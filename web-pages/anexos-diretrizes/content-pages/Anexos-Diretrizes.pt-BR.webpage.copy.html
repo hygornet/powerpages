@@ -16,8 +16,6 @@
     const params = new URLSearchParams(window.location.search);
     const recordId = params.get("id");
 
-    console.log("📤 Filho enviando mensagem:", tipo, recordId);
-
     if (window.parent && window.parent !== window) {
       window.parent.postMessage({
         type: tipo,
@@ -44,14 +42,27 @@
     const botaoSalvar = encontrarBotaoSalvar();
 
     if (!botaoSalvar) {
-      console.warn("⚠️ Botão salvar não encontrado.");
+      console.warn("Botão salvar não encontrado.");
       return;
     }
 
-    console.log("💾 Filho submetendo form automaticamente...");
-
     jaSubmeteu = true;
     botaoSalvar.click();
+  }
+
+  // Detecta se o controle nativo de anexo já terminou de processar o
+  // arquivo selecionado, em vez de assumir um tempo fixo de espera.
+  function arquivoProntoNoControle() {
+    const form = document.getElementById("custom-modern-form");
+    if (!form) return false;
+
+    const texto = (form.innerText || form.textContent || "").toLowerCase();
+    const temNomeArquivo = /\.(pdf|jpe?g|png|docx?|xlsx?|dwg|zip|kmz|rar)\b/.test(texto);
+    if (!temNomeArquivo) return false;
+
+    return !!(
+      form.querySelector("button[title*='Excluir'],button[title*='Remover'],button[aria-label*='Excluir'],button[aria-label*='Remover'],button[title*='Delete'],button[aria-label*='Delete'],[class*='delete'],[class*='remove'],.fa-trash,.glyphicon-trash")
+    );
   }
 
   document.addEventListener("change", function (e) {
@@ -62,8 +73,6 @@
     if (inputFile.type !== "file") return;
     if (!inputFile.files || inputFile.files.length === 0) return;
 
-    console.log("📎 Arquivo selecionado:", inputFile.files[0].name);
-
     usuarioSelecionouArquivo = true;
 
     if (!jaAvisouPaiCarregando) {
@@ -71,12 +80,19 @@
       avisarPai("ANEXO_DIRETRIZES_CARREGANDO");
     }
 
-    setTimeout(function () {
-      submeterAutomaticamente();
-    }, 500);
-  }, true);
+    const TETO_ESPERA_MS = 6000;
+    const INTERVALO_MS = 300;
+    let decorrido = 0;
 
-  console.log("✅ Script filho /anexos-diretrizes carregado.");
+    const intervalo = setInterval(function () {
+      decorrido += INTERVALO_MS;
+
+      if (arquivoProntoNoControle() || decorrido >= TETO_ESPERA_MS) {
+        clearInterval(intervalo);
+        submeterAutomaticamente();
+      }
+    }, INTERVALO_MS);
+  }, true);
 })();
 </script>
 

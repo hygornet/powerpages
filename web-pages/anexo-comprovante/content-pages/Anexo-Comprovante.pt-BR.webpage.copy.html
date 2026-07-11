@@ -81,10 +81,17 @@
     }
   });
 
-  observer.observe(document.body, {
-    childList: true,
-    subtree: true
-  });
+  // Escopado ao wrapper do formulário em vez de document.body inteiro:
+  // reagir a qualquer mutação da página (não só do formulário de anexo)
+  // gera trabalho de CPU desnecessário durante toda a navegação nesta página.
+  const formWrapperComprovante = document.getElementById("custom-modern-form");
+
+  if (formWrapperComprovante) {
+    observer.observe(formWrapperComprovante, {
+      childList: true,
+      subtree: true
+    });
+  }
 })();
 </script>
 

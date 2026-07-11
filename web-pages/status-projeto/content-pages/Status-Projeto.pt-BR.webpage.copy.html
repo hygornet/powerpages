@@ -4520,15 +4520,16 @@ document.querySelectorAll(".js-money").forEach(function (el) {
     if (jaAgendouRefreshComprovante) return;
     jaAgendouRefreshComprovante = true;
 
+    // A mensagem recebida do iframe filho já confirma que o comprovante foi
+    // salvo — não há necessidade de mais 3s de espera artificial antes de
+    // atualizar a lista com os dados vindos do servidor.
     setTimeout(function () {
       window.location.reload();
-    }, 3000);
+    }, 500);
   }
 
   window.addEventListener("message", function (event) {
     if (!event.data) return;
-
-    console.log("📥 PAI recebeu mensagem do comprovante:", event.data);
 
     if (
       event.data.type === "ANEXO_COMPROVANTE_CARREGANDO" ||
@@ -4582,7 +4583,11 @@ document.querySelectorAll(".js-money").forEach(function (el) {
 (function () {
   let docIdSelecionadoAnexos = "";
 
-  const TEMPO_REFRESH_ANEXOS = 3000; 
+  // A mensagem ANEXOS_FILHO_SUBMIT_OK já confirma que o upload/exclusão foi
+  // concluído no servidor — este valor é apenas uma pequena folga para a UI
+  // assentar antes do reload que busca a lista de documentos atualizada,
+  // não uma espera de processamento.
+  const TEMPO_REFRESH_ANEXOS = 500;
 
   function el(id) {
     return document.getElementById(id);
@@ -4698,8 +4703,6 @@ document.querySelectorAll(".js-money").forEach(function (el) {
     const tipoMensagem = event.data.type || event.data.tipo;
 
     if (tipoMensagem !== "ANEXOS_FILHO_SUBMIT_OK") return;
-
-    console.log("📥 PAI recebeu upload concluído da página filha:", event.data);
 
     if (event.data.docId) {
       marcarLinhaCarregando(event.data.docId);

@@ -91,7 +91,7 @@
 
 
 {% fetchxml anexosAnnotation %}
-<fetch>
+<fetch top="100">
   <entity name="annotation">
     <attribute name="annotationid" />
     <attribute name="filename" />
@@ -1115,14 +1115,42 @@
       var SOLICITACAO_ID = "{{ solicitacaoId | escape }}";
       var STORAGE_KEY = "anexos_documentos_projetos_submit_ok";
       var STORAGE_UPLOAD_KEY = "upload_pendente_anexo_{{ docUrlId | escape }}";
-      var TEMPO_MINIMO_CARREGANDO_MS = 12000;
       var QTD_ANEXOS_ATUAL = Number("{{ qtdAnexos | default: 0 }}");
-      var TEMPO_ESPERA_UPLOAD_MS = 8000;
       var uploadControleAnexoEmAndamento = false;
       var timerLiberarUploadControle = null;
+      var uploadJaNotificadoAoPai = false;
 
       function byId(id) {
         return document.getElementById(id);
+      }
+
+      // Notificação não bloqueante (substitui alert()): o alert() nativo
+      // trava a thread principal (inclusive o iframe pai) e mostra um popup
+      // não estilizado do navegador. Mensagens em linguagem de negócio, sem
+      // termos técnicos internos.
+      function exibirNotificacaoAnexo(mensagem, tipoNotificacao) {
+        tipoNotificacao = tipoNotificacao || "erro";
+
+        var existente = byId("notificacaoAnexoToast");
+        if (existente) existente.remove();
+
+        var toast = document.createElement("div");
+        toast.id = "notificacaoAnexoToast";
+        toast.setAttribute("role", "alert");
+        toast.textContent = mensagem;
+        toast.style.cssText =
+          "position:fixed;bottom:24px;right:24px;z-index:99999;max-width:360px;" +
+          "padding:14px 18px;border-radius:8px;font-size:14px;line-height:1.4;" +
+          "color:#fff;box-shadow:0 4px 14px rgba(0,0,0,.2);" +
+          (tipoNotificacao === "sucesso" ? "background:#1e7e34;" : "background:#c0392b;");
+
+        document.body.appendChild(toast);
+
+        setTimeout(function () {
+          toast.style.transition = "opacity .3s";
+          toast.style.opacity = "0";
+          setTimeout(function () { toast.remove(); }, 300);
+        }, 5000);
       }
 
       function isVisible(el) {
@@ -1190,6 +1218,9 @@
         }
       }
       function avisarPaginaPaiUploadConcluido() {
+    if (uploadJaNotificadoAoPai) return;
+    uploadJaNotificadoAoPai = true;
+
     var payload = {
       tipo: "ANEXOS_FILHO_SUBMIT_OK",
       docId: "{{ docUrlId | escape }}"
@@ -1237,11 +1268,11 @@
             sessionStorage.removeItem(STORAGE_KEY);
             hideNativeSuccessMessage();
 
-
-
+            // Pequena folga apenas para deixar a UI assentar antes de avisar
+            // o iframe pai — o upload já foi confirmado acima via isSuccessMessage().
             setTimeout(function () {
               avisarPaginaPaiUploadConcluido();
-            }, 8000);
+            }, 600);
           }
         }
         function ocultarFormEnquantoCarrega() {
@@ -1393,7 +1424,7 @@ function executarFlowExcluirAnexo() {
   var anexoId = anexoSelecionadoParaExcluir.anexoId;
 
   if (!anexoId) {
-    alert("Não foi possível identificar o anexo.");
+    exibirNotificacaoAnexo("Não foi possível identificar o anexo selecionado. Atualize a página e tente novamente.");
     return;
   }
 
@@ -1414,14 +1445,13 @@ function executarFlowExcluirAnexo() {
     QtdAnexado: String(anexoSelecionadoParaExcluir.qtdAnexado)
   };
 
-  console.log("Payload enviado ao Flow:", payloadFlow);
-
   shell.getTokenDeferred()
     .done(function (token) {
       $.ajax({
         url: FLOW_EXCLUIR_ANEXO_URL,
         type: "POST",
         contentType: "application/json; charset=utf-8",
+        timeout: 20000,
         headers: {
           "__RequestVerificationToken": token
         },
@@ -1430,8 +1460,6 @@ function executarFlowExcluirAnexo() {
         }),
 
         success: function (response) {
-          console.log("Flow de exclusão executado com sucesso:", response);
-
           removerAnexoDaLista(anexoId);
           fecharModalExcluirAnexo();
           resetarBotaoExcluir();
@@ -1460,9 +1488,11 @@ function executarFlowExcluirAnexo() {
           restaurarAnexoAposErro(anexoId);
           resetarBotaoExcluir();
 
-          alert(
-            "Não foi possível excluir o anexo. Tente novamente."
-          );
+          var mensagemErro = xhr.statusText === "timeout"
+            ? "A exclusão está demorando mais que o esperado. Tente novamente em instantes."
+            : "Não foi possível excluir o anexo. Tente novamente.";
+
+          exibirNotificacaoAnexo(mensagemErro);
         }
       });
     })
@@ -1470,7 +1500,7 @@ function executarFlowExcluirAnexo() {
       restaurarAnexoAposErro(anexoId);
       resetarBotaoExcluir();
 
-      alert("Não foi possível obter o token de segurança do portal.");
+      exibirNotificacaoAnexo("Não foi possível confirmar sua sessão no portal. Atualize a página e tente novamente.");
     });
 }
 
@@ -1612,14 +1642,19 @@ function controlarBotoesSalvarAnexos() {
 
   var podeEnviar = arquivoPronto && !estaCarregandoArquivo;
 
+  // Só mexe no DOM quando o estado realmente muda: o botão está dentro do
+  // mesmo formulário observado pelo MutationObserver abaixo, e alterar o
+  // atributo/classe incondicionalmente a cada chamada faz o observer disparar
+  // de novo e reagendar mais verificações, criando um loop que nunca se
+  // estabiliza enquanto a página de anexos ficar aberta.
+  var estadoAtualHabilitado = !btnEnviar.disabled;
+  if (estadoAtualHabilitado === podeEnviar) {
+    return;
+  }
+
   btnEnviar.disabled = !podeEnviar;
   btnEnviar.setAttribute("aria-disabled", podeEnviar ? "false" : "true");
-
-  if (podeEnviar) {
-    btnEnviar.classList.remove("btn-cloud-disabled");
-  } else {
-    btnEnviar.classList.add("btn-cloud-disabled");
-  }
+  btnEnviar.classList.toggle("btn-cloud-disabled", !podeEnviar);
 }
 
 
@@ -1681,27 +1716,32 @@ function controlarBotoesSalvarAnexos() {
       controlarBotoesSalvarAnexos();
     }, 3000);
 
-    setTimeout(controlarBotoesSalvarAnexos, 500);
+    // Poucos checkpoints de segurança: a maior parte das mudanças reais de
+    // estado (arquivo pronto/indicador de upload) já é capturada pelo
+    // MutationObserver abaixo, agora que controlarBotoesSalvarAnexos só
+    // mexe no DOM quando o estado muda de fato.
     setTimeout(controlarBotoesSalvarAnexos, 1000);
-    setTimeout(controlarBotoesSalvarAnexos, 2000);
     setTimeout(controlarBotoesSalvarAnexos, 3000);
-    setTimeout(controlarBotoesSalvarAnexos, 5000);
   }
 });
 
         var formWrapper = byId("custom-modern-form");
 
         if (formWrapper) {
+          var timerReverificarObserver = null;
+
           var formObserver = new MutationObserver(function () {
 
             if (existeArquivoProntoNoControle(formWrapper)) {
               uploadControleAnexoEmAndamento = false;
             }
 
-            setTimeout(controlarBotoesSalvarAnexos, 200);
-            setTimeout(controlarBotoesSalvarAnexos, 800);
-            setTimeout(controlarBotoesSalvarAnexos, 1500);
-            setTimeout(controlarBotoesSalvarAnexos, 2500);
+            // Debounce: várias mutações seguidas (ex.: a própria lib de
+            // upload atualizando a barra de progresso) reaproveitam o mesmo
+            // timer em vez de empilhar um novo grupo de checagens a cada
+            // mutação individual.
+            clearTimeout(timerReverificarObserver);
+            timerReverificarObserver = setTimeout(controlarBotoesSalvarAnexos, 300);
           });
 
           formObserver.observe(formWrapper, {
@@ -1773,6 +1813,9 @@ function controlarBotoesSalvarAnexos() {
   function finalizarUploadFilho() {
     limparUploadPendente();
 
+    if (uploadJaNotificadoAoPai) return;
+    uploadJaNotificadoAoPai = true;
+
     if (window.parent && window.parent !== window) {
       window.parent.postMessage({
         type: "ANEXOS_FILHO_SUBMIT_OK",
@@ -1818,9 +1861,13 @@ function controlarBotoesSalvarAnexos() {
       nativeSubmit.click();
     }, 500);
 
+    // Rede de segurança: só age se a detecção real de sucesso
+    // (handlePostSubmitFeedback, via MutationObserver no MessagePanel) não
+    // tiver confirmado o upload até aqui. uploadJaNotificadoAoPai evita
+    // reportar sucesso falso/duplicado quando o upload ainda está em curso.
     setTimeout(function () {
       finalizarUploadFilho();
-    }, 6000);
+    }, 15000);
   }
 
         document.querySelectorAll(".btn-download-anexo").forEach(function (btn) {
@@ -1831,7 +1878,7 @@ function controlarBotoesSalvarAnexos() {
             var anexoId = this.closest(".item-anexo-existente").getAttribute("data-annotation-id");
 
             if (!anexoId) {
-              alert("Não foi possível identificar o anexo.");
+              exibirNotificacaoAnexo("Não foi possível identificar o anexo selecionado. Atualize a página e tente novamente.");
               return;
             }
 

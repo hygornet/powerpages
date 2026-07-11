@@ -2,7 +2,7 @@
 
 
 {% fetchxml anexosAnnotation %}
-<fetch>
+<fetch top="100">
   <entity name="annotation">
     <attribute name="annotationid" />
     <attribute name="filename" />
@@ -805,6 +805,34 @@ div[id="MessagePanel"] {
       return document.getElementById(id);
     }
 
+    // Notificação não bloqueante (substitui alert()): o alert() nativo
+    // trava a thread principal e mostra um popup não estilizado do
+    // navegador. Mensagens em linguagem de negócio, sem termos técnicos.
+    function exibirNotificacaoAnexo(mensagem, tipoNotificacao) {
+      tipoNotificacao = tipoNotificacao || "erro";
+
+      var existente = byId("notificacaoAnexoToast");
+      if (existente) existente.remove();
+
+      var toast = document.createElement("div");
+      toast.id = "notificacaoAnexoToast";
+      toast.setAttribute("role", "alert");
+      toast.textContent = mensagem;
+      toast.style.cssText =
+        "position:fixed;bottom:24px;right:24px;z-index:99999;max-width:360px;" +
+        "padding:14px 18px;border-radius:8px;font-size:14px;line-height:1.4;" +
+        "color:#fff;box-shadow:0 4px 14px rgba(0,0,0,.2);" +
+        (tipoNotificacao === "sucesso" ? "background:#1e7e34;" : "background:#c0392b;");
+
+      document.body.appendChild(toast);
+
+      setTimeout(function () {
+        toast.style.transition = "opacity .3s";
+        toast.style.opacity = "0";
+        setTimeout(function () { toast.remove(); }, 300);
+      }, 5000);
+    }
+
     function isVisible(el) {
       return !!(el && (el.offsetWidth || el.offsetHeight || el.getClientRects().length));
     }
@@ -903,9 +931,12 @@ div[id="MessagePanel"] {
           sessionStorage.removeItem(STORAGE_KEY);
           hideNativeSuccessMessage();
 
+          // Pequena folga apenas para deixar a UI assentar antes de recarregar
+          // — o upload já foi confirmado acima via isSuccessMessage(), então
+          // não há motivo para os 8s de espera artificial anteriores.
           setTimeout(function () {
             window.location.reload();
-          }, TEMPO_ESPERA_UPLOAD_MS);
+          }, 800);
         }
       }
       function ocultarFormEnquantoCarrega() {
@@ -961,7 +992,7 @@ function executarFlowExcluirAnexo() {
   var btn = byId("btnConfirmarExcluirAnexo");
 
   if (!anexoSelecionadoParaExcluir.anexoId) {
-    alert("Não foi possível identificar o anexo.");
+    exibirNotificacaoAnexo("Não foi possível identificar o anexo selecionado. Atualize a página e tente novamente.");
     return;
   }
 
@@ -976,13 +1007,12 @@ function executarFlowExcluirAnexo() {
     QtdAnexado: String(anexoSelecionadoParaExcluir.qtdAnexado)
   };
 
-  console.log("Payload enviado ao Flow:", payloadFlow);
-
   shell.getTokenDeferred().done(function (token) {
     $.ajax({
       url: "/_api/cloudflow/v1.0/trigger/274f69ba-5440-f111-bec7-7ced8da81546",
       type: "POST",
       contentType: "application/json; charset=utf-8",
+      timeout: 20000,
       headers: {
         "__RequestVerificationToken": token
       },
@@ -990,17 +1020,20 @@ function executarFlowExcluirAnexo() {
         eventData: JSON.stringify(payloadFlow)
       }),
       success: function (response) {
-        console.log("Flow executado com sucesso:", response);
         fecharModalExcluirAnexo();
 
         setTimeout(function () {
           window.location.reload();
-        }, 3000);
+        }, 800);
       },
       error: function (xhr) {
         console.error("Erro ao executar flow:", xhr.responseText || xhr);
 
-        alert("Erro ao excluir o anexo. Verifique o console do navegador.");
+        var mensagemErro = xhr.statusText === "timeout"
+          ? "A exclusão está demorando mais que o esperado. Tente novamente em instantes."
+          : "Não foi possível excluir o anexo. Tente novamente.";
+
+        exibirNotificacaoAnexo(mensagemErro);
 
         if (btn) {
           btn.disabled = false;
@@ -1009,7 +1042,7 @@ function executarFlowExcluirAnexo() {
       }
     });
   }).fail(function () {
-    alert("Não foi possível obter o token do portal.");
+    exibirNotificacaoAnexo("Não foi possível confirmar sua sessão no portal. Atualize a página e tente novamente.");
 
     if (btn) {
       btn.disabled = false;
@@ -1212,7 +1245,7 @@ function acionarSubmitAutomaticoAnexo() {
           var anexoId = this.closest(".item-anexo-existente").getAttribute("data-annotation-id");
 
           if (!anexoId) {
-            alert("Não foi possível identificar o anexo.");
+            exibirNotificacaoAnexo("Não foi possível identificar o anexo selecionado. Atualize a página e tente novamente.");
             return;
           }
 

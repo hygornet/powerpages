@@ -57,6 +57,21 @@
     );
   }
 
+  // Detecta se o controle nativo de anexo já terminou de processar o
+  // arquivo selecionado, em vez de assumir um tempo fixo de espera.
+  function arquivoProntoNoControle() {
+    const form = document.getElementById("custom-modern-form");
+    if (!form) return false;
+
+    const texto = (form.innerText || form.textContent || "").toLowerCase();
+    const temNomeArquivo = /\.(pdf|jpe?g|png|docx?|xlsx?|dwg|zip|kmz|rar)\b/.test(texto);
+    if (!temNomeArquivo) return false;
+
+    return !!(
+      form.querySelector("button[title*='Excluir'],button[title*='Remover'],button[aria-label*='Excluir'],button[aria-label*='Remover'],button[title*='Delete'],button[aria-label*='Delete'],[class*='delete'],[class*='remove'],.fa-trash,.glyphicon-trash")
+    );
+  }
+
   function submeterAutomaticamente() {
     if (!usuarioSelecionouArquivo) return;
     if (jaSubmeteu) return;
@@ -71,11 +86,7 @@
     jaSubmeteu = true;
 
     avisarPaiCarregando();
-
-    setTimeout(function () {
-      console.log("💾 Submetendo form de anexos finais automaticamente...");
-      botaoSalvar.click();
-    }, 2500);
+    botaoSalvar.click();
   }
 
   document.addEventListener("change", function (e) {
@@ -86,10 +97,24 @@
 
     usuarioSelecionouArquivo = true;
 
-    setTimeout(function () {
-      submeterAutomaticamente();
-    }, 3500);
+    // Verifica em intervalos curtos se o controle já processou o arquivo,
+    // em vez de sempre esperar 6s fixos independentemente do tamanho do
+    // arquivo. Mantém um teto de segurança de 6s como fallback.
+    const TETO_ESPERA_MS = 6000;
+    const INTERVALO_MS = 300;
+    let decorrido = 0;
+
+    const intervalo = setInterval(function () {
+      decorrido += INTERVALO_MS;
+
+      if (arquivoProntoNoControle() || decorrido >= TETO_ESPERA_MS) {
+        clearInterval(intervalo);
+        submeterAutomaticamente();
+      }
+    }, INTERVALO_MS);
   }, true);
+
+  const formWrapperSucesso = document.getElementById("custom-modern-form");
 
   const observerSucesso = new MutationObserver(function () {
     const sucesso =
@@ -99,18 +124,17 @@
       document.querySelector("[data-form-success]");
 
     if (sucesso && sucesso.innerText.trim() !== "") {
-      console.log("✅ Anexo final salvo. Avisando página pai.");
       avisarPaiSalvo();
     }
   });
 
-  observerSucesso.observe(document.body, {
-    childList: true,
-    subtree: true,
-    characterData: true
-  });
-
-  console.log("✅ Script /anexos-obra-final carregado.");
+  if (formWrapperSucesso) {
+    observerSucesso.observe(formWrapperSucesso, {
+      childList: true,
+      subtree: true,
+      characterData: true
+    });
+  }
 })();
 </script>
 
