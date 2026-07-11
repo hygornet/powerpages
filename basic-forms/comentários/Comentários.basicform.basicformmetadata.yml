@@ -1,0 +1,33 @@
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_comentarios_anexo
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_entityform: df903837-8623-49e5-83a7-ff57c9170ea4
+  adx_entityformmetadataid: 1c9db004-7ae7-4436-a1ca-be9e43f0ff27
+  adx_fieldisrequired: false
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Comentários sobre os anexos💬"
+      }
+    ]
+  adx_name: Comentários cloud_comentarios_anexo
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_validationregularexpressionerrormessage: ''

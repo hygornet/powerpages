@@ -1,0 +1,35 @@
+adx_attachfilelabel: >-
+  [
+    {
+      "LCID": 1046,
+      "Value": ""
+    }
+  ]
+adx_attachfilemaxsize: 
+adx_attachfilestoragelocation: 756150000
+adx_captcharequired: false
+adx_containername: ''
+adx_entityformid: 86712747-03bf-4e48-b3e9-3b9550ce577c
+adx_entityname: cloud_solicitacoes
+adx_entitypermissionsenabled: true
+adx_entitysourcetype: 756150001
+adx_formname: GRANDES CLIENTES A
+adx_hideformonsuccess: false
+adx_maximumnooffiles: 5
+adx_mode: 100000001
+adx_name: GRANDES CLIENTES A
+adx_onsuccess: 756150000
+adx_recordidquerystringparametername: id
+adx_redirecturl: 
+adx_redirectwebpage: 
+adx_showcaptchaforauthenticatedusers: false
+adx_storageaccountname: ''
+adx_successmessage: >-
+  [
+    {
+      "LCID": 1046,
+      "Value": ""
+    }
+  ]
+statecode: 1
+statuscode: 2

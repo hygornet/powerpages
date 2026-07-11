@@ -1,0 +1,908 @@
+{% assign url = request.url | downcase %} 
+{% assign mid_image = "/logo-aegea-personalizado.png" %} 
+{% assign url_contato = "www.aegea.com.br/contato/" %} 
+{% assign url_dominio_unidade = "" %} 
+{% if url contains settings["URLCorsan"] %} 
+{% assign mid_image = "/corsan-centralized.png" %} 
+{% assign url_dominio_unidade = settings["URLCorsan"] %} 
+{% assign url_contato = "https://corsan.com.br/canais-de-relacionamento/" %} 
+{% elsif url contains settings["URLAguasDoPara"] %} 
+{% assign mid_image = "/centro_para.png" %} 
+{% assign url_dominio_unidade = settings["URLAguasDoPara"] %} 
+{% assign url_contato = "https://www.aguasdopara.com.br/contato/" %} 
+{% elsif url contains settings["URLAguasDeGuariroba"] %} 
+{% assign mid_image = "/centro_guariroba.png" %} 
+{% assign url_dominio_unidade = settings["URLAguasDeGuariroba"] %} 
+{% assign url_contato = "https://www.aguasguariroba.com.br/contato/" %} 
+{% elsif url contains settings["URLAguasDeManaus"] %} 
+{% assign mid_image = "/centro_manaus.png" %} 
+{% assign url_dominio_unidade = settings["URLAguasDeManaus"] %} 
+{% assign url_contato = "https://www.aguasdemanaus.com.br/contato/" %} 
+{% elsif url contains settings["URLProlagos"] %} 
+{% assign mid_image = "/centro_prolagos.png" %} 
+{% assign url_dominio_unidade = settings["URLProlagos"] %} 
+{% assign url_contato = "https://www.prolagos.com.br/contato/" %} 
+{% endif %} {% fetchxml unidade %}
+
+
+
+<fetch>
+  <entity name="cloud_unidades">
+    <attribute name="cloud_docs_obrigatorios" />
+    <attribute name="cloud_docs_condicionais" />
+    <attribute name="cloud_id_unidade" />
+    <attribute name="cloud_nome_unidade" />
+    <attribute name="cloud_unidadesid" />
+    <attribute name="cloud_dominio" />
+    <filter>
+      <condition attribute="cloud_dominio" operator="eq" value="{{url_dominio_unidade}}" />
+    </filter>
+  </entity>
+</fetch>
+{% endfetchxml %} 
+
+{% assign unidadeRegistro = unidade.results.entities | first %} 
+{% assign docsCondicionais = unidadeRegistro.cloud_docs_condicionais %} 
+{% assign unidadeRegistro = unidade.results.entities | first %} 
+<script>
+  window.UNIDADE_ATIVA_ID = "{{ unidadeRegistro.cloud_unidadesid | escape }}";
+  window.PORTAL_ATIVO_DOMINIO = "{{ url_dominio_unidade | escape }}";
+</script>
+{% assign docsObrigatorios = unidadeRegistro.cloud_docs_obrigatorios %}
+{% assign solicitacaoId = request.params["id"] %}
+
+{% fetchxml solicitacao %}
+<fetch top="1">
+  <entity name="cloud_solicitacoes">
+
+    <attribute name="cloud_solicitacoesid" />
+    <attribute name="cloud_status_atual" />
+    <attribute name="cloud_pagina_ultimo_form" />
+
+    <filter type="and">
+      <condition attribute="cloud_solicitacoesid"
+                 operator="eq"
+                 value="{{ solicitacaoId }}" />
+                 <condition attribute="createdon" operator="le" value='{{ "today" | date: "yyyy-MM-dd HH:mm:ss" }}' />
+    </filter>
+
+
+    <link-entity name="cloud_finalidades_solicitacao"
+                 from="cloud_finalidades_solicitacaoid"
+                 to="cloud_fk_finalidades_solicitacao"
+                 link-type="outer"
+                 alias="finalidade">
+
+      <attribute name="cloud_nome_finalidade" />
+
+    </link-entity>
+    
+  </entity>
+</fetch>
+{% endfetchxml %}
+
+{% assign finalidade = solicitacao.results.entities[0]["finalidade.cloud_nome_finalidade"] | default: "" | upcase %}
+
+{% assign statusAtual = solicitacao.results.entities[0]['cloud_status_atual'].value %}
+{% assign paginaUltimoFormValor = solicitacao.results.entities[0]['cloud_pagina_ultimo_form'].value | default: 586450001 %}
+
+{% assign paginaInicial = "1" %}
+{% if paginaUltimoFormValor == 586450002 %}
+  {% assign paginaInicial = "2" %}
+{% elsif paginaUltimoFormValor == 586450003 %}
+  {% assign paginaInicial = "3" %}
+{% elsif paginaUltimoFormValor == 586450004 %}
+  {% assign paginaInicial = "4" %}
+{% endif %}
+{% if statusAtual == 586450001 and paginaUltimoFormValor == 586450004 %}
+  <style>body { display:none !important; }</style>
+  <script>
+    window.location.href = "/Status/?id={{ solicitacaoId }}";
+  </script>
+{% endif %}
+
+<div class="row sectionBlockLayout" style="display: flex; flex-wrap: wrap; margin: 0px; min-height: auto; padding: 80px 0px 40px; background-color: rgb(249, 250, 251);">
+  <div class="container" style="padding: 0px; display: flex; flex-wrap: wrap; column-gap: 0px;">
+    <div
+      class="col-lg-6 columnBlockLayout"
+      style="flex-grow: 1; min-width: 250px; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; width: calc(50% + 0px);
+            padding: 0px 15px;"
+    >
+      <img
+          id="midImageUnidade"
+          src="{{ mid_image }}"
+          alt="Logo"
+          data-default-mid-image="{{ mid_image }}"
+          style="max-width: 100%; width: 540px; height: 400px;
+            margin-bottom: 24px; border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);"
+        />
+    </div>
+ <div
+  class="col-lg-6 columnBlockLayout"
+  style="
+    flex-grow: 1;
+    min-width: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: calc(50% + 0px);
+    padding: 0 15px;
+  "
+>
+  <div
+        style="
+          width: 100%;
+          max-width: 760px;
+          padding: 32px 30px;
+          border-radius: 24px;
+          background: transparent;
+          border: none;
+          box-shadow: none;
+          backdrop-filter: none;
+          -webkit-backdrop-filter: none;
+        "
+      >
+    <h1 style="text-align: left; margin: 0 0 15px 0; color: #0027bd;">
+      Viabilidade Técnica
+      <span aria-label="Texto para Empreendimentos" style="position: relative;">
+        para Empreendimentos
+      </span>
+    </h1>
+
+    <p
+      style="
+        text-align: left;
+        font-size: 18px;
+        color: #0027bd;
+        max-width: 2000px;
+        line-height: 1.6;
+        margin: 0 0 32px 0;
+      "
+    >
+      Este portal é destinado a manter o empreendedor atualizado quanto suas solicitações, visualização do histórico e controle de todas as solicitações iniciadas por este site.
+    </p>
+
+    <div
+      style="
+        background: rgba(255, 255, 255, 0.96);
+        border-left: 4px solid var(--portalThemeColor4);
+        padding: 20px 24px;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        max-width: 700px;
+        width: 100%;
+      "
+    >
+      <p
+        class="smallText"
+        style="
+          margin: 0;
+          font-size: 15px;
+          color: #374151;
+          line-height: 1.5;
+        "
+      >
+        <strong>Sua solicitação é para um imóvel residencial?</strong><br />
+        Caso sua solicitação seja referente a unidade residencial ou uso particular, o atendimento não é realizado por este canal.
+        Para esses casos, por favor utilize nossos canais de atendimento ao cliente, acessando o 
+        <a
+          href="{{url_contato}}"
+          aria-label="Vínculo alias@dominio.com.br Pressione Enter para editar"
+          style="
+            font-weight: 600;
+            text-decoration: underline;
+            color: var(--portalThemeColor4);
+          "
+        >
+          Fale Conosco
+        </a>.
+      </p>
+    </div>
+  </div>
+</div>
+  </div>
+
+
+  <div class="row sectionBlockLayout" style="display: flex; flex-wrap: wrap; margin: 0px; min-height: auto; padding: 40px 0px 80px; background-color: rgb(249, 250, 251); border: 0px solid rgb(200, 198, 196);">
+    <div class="container" style="padding: 0px; display: flex; flex-wrap: wrap;">
+      <div class="col-lg-12" style="margin-bottom: -20px; padding: 0 15px 0 15px;">
+        <h2 style="text-align: center;">Documentação Necessária</h2>
+        <p style="text-align: center;">Organize seus arquivos antes de prosseguir.</p>
+      </div>
+      <div class="col-lg-6 columnBlockLayout" style="flex-grow: 1; min-width: 250px; display: flex; flex-direction: column; padding: 15px;">
+        <div style="background-color: #ffffff; border-radius: 16px; padding: 32px; height: 100%; border: 1px solid #e5e7eb; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
+          <div style="display: flex; align-items: center; margin-bottom: 24px;">
+            <div style="width: 40px; height: 40px; border-radius: 8px; background-color: #fee2e2; display: flex; justify-content: center; align-items: center; margin-right: 16px;"><span style="font-size: 20px; color: #b91c1c;">!</span></div>
+            <h4 style="margin: 0; font-size: 20px; font-weight: 700; color: #1f2937;">Itens Obrigatórios</h4>
+          </div>
+          {% if docsObrigatorios %} {{ docsObrigatorios}} {% else %}
+          <p span style="font-size: 14px; color: #6b7280;">Nenhuma documentação condicional foi configurada para esta unidade.</p>
+          {% endif %}
+        </div>
+      </div>
+      <div class="col-lg-6 columnBlockLayout" style="flex-grow: 1; min-width: 250px; display: flex; flex-direction: column; padding: 15px;">
+        <div style="background-color: #ffffff; border-radius: 16px; padding: 32px; height: 100%; border: 1px solid #e5e7eb; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
+          <div style="display: flex; align-items: center; margin-bottom: 24px;">
+            <div style="width: 40px; height: 40px; border-radius: 8px; background-color: #dbeafe; display: flex; justify-content: center; align-items: center; margin-right: 16px;"><span style="font-size: 20px; color: #1d4ed8;">📄</span></div>
+            <h4 style="margin: 0; font-size: 20px; font-weight: 700; color: #1f2937;">Conforme Aplicável</h4>
+          </div>
+          {% if docsCondicionais %} {{ docsCondicionais}} {% else %}
+          <p span style="font-size: 14px; color: #6b7280;">Nenhuma documentação obrigatória foi configurada para esta unidade.</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div id="form-foco-solicitacao" class="fsa-page-shell">
+  <div class="fsa-white-card">
+    <div id="custom-modern-form" class="modern-form-wrapper">
+
+      <!-- HEADER -->
+      <div class="fsa-header" id="fsaHeader">
+
+        <h1 class="fsa-title">
+          Formulário de Solicitação de Análise (FSA)
+        </h1>
+
+        <p class="fsa-subtitle">
+          Preencha os dados abaixo para darmos sequência.
+        </p>
+
+        <div class="fsa-step-indicator">
+          <span class="fsa-step-text">ETAPA</span>
+          <div class="fsa-step-circle active" id="stepNumber">1</div>
+          <span class="fsa-step-text">DE</span>
+          <div class="fsa-step-circle total">3</div>
+        </div>
+
+      </div>
+
+      <div style="height: 30px;"></div>
+
+      <div class="power-pages-form-container">
+
+                    <!-- ETAPA 1 -->
+          <div class="fsa-step active" id="step1">
+            <div class="ppFlexContainer">
+              {% entityform name: 'GRANDES CLIENTES E' %}
+            </div>
+          </div>
+
+
+                <div class="fsa-nav-buttons" id="navWizardButtons">
+          <button type="button" class="btn-cloud btn-cloud-disabled" id="btnNext" disabled>
+  AVANÇAR
+</button>
+        </div>
+
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+  </div>
+
+
+  <!-- FAB - POSSO AJUDAR -->
+
+  <a href="/FAQ/" class="faq-fab" aria-label="Posso ajudar?">
+    ?
+    <span class="faq-fab-tooltip">Posso ajudar?</span>
+  </a>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+</div>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  const target = document.getElementById("form-foco-solicitacao");
+
+  if (target) {
+
+      target.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+      });
+
+  }
+
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  const STORAGE_KEY = "aegea_unidade_selecionada";
+  const midImage = document.getElementById("midImageUnidade");
+
+  if (!midImage) return;
+
+  function getSelectedUnit() {
+    try {
+      return localStorage.getItem(STORAGE_KEY) || "default";
+    } catch (e) {
+      return "default";
+    }
+  }
+
+  const unidadeSelecionada = getSelectedUnit();
+  const defaultMidImage = midImage.getAttribute("data-default-mid-image") || "";
+
+  if (!unidadeSelecionada || unidadeSelecionada.toLowerCase() === "default") {
+    midImage.src = defaultMidImage;
+    return;
+  }
+
+  const imageMap = {
+    "águas de guariroba": "/centro_guariroba.png",
+    "aguas de guariroba": "/centro_guariroba.png",
+
+    "águas de manaus": "/centro_manaus.png",
+    "aguas de manaus": "/centro_manaus.png",
+
+    "águas do pará": "/centro_para.png",
+    "aguas do para": "/centro_para.png",
+    "águas do para": "/centro_para.png",
+    "aguas do pará": "/centro_para.png",
+
+    "prolagos": "/centro_prolagos.png",
+
+    "corsan": "/corsan-centralized.png"
+  };
+
+  const key = String(unidadeSelecionada).trim().toLowerCase();
+
+  if (imageMap[key]) {
+    midImage.src = imageMap[key];
+  } else {
+    midImage.src = defaultMidImage;
+  }
+});
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  const FLOW_PAGINA = "/_api/cloudflow/v1.0/trigger/c40ce1c6-d918-f111-8342-002248de77b7";
+  const FLOW_CANCELAR_POR_PEQUENO_CLIENTE = "/_api/cloudflow/v1.0/trigger/2361651b-5ff6-f011-8406-002248de77b7";
+
+  const recordID = "{{ solicitacaoId }}";
+  const btnNext = document.getElementById("btnNext");
+
+  function normalizarTexto(texto) {
+    return (texto || "")
+      .toString()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/\s+/g, " ")
+      .trim()
+      .toUpperCase();
+  }
+
+  function obterElementoCampo(selector) {
+    return document.querySelector("#step1 " + selector) || document.querySelector(selector);
+  }
+
+  function obterTextoCampo(selector) {
+    const el = obterElementoCampo(selector);
+    if (!el) return "";
+
+    if (el.tagName === "SELECT") {
+      const opt = el.options[el.selectedIndex];
+      return opt ? (opt.text || "").toString().trim() : "";
+    }
+
+    return (el.value || el.getAttribute("value") || "").toString().trim();
+  }
+
+  function obterNumeroCampo(selector) {
+    const el = obterElementoCampo(selector);
+    if (!el) return 0;
+
+    let valor = (el.value || "").toString().trim();
+    if (!valor) return 0;
+
+    valor = valor.replace(/[^\d,.-]/g, "");
+
+    if (valor.indexOf(",") > -1) {
+      valor = valor.replace(/\./g, "").replace(",", ".");
+    }
+
+    const numero = parseFloat(valor);
+    return isNaN(numero) ? 0 : numero;
+  }
+
+  function obterValorLookup(baseSelector) {
+    const hiddenEl = obterElementoCampo(baseSelector);
+    const nameEl = obterElementoCampo(baseSelector + "_name");
+
+    const hiddenValue = hiddenEl ? (hiddenEl.value || "").toString().trim() : "";
+    const nameValue = nameEl ? (nameEl.value || "").toString().trim() : "";
+
+    return {
+      hiddenValue: hiddenValue,
+      nameValue: nameValue,
+      preenchido: hiddenValue !== "" || nameValue !== ""
+    };
+  }
+
+  function obterBooleanRadio(baseId) {
+    let radioMarcado =
+      document.querySelector("#" + baseId + " input[type='radio']:checked") ||
+      document.querySelector("input[name='" + baseId + "']:checked");
+
+    if (!radioMarcado) return false;
+
+    const valor = normalizarTexto(radioMarcado.value);
+    return valor === "TRUE" || valor === "1" || valor === "SIM" || valor === "YES";
+  }
+
+  function getSubmitFormAtual() {
+    const stepVisivel = document.querySelector("#step1");
+    if (!stepVisivel) return null;
+
+    return stepVisivel.querySelector("#UpdateButton")
+      || stepVisivel.querySelector("#InsertButton")
+      || stepVisivel.querySelector('input[id$="UpdateButton"]')
+      || stepVisivel.querySelector('input[id$="InsertButton"]')
+      || stepVisivel.querySelector('button[type="submit"]')
+      || stepVisivel.querySelector('input[type="submit"]');
+  }
+
+  function campoVisivel(el) {
+    if (!el) return false;
+    const style = window.getComputedStyle(el);
+    if (style.display === "none" || style.visibility === "hidden") return false;
+    return !!(el.offsetWidth || el.offsetHeight || el.getClientRects().length);
+  }
+
+  function campoObrigatorioPreenchido(el) {
+    if (!el || el.disabled) return true;
+
+    const tipo = (el.type || "").toLowerCase();
+    const tag = (el.tagName || "").toLowerCase();
+
+    if (tipo === "radio") {
+      const nome = el.name;
+      if (!nome) return !!el.checked;
+
+      const radios = document.querySelectorAll('input[type="radio"][name="' + nome + '"]');
+      return Array.from(radios).some(function (r) {
+        return !r.disabled && r.checked;
+      });
+    }
+
+    if (tipo === "checkbox") {
+      return el.checked;
+    }
+
+    if (tag === "select") {
+      const valor = (el.value || "").trim();
+      return valor !== "" && valor !== "null" && valor !== "-1";
+    }
+
+    if (el.id && !el.value && document.getElementById(el.id + "_name")) {
+      const nomeLookup = document.getElementById(el.id + "_name");
+      return !!((nomeLookup.value || "").trim());
+    }
+
+    return (el.value || "").trim() !== "";
+  }
+
+  function numeroEconomiasMaiorQueZero() {
+  const numeroEconomias = obterNumeroCampo("#cloud_numero_economias");
+
+  return numeroEconomias > 0;
+}
+
+function todosObrigatoriosPreenchidosNoStepAtual() {
+  const finalidadeLookup = obterValorLookup("#cloud_fk_finalidades_solicitacao");
+  const municipioLookup = obterValorLookup("#cloud_fk_municipios");
+
+  const tipoCadastro = obterTextoCampo("#cloud_tipo_cadastro");
+  const consumoMensal = obterTextoCampo("#cloud_consumo_mensal");
+  const areaConstruida = obterTextoCampo("#cloud_area_construida_total");
+
+  const radioMarcado =
+    document.querySelector("#cloud_is_conglomerado_empresarial input[type='radio']:checked") ||
+    document.querySelector("input[name='cloud_is_conglomerado_empresarial']:checked");
+
+  return !!(
+    finalidadeLookup.preenchido &&
+    municipioLookup.preenchido &&
+    tipoCadastro !== "" &&
+    consumoMensal !== "" &&
+    numeroEconomiasMaiorQueZero() &&
+    areaConstruida !== "" &&
+    radioMarcado
+  );
+}
+
+
+function atualizarEstadoBotaoAvancar() {
+  const btn = document.getElementById("btnNext");
+  if (!btn) return;
+
+  const preenchido = todosObrigatoriosPreenchidosNoStepAtual();
+
+  btn.disabled = !preenchido;
+  btn.classList.toggle("btn-cloud-disabled", !preenchido);
+}
+
+
+
+  function registrarEventosValidacao() {
+    const container = document.querySelector(".power-pages-form-container");
+    if (!container) return;
+
+    container.addEventListener("input", atualizarEstadoBotaoAvancar);
+    container.addEventListener("change", atualizarEstadoBotaoAvancar);
+
+    setTimeout(atualizarEstadoBotaoAvancar, 300);
+    setTimeout(atualizarEstadoBotaoAvancar, 1000);
+  }
+
+  function avaliarRegraGrandeCliente() {
+    const finalidade = normalizarTexto(
+      obterTextoCampo("#cloud_fk_finalidades_solicitacao_name") ||
+      obterTextoCampo("#cloud_fk_finalidades_solicitacao")
+    );
+
+    const tipoCadastro = normalizarTexto(
+      obterTextoCampo("#cloud_tipo_cadastro")
+    );
+
+    const consumoMensal = obterNumeroCampo("#cloud_consumo_mensal");
+    const numeroEconomias = parseInt(obterNumeroCampo("#cloud_numero_economias"), 10) || 0;
+    const areaConstruidaTotal = obterNumeroCampo("#cloud_area_construida_total");
+    const isConglomeradoEmpresarial = obterBooleanRadio("cloud_is_conglomerado_empresarial");
+
+    const regraFinalidadeGrande =
+      finalidade.indexOf("CONDOMINIO") > -1 ||
+      finalidade.indexOf("LOTEAMENTO RESIDENCIAL") > -1 ||
+      finalidade.indexOf("LOTEAMENTO INDUSTRIAL") > -1 ||
+      finalidade.indexOf("INDUSTRIAL") > -1 ||
+      finalidade.indexOf("INSTITUCIONAL") > -1;
+
+    const regraCnpjConsumo =
+      tipoCadastro === "CNPJ" &&
+      consumoMensal >= 100;
+
+    const regraConsumo = consumoMensal > 100;
+    const regraNumeroEconomias = numeroEconomias >= 10;
+    const regraNumeroEconomiasEConsumo = numeroEconomias >= 1 && consumoMensal >= 100;
+    const regraAreaConstruida = areaConstruidaTotal > 750;
+
+    const regraComercialConglomerado =
+      finalidade.indexOf("COMERCIAL") > -1 &&
+      isConglomeradoEmpresarial === true;
+
+    return (
+      regraFinalidadeGrande ||
+      regraCnpjConsumo ||
+      regraConsumo ||
+      regraNumeroEconomias ||
+      regraNumeroEconomiasEConsumo ||
+      regraAreaConstruida ||
+      regraComercialConglomerado
+    );
+  }
+
+      function executarFlowPagina2(callback) {
+      const paginaAtual = "2";
+
+      const mapaReferencia = {
+        "1": "A",
+        "2": "B",
+        "3": "C"
+      };
+
+      const referenciaFlow = mapaReferencia[paginaAtual] || paginaAtual;
+
+      const payload = {
+        eventData: JSON.stringify({
+          RecordID: recordID,
+          Pagina: referenciaFlow
+        })
+      };
+
+    shell.ajaxSafePost({
+      type: "POST",
+      url: FLOW_PAGINA,
+      contentType: "application/json",
+      data: JSON.stringify(payload),
+      processData: false
+    })
+    .done(function () {
+      if (callback) callback();
+    })
+    .fail(function (xhr) {
+      console.error("Erro Flow:", xhr);
+      alert("Erro ao executar fluxo.");
+      if (btnNext) {
+        btnNext.disabled = false;
+        btnNext.textContent = "AVANÇAR";
+      }
+    });
+  }
+
+  function executarFlowCancelarPequenoCliente(callback) {
+    const payload = {
+      eventData: JSON.stringify({
+        RecordID: recordID
+      })
+    };
+
+    shell.ajaxSafePost({
+      type: "POST",
+      url: FLOW_CANCELAR_POR_PEQUENO_CLIENTE,
+      contentType: "application/json",
+      data: JSON.stringify(payload),
+      processData: false
+    })
+    .done(function () {
+      if (callback) callback();
+    })
+    .fail(function (xhr) {
+      console.error("Erro Flow cancelamento pequeno cliente:", xhr);
+      alert("Erro ao executar o fluxo de cancelamento da solicitação.");
+      if (btnNext) {
+        btnNext.disabled = false;
+        btnNext.textContent = "AVANÇAR";
+      }
+    });
+  }
+
+  function abrirModalPequenoCliente() {
+    const modalExistente = document.getElementById("modal-pequeno-cliente-overlay");
+    if (modalExistente) modalExistente.remove();
+
+    const overlay = document.createElement("div");
+    overlay.id = "modal-pequeno-cliente-overlay";
+
+    overlay.style.position = "fixed";
+    overlay.style.inset = "0";
+    overlay.style.width = "100vw";
+    overlay.style.height = "100vh";
+    overlay.style.background = "rgba(15, 23, 42, 0.55)";
+    overlay.style.display = "flex";
+    overlay.style.alignItems = "center";
+    overlay.style.justifyContent = "center";
+    overlay.style.zIndex = "2147483647";
+    overlay.style.padding = "24px";
+    overlay.style.boxSizing = "border-box";
+
+    overlay.innerHTML = `
+      <div
+        style="
+          width: 100%;
+          max-width: 720px;
+          background: #ffffff;
+          border-radius: 22px;
+          padding: 28px 28px 24px;
+          box-shadow: 0 24px 80px rgba(0,0,0,0.28);
+          border: 1px solid rgba(0,39,189,0.12);
+          font-family: inherit;
+        "
+      >
+        <h3 style="
+          margin: 0 0 16px 0;
+          color: #0027bd;
+          font-size: 32px;
+          line-height: 1.15;
+        ">
+          AVISO IMPORTANTE!
+        </h3>
+
+        <p style="
+          margin: 0 0 16px 0;
+          color: #475569;
+          font-size: 18px;
+          line-height: 1.7;
+        ">
+          Conforme a alteração das informações que você registrou anteriormente,
+          identificamos que sua necessidade é referente a uma
+          <strong>Unidade de Serviço Residencial</strong>.
+        </p>
+
+        <p style="
+          margin: 0 0 18px 0;
+          color: #475569;
+          font-size: 18px;
+          line-height: 1.7;
+        ">
+          Caso prossiga, essa solicitação será cancelada, pois este portal é exclusivo
+          para solicitações de <strong>Viabilidade Técnica de Empreendimentos</strong>.
+        </p>
+
+        <p style="
+          margin: 0 0 22px 0;
+          color: #334155;
+          font-size: 18px;
+          font-weight: 700;
+        ">
+          Deseja prosseguir?
+        </p>
+
+        <div style="
+          display: flex;
+          justify-content: flex-end;
+          gap: 12px;
+          flex-wrap: wrap;
+        ">
+          <button
+            id="btnNaoProsseguirPequenoCliente"
+            type="button"
+            class="btn-cloud-outline"
+            style="min-width: 120px;"
+          >
+            NÃO
+          </button>
+
+          <button
+            id="btnSimProsseguirPequenoCliente"
+            type="button"
+            class="btn-cloud"
+            style="min-width: 120px;"
+          >
+            SIM
+          </button>
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(overlay);
+    document.body.style.overflow = "hidden";
+
+    function fecharModal() {
+      document.body.style.overflow = "";
+      const modal = document.getElementById("modal-pequeno-cliente-overlay");
+      if (modal) modal.remove();
+    }
+
+    overlay.addEventListener("click", function (e) {
+      if (e.target === overlay) {
+        fecharModal();
+      }
+    });
+
+    document.getElementById("btnNaoProsseguirPequenoCliente").onclick = function () {
+      fecharModal();
+      btnNext.disabled = false;
+      btnNext.textContent = "AVANÇAR";
+    };
+
+    document.getElementById("btnSimProsseguirPequenoCliente").onclick = function () {
+      const btn = this;
+      btn.disabled = true;
+      btn.textContent = "PROCESSANDO...";
+
+      executarFlowCancelarPequenoCliente(function () {
+        fecharModal();
+        window.location.href = "/unidade-de-servico/";
+      });
+    };
+  }
+
+  function submeterFormularioEtapa1() {
+      const submitBtn = getSubmitFormAtual();
+
+      if (!submitBtn) {
+        alert("Botão ENVIAR do formulário não encontrado.");
+        btnNext.disabled = false;
+        btnNext.textContent = "AVANÇAR";
+        return;
+      }
+
+      submitBtn.click();
+    }
+
+  if (btnNext) {
+    const btnNovo = btnNext.cloneNode(true);
+    btnNext.parentNode.replaceChild(btnNovo, btnNext);
+
+    btnNovo.addEventListener("click", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      if (btnNovo.disabled) return;
+
+      if (!todosObrigatoriosPreenchidosNoStepAtual()) {
+        alert("Preencha todos os campos obrigatórios da etapa 1.");
+        return;
+      }
+
+      const isGrandeCliente = avaliarRegraGrandeCliente();
+
+      btnNovo.disabled = true;
+      btnNovo.textContent = "PROCESSANDO...";
+
+      if (!isGrandeCliente) {
+        abrirModalPequenoCliente();
+        return;
+      }
+
+      if (!window.shell || typeof shell.ajaxSafePost !== "function") {
+        alert("Contexto de segurança do Power Pages não disponível.");
+        btnNovo.disabled = false;
+        btnNovo.textContent = "AVANÇAR";
+        return;
+      }
+
+      executarFlowPagina2(function () {
+        submeterFormularioEtapa1();
+      });
+
+
+    });
+
+    registrarEventosValidacao();
+    setTimeout(atualizarEstadoBotaoAvancar, 500);
+    setTimeout(atualizarEstadoBotaoAvancar, 1200);
+  }
+});
+
+
+// =====================================
+// ATIVAR SOMENTE FORM VISÍVEL
+// =====================================
+
+function controlarFormularios() {
+
+  const steps = document.querySelectorAll(".fsa-step");
+
+  steps.forEach(step => {
+
+    const visivel = step.offsetParent !== null;
+
+    const inputs = step.querySelectorAll("input, select, textarea");
+
+    inputs.forEach(input => {
+
+      if(visivel){
+        input.removeAttribute("disabled");
+      }else{
+        input.setAttribute("disabled","disabled");
+      }
+
+    });
+
+  });
+
+}
+
+// =====================================
+// CONTROLAR VALIDADORES ASP.NET
+// =====================================
+
+function controlarValidadores(){
+
+  if(typeof(Page_Validators) === "undefined") return;
+
+  Page_Validators.forEach(function(validator){
+
+    const step = validator.closest(".fsa-step");
+
+    if(!step) return;
+
+    const visivel = step.offsetParent !== null;
+
+    if(visivel){
+
+      ValidatorEnable(validator, true);
+
+    }else{
+
+      ValidatorEnable(validator, false);
+
+    }
+
+  });
+
+}
+
+
+</script>

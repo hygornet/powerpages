@@ -1,0 +1,33 @@
+adx_attachfilelabel: >-
+  [
+    {
+      "LCID": 1046,
+      "Value": ""
+    }
+  ]
+adx_attachfilemaxsize: 
+adx_attachfilestoragelocation: 756150000
+adx_captcharequired: false
+adx_containername: ''
+adx_entityformid: df903837-8623-49e5-83a7-ff57c9170ea4
+adx_entityname: cloud_docs_solicitacao
+adx_entitypermissionsenabled: true
+adx_entitysourcetype: 756150001
+adx_formname: Comentários
+adx_hideformonsuccess: false
+adx_maximumnooffiles: 5
+adx_mode: 100000001
+adx_name: Comentários
+adx_onsuccess: 756150000
+adx_recordidquerystringparametername: id
+adx_redirecturl: 
+adx_redirectwebpage: 
+adx_showcaptchaforauthenticatedusers: false
+adx_storageaccountname: ''
+adx_successmessage: >-
+  [
+    {
+      "LCID": 1046,
+      "Value": ""
+    }
+  ]

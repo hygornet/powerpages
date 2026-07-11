@@ -1,0 +1,231 @@
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_tipo_cadastro
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_entityform: ca80a6ae-a98b-4772-9f82-937bd77b3d65
+  adx_entityformmetadataid: 1fa6df75-a7fc-49d6-85a3-9f1820e35c1b
+  adx_fieldisrequired: false
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "O cadastro da ligação de água será feito em nome de:"
+      }
+    ]
+  adx_name: GRANDES CLIENTES E cloud_tipo_cadastro
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_validationregularexpressionerrormessage: ''
+- adx_adddescription: true
+  adx_attributelogicalname: cloud_area_construida_total
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Informe o total de área construída do empreendimento. Caso não se aplique (ex: apenas um loteamento), insira 0."
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_entityform: ca80a6ae-a98b-4772-9f82-937bd77b3d65
+  adx_entityformmetadataid: 5c3973a4-a87b-4c61-800f-f9c518618103
+  adx_fieldisrequired: true
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Qual é a área construída total (em m²)?"
+      }
+    ]
+  adx_name: GRANDES CLIENTES E cloud_area_construida_total
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_validationregularexpressionerrormessage: ''
+- adx_adddescription: true
+  adx_attributelogicalname: cloud_consumo_mensal
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Lembre-se 1m³ (metro cúbico) equivale a 1.000 litros de água."
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_entityform: ca80a6ae-a98b-4772-9f82-937bd77b3d65
+  adx_entityformmetadataid: 62076649-d27a-4df6-ab14-f5a36322a708
+  adx_fieldisrequired: true
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Qual o volume de água a ser consumido por mês?"
+      }
+    ]
+  adx_name: GRANDES CLIENTES E cloud_consumo_mensal
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_validationregularexpressionerrormessage: ''
+- adx_adddescription: true
+  adx_attributelogicalname: cloud_numero_economias
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Exemplo: considere as unidades como apartamentos, casas, lotes, salas comerciais, lojas ou unidades industriais."
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_entityform: ca80a6ae-a98b-4772-9f82-937bd77b3d65
+  adx_entityformmetadataid: 85d8eefe-004d-40ef-a142-438b8d9e4011
+  adx_fieldisrequired: true
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Informe a quantidade total de unidades comercializáveis previstas no empreendimento."
+      }
+    ]
+  adx_name: GRANDES CLIENTES E cloud_numero_economias
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_validationregularexpressionerrormessage: ''
+- adx_adddescription: true
+  adx_attributelogicalname: cloud_is_conglomerado_empresarial
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Selecione 'Sim' se este CNPJ estiver associado a mais de um local de consumo (matriz e filiais, por exemplo)."
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_entityform: ca80a6ae-a98b-4772-9f82-937bd77b3d65
+  adx_entityformmetadataid: ac902ca8-eea1-4ae2-bf1f-612ad8686d17
+  adx_fieldisrequired: true
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Este CNPJ já é (ou será) utilizado para cadastrar outros endereços/filiais com nossa companhia de água?"
+      }
+    ]
+  adx_name: GRANDES CLIENTES E cloud_is_conglomerado_empresarial
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_validationregularexpressionerrormessage: ''
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_fk_finalidades_solicitacao
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_entityform: ca80a6ae-a98b-4772-9f82-937bd77b3d65
+  adx_entityformmetadataid: b689d186-5c40-4d5f-a4ee-7115ea7f7336
+  adx_fieldisrequired: true
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Qual é a Finalidade do Empreendimento?"
+      }
+    ]
+  adx_name: GRANDES CLIENTES E cloud_fk_finalidades_solicitacao
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_validationregularexpressionerrormessage: ''
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_fk_municipios
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_entityform: ca80a6ae-a98b-4772-9f82-937bd77b3d65
+  adx_entityformmetadataid: de9f371a-61d8-4fe7-b580-6271ae197a71
+  adx_fieldisrequired: true
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Município da Obra"
+      }
+    ]
+  adx_name: GRANDES CLIENTES E cloud_fk_municipios
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_validationregularexpressionerrormessage: ''

@@ -1,0 +1,843 @@
+adx_calendar_initialview: 756150001
+adx_calendar_style: 756150000
+adx_calendar_timezonemode: 756150000
+adx_createbuttonlabel: >-
+  [
+    {
+      "LCID": 1046,
+      "Value": ""
+    }
+  ]
+adx_emptylisttext: >-
+  [
+    {
+      "LCID": 1033,
+      "Value": ""
+    },
+    {
+      "LCID": 1046,
+      "Value": "Você não tem nenhuma solicitação aberta, crie uma em \"Criar Solicitação\"."
+    }
+  ]
+adx_entitylistid: 7d1e18bb-ed41-4a18-8723-695620938b9a
+adx_entityname: cloud_solicitacoes
+adx_filter_enabled: false
+adx_idquerystringparametername: id
+adx_map_distanceunits: 756150001
+adx_map_distancevalues: 5,10,25,50,100
+adx_map_enabled: false
+adx_map_infoboxoffsetx: 25
+adx_map_infoboxoffsety: 46
+adx_map_pushpinheight: 39
+adx_map_pushpinwidth: 32
+adx_map_resturl: https://dev.virtualearth.net/REST/v1/Locations
+adx_map_type: 756150000
+adx_map_zoom: 12
+adx_name: Minhas Solicitações
+adx_odata_enabled: false
+adx_pagesize: 10
+adx_searchenabled: false
+adx_searchplaceholdertext: ''
+adx_settings: >-
+  {
+    "Type": "CrmEntityFormView-GridMetadata",
+    "ViewFormats": [],
+    "ViewActions": [
+      {
+        "Type": "CrmEntityFormView-DownloadAction",
+        "SuccessMessage": [],
+        "RecordIdQueryStringParameterName": "",
+        "TargetType": 0,
+        "OnComplete": 0,
+        "RedirectWebpageId": "",
+        "RedirectUrl": "",
+        "EntityFormId": "",
+        "ShowModal": 0,
+        "Confirmation": [],
+        "ButtonLabel": [
+          {
+            "Type": "LanguageResources",
+            "LCID": 1046,
+            "Value": ""
+          }
+        ],
+        "ButtonTooltip": [],
+        "ActionIndex": 0,
+        "FilterCriteria": ""
+      }
+    ],
+    "ExtendedViewActions": [],
+    "ItemActions": [
+      {
+        "Type": "CrmEntityFormView-EditAction",
+        "SuccessMessage": [
+          {
+            "Type": "LanguageResources",
+            "LCID": 1046,
+            "Value": "O registro foi salvo."
+          }
+        ],
+        "RecordIdQueryStringParameterName": "id",
+        "TargetType": 1,
+        "OnComplete": 0,
+        "RedirectWebpageId": "16b3d8fb-ee16-0da7-22ed-34f5caebf100",
+        "RedirectUrl": "",
+        "EntityFormId": "",
+        "ShowModal": 0,
+        "Confirmation": [
+          {
+            "Type": "LanguageResources",
+            "LCID": 1046,
+            "Value": ""
+          }
+        ],
+        "ButtonLabel": [
+          {
+            "Type": "LanguageResources",
+            "LCID": 1046,
+            "Value": ""
+          }
+        ],
+        "ButtonTooltip": [
+          {
+            "Type": "LanguageResources",
+            "LCID": 1046,
+            "Value": "Requer pagamento de nova taxa de entrada"
+          }
+        ],
+        "ActionIndex": 0,
+        "FilterCriteria": "<fetch version=\"1.0\" output-format=\"xml-platform\" mapping=\"logical\" distinct=\"false\">\n  <entity name=\"cloud_solicitacoes\">\n    <filter type=\"and\">\n      <condition attribute=\"cloud_status_atual\" operator=\"ne\" value=\"586450000\" />\n      <condition attribute=\"cloud_status_atual\" operator=\"ne\" value=\"586450002\" />\n      <condition attribute=\"cloud_status_atual\" operator=\"ne\" value=\"586450003\" />\n      <condition attribute=\"cloud_status_atual\" operator=\"ne\" value=\"586450004\" />\n      <condition attribute=\"cloud_status_atual\" operator=\"ne\" value=\"586450005\" />\n      <condition attribute=\"cloud_status_atual\" operator=\"ne\" value=\"586450006\" />\n      <condition attribute=\"cloud_status_atual\" operator=\"ne\" value=\"586450007\" />\n      <condition attribute=\"cloud_status_atual\" operator=\"ne\" value=\"586450008\" />\n      <condition attribute=\"cloud_status_atual\" operator=\"ne\" value=\"586450009\" />\n    </filter>\n  </entity>\n</fetch>"
+      }
+    ],
+    "ExtendedItemActions": [
+      {
+        "Type": "DeactivateAction",
+        "SuccessMessage": [
+          {
+            "Type": "LanguageResources",
+            "LCID": 1046,
+            "Value": "A solicitação foi cancelada."
+          }
+        ],
+        "OnComplete": 0,
+        "RedirectWebpageId": "",
+        "RedirectUrl": "",
+        "ButtonLabel": [
+          {
+            "Type": "LanguageResources",
+            "LCID": 1046,
+            "Value": "Excluir solicitação"
+          }
+        ],
+        "ButtonTooltip": [
+          {
+            "Type": "LanguageResources",
+            "LCID": 1046,
+            "Value": ""
+          }
+        ],
+        "ActionIndex": 3,
+        "ShowModal": 1,
+        "Confirmation": [
+          {
+            "Type": "LanguageResources",
+            "LCID": 1046,
+            "Value": "Ao desativar você está excluindo a solicitação e todos as informações relacionadas a ela, deseja prosseguir?"
+          }
+        ],
+        "FilterCriteria": ""
+      }
+    ],
+    "ColumnOverrides": [
+      {
+        "Type": "CrmEntityFormView-ViewColumn",
+        "AttributeLogicalName": "cloud_nome_empreendimento",
+        "DisplayName": "NOME EMPREENDIMENTO",
+        "Width": null
+      },
+      {
+        "Type": "CrmEntityFormView-ViewColumn",
+        "AttributeLogicalName": "cloud_fase",
+        "DisplayName": "FASE",
+        "Width": null
+      },
+      {
+        "Type": "CrmEntityFormView-ViewColumn",
+        "AttributeLogicalName": "cloud_etapa",
+        "DisplayName": "ETAPA",
+        "Width": null
+      },
+      {
+        "Type": "CrmEntityFormView-ViewColumn",
+        "AttributeLogicalName": "cloud_status_atual",
+        "DisplayName": "STATUS ATUAL",
+        "Width": null
+      },
+      {
+        "Type": "CrmEntityFormView-ViewColumn",
+        "AttributeLogicalName": "a_0eccdcd042d149c6b3f609a6f7278a58.cloud_nome_finalidade",
+        "DisplayName": "FINALIDADE EMPREENDIMENTO",
+        "Width": null
+      },
+      {
+        "Type": "CrmEntityFormView-ViewColumn",
+        "AttributeLogicalName": "cloud_consumo_mensal",
+        "DisplayName": "CONSUMO MENSAL",
+        "Width": null
+      },
+      {
+        "Type": "CrmEntityFormView-ViewColumn",
+        "AttributeLogicalName": "cloud_numero_economias",
+        "DisplayName": "NÚM. ECONOMIAS",
+        "Width": null
+      },
+      {
+        "Type": "CrmEntityFormView-ViewColumn",
+        "AttributeLogicalName": "cloud_area_construida_total",
+        "DisplayName": "ÁREA CONSTRUÍDA TOTAL",
+        "Width": null
+      },
+      {
+        "Type": "CrmEntityFormView-ViewColumn",
+        "AttributeLogicalName": "cloud_is_conglomerado_empresarial",
+        "DisplayName": "CONGLOMERADO EMPRESARIAL?",
+        "Width": null
+      },
+      {
+        "Type": "CrmEntityFormView-ViewColumn",
+        "AttributeLogicalName": "cloud_nome_proprietario",
+        "DisplayName": "NOME PROPRIETÁRIO",
+        "Width": null
+      },
+      {
+        "Type": "CrmEntityFormView-ViewColumn",
+        "AttributeLogicalName": "cloud_cpf_proprietario",
+        "DisplayName": "CPF PROPRIETÁRIO",
+        "Width": null
+      },
+      {
+        "Type": "CrmEntityFormView-ViewColumn",
+        "AttributeLogicalName": "cloud_rg_proprietario",
+        "DisplayName": "RG PROPRIETÁRIO",
+        "Width": null
+      },
+      {
+        "Type": "CrmEntityFormView-ViewColumn",
+        "AttributeLogicalName": "cloud_nome_construtora",
+        "DisplayName": "NOME CONSTRUTORA",
+        "Width": null
+      },
+      {
+        "Type": "CrmEntityFormView-ViewColumn",
+        "AttributeLogicalName": "cloud_cnpj_construtora",
+        "DisplayName": "CNPJ CONSTRUTORA",
+        "Width": null
+      },
+      {
+        "Type": "CrmEntityFormView-ViewColumn",
+        "AttributeLogicalName": "cloud_nome_resp_faturamento",
+        "DisplayName": "RESPONSÁVEL FATURAMENTO",
+        "Width": null
+      },
+      {
+        "Type": "CrmEntityFormView-ViewColumn",
+        "AttributeLogicalName": "cloud_observacoes",
+        "DisplayName": "OBSERVAÇÕES",
+        "Width": null
+      },
+      {
+        "Type": "CrmEntityFormView-ViewColumn",
+        "AttributeLogicalName": "cloud_endereco_da_obra",
+        "DisplayName": "ENDEREÇO OBRA",
+        "Width": null
+      },
+      {
+        "Type": "CrmEntityFormView-ViewColumn",
+        "AttributeLogicalName": "cloud_bairro_da_obra",
+        "DisplayName": "BAIRRO OBRA",
+        "Width": null
+      },
+      {
+        "Type": "CrmEntityFormView-ViewColumn",
+        "AttributeLogicalName": "a_4a79be84e1c847968ad6308f6f3c9868.cloud_nome_municipio",
+        "DisplayName": "MUNICÍPIO OBRA",
+        "Width": null
+      },
+      {
+        "Type": "CrmEntityFormView-ViewColumn",
+        "AttributeLogicalName": "cloud_data_prev_fim_obra",
+        "DisplayName": "DATA PREV. FIM OBRA",
+        "Width": null
+      },
+      {
+        "Type": "CrmEntityFormView-ViewColumn",
+        "AttributeLogicalName": "cloud_descricao_atividades",
+        "DisplayName": "DESCRIÇÃO ATIVIDADES",
+        "Width": null
+      },
+      {
+        "Type": "CrmEntityFormView-ViewColumn",
+        "AttributeLogicalName": "cloud_numero_funcionarios",
+        "DisplayName": "NÚM. FUNCIONÁRIOS",
+        "Width": null
+      },
+      {
+        "Type": "CrmEntityFormView-ViewColumn",
+        "AttributeLogicalName": "cloud_estimativa_publico_diario",
+        "DisplayName": "ESTIMATIVA PÚBLICO DIÁRIO",
+        "Width": null
+      },
+      {
+        "Type": "CrmEntityFormView-ViewColumn",
+        "AttributeLogicalName": "cloud_volume_agua_processo",
+        "DisplayName": "VOLUME ÁGUA DO PROCESSO",
+        "Width": null
+      },
+      {
+        "Type": "CrmEntityFormView-ViewColumn",
+        "AttributeLogicalName": "cloud_is_projecao_ampliacao",
+        "DisplayName": "PROJETO DE AMPLIAÇÃO?",
+        "Width": null
+      },
+      {
+        "Type": "CrmEntityFormView-ViewColumn",
+        "AttributeLogicalName": "cloud_tipo_ocupacao",
+        "DisplayName": "TIPO OCUPAÇÃO",
+        "Width": null
+      },
+      {
+        "Type": "CrmEntityFormView-ViewColumn",
+        "AttributeLogicalName": "cloud_tipo_parcelamento",
+        "DisplayName": "TIPO PARCELAMENTO",
+        "Width": null
+      },
+      {
+        "Type": "CrmEntityFormView-ViewColumn",
+        "AttributeLogicalName": "cloud_tipo_medicao",
+        "DisplayName": "TIPO MEDIÇÃO",
+        "Width": null
+      },
+      {
+        "Type": "CrmEntityFormView-ViewColumn",
+        "AttributeLogicalName": "cloud_quantidade_box",
+        "DisplayName": "QTD BOX",
+        "Width": null
+      },
+      {
+        "Type": "CrmEntityFormView-ViewColumn",
+        "AttributeLogicalName": "cloud_qtd_apt_1_dorm_menor_12",
+        "DisplayName": "QTD APT 1 DORM (<12M²)",
+        "Width": null
+      },
+      {
+        "Type": "CrmEntityFormView-ViewColumn",
+        "AttributeLogicalName": "cloud_qtd_apt_1_dorm_maior_12",
+        "DisplayName": "QTD APT 1 DORM (>12M²)",
+        "Width": null
+      },
+      {
+        "Type": "CrmEntityFormView-ViewColumn",
+        "AttributeLogicalName": "cloud_qtd_apt_2_dorm_menor_12",
+        "DisplayName": "QTD APT 2 DORM (<12M²)",
+        "Width": null
+      },
+      {
+        "Type": "CrmEntityFormView-ViewColumn",
+        "AttributeLogicalName": "cloud_qtd_apt_2_dorm_maior_12",
+        "DisplayName": "QTD APT 2 DORM (>12M²)",
+        "Width": null
+      },
+      {
+        "Type": "CrmEntityFormView-ViewColumn",
+        "AttributeLogicalName": "cloud_qtd_apt_3_dorm_menor_12",
+        "DisplayName": "QTD APT 3 DORM (<12M²)",
+        "Width": null
+      },
+      {
+        "Type": "CrmEntityFormView-ViewColumn",
+        "AttributeLogicalName": "cloud_qtd_apt_3_dorm_maior_12",
+        "DisplayName": "QTD APT 3 DORM (>12M²)",
+        "Width": null
+      },
+      {
+        "Type": "CrmEntityFormView-ViewColumn",
+        "AttributeLogicalName": "cloud_qtd_apt_4_dorm_menor_12",
+        "DisplayName": "QTD APT 4 DORM (<12M²)",
+        "Width": null
+      },
+      {
+        "Type": "CrmEntityFormView-ViewColumn",
+        "AttributeLogicalName": "cloud_qtd_apt_4_dorm_maior_12",
+        "DisplayName": "QTD APT 4 DORM (>12M²)",
+        "Width": null
+      },
+      {
+        "Type": "CrmEntityFormView-ViewColumn",
+        "AttributeLogicalName": "cloud_tipo_cadastro",
+        "DisplayName": "TIPO CADASTRO",
+        "Width": null
+      },
+      {
+        "Type": "CrmEntityFormView-ViewColumn",
+        "AttributeLogicalName": "createdon",
+        "DisplayName": "CRIADO EM",
+        "Width": null
+      },
+      {
+        "Type": "CrmEntityFormView-ViewColumn",
+        "AttributeLogicalName": "modifiedon",
+        "DisplayName": "ÚLT. ATUALIZAÇÃO",
+        "Width": null
+      },
+      {
+        "Type": "CrmEntityFormView-ViewColumn",
+        "AttributeLogicalName": "cloud_id_solicitacoes",
+        "DisplayName": "PROTOCOLO",
+        "Width": null
+      }
+    ],
+    "LoadingMessage": [
+      {
+        "Type": "LanguageResources",
+        "LCID": 1046,
+        "Value": ""
+      }
+    ],
+    "ErrorMessage": [
+      {
+        "Type": "LanguageResources",
+        "LCID": 1046,
+        "Value": ""
+      }
+    ],
+    "AccessDeniedMessage": [
+      {
+        "Type": "LanguageResources",
+        "LCID": 1046,
+        "Value": ""
+      }
+    ],
+    "EmptyMessage": [
+      {
+        "Type": "LanguageResources",
+        "LCID": 1046,
+        "Value": "Nenhuma solicitação encontrada."
+      }
+    ],
+    "DetailsFormDialog": {
+      "Type": "CrmEntityFormView-DetailsFormModal",
+      "LoadingMessage": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "Title": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "PrimaryButtonText": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "CloseButtonText": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "DismissButtonSrText": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "Size": 1,
+      "CssClass": "",
+      "TitleCssClass": "",
+      "PrimaryButtonCssClass": "",
+      "CloseButtonCssClass": ""
+    },
+    "EditFormDialog": {
+      "Type": "CrmEntityFormView-EditFormModal",
+      "LoadingMessage": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "Title": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "PrimaryButtonText": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "CloseButtonText": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "DismissButtonSrText": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "Size": 1,
+      "CssClass": "",
+      "TitleCssClass": "",
+      "PrimaryButtonCssClass": "",
+      "CloseButtonCssClass": ""
+    },
+    "CreateRelatedRecordDialog": {
+      "Type": "CreateRelatedRecordModal",
+      "LoadingMessage": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "Title": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "PrimaryButtonText": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "CloseButtonText": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "DismissButtonSrText": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "Size": 1,
+      "CssClass": "",
+      "TitleCssClass": "",
+      "PrimaryButtonCssClass": "",
+      "CloseButtonCssClass": ""
+    },
+    "CreateFormDialog": {
+      "Type": "CrmEntityFormView-CreateFormModal",
+      "LoadingMessage": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "Title": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "PrimaryButtonText": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "CloseButtonText": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "DismissButtonSrText": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "Size": 1,
+      "CssClass": "",
+      "TitleCssClass": "",
+      "PrimaryButtonCssClass": "",
+      "CloseButtonCssClass": ""
+    },
+    "DeleteDialog": {
+      "Type": "CrmEntityFormView-GridDeleteModal",
+      "Title": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "PrimaryButtonText": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "CloseButtonText": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "DismissButtonSrText": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "Size": 0,
+      "CssClass": "",
+      "TitleCssClass": "",
+      "PrimaryButtonCssClass": "",
+      "CloseButtonCssClass": ""
+    },
+    "WorkflowDialog": {
+      "Type": "WorkflowModal",
+      "Title": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "PrimaryButtonText": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "CloseButtonText": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "DismissButtonSrText": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "Size": 0,
+      "CssClass": "",
+      "TitleCssClass": "",
+      "PrimaryButtonCssClass": "",
+      "CloseButtonCssClass": ""
+    },
+    "ErrorDialog": {
+      "Type": "CrmEntityFormView-ErrorModal",
+      "Body": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "Title": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "PrimaryButtonText": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "CloseButtonText": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "DismissButtonSrText": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "Size": 0,
+      "CssClass": "",
+      "TitleCssClass": "",
+      "PrimaryButtonCssClass": "",
+      "CloseButtonCssClass": ""
+    },
+    "CssClass": "",
+    "GridCssClass": "table-striped",
+    "GridColumnWidthStyle": 1,
+    "ActivateDialog": {
+      "Type": "ActivateModal",
+      "Title": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "PrimaryButtonText": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "CloseButtonText": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "DismissButtonSrText": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "Size": 0,
+      "CssClass": "",
+      "TitleCssClass": "",
+      "PrimaryButtonCssClass": "",
+      "CloseButtonCssClass": ""
+    },
+    "DeactivateDialog": {
+      "Type": "DeactivateModal",
+      "Title": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "PrimaryButtonText": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "CloseButtonText": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "DismissButtonSrText": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "Size": 0,
+      "CssClass": "",
+      "TitleCssClass": "",
+      "PrimaryButtonCssClass": "",
+      "CloseButtonCssClass": ""
+    },
+    "GetDirectionsDialog": {
+      "Type": "GetDirectionsModal",
+      "Title": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "PrimaryButtonText": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "CloseButtonText": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "DismissButtonSrText": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "Size": 1,
+      "CssClass": "",
+      "TitleCssClass": "",
+      "PrimaryButtonCssClass": "",
+      "CloseButtonCssClass": ""
+    }
+  }
+adx_view: 82fbc2d1-aa34-4313-911b-e065126c827c
+adx_views: >-
+  {
+    "Type": "ViewMetadata",
+    "Views": [
+      {
+        "Type": "View",
+        "DisplayName": [
+          {
+            "Type": "LanguageResources",
+            "LCID": 1046,
+            "Value": ""
+          }
+        ],
+        "ViewId": "82fbc2d1-aa34-4313-911b-e065126c827c"
+      }
+    ]
+  }

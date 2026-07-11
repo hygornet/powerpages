@@ -1,0 +1,8 @@
+adx_CloudFlowConsumer_adx_webrole:
+- 1e16f3b3-b319-4d15-a71e-bd149be9381d
+adx_cloudflowconsumerid: 371be550-6c1f-f111-88b1-7ced8da81546
+adx_flowapiurl: /_api/cloudflow/v1.0/trigger/6bcf3d2f-6c1f-f111-88b2-002248de77b7
+adx_flowtriggerurl: ''
+adx_metadata: ''
+adx_name: F20 - ANEXAR documento e gerar linha de histórico
+adx_processid: 6bcf3d2f-6c1f-f111-88b2-002248de77b7

@@ -1,0 +1,8 @@
+adx_CloudFlowConsumer_adx_webrole:
+- 1e16f3b3-b319-4d15-a71e-bd149be9381d
+adx_cloudflowconsumerid: eede76a1-1f66-f111-ab0d-7ced8da81546
+adx_flowapiurl: /_api/cloudflow/v1.0/trigger/37c1c88e-1f66-f111-ab0d-002248de77b7
+adx_flowtriggerurl: ''
+adx_metadata: ''
+adx_name: F40 - Marcar como lido ao visualizar atividade da Unidade
+adx_processid: 37c1c88e-1f66-f111-ab0d-002248de77b7

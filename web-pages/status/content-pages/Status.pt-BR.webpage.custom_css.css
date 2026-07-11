@@ -1,0 +1,2330 @@
+:root {
+  --brand-color: #0027bd;
+  --brand-hover: #8493ca;
+  --text-dark: #1f2937;
+  --secondary-color: #17e3cb;
+}
+
+/* Container diagnóstico */
+.debug-card {
+  max-width: 900px;
+  margin: 24px auto;
+  padding: 20px;
+  border-radius: 10px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  font-size: 14px;
+}
+
+/* Card principal */
+.card-termo {
+  max-width: 900px;
+  margin: 40px auto 60px;
+  padding: 32px;
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  border: 1px solid #e5e7eb;
+}
+
+/* Título */
+.card-termo h2 {
+  margin-bottom: 16px;
+  color: var(--brand-color);
+  font-size: 22px;
+}
+
+/* Texto */
+.card-termo p {
+  font-size: 16px;
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+
+/* ===============================
+   BOTÃO PRIMÁRIO – PADRÃO FLUENT
+   =============================== */
+.btn-cloud {
+  background-color: var(--brand-color) !important;
+  color: #ffffff !important;
+  width: auto !important;
+  min-width: 180px !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 32px !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  border-radius: 8px !important;
+  border: none !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  box-shadow: none !important;
+  text-decoration: none !important;
+}
+
+/* Hover */
+.btn-cloud:hover {
+  background-color: var(--secondary-color) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 12px rgba(23, 227, 203, 0.4) !important;
+}
+
+/* Active */
+.btn-cloud:active {
+  transform: translateY(0) !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Focus (acessibilidade) */
+.btn-cloud:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(23, 227, 203, 0.35) !important;
+}
+
+/* ===============================
+   BOTÃO SECUNDÁRIO – OUTLINE
+   =============================== */
+.btn-cloud-outline {
+  background-color: #ffffff !important;
+  color: var(--brand-color) !important;
+  border: 2px solid var(--brand-color) !important;
+  border-radius: 8px !important;
+}
+
+/* Hover outline */
+.btn-cloud-outline:hover {
+  background-color: var(--secondary-color) !important;
+  color: #ffffff !important;
+  border-color: var(--secondary-color) !important;
+}
+
+/* Active outline */
+.btn-cloud-outline:active {
+  transform: translateY(0) !important;
+}
+
+/* Focus outline */
+.btn-cloud-outline:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(23, 227, 203, 0.35) !important;
+}
+/* ======================================
+   REMOVE SUBLINHADO DOS BOTÕES <a>
+   ====================================== */
+.btn-cloud,
+.btn-cloud:hover,
+.btn-cloud:focus,
+.btn-cloud:active,
+.btn-cloud-outline,
+.btn-cloud-outline:hover,
+.btn-cloud-outline:focus,
+.btn-cloud-outline:active {
+  text-decoration: none !important;
+}
+/* ===============================
+   CONFETTI ULTRA EXPLOSIVO
+   =============================== */
+.confetti {
+  position: absolute; /* ⬅️ NÃO fixed */
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 2147483647;
+  animation: explode 900ms cubic-bezier(.17,.67,.45,1.3) forwards;
+  filter: drop-shadow(0 0 6px rgba(255,255,255,0.8));
+}
+
+@keyframes explode {
+  0% {
+    transform: translate(0, 0) scale(1.4) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--dx), var(--dy)) scale(0.2) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+
+:root {
+  --brand-color: #0027bd;
+  --brand-hover: #8493ca;
+  --text-dark: #1f2937;
+  --secondary-color: #17e3cb;
+
+  --blue-dark:#0027bd;
+  --blue-light:#0b5cff;
+  --turq:#17e3cb;
+  --line-gray:#e5e7eb;
+  --border-gray:#cbd5e1;
+}
+
+/* ===============================
+   CARDS GERAIS
+   =============================== */
+.debug-card,
+.timeline-card,
+.card-termo {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Container diagnóstico */
+.debug-card {
+  margin-top: 24px;
+  padding: 20px;
+  border-radius: 10px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  font-size: 14px;
+}
+
+/* Card principal */
+.card-termo {
+  margin: 40px auto 60px;
+  padding: 32px;
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  border: 1px solid #e5e7eb;
+}
+
+/* ===============================
+   BOTÕES
+   =============================== */
+.btn-cloud {
+  background-color: var(--brand-color) !important;
+  color: #ffffff !important;
+  min-width: 180px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 32px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 8px;
+  border: none;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none !important;
+}
+
+.btn-cloud:hover {
+  background-color: var(--secondary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(23, 227, 203, 0.4);
+}
+
+.btn-cloud-outline {
+  background-color: #ffffff !important;
+  color: var(--brand-color) !important;
+  border: 2px solid var(--brand-color) !important;
+}
+
+/* ===============================
+   TIMELINE – VERSÃO FINAL
+   =============================== */
+.timeline-card {
+  margin: 32px auto;
+  padding: 26px 28px 30px;
+  border-radius: 14px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+}
+
+/* Área útil da timeline (mais estreita) */
+.timeline-wrap{
+  position: relative;
+  height: 130px;
+  width: 90%;
+  margin: 0 auto;
+}
+
+/* Barra */
+/* Base sempre ocupa tudo */
+.timeline-line-base{
+  position:absolute;
+  left:0;
+  right:0;
+  top:46px;
+  height:8px;
+  border-radius:6px;
+  background: var(--line-gray);
+  z-index:1;
+}
+/* ✅ Concluído (azul sólido) */
+.timeline-line-done{
+  position:absolute;
+  left:0;
+  top:46px;
+  height:8px;
+  border-radius:6px;
+  background:#0027bd;
+  box-shadow:none;
+  z-index:2;
+  width: 0%; /* JS/inline define */
+}
+
+.timeline-line-current{
+  position:absolute;
+  top:46px;
+  height:8px;
+  border-radius:6px;
+  background: linear-gradient(90deg, #0027bd, #17e3cb);
+  box-shadow:none;
+  z-index:3;
+
+  left: 0%;   /* JS/inline define */
+  width: 0%;  /* JS/inline define */
+}
+
+/* Barras calculadas usam LEFT + WIDTH */
+.timeline-line-done,
+.timeline-line-current {
+  position: absolute;
+  left: 0;
+  top: 46px;
+  height: 8px;
+  border-radius: 6px;
+}
+
+
+
+
+/* Bolinhas */
+.tnode {
+  position: absolute;
+  top: 32px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #ffffff;
+  border: 3px solid var(--border-gray);
+  color: #0027bd;
+  transition: all .25s ease;
+}
+
+.tnode svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+  fill: currentColor;
+}
+
+.tnode.p1 { left: 0%; }
+.tnode.p2 { left: 33.333%; }
+.tnode.p3 { left: 66.666%; }
+.tnode.p4 { left: 100%; }
+
+/* estados */
+.tnode.etapa-superada {
+  background: #dbeafe;
+  border-color: #1d4ed8;
+  color: #0027bd;
+}
+
+.tnode.etapa-atual {
+  background: #17e3cb;
+  border-color: #0f766e;
+  color: #0027bd;
+  box-shadow: 0 0 0 6px rgba(23,227,203,0.22);
+  position: relative;
+  z-index: 6;
+}
+
+.tnode.etapa-atual::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: rgba(23,227,203,0.35);
+  transform: translate(-50%, -50%) scale(1);
+  animation: pulse-timeline-atual 1.6s ease-out infinite;
+  z-index: -1;
+}
+
+@keyframes pulse-timeline-atual {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: .85;
+  }
+  70% {
+    transform: translate(-50%, -50%) scale(1.9);
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.tnode.etapa-futura {
+  background: #cbd5e1;
+  border-color: #94a3b8;
+  color: #ffffff;
+}
+
+.tnode.etapa-reprovada {
+  background: #ef4444;
+  border-color: #b91c1c;
+  color: #ffffff;
+  box-shadow: 0 0 0 6px rgba(239,68,68,0.20);
+  position: relative;
+  z-index: 6;
+}
+/* Labels – BONITOS E LEGÍVEIS */
+/* Labels – AJUSTADOS PARA CABER NA HORIZONTAL */
+.timeline-label{
+  position:absolute;
+  top:78px;
+  transform:translateX(-50%);
+  font-size:11px;
+  font-weight:500;
+  color:#475569;
+  text-align:center;
+  line-height:1.2;
+  z-index:5;
+
+  max-width:88px;       /* seguro agora */
+  white-space:normal;
+  word-break:keep-all;
+}
+
+
+/* Mesmas posições das bolinhas */
+.timeline-label.p1 { left: 0%; }
+.timeline-label.p2 { left: 33.333%; }
+.timeline-label.p3 { left: 66.666%; }
+.timeline-label.p4 { left: 100%; }
+
+@media (max-width: 1024px) {
+  .timeline-wrap{
+    max-width: 680px;
+  }
+}
+/* Overlay */
+.modal-cloud-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+}
+
+/* Caixa */
+.modal-cloud {
+  background: #fff;
+  width: 100%;
+  max-width: 520px;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.3);
+  font-family: 'Inter', sans-serif;
+}
+
+/* Ações */
+.modal-cloud-actions {
+  margin-top: 32px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+.modal-cloud-actions-center {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+}
+/* ===============================
+   CAMADA GLOBAL DE EFEITOS
+   =============================== */
+.effects-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2147483647; /* topo absoluto */
+}
+/* ===============================
+   TIMELINE – AVANÇO DAS AÇÕES (7 etapas)
+   NÃO afeta a timeline principal
+   =============================== */
+
+.timeline-actions .tnode.p1,
+.timeline-actions .timeline-label.p1 { left: 0%; }
+
+.timeline-actions .tnode.p2,
+.timeline-actions .timeline-label.p2 { left: 16.66%; }
+
+.timeline-actions .tnode.p3,
+.timeline-actions .timeline-label.p3 { left: 33.33%; }
+
+.timeline-actions .tnode.p4,
+.timeline-actions .timeline-label.p4 { left: 50%; }
+
+.timeline-actions .tnode.p5,
+.timeline-actions .timeline-label.p5 { left: 66.66%; }
+
+.timeline-actions .tnode.p6,
+.timeline-actions .timeline-label.p6 { left: 83.33%; }
+
+.timeline-actions .tnode.p7,
+.timeline-actions .timeline-label.p7 { left: 100%; }
+
+/* 🧭 Andamento da Solicitação */
+.timeline-card:not(.timeline-actions) .timeline-line-done{
+  background:#0027bd !important;
+  box-shadow:none !important;
+}
+/* FASE atual */
+.timeline-card:not(.timeline-actions) .timeline-line-current{
+  background: linear-gradient(98deg, #0027bd, #17e3cb) !important;
+  box-shadow:none !important;
+}
+/* 📈 Avanço das ações */
+.timeline-actions .timeline-line-done {
+  background: linear-gradient(5deg, #0027bd, #17e3cb);
+}
+/* ===============================
+   CORES POR ESTADO DA TIMELINE
+   =============================== */
+.timeline-label.past {
+  color: #0027bd; /* azul escuro */
+  font-weight: 600;
+}
+
+.timeline-label.present {
+  color: #0b5cff; /* azul vivo */
+  font-weight: 700;
+}
+
+.timeline-label.future {
+  color: #9ca3af; /* cinza */
+  font-weight: 500;
+}
+/* ===============================
+   BOLINHA ATUAL COM AURA PULSANTE
+   =============================== */
+.tnode.etapa-atual::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: rgba(23,227,203,0.35);
+  transform: translate(-50%, -50%) scale(1);
+  animation: pulse-timeline-atual 1.6s ease-out infinite;
+  z-index: -1;
+}
+
+.tnode.etapa-reprovada::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: rgba(239,68,68,0.35);
+  transform: translate(-50%, -50%) scale(1);
+  animation: pulse-timeline-reprovada 1.6s ease-out infinite;
+  z-index: -1;
+}
+
+@keyframes pulse-timeline-atual {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: .85;
+  }
+  70% {
+    transform: translate(-50%, -50%) scale(1.9);
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes pulse-timeline-reprovada {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: .9;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(2);
+    opacity: 0;
+  }
+}
+/* ===============================
+   TOOLTIP DAS BOLINHAS
+   =============================== */
+.tnode[data-tooltip] {
+  cursor: help;
+}
+
+.tnode[data-tooltip]::before {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 140%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #010505;
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s ease;
+  z-index: 10;
+}
+
+.tnode[data-tooltip]::after {
+  content: "";
+  position: absolute;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: #17e3cb transparent transparent transparent;
+  opacity: 0;
+  transition: opacity .2s ease;
+}
+
+.tnode:hover::before,
+.tnode:hover::after {
+  opacity: 1;
+}
+/* ================================
+   TIMELINES INTEGRADAS À PÁGINA
+   (remove efeito de card)
+   ================================ */
+
+.timeline-card {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 auto 16px !important;
+  max-width: 1200px;
+  width: 90%;
+}
+
+/* ================================
+   APROXIMA AS DUAS TIMELINES
+   ================================ */
+
+.timeline-card.timeline-actions {
+  margin-top: -8px;  /* aproxima da de cima */
+}
+
+/* =========================================
+   TIMELINE AÇÕES – PAGAMENTO RECUSADO
+   RESET TOTAL DA AURA (SEM VAZAMENTO)
+   ========================================= */
+
+/* bolinha */
+
+/* =========================================
+   TIMELINE AÇÕES – PAGAMENTO RECUSADO
+   RÓTULO ATUAL EM VERMELHO
+   ========================================= */
+
+.timeline-actions.status-reprovado
+.timeline-label.present {
+  color: #dc2626 !important;
+  font-weight: 700 !important;
+}
+ /* FAB - POSSO AJUDAR */
+.faq-fab {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+
+  background: #0027bd;
+  color: #ffffff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 26px;
+  font-weight: 800;
+  text-decoration: none;
+
+  box-shadow:
+    0 6px 16px rgba(0, 39, 189, 0.45);
+
+  z-index: 9999;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.faq-fab:hover {
+  transform: translateY(-4px);
+  background: #001e99;
+  box-shadow:
+    0 10px 24px rgba(0, 39, 189, 0.55);
+}
+
+/* Tooltip */
+.faq-fab-tooltip {
+  position: absolute;
+  right: 68px;
+  white-space: nowrap;
+
+  background: #111827;
+  color: #ffffff;
+  font-size: 13px;
+  padding: 6px 10px;
+  border-radius: 6px;
+
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(4px);
+  transition: all 0.2s ease;
+}
+
+.faq-fab:hover .faq-fab-tooltip {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* Botão X do modal */
+.modal-cloud {
+  position: relative;
+}
+
+.modal-close-x {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  font-size: 22px;
+  font-weight: 600;
+  
+  cursor: pointer;
+}
+
+/* Botão Carregar – padrão portal */
+#modalEnviarDocumentos .buttonForFileUpload,
+#modalEnviarDocumentos .btn-upload,
+#modalEnviarDocumentos input[type="file"] + label {
+  background-color: #0027bd;
+  color: #ffffff;
+  border-radius: 8px;
+  border: none;
+  padding: 8px 16px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+#modalEnviarDocumentos .buttonForFileUpload:hover,
+#modalEnviarDocumentos .btn-upload:hover,
+#modalEnviarDocumentos input[type="file"] + label:hover {
+  background-color: #17e3cb;
+  color: #0027bd;
+}
+
+/* Área inferior do modal */
+#modalNovosDocumentos .actions,
+#modalNovosDocumentos .modal-cloud-actions {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Container pai vira footer flex */
+#modalNovosDocumentos .modal-cloud {
+  display: flex;
+  flex-direction: column;
+}
+
+#modalNovosDocumentos .actions {
+  margin-left: auto;
+}
+
+#modalNovosDocumentos .modal-cloud-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+/* Força submit e fechar na mesma linha */
+#modalNovosDocumentos .actions,
+#modalNovosDocumentos .modal-cloud-actions {
+  justify-content: flex-end;
+}
+
+/* Ajuste visual do submit */
+#modalNovosDocumentos input[type="submit"] {
+  margin-right: 12px;
+}
+#btnFecharNovosDocumentos {
+  display: none !important;
+}
+/* ================================
+   BOTÃO X DO MODAL (clean)
+================================ */
+.modal-close-x {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+
+  background: transparent;
+  border: none;
+  outline: none;
+
+  color: #0027bd; /* azul padrão */
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1;
+
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 6px;
+
+  box-shadow: none;
+}
+
+/* Hover suave (sem fundo pesado) */
+.modal-close-x:hover {
+  background: rgba(0, 39, 189, 0.08); /* azul bem leve */
+}
+
+/* Remove qualquer foco feio */
+.modal-close-x:focus,
+.modal-close-x:active {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Garante o X posicionado no canto do modal */
+#modalComprovante .modal-cloud {
+  position: relative;
+}
+
+/* Botão X */
+#modalComprovante .modal-close-x{
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: transparent;
+  color: var(--brand-color, #0026bd00);
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+  border-radius: 10px;
+}
+#modalComprovante .modal-close-x:hover{
+  background: rgba(0, 39, 189, 0.08);
+}
+
+/* =========================================
+   UPLOAD MODAL COMPROVANTE (DROPZONE REAL)
+   ========================================= */
+
+/* remove layout padrão do file-cell dentro do modal */
+#modalComprovante .file-cell {
+  display: block !important;
+  padding: 0 !important;
+  border: none !important;
+  background: transparent !important;
+}
+
+/* input ocupa toda a área */
+#modalComprovante #inputComprovante {
+  width: 100% !important;
+  min-height: 110px !important;
+  cursor: pointer !important;
+}
+
+/* dropzone visual */
+#modalComprovante #inputComprovante::file-selector-button {
+  display: none;
+}
+
+/* caixa visual */
+#modalComprovante .file-cell::after {
+  content: "⬆ Carregar";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 110px;
+  border: 2px dashed #cbd5e1;
+  border-radius: 12px;
+  background-color: #f8fafc;
+  color: var(--brand-color, #0027bd);
+  font-weight: 600;
+  font-family: Inter, sans-serif;
+}
+
+/* hover */
+#modalComprovante .file-cell:hover::after {
+  background-color: #eff6ff;
+  border-color: var(--brand-color, #0027bd);
+}
+/* ======================================================
+   ENTITY FORM UPLOAD → MESMO DESIGN DO inputComprovante
+   ====================================================== */
+
+/* remove layout padrão */
+#modalComprovante .buttonForFileUpload {
+  display: block !important;
+  padding: 0 !important;
+  border: none !important;
+  background: transparent !important;
+  position: relative;
+}
+
+/* esconde visual do botão real */
+#modalComprovante #UploadButton {
+  width: 100% !important;
+  min-height: 110px !important;
+  opacity: 0 !important;
+  cursor: pointer !important;
+  position: relative;
+  z-index: 2;
+}
+
+/* caixa visual fake */
+#modalComprovante .buttonForFileUpload::after {
+  content: "⬆ Carregar";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 110px;
+  border: 2px dashed #cbd5e1;
+  border-radius: 12px;
+  background-color: #f8fafc;
+  color: var(--brand-color, #0027bd);
+  font-weight: 600;
+  font-family: Inter, sans-serif;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+/* hover */
+#modalComprovante .buttonForFileUpload:hover::after {
+  background-color: #eff6ff;
+  border-color: var(--brand-color, #0027bd);
+}
+
+#ValidationSummaryEntityFormControl_001dc6946db447ac915ac4867ff31f52_EntityFormView {
+  display: none !important;
+}
+
+.modal-close-x {
+  background-color: transparent !important;
+  color: #2563eb !important; /* azul (pode trocar pela sua var) */
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* mantém igual no hover */
+.modal-close-x:hover {
+  background-color: transparent !important;
+  color: #2563eb !important;
+}
+
+/* ======================================================
+   UPLOAD MODAL DOCUMENTOS → PADRÃO COMPROVANTE
+   ====================================================== */
+
+/* container do upload */
+#modalEnviarDocumentos .buttonForFileUpload {
+  display: block !important;
+  padding: 0 !important;
+  border: none !important;
+  background: transparent !important;
+  position: relative;
+}
+
+/* botão real invisível */
+#modalEnviarDocumentos #UploadButton {
+  width: 100% !important;
+  min-height: 110px !important;
+  opacity: 0 !important;
+  cursor: pointer !important;
+  position: relative;
+  z-index: 2;
+}
+
+/* caixa visual fake */
+#modalEnviarDocumentos .buttonForFileUpload::after {
+  content: "⬆ Carregar";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 110px;
+  border: 2px dashed #cbd5e1;
+  border-radius: 12px;
+  background-color: #f8fafc;
+  color: var(--brand-color, #0027bd);
+  font-weight: 600;
+  font-family: Inter, sans-serif;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+/* hover bonito */
+#modalEnviarDocumentos .buttonForFileUpload:hover::after {
+  background-color: #eff6ff;
+  border-color: var(--brand-color, #0027bd);
+}
+
+/* =========================================
+   CARD TRANSPARENTE DAS TIMELINES
+   ========================================= */
+.timeline-glass-card{
+  max-width: 1200px;
+  width: 100%;
+  margin: 32px auto 40px;
+  padding: 24px 20px 18px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.10);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.timeline-block + .timeline-block{
+  margin-top: 10px;
+}
+
+.timeline-block-title{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 90%;
+  margin: 0 auto 10px auto;
+  padding: 10px 10px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: #0027bd;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: left;
+  text-shadow: none;
+}
+.timeline-glass-card .timeline-card{
+  margin: 0 auto 12px !important;
+  width: 100% !important;
+  max-width: none !important;
+}
+
+.timeline-glass-card .timeline-card.timeline-actions{
+  margin-top: 0 !important;
+}
+
+@media (max-width: 768px){
+  .timeline-glass-card{
+    padding: 18px 12px 14px;
+  }
+
+  .timeline-block-title{
+  width: 100%;
+  margin: 0 0 10px 0;
+  font-size: 15px;
+  padding: 9px 10px;
+}
+
+  .timeline-glass-card .timeline-card{
+    width: 100% !important;
+  }
+}
+
+/* remove animação/efeito customizado dos botões de excluir anexo */
+#modalEnviarDocumentos .delete,
+#modalEnviarDocumentos .remove,
+#modalEnviarDocumentos .remove-file,
+#modalEnviarDocumentos .btn-delete,
+#modalEnviarDocumentos .btn-remove,
+#modalEnviarDocumentos [title*="Excluir"],
+#modalEnviarDocumentos [title*="Remover"],
+#modalEnviarDocumentos button[aria-label*="Excluir"],
+#modalEnviarDocumentos button[aria-label*="Remover"] {
+  background: transparent !important;
+  color: inherit !important;
+  border: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+/* hover limpo, sem animação */
+#modalEnviarDocumentos .delete:hover,
+#modalEnviarDocumentos .remove:hover,
+#modalEnviarDocumentos .remove-file:hover,
+#modalEnviarDocumentos .btn-delete:hover,
+#modalEnviarDocumentos .btn-remove:hover,
+#modalEnviarDocumentos [title*="Excluir"]:hover,
+#modalEnviarDocumentos [title*="Remover"]:hover,
+#modalEnviarDocumentos button[aria-label*="Excluir"]:hover,
+#modalEnviarDocumentos button[aria-label*="Remover"]:hover {
+  background: transparent !important;
+  color: inherit !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+.tnode.etapa-superada svg {
+  width: 38px;
+  height: 38px;
+  filter: drop-shadow(0 0 2px rgba(0,0,0,0.2));
+}
+.tnode.etapa-atual svg {
+  width: 18px;
+  height: 18px;
+}
+
+.tnode.etapa-futura svg {
+  width: 16px;
+  height: 16px;
+}
+
+.tnode.etapa-atual {
+  position: relative;
+  z-index: 6;
+}
+
+.tnode.etapa-atual::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: rgba(23,227,203,0.35);
+  transform: translate(-50%, -50%) scale(1);
+  animation: pulse-timeline-atual 1.6s ease-out infinite;
+  z-index: -1;
+}
+
+@keyframes pulse-timeline-atual {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: .85;
+  }
+  70% {
+    transform: translate(-50%, -50%) scale(1.9);
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+/* MODAL - SUBMETER NOVOS DOCUMENTOS */
+#modalNovosDocumentos .modal-novos-documentos-box {
+  width: 92%;
+  max-width: 680px;
+  height: auto;
+max-height: 68vh;
+overflow-y: auto;
+  overflow-y: auto;
+  padding: 24px 26px;
+  border-radius: 18px;
+}
+
+/* Reduz espaços internos do formulário dentro do modal */
+#modalNovosDocumentos .sectionBlockLayout {
+  padding: 0 !important;
+  margin-top: 10px !important;
+}
+
+#modalNovosDocumentos .container {
+  max-width: 100% !important;
+}
+
+#modalNovosDocumentos .columnBlockLayout {
+  min-width: 100% !important;
+}
+
+/* Ajuste dos botões */
+#modalNovosDocumentos .modal-cloud-actions {
+  margin-top: 18px;
+  gap: 12px;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  #modalNovosDocumentos .modal-novos-documentos-box {
+    width: 94%;
+    max-width: 94%;
+    max-height: 62vh;
+    padding: 16px;
+  }
+}
+#modalNovosDocumentos .row,
+#modalNovosDocumentos .sectionBlockLayout,
+#modalNovosDocumentos .container,
+#modalNovosDocumentos .columnBlockLayout {
+  min-height: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+/* =====================================================
+   ANIMAÇÃO ÁGUA CORRENTE - 2 TIMELINES DA PÁGINA
+   ===================================================== */
+
+/* 1) Timeline de FASES */
+.timeline-fases-grande .timeline-line-done {
+  position: absolute !important;
+  overflow: hidden !important;
+  background: #0027bd !important;
+}
+
+.timeline-fases-grande .timeline-line-done::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+
+  background: linear-gradient(
+    90deg,
+    #001b8f 0%,
+    #0b5cff 18%,
+    #17e3cb 35%,
+    #0b5cff 52%,
+    #17e3cb 70%,
+    #0b5cff 85%,
+    #001b8f 100%
+  );
+
+  background-size: 300% 100%;
+  animation: aguaCorrenteDuasTimelines 2.6s linear infinite;
+}
+
+/* 2) Timeline de STATUS/AÇÕES */
+.timeline-card.timeline-actions .timeline-line-done {
+  position: absolute !important;
+  overflow: hidden !important;
+  background: #0027bd !important;
+}
+
+.timeline-card.timeline-actions .timeline-line-done::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+
+  background: linear-gradient(
+    90deg,
+    #001b8f 0%,
+    #0b5cff 18%,
+    #17e3cb 35%,
+    #0b5cff 52%,
+    #17e3cb 70%,
+    #0b5cff 85%,
+    #001b8f 100%
+  );
+
+  background-size: 300% 100%;
+  animation: aguaCorrenteDuasTimelines 2.6s linear infinite;
+}
+
+/* esquerda para direita */
+@keyframes aguaCorrenteDuasTimelines {
+  0% {
+    background-position: 300% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+/* FASES - barra concluída animada */
+.timeline-card:not(.timeline-actions) .timeline-line-done {
+  position: absolute !important;
+  overflow: hidden !important;
+  background: #0027bd !important;
+  z-index: 2 !important;
+}
+
+.timeline-card:not(.timeline-actions) .timeline-line-done::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    90deg,
+    #0027bd 0%,
+    #0b5cff 25%,
+    #17e3cb 50%,
+    #0b5cff 75%,
+    #0027bd 100%
+  );
+  background-size: 300% 100%;
+  animation: aguaCorrenteFases 2.6s linear infinite;
+}
+
+/* FASES - trecho atual animado */
+.timeline-card:not(.timeline-actions) .timeline-line-current {
+  position: absolute !important;
+  overflow: hidden !important;
+  background: #0027bd !important;
+  z-index: 3 !important;
+}
+
+.timeline-card:not(.timeline-actions) .timeline-line-current::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    90deg,
+    #0027bd 0%,
+    #0b5cff 25%,
+    #17e3cb 50%,
+    #0b5cff 75%,
+    #0027bd 100%
+  );
+  background-size: 300% 100%;
+  animation: aguaCorrenteFases 2.6s linear infinite;
+}
+
+@keyframes aguaCorrenteFases {
+  from {
+    background-position: 300% 50%;
+  }
+  to {
+    background-position: 0% 50%;
+  }
+}
+
+.card-upload-documentacao {
+  max-width: 1200px;
+  margin: 24px auto;
+}
+
+.upload-doc-lista {
+  margin-top: 22px;
+  padding: 18px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+}
+
+.upload-doc-lista-head,
+.upload-doc-bottom-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.upload-doc-lista-head {
+  margin-bottom: 16px;
+}
+
+.upload-doc-lista-titulo {
+  font-size: 16px;
+  font-weight: 800;
+  color: #0027bd;
+}
+
+.upload-doc-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.upload-doc-vazio {
+  padding: 16px;
+  border-radius: 12px;
+  background: #ffffff;
+  color: #64748b;
+  font-weight: 600;
+  text-align: center;
+}
+
+.upload-doc-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, .05);
+  transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease, background .22s ease;
+}
+
+.upload-doc-item:hover {
+  transform: translateY(-3px);
+  border-color: #17e3cb;
+  background: #fbfffe;
+  box-shadow: 0 14px 30px rgba(15, 23, 42, .10);
+}
+
+.upload-doc-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #eff6ff;
+  color: #0027bd;
+  font-size: 20px;
+}
+
+.upload-doc-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.upload-doc-nome {
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.upload-doc-link {
+  color: #0027bd;
+  text-decoration: none !important;
+}
+
+.upload-doc-link:hover {
+  color: #17a99b;
+  text-decoration: underline !important;
+}
+
+.upload-doc-trash {
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 12px;
+  background: #fef2f2;
+  color: #dc2626;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.upload-doc-trash:hover {
+  background: #fee2e2;
+  transform: scale(1.08);
+}
+
+.upload-doc-bottom-actions {
+  margin-top: 20px;
+}
+
+.modal-anexo-preliminar {
+  width: min(960px, 94vw);
+  max-width: 960px;
+  height: min(420px, 52vh);
+  padding: 0 !important;
+  overflow: hidden;
+  position: relative;
+}
+
+.iframe-anexo-preliminar {
+  width: 100%;
+  height: 420px;
+  max-height: 52vh;
+  display: block;
+  background: transparent;
+}
+
+.carregando-anexos-box {
+  width: 100%;
+  height: 520px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+  color: #0027bd;
+  background: #ffffff;
+}
+
+.loader-anexos {
+  width: 58px;
+  height: 58px;
+  border: 6px solid #dbeafe;
+  border-top-color: #17e3cb;
+  border-radius: 50%;
+  animation: spinAnexos 1s linear infinite;
+}
+
+@keyframes spinAnexos {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.btn-cloud:disabled,
+.btn-cloud-outline:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+  filter: grayscale(.2);
+}
+
+.upload-doc-item.excluindo {
+  opacity: .72;
+  pointer-events: none;
+  background: #f8fafc !important;
+  border-color: #93c5fd !important;
+}
+
+.upload-doc-status-excluindo {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #0027bd;
+  font-weight: 800;
+  font-size: 13px;
+}
+
+.upload-doc-spinner {
+  width: 16px;
+  height: 16px;
+  border: 3px solid #dbeafe;
+  border-top-color: #0027bd;
+  border-radius: 50%;
+  animation: spinAnexos .8s linear infinite;
+}
+
+/* ===============================
+   MOBILE - CARDS MAIS ESTREITOS - 28_05_2026
+   =============================== */
+@media (max-width: 768px) {
+
+  /* Card transparente que envolve as timelines */
+  .timeline-glass-card {
+    width: 92% !important;
+    max-width: 92% !important;
+    margin: 20px auto 28px !important;
+    padding: 16px 10px 14px !important;
+    border-radius: 16px !important;
+  }
+
+  /* Cards das timelines */
+  .timeline-card {
+    width: 92% !important;
+    max-width: 92% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  /* Card principal/status */
+  .card-termo,
+  .card-upload-documentacao,
+  .debug-card {
+    width: 92% !important;
+    max-width: 92% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding: 22px 18px !important;
+  }
+
+  /* Área interna da timeline um pouco mais estreita */
+  .timeline-wrap {
+    width: 86% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
+
+/* ===============================
+   MOBILE - TIMELINE 2 MAIS COMPACTA
+   =============================== */
+@media (max-width: 768px) {
+
+  /* Bolinhas menores */
+  .timeline-actions .tnode {
+    width: 24px !important;
+    height: 24px !important;
+    border-width: 2px !important;
+    top: 41px !important;
+  }
+
+  .timeline-actions .tnode svg {
+    width: 12px !important;
+    height: 12px !important;
+  }
+
+  .timeline-actions .tnode.etapa-superada svg {
+    width: 24px !important;
+    height: 24px !important;
+  }
+
+  /* Rótulos menores */
+  .timeline-actions .timeline-label {
+    font-size: 9px !important;
+    line-height: 1.1 !important;
+    max-width: 58px !important;
+    font-weight: 600 !important;
+  }
+
+  /* Ímpares abaixo */
+  .timeline-actions .timeline-label.p1,
+  .timeline-actions .timeline-label.p3,
+  .timeline-actions .timeline-label.p5,
+  .timeline-actions .timeline-label.p7 {
+    top: 72px !important;
+  }
+
+  /* Pares acima */
+  .timeline-actions .timeline-label.p2,
+  .timeline-actions .timeline-label.p4,
+  .timeline-actions .timeline-label.p6 {
+    top: auto !important;
+    bottom: 76px !important;
+  }
+
+  /* Dá altura para caber rótulo acima e abaixo */
+  .timeline-actions .timeline-wrap {
+    height: 112px !important;
+  }
+}
+
+.mobile-top-actions {
+  max-width: 1200px;
+  margin: 120px auto 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ===============================
+   MOBILE - VOLTAR E SOLICITAÇÃO NA MESMA LINHA
+   =============================== */
+@media (max-width: 768px) {
+  .mobile-top-actions {
+    width: 92% !important;
+    max-width: 92% !important;
+    margin: 70px auto 18px !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: stretch !important;
+    justify-content: space-between !important;
+    gap: 10px !important;
+  }
+
+  .mobile-top-actions .btn-voltar-topo,
+  .mobile-top-actions .btn-solicitacao-topo {
+    flex: 1 1 0 !important;
+    width: 50% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    height: 42px !important;
+    padding: 10px 8px !important;
+    font-size: 12px !important;
+    line-height: 1.1 !important;
+    justify-content: center !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+  }
+}
+
+/* ===============================
+   MOBILE - CARDS DE STATUS TURQUESA
+   =============================== */
+@media (max-width: 768px) {
+  .card-termo {
+    background: #17E3CB !important;
+    border: 1px solid rgba(0, 39, 189, 0.18) !important;
+    box-shadow: 0 10px 26px rgba(0, 39, 189, 0.18) !important;
+  }
+
+  .card-termo h2 {
+    color: #0027bd !important;
+  }
+
+  .card-termo p,
+  .card-termo li,
+  .card-termo strong {
+    color: #002147 !important;
+  }
+
+  .card-termo a {
+    color: #0027bd !important;
+  }
+}
+
+/* ===============================
+   MOBILE - CENTRALIZAR BARRA DA TIMELINE 2 NAS BOLINHAS
+   =============================== */
+@media (max-width: 768px) {
+  .timeline-actions .timeline-line-base,
+  .timeline-actions .timeline-line-done,
+  .timeline-actions .timeline-line-current {
+    top: 49px !important;
+  }
+}
+
+/* ===============================
+   MOBILE - STATUS CARDS CENTRALIZADOS
+   =============================== */
+@media (max-width: 768px) {
+  .card-termo {
+    text-align: center !important;
+  }
+
+  .card-termo h2,
+  .card-termo h3,
+  .card-termo p,
+  .card-termo ul,
+  .card-termo li,
+  .card-termo div {
+    text-align: center !important;
+  }
+
+  .card-termo ul {
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+    list-style-position: inside !important;
+  }
+
+  .card-termo > div,
+  .card-termo .modal-cloud-actions,
+  .card-termo .modal-cloud-actions-center,
+  .card-termo .upload-doc-lista-head,
+  .card-termo .upload-doc-bottom-actions {
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
+  .card-termo .btn-cloud,
+  .card-termo .btn-cloud-outline,
+  .card-termo button,
+  .card-termo a.btn-cloud {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    align-self: stretch !important;
+  }
+
+  .card-termo .upload-doc-lista,
+  .card-termo .upload-doc-grid,
+  .card-termo .upload-doc-item,
+  .card-termo .upload-doc-info {
+    width: 100% !important;
+  }
+
+  .card-termo .upload-doc-item {
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+}
+
+/* ===============================
+   MOBILE - MODAIS MAIS ESTREITOS
+   =============================== */
+@media (max-width: 768px) {
+  .modal-cloud {
+    width: 88% !important;
+    max-width: 88% !important;
+    margin: 0 auto !important;
+    padding: 22px 18px !important;
+    box-sizing: border-box !important;
+  }
+
+  .modal-cloud-overlay {
+    padding: 0 12px !important;
+    box-sizing: border-box !important;
+  }
+
+  .modal-anexo-preliminar,
+  .modal-novos-documentos-box {
+    width: 88% !important;
+    max-width: 88% !important;
+  }
+}
+
+/* ===============================
+   MOBILE - TIMELINE 1 COM 3 FASES
+   PC CONTINUA COM 4 FASES
+   =============================== */
+@media (max-width: 768px) {
+  .timeline-card:not(.timeline-actions) .tnode.p1,
+  .timeline-card:not(.timeline-actions) .timeline-label.p1 {
+    left: 0% !important;
+  }
+
+  .timeline-card:not(.timeline-actions) .tnode.p2,
+  .timeline-card:not(.timeline-actions) .timeline-label.p2 {
+    left: 50% !important;
+  }
+
+  .timeline-card:not(.timeline-actions) .tnode.p3,
+  .timeline-card:not(.timeline-actions) .timeline-label.p3 {
+    left: 100% !important;
+  }
+
+  .timeline-card:not(.timeline-actions) .tnode.p4,
+  .timeline-card:not(.timeline-actions) .timeline-label.p4 {
+    display: none !important;
+  }
+
+  .timeline-card:not(.timeline-actions) .timeline-line-done {
+    width: calc(var(--mobile-fase-done, 0) * 50%) !important;
+  }
+}
+
+/* ===============================
+   MOBILE - TIMELINE 1 MAIS ESTREITA
+   =============================== */
+@media (max-width: 768px) {
+  .timeline-card:not(.timeline-actions) .timeline-wrap {
+    width: 76% !important;
+  }
+}
+
+/* ===============================
+   MOBILE - BOTÕES DOS MODAIS EMPILHADOS
+   Confirmar em cima / Cancelar embaixo
+   =============================== */
+@media (max-width: 768px) {
+  .modal-cloud .modal-cloud-actions {
+    display: flex !important;
+    flex-direction: column-reverse !important;
+    align-items: stretch !important;
+    justify-content: center !important;
+    gap: 10px !important;
+  }
+
+  .modal-cloud .modal-cloud-actions .btn-cloud,
+  .modal-cloud .modal-cloud-actions button,
+  .modal-cloud .modal-cloud-actions a {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+
+  .modal-cloud .modal-cloud-actions-center {
+    align-items: stretch !important;
+  }
+
+  .modal-cloud .modal-cloud-actions-center .btn-cloud,
+  .modal-cloud .modal-cloud-actions-center button,
+  .modal-cloud .modal-cloud-actions-center a {
+    width: 100% !important;
+  }
+}
+
+/* ===============================
+   MOBILE - CARDS/AVISOS INTERNOS À ESQUERDA
+   =============================== */
+@media (max-width: 768px) {
+  .card-termo > div:not(.modal-cloud-actions):not(.modal-cloud-actions-center),
+  .card-termo > div:not(.modal-cloud-actions):not(.modal-cloud-actions-center) *,
+  .card-termo [style*="border-left"],
+  .card-termo [style*="border-left"] * {
+    text-align: left !important;
+  }
+
+  .card-termo [style*="border-left"] {
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+}
+
+/* ===============================
+   MOBILE - ITENS DAS LISTAS CENTRALIZADOS
+   =============================== */
+@media (max-width: 768px) {
+  .card-termo .upload-doc-lista-head {
+    flex-direction: column !important;
+    text-align: center !important;
+  }
+
+  .card-termo .upload-doc-lista-titulo,
+  .card-termo .upload-doc-item,
+  .card-termo .upload-doc-item *,
+  .card-termo .upload-doc-info,
+  .card-termo .upload-doc-nome,
+  .card-termo .upload-doc-link,
+  .card-termo .upload-doc-vazio {
+    text-align: center !important;
+  }
+
+  .card-termo .upload-doc-item {
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .card-termo .upload-doc-lista .btn-cloud,
+  .card-termo .upload-doc-bottom-actions .btn-cloud {
+    width: 100% !important;
+    justify-content: center !important;
+    text-align: center !important;
+  }
+}
+/* ===============================
+   MOBILE - NOMES DE ARQUIVOS E BOTÃO CENTRALIZADOS
+   =============================== */
+@media (max-width: 768px) {
+  .card-termo .upload-doc-nome,
+  .card-termo .upload-doc-link {
+    display: block !important;
+    width: 100% !important;
+    text-align: center !important;
+  }
+
+  .card-termo #btnEnviarArquivosDiretrizes {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    white-space: normal !important;
+    line-height: 1.2 !important;
+  }
+}
+/* ===============================
+   MOBILE - NOME DO ARQUIVO CENTRALIZADO
+   =============================== */
+@media (max-width: 768px) {
+  .card-termo .upload-doc-info {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center !important;
+    width: 100% !important;
+  }
+
+  .card-termo .upload-doc-info .upload-doc-nome.upload-doc-link {
+    display: block !important;
+    width: 100% !important;
+    text-align: center !important;
+    margin: 0 auto !important;
+  }
+}
+
+/* ===============================
+   MOBILE - BOTÃO VOLTAR FLUTUANTE
+   =============================== */
+.voltar-fab-mobile {
+  display: none !important;
+}
+
+@media (max-width: 768px) {
+  .mobile-top-actions .btn-voltar-topo {
+    display: none !important;
+  }
+
+  .voltar-fab-mobile {
+    position: fixed !important;
+    bottom: 24px !important;
+    left: 24px !important;
+
+    width: 56px !important;
+    height: 56px !important;
+    border-radius: 50% !important;
+
+    background: #0027bd !important;
+    color: #ffffff !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    box-shadow: 0 6px 16px rgba(0, 39, 189, 0.45) !important;
+    z-index: 9999 !important;
+
+    text-decoration: none !important;
+  }
+
+  .voltar-fab-mobile:hover {
+    background: #001e99 !important;
+    transform: translateY(-4px) !important;
+  }
+}
+@media (max-width: 768px) {
+  .titulo-fase-atual,
+  .titulo-proximos-passos {
+    justify-content: center !important;
+    text-align: center !important;
+  }
+}
+@media (max-width: 768px) {
+  #btnEnviarComprovanteAnalise {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    white-space: normal !important;
+    line-height: 1.2 !important;
+    width: 100% !important;
+  }
+}
+
+/* NOVO COMPONENTE DE ADICIONAR ANEXOS!!*/
+
+.upload-comprovante-inline {
+  width: 100%;
+  margin-top: 18px;
+  margin-bottom: 20px;
+}
+
+.upload-comprovante-box {
+  width: 100%;
+  padding: 18px;
+  border: 1px dashed #17E3CB;
+  border-radius: 16px;
+  background: #f8fffe;
+  box-sizing: border-box;
+}
+
+.upload-comprovante-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: #0027bd;
+  margin-bottom: 6px;
+}
+
+.upload-comprovante-desc {
+  margin: 0 0 14px;
+  font-size: 14px;
+  color: #374151;
+  line-height: 1.5;
+}
+
+.upload-comprovante-label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.inputComprovanteBoleto {
+  display: none !important;
+}
+
+.upload-comprovante-fake-btn {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 44px;
+  border-radius: 999px;
+  background: #0027bd;
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: .03em;
+  text-align: center;
+}
+
+.upload-comprovante-file-name {
+  font-size: 13px;
+  color: #4b5563;
+  word-break: break-word;
+  padding-left: 4px;
+}
+
+.upload-comprovante-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+
+.upload-comprovante-actions .btn-cloud:disabled {
+  opacity: .55;
+  cursor: not-allowed;
+}
+
+.upload-comprovante-status {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  align-items: center;
+  gap: 10px;
+}
+
+.upload-comprovante-status.carregando {
+  background: #eff6ff;
+  color: #1e3a8a;
+  border-left: 4px solid #2563eb;
+}
+
+.upload-comprovante-status.sucesso {
+  background: #ecfdf5;
+  color: #065f46;
+  border-left: 4px solid #16a34a;
+}
+
+.upload-comprovante-status.erro {
+  background: #fef2f2;
+  color: #7f1d1d;
+  border-left: 4px solid #dc2626;
+}
+
+@media (max-width: 768px) {
+  .upload-comprovante-box {
+    padding: 16px;
+    border-radius: 14px;
+  }
+
+  .upload-comprovante-actions {
+    justify-content: center;
+  }
+
+  .upload-comprovante-actions .btn-cloud {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .upload-comprovante-fake-btn {
+    min-height: 48px;
+  }
+}
+.comprovante-inline-header {
+  display: none !important;
+}
+
+.comprovante-inline-container {
+  width: 100% !important;
+  max-width: none !important;
+  padding: 0 !important;
+  margin: 16px 0 24px !important;
+  border: none !important;
+  background: transparent !important;
+  box-sizing: border-box !important;
+}
+
+
+
+.comprovante-inline-frame-box {
+  width: 100% !important;
+  max-width: none !important;
+  height: 190px !important;
+  min-height: 190px !important;
+  overflow: hidden !important;
+  border-radius: 14px !important;
+  background: #f8fafc !important;
+}
+
+.iframe-comprovante-inline {
+  width: 100% !important;
+  max-width: none !important;
+  height: 190px !important;
+  min-height: 190px !important;
+  border: 0 !important;
+  display: block !important;
+  background: #f8fafc !important;
+}
+/* Página filha de anexos de diretrizes dentro do card */
+.anexo-diretrizes-inline-container {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 12px 0 12px !important;
+  padding: 0 !important;
+  border: none !important;
+  background: #f8fafc !important;
+  box-sizing: border-box !important;
+}
+
+.anexo-diretrizes-inline-frame-box {
+  width: 100% !important;
+  max-width: none !important;
+  height: 190px !important;
+  min-height: 190px !important;
+  overflow: hidden !important;
+  border-radius: 14px !important;
+  background: #f8fafc !important;
+}
+
+.iframe-anexo-diretrizes-inline {
+  width: 100% !important;
+  max-width: none !important;
+  height: 190px !important;
+  min-height: 190px !important;
+  border: 0 !important;
+  display: block !important;
+  background: #f8fafc !important;
+}
+
+.upload-doc-lista .anexo-diretrizes-inline-container,
+.upload-doc-lista .anexo-diretrizes-inline-frame-box,
+.upload-doc-lista .iframe-anexo-diretrizes-inline {
+  flex: 0 0 100% !important;
+  align-self: stretch !important;
+}
+
+/* INLINE - ANEXOS DIRETRIZES - IGUAL COMPROVANTE */
+.anexo-diretrizes-inline-container {
+  width: 100% !important;
+  max-width: none !important;
+  padding: 0 !important;
+  margin: 14px 0 14px !important;
+  border: none !important;
+  background: #f8fafc !important;
+  box-sizing: border-box !important;
+}
+
+.anexo-diretrizes-inline-frame-box {
+  width: 100% !important;
+  max-width: none !important;
+  height: 280px !important;
+  min-height: 280px !important;
+  overflow: hidden !important;
+  border-radius: 14px !important;
+  background: #f8fafc !important;
+}
+
+.iframe-anexo-diretrizes-inline {
+  width: 100% !important;
+  max-width: none !important;
+  height: 280px !important;
+  min-height: 280px !important;
+  border: 0 !important;
+  display: block !important;
+  background: #f8fafc !important;
+}
+
+.upload-doc-lista .anexo-diretrizes-inline-container,
+.upload-doc-lista .anexo-diretrizes-inline-frame-box,
+.upload-doc-lista .iframe-anexo-diretrizes-inline {
+  flex: 0 0 100% !important;
+  align-self: stretch !important;
+}
+
+.upload-doc-item-carregando {
+  position: relative !important;
+  opacity: 0.95 !important;
+}
+
+.upload-doc-status-carregando {
+  margin-top: 6px !important;
+  font-size: 12px !important;
+  font-weight: 800 !important;
+  color: #0027bd !important;
+  text-transform: uppercase !important;
+  letter-spacing: .02em !important;
+}
+
+.upload-doc-spinner {
+  width: 22px !important;
+  height: 22px !important;
+  display: inline-block !important;
+  border: 3px solid #dbeafe !important;
+  border-top-color: #17e3cb !important;
+  border-radius: 50% !important;
+  animation: uploadDocSpin 0.8s linear infinite !important;
+}
+
+@keyframes uploadDocSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Botão desabilitado no padrão azul claro */
+.btn-cloud-disabled,
+.btn-cloud:disabled,
+button[disabled].btn-cloud {
+  background: #8fa2ff !important;
+  border-color: #8fa2ff !important;
+  color: #ffffff !important;
+
+  opacity: 1 !important;
+  filter: none !important;
+  cursor: not-allowed !important;
+  pointer-events: none !important;
+  box-shadow: none !important;
+}
+
+/* Remove efeito hover quando estiver desabilitado */
+.btn-cloud-disabled:hover,
+.btn-cloud:disabled:hover,
+button[disabled].btn-cloud:hover {
+  background: #8fa2ff !important;
+  border-color: #8fa2ff !important;
+  color: #ffffff !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+/* ======================================================
+   TIMELINE DE FASE COM 3 PONTOS - DESKTOP E MOBILE
+   ====================================================== */
+
+/* Fase atual da solicitação: 3 pontos */
+.timeline-block:first-child .timeline-wrap > .tnode.p1,
+.timeline-block:first-child .timeline-wrap > .timeline-label.p1 {
+  left: 0% !important;
+}
+
+.timeline-block:first-child .timeline-wrap > .tnode.p2,
+.timeline-block:first-child .timeline-wrap > .timeline-label.p2 {
+  left: 50% !important;
+}
+
+.timeline-block:first-child .timeline-wrap > .tnode.p3,
+.timeline-block:first-child .timeline-wrap > .timeline-label.p3 {
+  left: 100% !important;
+}
+
+/* Garante que FINALIZAÇÃO não apareça mais */
+.timeline-block:first-child .timeline-wrap > .tnode.p4,
+.timeline-block:first-child .timeline-wrap > .timeline-label.p4 {
+  display: none !important;
+}
+
+
+/* Alinha os títulos com o primeiro ponto da timeline */
+.timeline-block-title,
+.titulo-fase-atual,
+.titulo-proximos-passos {
+  margin-left: 0 !important;
+  padding-left: 32px !important;
+  text-align: left !important;
+  position: relative;
+  left: 0 !important;
+}
+/* Timeline reposicionada depois do card da etapa atual */
+.timeline-glass-card.timeline-posicionada-no-final {
+  margin-top: 0 !important;
+  margin-bottom: 40px !important;
+}

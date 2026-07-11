@@ -1,0 +1,16 @@
+adx_accountrelationship: 
+adx_append: true
+adx_appendto: true
+adx_contactrelationship: 
+adx_create: true
+adx_delete: true
+adx_entitylogicalname: cloud_boletos
+adx_entityname: Incluir Comprovante
+adx_entitypermission_webrole:
+- 1e16f3b3-b319-4d15-a71e-bd149be9381d
+adx_entitypermissionid: 3421d96c-6f90-4b33-888c-b40a53315d0b
+adx_parententitypermission: 
+adx_parentrelationship: 
+adx_read: true
+adx_scope: 756150000
+adx_write: true

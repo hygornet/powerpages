@@ -1,0 +1,388 @@
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_qtd_apt_1_dorm_menor_12
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_fieldisrequired: false
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Qtd. Apto. 1 Dorm. menor que 12 m²"
+      }
+    ]
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_webformmetadataid: 04dd0aee-3e7c-44d8-a7f9-0302bf4b6498
+  adx_webformstep: 6ab81068-9dd6-f011-8543-000d3a3113d7
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_quantidade_box
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_fieldisrequired: false
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Quantidade de Box"
+      }
+    ]
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_webformmetadataid: 09e8e53b-182c-4b11-9cc0-045e2bfffa87
+  adx_webformstep: 6ab81068-9dd6-f011-8543-000d3a3113d7
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_qtd_apt_3_dorm_maior_12
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_fieldisrequired: false
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Qtd. Apto. 3 Dorm. maior que 12 m²"
+      }
+    ]
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_webformmetadataid: 0ef149e1-e2fb-449f-89d8-1885e1f07098
+  adx_webformstep: 6ab81068-9dd6-f011-8543-000d3a3113d7
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_qtd_apt_4_dorm_maior_12
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_fieldisrequired: false
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Qtd. Apto. 4 Dorm. maior que 12 m²"
+      }
+    ]
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_webformmetadataid: 34a8ba40-faa9-46f1-bc20-eb0e83c0a8db
+  adx_webformstep: 6ab81068-9dd6-f011-8543-000d3a3113d7
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_status_atual
+  adx_descriptionposition: 100000000
+  adx_fieldisrequired: false
+  adx_ignoredefaultvalue: false
+  adx_onsavetype: 100000000
+  adx_onsavevalue: 586450001
+  adx_purchasecreateinvoiceonpayment: false
+  adx_purchasefulfillorderonpayment: false
+  adx_purchaserequiresshipping: false
+  adx_randomizeoptionsetvalues: false
+  adx_setvalueonsave: true
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_webformmetadataid: 3ea1081d-bada-f011-8543-000d3a3113d7
+  adx_webformstep: 6ab81068-9dd6-f011-8543-000d3a3113d7
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_qtd_apt_1_dorm_maior_12
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_fieldisrequired: false
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Qtd. Apto. 1 Dorm. maior que 12 m²"
+      }
+    ]
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_webformmetadataid: 4bc54192-3e1c-48b1-a4ca-53ac97a14a64
+  adx_webformstep: 6ab81068-9dd6-f011-8543-000d3a3113d7
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_qtd_apt_2_dorm_menor_12
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_fieldisrequired: false
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Qtd. Apto. 2 Dorm. menor que 12 m²"
+      }
+    ]
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_webformmetadataid: 64f378bd-722d-46a4-9421-862c46e8e7c4
+  adx_webformstep: 6ab81068-9dd6-f011-8543-000d3a3113d7
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_qtd_apt_2_dorm_maior_12
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_fieldisrequired: false
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Qtd. Apto. 2 Dorm. maior que 12 m²"
+      }
+    ]
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_webformmetadataid: 92870219-1f0a-4fd5-9e98-ab20697a1cd8
+  adx_webformstep: 6ab81068-9dd6-f011-8543-000d3a3113d7
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_tipo_ocupacao
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_fieldisrequired: false
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Tipo de Ocupação"
+      }
+    ]
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_webformmetadataid: b46627ec-3109-4daf-b11a-3d6e46ac1dac
+  adx_webformstep: 6ab81068-9dd6-f011-8543-000d3a3113d7
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_tipo_medicao
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_fieldisrequired: false
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Tipo de Medição"
+      }
+    ]
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_webformmetadataid: c7468a4f-1a29-466d-accc-c88fd5b683f2
+  adx_webformstep: 6ab81068-9dd6-f011-8543-000d3a3113d7
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_tipo_parcelamento
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_fieldisrequired: false
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Tipo de Parcelamento"
+      }
+    ]
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_webformmetadataid: c7947f27-966a-4077-9b44-9f5fbbdf3c62
+  adx_webformstep: 6ab81068-9dd6-f011-8543-000d3a3113d7
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_qtd_apt_3_dorm_menor_12
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_fieldisrequired: false
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Qtd. Apto. 3 Dorm. menor que 12 m²"
+      }
+    ]
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_webformmetadataid: cb658b2c-412a-4ec3-84d9-8dddf91701f7
+  adx_webformstep: 6ab81068-9dd6-f011-8543-000d3a3113d7
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_qtd_apt_4_dorm_menor_12
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_fieldisrequired: false
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Qtd. Apto. 4 Dorm. menor que 12 m²"
+      }
+    ]
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_webformmetadataid: dd920da0-9aef-444c-a194-d430943df5c1
+  adx_webformstep: 6ab81068-9dd6-f011-8543-000d3a3113d7

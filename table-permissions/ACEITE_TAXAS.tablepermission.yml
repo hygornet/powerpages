@@ -1,0 +1,16 @@
+adx_accountrelationship: 
+adx_append: false
+adx_appendto: false
+adx_contactrelationship: 
+adx_create: false
+adx_delete: false
+adx_entitylogicalname: cloud_aceite_taxas
+adx_entityname: ACEITE_TAXAS
+adx_entitypermission_webrole:
+- 1e16f3b3-b319-4d15-a71e-bd149be9381d
+adx_entitypermissionid: a22ec92f-bdd0-4eb3-bc50-6dfd41116c83
+adx_parententitypermission: dd384cc2-35f9-4ba9-8f4e-a334968d43a2
+adx_parentrelationship: cloud_aceite_taxas_fk_solicitacoes_cloud_solicitacoes
+adx_read: true
+adx_scope: 756150003
+adx_write: false

@@ -1,0 +1,2803 @@
+{% assign url = request.url | downcase %} {% assign mid_image = "/logo-aegea-personalizado.png" %} {% assign url_contato = "www.aegea.com.br/contato/" %} {% assign url_dominio_unidade = "" %} {% if url contains settings["URLCorsan"] %} {% assign mid_image = "/corsan-centralized.png" %} {% assign url_dominio_unidade = settings["URLCorsan"] %} {% assign url_contato = "https://wa.me/555197046644" %} {% elsif url contains settings["URLAguasDoPara"] %} {% assign mid_image = "/imagens/logo-rj.png" %} {% assign url_dominio_unidade = settings["URLAguasDoPara"] %} {% assign url_contato = "https://www.aguasdopara.com.br/contato/" %} {% elsif url contains settings["URLAguasDeGuariroba"] %} {% assign mid_image = "/imagens/logo-mg.png" %} {% assign url_dominio_unidade = settings["URLAguasDeGuariroba"] %} {% assign url_contato = "https://www.aguasguariroba.com.br/contato/" %} {% elsif url contains settings["URLAguasDeManaus"] %} {% assign mid_image = "/imagens/logo-mg.png" %} {% assign url_dominio_unidade = settings["URLAguasDeManaus"] %} {% assign url_contato = "https://www.aguasdemanaus.com.br/contato/" %} {% elsif url contains settings["URLProlagos"] %} {% assign mid_image = "/imagens/logo-mg.png" %} {% assign url_dominio_unidade = settings["URLProlagos"] %} {% assign url_contato = "https://www.prolagos.com.br/contato/" %} {% endif %} {% fetchxml unidade %}
+<fetch>
+  <entity name="cloud_unidades">
+    <attribute name="cloud_docs_obrigatorios" />
+    <attribute name="cloud_docs_condicionais" />
+    <attribute name="cloud_id_unidade" />
+    <attribute name="cloud_nome_unidade" />
+    <attribute name="cloud_unidadesid" />
+    <attribute name="cloud_dominio" />
+    <filter>
+      <condition attribute="cloud_dominio" operator="eq" value="{{url_dominio_unidade}}" />
+    </filter>
+  </entity>
+</fetch>
+{% endfetchxml %} {% assign unidadeRegistro = unidade.results.entities | first %} {% assign docsCondicionais = unidadeRegistro.cloud_docs_condicionais %} {% assign unidadeRegistro = unidade.results.entities | first %} {% assign docsObrigatorios = unidadeRegistro.cloud_docs_obrigatorios %}
+{% assign solicitacaoId = request.params["id"] %}
+
+{% fetchxml solicitacao %}
+<fetch top="1">
+  <entity name="cloud_solicitacoes">
+
+    <attribute name="cloud_solicitacoesid" />
+    <attribute name="cloud_status_atual" />
+    <attribute name="cloud_is_orcamento_solicitado" />
+    <attribute name="cloud_pagina_ultimo_form" />
+
+    <filter type="and">
+      <condition attribute="cloud_solicitacoesid"
+                 operator="eq"
+                 value="{{ solicitacaoId }}" />
+                 <condition attribute="createdon" operator="le" value='{{ "today" | date: "yyyy-MM-dd HH:mm:ss" }}' />
+    </filter>
+
+
+    <link-entity name="cloud_finalidades_solicitacao"
+                 from="cloud_finalidades_solicitacaoid"
+                 to="cloud_fk_finalidades_solicitacao"
+                 link-type="outer"
+                 alias="finalidade">
+
+      <attribute name="cloud_nome_finalidade" />
+
+    </link-entity>
+    
+  </entity>
+</fetch>
+{% endfetchxml %}
+
+{% assign finalidade = solicitacao.results.entities[0]["finalidade.cloud_nome_finalidade"] | default: "" | upcase %}
+
+{% assign statusAtual = solicitacao.results.entities[0]['cloud_status_atual'].value %}
+{% assign paginaUltimoFormValor = solicitacao.results.entities[0]['cloud_pagina_ultimo_form'].value | default: 586450001 %}
+{% assign isOrcamentoSolicitado = solicitacao.results.entities[0]['cloud_is_orcamento_solicitado'] | default: false %}
+
+{% assign paginaInicial = "1" %}
+{% if paginaUltimoFormValor == 586450002 %}
+  {% assign paginaInicial = "2" %}
+{% elsif paginaUltimoFormValor == 586450003 %}
+  {% assign paginaInicial = "3" %}
+{% elsif paginaUltimoFormValor == 586450004 %}
+  {% assign paginaInicial = "4" %}
+{% endif %}
+
+
+{% if statusAtual == 586450001 and paginaUltimoFormValor == 586450004 %}
+  <style>body { display:none !important; }</style>
+  <script>
+    window.location.href = "/Status/?id={{ solicitacaoId }}";
+  </script>
+{% endif %}
+
+
+<div class="row sectionBlockLayout" style="display: flex; flex-wrap: wrap; margin: 0px; min-height: auto; padding: 80px 0px 40px; background-color: rgb(249, 250, 251);">
+
+  <div id="form-foco-solicitacao" class="fsa-page-shell">
+  <div class="fsa-white-card">
+    <div id="custom-modern-form" class="modern-form-wrapper">
+
+      <div class="fsa-header" id="fsaHeader">
+        <h1 class="fsa-title">
+          Atualizar Formulário de Solicitação de Análise (FSA)
+        </h1>
+
+        <p class="fsa-subtitle">
+          Com essa etapa é possível alterar informações da solicitação inicial.
+        </p>
+      </div>
+
+      <div style="height: 20px;"></div>
+
+      <div class="power-pages-form-container fsa-secoes-fixas">
+
+        <!-- ETAPA 1 -->
+        <section class="fsa-section-card" id="secao-etapa-1">
+          <div class="fsa-section-head">
+            <div class="fsa-section-badge">1</div>
+            <div>
+              <h2 class="fsa-section-title">🔒 Informações iniciais - Somente leitura</h2>
+              <p class="fsa-section-subtitle">
+                Esta seção contém informações que se alteradas poderiam mudar todo o processo e valores do projeto.
+              </p>
+            </div>
+          </div>
+
+          <div class="ppFlexContainer">
+            {% entityform name: 'GRANDES CLIENTES' %}
+          </div>
+        </section>
+
+        <!-- ETAPA 2 -->
+        <section class="fsa-section-card" id="secao-etapa-2">
+          <div class="fsa-section-head">
+            <div class="fsa-section-badge">2</div>
+            <div>
+              <h2 class="fsa-section-title">Dados complementares</h2>
+              <p class="fsa-section-subtitle">
+                Complete as informações adicionais da solicitação.
+              </p>
+            </div>
+          </div>
+
+          <div class="ppFlexContainer">
+            {% entityform name: 'Form_FSA P' %}
+          </div>
+        </section>
+
+        <!-- ETAPA 3 -->
+        <section class="fsa-section-card" id="secao-etapa-3">
+          <div class="fsa-section-head">
+            <div class="fsa-section-badge">3</div>
+            <div>
+              <h2 class="fsa-section-title">🔒 Informações específicas da finalidade {{ finalidade }} - Somente Leitura</h2>
+              <p class="fsa-section-subtitle">
+                Esta seção é exibida conforme a finalidade da solicitação.
+              </p>
+            </div>
+          </div>
+
+          {% if finalidade == "INDUSTRIAL" %}
+            <div class="ppFlexContainer">
+              {% entityform name: 'FINALIDADE_IND A' %}
+            </div>
+          {% elsif finalidade == "COMERCIAL" or finalidade == "INSTITUCIONAL" %}
+            <div class="ppFlexContainer">
+              {% entityform name: 'FINALIDADES_COM_INS A' %}
+            </div>
+          {% else %}
+            <div class="ppFlexContainer">
+              {% entityform name: 'FINALIDADES_RES_LOTRES_CON_LOTIND A' %}
+            </div>
+          {% endif %}
+        </section>
+
+      </div>
+
+<div class="fsa-global-actions" id="fsaGlobalActions">
+  <button
+    type="button"
+    class="btn-cloud btn-cloud-disabled"
+    id="btnSalvarTudo"
+    disabled
+    aria-disabled="true">
+    SALVAR
+  </button>
+</div>
+
+
+
+    </div>
+  </div>
+</div>
+
+  </div>
+
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+</div>
+<script>
+
+
+
+// =====================================
+// FUNÇÃO UTILITÁRIA: desabilita o campo cloud_pagina_ultimo_form
+// no DOM antes do submit, para que o postback do entityform
+// NÃO sobrescreva o valor que o flow acabou de gravar.
+// =====================================
+function protegerCampoPagina() {
+  var seletores = [
+    "#cloud_pagina_ultimo_form",
+    "select[id*='cloud_pagina_ultimo_form']",
+    "input[id*='cloud_pagina_ultimo_form']"
+  ];
+  seletores.forEach(function (sel) {
+    var els = document.querySelectorAll(sel);
+    els.forEach(function (el) {
+      el.setAttribute("disabled", "disabled");
+      el.removeAttribute("name");
+      console.log("PROTEGIDO campo pagina:", el.id || el.name);
+    });
+  });
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+
+protegerCampoPagina();
+setTimeout(protegerCampoPagina, 500);
+setTimeout(protegerCampoPagina, 1000);
+setTimeout(protegerCampoPagina, 2000);
+setTimeout(protegerCampoPagina, 4000);
+
+
+const FLOW_CANCELAR_POR_PEQUENO_CLIENTE = "/_api/cloudflow/v1.0/trigger/2361651b-5ff6-f011-8406-002248de77b7";
+
+const recordID = "{{ solicitacaoId }}";
+const isOrcamentoSolicitado = "{{ isOrcamentoSolicitado }}" === "true";
+const urlStatusProjeto = isOrcamentoSolicitado
+  ? "/status-projeto-aegea/?id=" + encodeURIComponent(recordID)
+  : "/status-projeto/?id=" + encodeURIComponent(recordID);
+const paginaAtual = "{{ paginaInicial }}";
+const paginaAtualValor = Number("{{ paginaUltimoFormValor }}");
+const statusAtual = Number("{{ statusAtual }}");
+
+function isPagina1() { return paginaAtual === "1"; }
+function isPagina2() { return paginaAtual === "2"; }
+function isPagina3() { return paginaAtual === "3"; }
+function isPagina4() { return paginaAtual === "4"; }
+
+const btnNext = document.getElementById("btnNext");
+const btnPrev = document.getElementById("btnPrev");
+const btnSalvar = document.getElementById("btnSalvar");
+
+// =====================================
+// HELPERS CAMPOS / REGRAS GRANDE CLIENTE
+// =====================================
+
+function normalizarTexto(texto) {
+  return (texto || "")
+    .toString()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .toUpperCase();
+}
+
+function obterElementoCampoNoStepAtual(selector) {
+  const step = getStepAtual();
+  if (!step) return null;
+  return step.querySelector(selector) || document.querySelector(selector);
+}
+
+function obterTextoCampo(selector) {
+  const el = obterElementoCampoNoStepAtual(selector);
+  if (!el) return "";
+
+  if (el.tagName === "SELECT") {
+    const opt = el.options[el.selectedIndex];
+    return opt ? (opt.text || "").toString().trim() : "";
+  }
+
+  return (el.value || el.getAttribute("value") || "").toString().trim();
+}
+
+function obterNumeroCampo(selector) {
+  const el = obterElementoCampoNoStepAtual(selector);
+  if (!el) return 0;
+
+  let valor = (el.value || "").toString().trim();
+  if (!valor) return 0;
+
+  valor = valor.replace(/[^\d,.-]/g, "");
+
+  if (valor.indexOf(",") > -1) {
+    valor = valor.replace(/\./g, "").replace(",", ".");
+  }
+
+  const numero = parseFloat(valor);
+  return isNaN(numero) ? 0 : numero;
+}
+
+function obterBooleanRadio(baseId) {
+  const step = getStepAtual();
+
+  let radioMarcado =
+    step?.querySelector("#" + baseId + " input[type='radio']:checked") ||
+    step?.querySelector("input[name='" + baseId + "']:checked") ||
+    document.querySelector("#" + baseId + " input[type='radio']:checked") ||
+    document.querySelector("input[name='" + baseId + "']:checked");
+
+  if (!radioMarcado) return false;
+
+  const valor = normalizarTexto(radioMarcado.value);
+  return valor === "TRUE" || valor === "1" || valor === "SIM" || valor === "YES";
+}
+function obterValorLookup(baseSelector) {
+  const hiddenEl = obterElementoCampoNoStepAtual(baseSelector);
+  const nameEl = obterElementoCampoNoStepAtual(baseSelector + "_name");
+
+  const hiddenValue = hiddenEl ? (hiddenEl.value || "").toString().trim() : "";
+  const nameValue = nameEl ? (nameEl.value || "").toString().trim() : "";
+
+  return {
+    hiddenValue: hiddenValue,
+    nameValue: nameValue,
+    preenchido: hiddenValue !== "" || nameValue !== ""
+  };
+}
+
+function obterValorTextoSimples(selector) {
+  const el = obterElementoCampoNoStepAtual(selector);
+  if (!el) return "";
+
+  return (el.value || "").toString().trim();
+}
+function avaliarRegraGrandeCliente() {
+  const finalidade = normalizarTexto(
+    obterTextoCampo("#cloud_fk_finalidades_solicitacao_name") ||
+    obterTextoCampo("#cloud_fk_finalidades_solicitacao")
+  );
+
+  const tipoCadastro = normalizarTexto(
+    obterTextoCampo("#cloud_tipo_cadastro")
+  );
+
+  const consumoMensal = obterNumeroCampo("#cloud_consumo_mensal");
+  const numeroEconomias = parseInt(obterNumeroCampo("#cloud_numero_economias"), 10) || 0;
+  const areaConstruidaTotal = obterNumeroCampo("#cloud_area_construida_total");
+  const isConglomeradoEmpresarial = obterBooleanRadio("cloud_is_conglomerado_empresarial");
+
+  const regraFinalidadeGrande =
+    finalidade.indexOf("CONDOMINIO") > -1 ||
+    finalidade.indexOf("LOTEAMENTO RESIDENCIAL") > -1 ||
+    finalidade.indexOf("LOTEAMENTO INDUSTRIAL") > -1 ||
+    finalidade.indexOf("INDUSTRIAL") > -1 ||
+    finalidade.indexOf("INSTITUCIONAL") > -1;
+
+  const regraCnpjConsumo =
+    tipoCadastro === "CNPJ" &&
+    consumoMensal >= 100;
+
+  const regraConsumo = consumoMensal > 100;
+
+  const regraNumeroEconomias = numeroEconomias >= 10;
+
+  const regraNumeroEconomiasEConsumo =
+    numeroEconomias >= 1 &&
+    consumoMensal >= 100;
+
+  const regraAreaConstruida = areaConstruidaTotal > 750;
+
+  const regraComercialConglomerado =
+    finalidade.indexOf("COMERCIAL") > -1 &&
+    isConglomeradoEmpresarial === true;
+
+  return (
+    regraFinalidadeGrande ||
+    regraCnpjConsumo ||
+    regraConsumo ||
+    regraNumeroEconomias ||
+    regraNumeroEconomiasEConsumo ||
+    regraAreaConstruida ||
+    regraComercialConglomerado
+  );
+}
+
+// =====================================
+// VALIDAR CAMPOS OBRIGATÓRIOS DO STEP VISÍVEL
+// =====================================
+
+function campoVisivel(el) {
+  if (!el) return false;
+  const style = window.getComputedStyle(el);
+  if (style.display === "none" || style.visibility === "hidden") return false;
+  return !!(el.offsetWidth || el.offsetHeight || el.getClientRects().length);
+}
+
+function obterCamposObrigatoriosDoStepAtual() {
+  const step = getStepAtual();
+  if (!step) return [];
+
+  // ETAPA 1 = campos fixos da regra de negócio
+  if (paginaAtual === "1") {
+    return [
+      obterElementoCampoNoStepAtual("#cloud_fk_finalidades_solicitacao_name"),
+      obterElementoCampoNoStepAtual("#cloud_tipo_cadastro"),
+      obterElementoCampoNoStepAtual("#cloud_consumo_mensal"),
+      obterElementoCampoNoStepAtual("#cloud_numero_economias"),
+      obterElementoCampoNoStepAtual("#cloud_area_construida_total"),
+      obterElementoCampoNoStepAtual("input[name='cloud_is_conglomerado_empresarial']")
+    ].filter(Boolean);
+  }
+
+  let campos = Array.from(
+    step.querySelectorAll(
+      "input[required], select[required], textarea[required], .required input, .required select, .required textarea"
+    )
+  );
+
+  campos = campos.filter(function (el, index, arr) {
+    return arr.indexOf(el) === index && !el.disabled;
+  });
+
+  // remove tudo que estiver em linha oculta
+  campos = campos.filter(function (el) {
+    const linha =
+      el.closest("tr") ||
+      el.closest(".form-group") ||
+      el.closest(".control");
+
+    if (linha) {
+      return campoVisivel(linha);
+    }
+
+    return campoVisivel(el);
+  });
+
+  // REGRA ESPECIAL: ETAPA 2 + CPF
+  if (isPagina2()) {
+    const tipoCadastro = normalizarTexto(
+      obterTextoCampo("#cloud_tipo_cadastro")
+    );
+
+    if (tipoCadastro === "CPF") {
+      const seletoresIgnorados = [
+        "#cloud_cnpj_construtora",
+        "#cloud_nome_resp_faturamento",
+        "#cloud_nome_construtora",
+        "#cloud_cnpj_construtora_name",
+        "#cloud_nome_resp_faturamento_name",
+        "#cloud_nome_construtora_name"
+      ];
+
+      campos = campos.filter(function (el) {
+        const deveIgnorar = seletoresIgnorados.some(function (selector) {
+          const alvo = step.querySelector(selector) || document.querySelector(selector);
+          if (!alvo) return false;
+
+          const linhaDoAlvo =
+            alvo.closest("tr") ||
+            alvo.closest(".form-group") ||
+            alvo.closest(".control");
+
+          const linhaDoCampo =
+            el.closest("tr") ||
+            el.closest(".form-group") ||
+            el.closest(".control");
+
+          return (
+            el === alvo ||
+            alvo.contains(el) ||
+            (linhaDoAlvo && linhaDoCampo && linhaDoAlvo === linhaDoCampo)
+          );
+        });
+
+        return !deveIgnorar;
+      });
+    }
+  }
+
+  return campos;
+}
+
+function campoObrigatorioPreenchido(el) {
+  if (!el || el.disabled) return true;
+
+  const tipo = (el.type || "").toLowerCase();
+  const tag = (el.tagName || "").toLowerCase();
+
+  if (tipo === "radio") {
+    const nome = el.name;
+    if (!nome) return !!el.checked;
+
+    const radios = document.querySelectorAll('input[type="radio"][name="' + nome + '"]');
+    return Array.from(radios).some(function (r) {
+      return !r.disabled && r.checked;
+    });
+  }
+
+  if (tipo === "checkbox") {
+    return el.checked;
+  }
+
+  if (tag === "select") {
+    const valor = (el.value || "").trim();
+    return valor !== "" && valor !== "null" && valor !== "-1";
+  }
+
+  // lookup hidden + lookup _name
+  if (el.id && !el.value && document.getElementById(el.id + "_name")) {
+    const nomeLookup = document.getElementById(el.id + "_name");
+    return !!((nomeLookup.value || "").trim());
+  }
+
+  return (el.value || "").trim() !== "";
+}
+
+function todosObrigatoriosPreenchidosNoStepAtual() {
+  if (isPagina1()) {
+    const finalidadeLookup = obterValorLookup("#cloud_fk_finalidades_solicitacao");
+    const tipoCadastro = obterValorTextoSimples("#cloud_tipo_cadastro");
+    const consumoMensal = obterValorTextoSimples("#cloud_consumo_mensal");
+    const numeroEconomias = obterValorTextoSimples("#cloud_numero_economias");
+    const areaConstruida = obterValorTextoSimples("#cloud_area_construida_total");
+
+    const radioMarcado =
+      document.querySelector("#cloud_is_conglomerado_empresarial input[type='radio']:checked") ||
+      document.querySelector("input[name='cloud_is_conglomerado_empresarial']:checked");
+
+    const preenchido = !!(
+      finalidadeLookup.preenchido &&
+      tipoCadastro !== "" &&
+      consumoMensal !== "" &&
+      numeroEconomias !== "" &&
+      areaConstruida !== "" &&
+      radioMarcado
+    );
+
+
+    return preenchido;
+  }
+
+  const campos = obterCamposObrigatoriosDoStepAtual();
+  if (!campos.length) return false;
+
+  for (let i = 0; i < campos.length; i++) {
+    if (!campoObrigatorioPreenchido(campos[i])) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+function atualizarEstadoBotoesNavegacao() {
+  if (isPagina4()) return;
+
+  const campos = obterCamposObrigatoriosDoStepAtual();
+const preenchido = campos.length > 0 && campos.every(campoObrigatorioPreenchido);
+
+
+
+  if (isPagina1() || isPagina2()) {
+    if (btnNext) {
+      btnNext.classList.toggle("btn-cloud-disabled", !preenchido);
+    }
+  }
+
+  if (isPagina3()) {
+    if (btnSalvar) {
+      btnSalvar.classList.toggle("btn-cloud-disabled", !preenchido);
+    }
+  }
+}
+
+function marcarBotaoComoProcessando(botao, texto) {
+  if (!botao) return;
+  botao.dataset.processing = "true";
+  botao.dataset.blocked = "true";
+  botao.setAttribute("aria-disabled", "true");
+  botao.classList.add("btn-cloud-processing");
+  botao.classList.remove("btn-cloud-disabled");
+  botao.textContent = texto || "PROCESSANDO...";
+}
+function restaurarBotao(botao, textoOriginal) {
+  if (!botao) return;
+  botao.dataset.processing = "false";
+  botao.classList.remove("btn-cloud-processing");
+  botao.textContent = textoOriginal;
+  atualizarEstadoBotoesNavegacao();
+}
+
+function registrarEventosValidacaoStepAtual() {
+  const container = document.querySelector(".power-pages-form-container");
+  if (!container) return;
+
+  container.addEventListener("input", function () {
+    atualizarEstadoBotoesNavegacao();
+  });
+
+  container.addEventListener("change", function () {
+    atualizarEstadoBotoesNavegacao();
+  });
+
+  // importante para lookup/modal/rerender do Power Pages
+  setTimeout(atualizarEstadoBotoesNavegacao, 300);
+  setTimeout(atualizarEstadoBotoesNavegacao, 1000);
+}
+// =====================================
+// MODAL PEQUENO CLIENTE
+// =====================================
+
+function executarFlowCancelarPequenoCliente(callback) {
+  const payload = {
+    eventData: JSON.stringify({
+      RecordID: recordID
+    })
+  };
+
+  if (!window.shell || typeof shell.ajaxSafePost !== "function") {
+    alert("Contexto de segurança do Power Pages não disponível.");
+    return;
+  }
+
+  shell.ajaxSafePost({
+    type: "POST",
+    url: FLOW_CANCELAR_POR_PEQUENO_CLIENTE,
+    contentType: "application/json",
+    data: JSON.stringify(payload),
+    processData: false
+  })
+  .done(function () {
+    if (callback) callback();
+  })
+  .fail(function (xhr) {
+    console.error("Erro Flow cancelamento pequeno cliente:", xhr);
+    alert("Erro ao executar o fluxo de cancelamento da solicitação.");
+  });
+}
+
+
+const headerFSA = document.getElementById("fsaHeader");
+
+const navWizardButtons = document.getElementById("navWizardButtons");
+
+
+
+// =============================
+// CONTROLE PAGINA 4
+// =============================
+
+if (isPagina4()) {
+
+headerFSA?.style.setProperty("display","none","important");
+
+document.querySelector("#step1")?.style.setProperty("display","none","important");
+document.querySelector("#step2")?.style.setProperty("display","none","important");
+document.querySelector("#step3")?.style.setProperty("display","none","important");
+
+btnPrev?.style.setProperty("display","none","important");
+btnNext?.style.setProperty("display","none","important");
+btnSalvar?.style.setProperty("display","none","important");
+
+document.querySelector(".ppFlexContainer button")
+?.style.setProperty("display","none","important");
+
+navWizardButtons?.style.setProperty("display","none","important");
+
+setTimeout(()=>{
+btnPrev?.style.setProperty("display","none","important");
+btnNext?.style.setProperty("display","none","important");
+btnSalvar?.style.setProperty("display","none","important");
+},500)
+
+}
+
+// =====================================
+// CONTROLAR VISIBILIDADE DOS BOTÕES
+// =====================================
+
+function ajustarBotoes() {
+  if (!btnNext || !btnSalvar) return;
+
+  if (isPagina3()) {
+    btnNext.style.setProperty("display", "none", "important");
+    btnSalvar.style.setProperty("display", "inline-flex", "important");
+  } else {
+    btnNext.style.setProperty("display", "inline-flex", "important");
+    btnSalvar.style.setProperty("display", "none", "important");
+  }
+
+  atualizarEstadoBotoesNavegacao();
+}
+
+ajustarBotoes();
+
+setTimeout(ajustarBotoes,200);
+setTimeout(ajustarBotoes,600);
+setTimeout(ajustarBotoes,1200);
+
+// =====================================
+// CORRIGIR VISIBILIDADE BOTÃO ANTERIOR
+// =====================================
+
+function ajustarBotaoAnterior() {
+  if (!btnPrev) return;
+
+  if (isPagina1()) {
+    btnPrev.style.setProperty("display", "none", "important");
+  } else {
+    btnPrev.style.setProperty("display", "inline-flex", "important");
+  }
+}
+
+ajustarBotaoAnterior();
+
+// executa novamente após render do entityform
+setTimeout(ajustarBotaoAnterior, 800);
+// executa várias vezes porque o entityform re-renderiza
+registrarEventosValidacaoStepAtual();
+setTimeout(atualizarEstadoBotoesNavegacao, 300);
+setTimeout(atualizarEstadoBotoesNavegacao, 900);
+setTimeout(atualizarEstadoBotoesNavegacao, 1600);
+
+setTimeout(ajustarBotaoAnterior,200);
+setTimeout(ajustarBotaoAnterior,600);
+setTimeout(ajustarBotaoAnterior,1200);
+setTimeout(ajustarBotaoAnterior,2000);
+
+// executa imediatamente
+ajustarBotaoAnterior();
+
+// executa novamente após render do entityform
+setTimeout(ajustarBotaoAnterior, 800);
+
+  // =============================
+  // LOCALIZAR BOTÃO ENVIAR
+  // =============================
+
+  function getSubmitFormAtual() {
+
+    const stepVisivel =
+      document.querySelector("#step1:not([style*='display:none'])") ||
+      document.querySelector("#step2:not([style*='display:none'])") ||
+      document.querySelector("#step3:not([style*='display:none'])");
+
+    if (!stepVisivel) return null;
+
+    return stepVisivel.querySelector("#UpdateButton")
+      || stepVisivel.querySelector("#InsertButton")
+      || stepVisivel.querySelector('input[id$="UpdateButton"]')
+      || stepVisivel.querySelector('input[id$="InsertButton"]')
+      || stepVisivel.querySelector('button[type="submit"]')
+      || stepVisivel.querySelector('input[type="submit"]');
+
+  }
+  function getPRM() {
+    try {
+      if (
+        window.Sys &&
+        Sys.WebForms &&
+        Sys.WebForms.PageRequestManager
+      ) {
+        return Sys.WebForms.PageRequestManager.getInstance();
+      }
+    } catch (e) {}
+    return null;
+  }
+
+  function getStepAtual() {
+    return document.querySelector(".fsa-step.active")
+      || document.querySelector("#step1:not([style*='display:none'])")
+      || document.querySelector("#step2:not([style*='display:none'])")
+      || document.querySelector("#step3:not([style*='display:none'])")
+      || document.querySelector(".power-pages-form-container");
+  }
+
+  function isVisivel(el) {
+    return !!(el && (el.offsetWidth || el.offsetHeight || el.getClientRects().length));
+  }
+
+  function formTemErroAtual() {
+    const contexto = getStepAtual();
+    if (!contexto) return false;
+
+    const resumoErro = contexto.querySelector(
+      ".validation-summary-errors, .alert-danger, .notification.error, #ValidationSummary"
+    );
+
+    if (
+      resumoErro &&
+      resumoErro.innerText &&
+      resumoErro.innerText.trim().length > 0 &&
+      isVisivel(resumoErro)
+    ) {
+      return true;
+    }
+
+    const campoErro = contexto.querySelector(
+      ".input-validation-error, .field-validation-error, .has-error"
+    );
+
+    return !!campoErro;
+  }
+
+  function restaurarScroll(posY) {
+    window.scrollTo(0, posY);
+  }
+
+  function focarPrimeiroErroSemScroll(posY) {
+    const contexto = getStepAtual();
+    if (!contexto) return;
+
+    const alvo =
+      contexto.querySelector("input.input-validation-error, select.input-validation-error, textarea.input-validation-error")
+      || contexto.querySelector(".has-error input, .has-error select, .has-error textarea");
+
+    if (!alvo) return;
+
+    try {
+      alvo.focus({ preventScroll: true });
+    } catch (e) {
+      try { alvo.focus(); } catch (_) {}
+      restaurarScroll(posY);
+    }
+  }
+
+function submeterComProtecaoScroll(submitBtn, onSuccess) {
+  if (!submitBtn) {
+    alert("Botão ENVIAR do formulário não encontrado.");
+    return;
+  }
+
+  const scrollAntes = window.pageYOffset || document.documentElement.scrollTop || 0;
+  const prm = getPRM();
+  let processado = false;
+
+  function finalizar() {
+    if (processado) return;
+    processado = true;
+
+    if (formTemErroAtual()) {
+      restaurarScroll(scrollAntes);
+
+      setTimeout(function () {
+        focarPrimeiroErroSemScroll(scrollAntes);
+        restaurarScroll(scrollAntes);
+      }, 30);
+
+      if (isPagina1() || isPagina2()) {
+        restaurarBotao(btnNext, "AVANÇAR");
+      }
+
+      if (isPagina3()) {
+        restaurarBotao(btnSalvar, "SALVAR");
+      }
+
+      return;
+    }
+
+    if (typeof onSuccess === "function") {
+      onSuccess();
+    }
+  }
+
+  if (prm) {
+    const handler = function () {
+      prm.remove_endRequest(handler);
+      finalizar();
+    };
+
+    prm.add_endRequest(handler);
+  }
+
+  setTimeout(function () {
+    if (formTemErroAtual()) {
+      finalizar();
+    }
+  }, 120);
+
+  submitBtn.click();
+}
+
+
+
+  // =============================
+  // EXECUTAR FLOW
+  // =============================
+
+  function executarFlow(paginaDestino, callback) {
+
+    const payload = {
+      eventData: JSON.stringify({
+        RecordID: recordID,
+        Pagina: paginaDestino
+      })
+    };
+
+    if (!window.shell || typeof shell.ajaxSafePost !== "function") {
+      alert("Contexto de segurança do Power Pages não disponível.");
+      return;
+    }
+
+    shell.ajaxSafePost({
+      type: "POST",
+      url: FLOW_PAGINA,
+      contentType: "application/json",
+      data: JSON.stringify(payload),
+      processData: false
+    })
+    .done(function () {
+
+      console.log("FLOW executado com sucesso -> Pagina:", paginaDestino);
+
+      if (callback) callback();
+
+    })
+    .fail(function (xhr) {
+
+      console.error("Erro Flow:", xhr);
+      alert("Erro ao executar fluxo.");
+
+    });
+
+  }
+
+
+
+
+
+// =============================
+// BOTÃO ANTERIOR
+// =============================
+
+if (btnPrev) {
+
+  btnPrev.addEventListener("click", function (e) {
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    btnPrev.disabled = true;
+
+    let paginaDestino = "1";
+
+if (isPagina2()) {
+  paginaDestino = "1";
+}
+
+if (isPagina3()) {
+  paginaDestino = "2";
+}
+
+    console.log("Voltando etapa -> Pagina:", paginaDestino);
+
+    executarFlow(paginaDestino, function () {
+
+      const urlAtual = new URL(window.location.href);
+
+      // remove nocache, caso exista
+      urlAtual.searchParams.delete("nocache");
+
+      // pequeno tempo para garantir que o flow atualize o campo antes do reload
+      setTimeout(function () {
+        window.location.href = urlAtual.pathname + urlAtual.search;
+      }, 400);
+
+    });
+
+  });
+
+}
+
+// =============================
+// BOTÃO AVANÇAR (PÁGINA 2 -> 3)
+// =============================
+// CORREÇÃO: flow primeiro, protege campo antes do submit
+
+if (btnNext) {
+
+  btnNext.addEventListener("click", function (e) {
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (btnNext.dataset.processing === "true") return;
+
+    const submitBtn = getSubmitFormAtual();
+
+    if (!submitBtn) {
+      alert("Botão ENVIAR do formulário não encontrado.");
+      return;
+    }
+
+    const preenchido = todosObrigatoriosPreenchidosNoStepAtual();
+
+    if (!preenchido) {
+      alert("Preencha todos os campos obrigatórios da etapa.");
+      return;
+    }
+
+    marcarBotaoComoProcessando(btnNext, "PROCESSANDO...");
+
+    // CORREÇÃO: flow primeiro, depois protege o campo e submete
+    executarFlow("3", function () {
+
+      protegerCampoPagina();
+
+      submeterComProtecaoScroll(submitBtn, function () {
+
+        // força reload para ir pra próxima etapa
+        window.location.reload();
+
+      });
+
+    });
+
+  });
+
+}
+
+function abrirModalConfirmarSalvar(){
+
+const modal=document.createElement("div");
+
+modal.innerHTML=`
+<div class="pp-modal-backdrop">
+<div class="pp-modal">
+
+<p>Ao confirmar, os dados do formulário serão salvos e a página será encerrada.</p>
+
+<div class="pp-modal-actions">
+
+<button id="btnCancelarSalvar" class="btn-cloud-outline">
+CANCELAR
+</button>
+
+<button id="btnConfirmarSalvar" class="btn-cloud">
+CONFIRMAR
+</button>
+
+</div>
+
+</div>
+</div>
+`;
+
+document.body.appendChild(modal);
+
+// cancelar
+document.getElementById("btnCancelarSalvar").onclick=function(){
+
+modal.remove();
+
+}
+
+// confirmar
+document.getElementById("btnConfirmarSalvar").onclick=function(){
+
+modal.remove();
+
+salvarSemAvancar();
+
+}
+
+}
+
+function abrirModalSalvarAvancar(){
+
+const modal=document.createElement("div");
+
+modal.innerHTML=`
+<div class="pp-modal-backdrop">
+<div class="pp-modal">
+
+<h3>Deseja salvar atualização e avançar o status da solicitação para
+<strong>Definição de componentes</strong>?</h3>
+
+<div class="pp-modal-actions">
+
+<button id="btnCancelarSalvar" class="btn-cloud-outline">
+CANCELAR
+</button>
+
+<button id="btnSalvarAvancar" class="btn-cloud">
+SALVAR E AVANÇAR ETAPA
+</button>
+
+</div>
+
+</div>
+</div>
+`;
+
+document.body.appendChild(modal);
+
+
+document.getElementById("btnCancelarSalvar").onclick=function(){
+
+window.location.href="/status-projeto/?id={{ solicitacaoId }}";
+
+}
+
+
+document.getElementById("btnSalvarAvancar").onclick=function(){
+
+executarSalvarEAvancar();
+
+}
+
+}
+
+function executarSalvarEAvancar() {
+
+  const submitBtn = getSubmitFormAtual();
+
+  if (!submitBtn) {
+    alert("Botão ENVIAR do formulário não encontrado.");
+    return;
+  }
+
+  executarFlow("1", function () {
+
+    submeterComProtecaoScroll(submitBtn, function () {
+
+      fetch("/_api/cloudflow/v1.0/trigger/46fad9d8-5a18-f111-8341-7ced8da81546", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          RecordID: "{{ solicitacaoId }}"
+        })
+      })
+      .then(() => {
+        abrirModalSucessoAvanco();
+      });
+
+    });
+
+  });
+
+}
+
+function salvarSemAvancar() {
+
+  const submitBtn = getSubmitFormAtual();
+
+  if (!submitBtn) {
+    alert("Botão ENVIAR do formulário não encontrado.");
+    return;
+  }
+
+  submeterComProtecaoScroll(submitBtn, function () {
+    window.location.href = "/Minhas-Solicitações/";
+  });
+
+}
+
+
+function abrirModalPergunta(){
+
+  const modal = document.createElement("div");
+
+  modal.innerHTML = `
+  <div class="pp-modal-backdrop">
+      <div class="pp-modal">
+
+          <h3>Dados atualizados com sucesso!</h3>
+
+          <p>
+          Deseja avançar o status da solicitação para 
+          <strong>Definição de componentes</strong>?
+          </p>
+
+          <div class="pp-modal-actions">
+
+              <button id="btnCancelarAvanco" class="btn-cloud-outline">
+              CANCELAR
+              </button>
+
+              <button id="btnConfirmarAvanco" class="btn-cloud">
+              AVANÇAR ETAPA
+              </button>
+
+          </div>
+
+      </div>
+  </div>
+  `;
+
+  document.body.appendChild(modal);
+
+  document.getElementById("btnCancelarAvanco").onclick=function(){
+
+      window.location.href="/status-projeto/?id={{ solicitacaoId }}";
+
+  }
+
+  document.getElementById("btnConfirmarAvanco").onclick=function(){
+
+      avancarStatus();
+
+  }
+
+}
+
+function avancarStatus(){
+
+fetch("/_api/cloudflow/v1.0/trigger/46fad9d8-5a18-f111-8341-7ced8da81546",{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body: JSON.stringify({
+RecordID:"{{ solicitacaoId }}"
+})
+
+})
+.then(()=>{
+
+abrirModalSucessoAvanco();
+
+});
+
+}
+
+function abrirModalSucessoAvanco(){
+
+const modal=document.createElement("div");
+
+modal.innerHTML=`
+<div class="pp-modal-backdrop">
+<div class="pp-modal">
+
+<h3>Status avançado com sucesso!</h3>
+
+<button id="btnOkAvanco" class="btn-cloud">
+OK
+</button>
+
+</div>
+</div>
+`;
+
+document.body.appendChild(modal);
+
+document.getElementById("btnOkAvanco").onclick=function(){
+
+window.location.href="/status-projeto/?id={{ solicitacaoId }}";
+
+}
+
+}
+function abrirModalSimples(){
+
+const modal=document.createElement("div");
+
+modal.innerHTML=`
+<div class="pp-modal-backdrop">
+<div class="pp-modal">
+
+<h3>Dados atualizados com sucesso!</h3>
+
+<button id="btnOkSimples" class="btn-cloud">
+OK
+</button>
+
+</div>
+</div>
+`;
+
+document.body.appendChild(modal);
+
+document.getElementById("btnOkSimples").onclick=function(){
+
+window.location.href="/Minhas-Solicitações/";
+
+}
+
+}
+
+// =============================
+// BOTÕES CARD SUCESSO
+// =============================
+
+const btnVoltarLista = document.getElementById("btnVoltarLista");
+const btnEditarNovamente = document.getElementById("btnEditarNovamente");
+const btnAvancarEtapa = document.getElementById("btnAvancarEtapa");
+
+
+
+if(btnAvancarEtapa){
+
+if(statusAtual !== 586450011){
+
+btnAvancarEtapa.style.setProperty("display","none","important");
+
+}
+setTimeout(()=>{
+if(statusAtual !== 586450011){
+btnAvancarEtapa?.style.setProperty("display","none","important");
+}
+},500)
+
+}
+
+if(btnVoltarLista){
+
+btnVoltarLista.onclick = function(){
+
+executarFlow("1", function(){
+
+window.location.href="/Minhas-Solicitações/";
+
+});
+
+}
+
+}
+
+if(btnEditarNovamente){
+
+btnEditarNovamente.onclick = function(){
+
+executarFlow("1", function(){
+
+window.location.reload();
+
+});
+
+}
+
+}
+
+if(btnAvancarEtapa){
+
+btnAvancarEtapa.onclick = function(){
+
+const modal=document.createElement("div");
+
+modal.innerHTML=`
+<div class="pp-modal-backdrop">
+<div class="pp-modal">
+
+<h3>Deseja avançar a etapa para
+AGUARDANDO DEFINIÇÃO DE COMPONENTES?</h3>
+
+<div class="pp-modal-actions">
+
+<button id="btnCancelarAvanco" class="btn-cloud-outline">
+CANCELAR
+</button>
+
+<button id="btnConfirmarAvanco" class="btn-cloud">
+CONFIRMAR
+</button>
+
+</div>
+
+</div>
+</div>
+`;
+
+document.body.appendChild(modal);
+
+document.getElementById("btnCancelarAvanco").onclick=function(){
+
+modal.remove();
+
+}
+
+document.getElementById("btnConfirmarAvanco").onclick=function(){
+
+executarFlow("1", function(){
+
+fetch("/_api/cloudflow/v1.0/trigger/46fad9d8-5a18-f111-8341-7ced8da81546",{
+method:"POST",
+headers:{ "Content-Type":"application/json"},
+body:JSON.stringify({RecordID:recordID})
+})
+.then(()=>{
+
+abrirModalSucessoAvanco();
+
+});
+
+});
+
+}
+
+}
+
+}
+controlarFormularios();
+controlarValidadores();
+
+setTimeout(()=>{
+  controlarFormularios();
+  controlarValidadores();
+},500);
+
+setTimeout(()=>{
+  controlarFormularios();
+  controlarValidadores();
+},1000);
+
+});
+
+// =====================================
+// ATIVAR SOMENTE FORM VISÍVEL
+// =====================================
+
+function controlarFormularios() {
+
+  const steps = document.querySelectorAll(".fsa-step");
+
+  steps.forEach(step => {
+
+    const visivel = step.offsetParent !== null;
+
+    const inputs = step.querySelectorAll("input, select, textarea");
+
+    inputs.forEach(input => {
+  // NUNCA reabilitar o campo de página - quem gerencia é o Flow
+  if (input.id && input.id.indexOf("cloud_pagina_ultimo_form") > -1) return;
+  if (input.name && input.name.indexOf("cloud_pagina_ultimo_form") > -1) return;
+
+  if(visivel){
+    input.removeAttribute("disabled");
+  }else{
+    input.setAttribute("disabled","disabled");
+  }
+});
+
+  });
+
+}
+
+// =====================================
+// CONTROLAR VALIDADORES ASP.NET
+// =====================================
+
+function controlarValidadores(){
+
+  if(typeof(Page_Validators) === "undefined") return;
+
+  Page_Validators.forEach(function(validator){
+
+    const step = validator.closest(".fsa-step");
+
+    if(!step) return;
+
+    const visivel = step.offsetParent !== null;
+
+    if(visivel){
+
+      ValidatorEnable(validator, true);
+
+    }else{
+
+      ValidatorEnable(validator, false);
+
+    }
+
+  });
+
+}
+
+// =====================================
+// IIFE - CORREÇÃO ETAPA 1 -> 2
+// CORREÇÃO: flow primeiro, protege campo antes do submit
+// =====================================
+(function () {
+  const RECORD_ID = "{{ solicitacaoId }}";
+  const PAGINA_ATUAL = "{{ paginaInicial }}";
+
+  const FLOW_CANCELAR = "/_api/cloudflow/v1.0/trigger/2361651b-5ff6-f011-8406-002248de77b7";
+
+  function normalizar(texto) {
+    return (texto || "")
+      .toString()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .trim()
+      .toUpperCase();
+  }
+
+  function texto(selector) {
+    var el = document.querySelector(selector);
+    if (!el) return "";
+
+    if (el.tagName === "SELECT") {
+      var opt = el.options[el.selectedIndex];
+      return opt ? (opt.text || "").trim() : "";
+    }
+
+    return (el.value || "").trim();
+  }
+
+  function numero(selector) {
+    var el = document.querySelector(selector);
+    if (!el) return 0;
+
+    var valor = (el.value || "").trim();
+    if (!valor) return 0;
+
+    valor = valor.replace(/[^\d,.-]/g, "");
+    if (valor.indexOf(",") > -1) {
+      valor = valor.replace(/\./g, "").replace(",", ".");
+    }
+
+    var n = parseFloat(valor);
+    return isNaN(n) ? 0 : n;
+  }
+
+  function lookupPreenchido(base) {
+    var hiddenEl = document.querySelector(base);
+    var nameEl = document.querySelector(base + "_name");
+
+    var hiddenValue = hiddenEl ? (hiddenEl.value || "").trim() : "";
+    var nameValue = nameEl ? (nameEl.value || "").trim() : "";
+
+    return hiddenValue !== "" || nameValue !== "";
+  }
+
+  function radioMarcado(nomeBase) {
+    return document.querySelector("#" + nomeBase + " input[type='radio']:checked") ||
+           document.querySelector("input[name='" + nomeBase + "']:checked");
+  }
+
+  function radioBoolean(nomeBase) {
+    var radio = radioMarcado(nomeBase);
+    if (!radio) return false;
+
+    var valor = normalizar(radio.value);
+    return valor === "TRUE" || valor === "1" || valor === "SIM" || valor === "YES";
+  }
+
+  function submitEtapaAtual() {
+    var step1 = document.querySelector("#step1:not([style*='display:none'])");
+    if (!step1) return null;
+
+    return step1.querySelector("#UpdateButton")
+      || step1.querySelector("#InsertButton")
+      || step1.querySelector('input[id$="UpdateButton"]')
+      || step1.querySelector('input[id$="InsertButton"]')
+      || step1.querySelector('button[type="submit"]')
+      || step1.querySelector('input[type="submit"]');
+  }
+
+function abrirModalPequenoCliente() {
+  var modalExistente = document.getElementById("modal-pequeno-cliente-overlay");
+  if (modalExistente) {
+    modalExistente.remove();
+  }
+
+  var overlay = document.createElement("div");
+  overlay.id = "modal-pequeno-cliente-overlay";
+
+  overlay.style.position = "fixed";
+  overlay.style.inset = "0";
+  overlay.style.width = "100vw";
+  overlay.style.height = "100vh";
+  overlay.style.background = "rgba(15, 23, 42, 0.55)";
+  overlay.style.display = "flex";
+  overlay.style.alignItems = "center";
+  overlay.style.justifyContent = "center";
+  overlay.style.zIndex = "2147483647";
+  overlay.style.padding = "24px";
+  overlay.style.boxSizing = "border-box";
+
+  overlay.innerHTML = `
+    <div
+      style="
+        width: 100%;
+        max-width: 720px;
+        background: #ffffff;
+        border-radius: 22px;
+        padding: 28px 28px 24px;
+        box-shadow: 0 24px 80px rgba(0,0,0,0.28);
+        border: 1px solid rgba(0,39,189,0.12);
+        font-family: inherit;
+      "
+    >
+      <h3 style="
+        margin: 0 0 16px 0;
+        color: #0027bd;
+        font-size: 32px;
+        line-height: 1.15;
+      ">
+        AVISO IMPORTANTE!
+      </h3>
+
+      <p style="
+        margin: 0 0 16px 0;
+        color: #475569;
+        font-size: 18px;
+        line-height: 1.7;
+      ">
+        Conforme a alteração das informações que você registrou anteriormente,
+        identificamos que sua necessidade é referente a uma
+        <strong>Unidade de Serviço Residencial</strong>.
+      </p>
+
+      <p style="
+        margin: 0 0 18px 0;
+        color: #475569;
+        font-size: 18px;
+        line-height: 1.7;
+      ">
+        Caso prossiga, essa solicitação será cancelada, pois este portal é exclusivo
+        para solicitações de <strong>Viabilidade Técnica de Empreendimentos</strong>.
+      </p>
+
+      <p style="
+        margin: 0 0 22px 0;
+        color: #334155;
+        font-size: 18px;
+        font-weight: 700;
+      ">
+        Deseja prosseguir?
+      </p>
+
+      <div style="
+        display: flex;
+        justify-content: flex-end;
+        gap: 12px;
+        flex-wrap: wrap;
+      ">
+        <button
+          id="btnNaoProsseguirPequenoCliente"
+          type="button"
+          class="btn-cloud-outline"
+          style="min-width: 120px;"
+        >
+          NÃO
+        </button>
+
+        <button
+          id="btnSimProsseguirPequenoCliente"
+          type="button"
+          class="btn-cloud"
+          style="min-width: 120px;"
+        >
+          SIM
+        </button>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(overlay);
+  document.body.style.overflow = "hidden";
+
+  function fecharModal() {
+    document.body.style.overflow = "";
+    var modal = document.getElementById("modal-pequeno-cliente-overlay");
+    if (modal) modal.remove();
+  }
+
+  overlay.addEventListener("click", function (e) {
+    if (e.target === overlay) {
+      fecharModal();
+    }
+  });
+
+  document.getElementById("btnNaoProsseguirPequenoCliente").onclick = function () {
+    fecharModal();
+  };
+
+  document.getElementById("btnSimProsseguirPequenoCliente").onclick = function () {
+    var btn = this;
+    btn.disabled = true;
+    btn.textContent = "PROCESSANDO...";
+
+    if (!window.shell || typeof shell.ajaxSafePost !== "function") {
+      alert("shell.ajaxSafePost não está disponível.");
+      btn.disabled = false;
+      btn.textContent = "SIM";
+      return;
+    }
+
+    shell.ajaxSafePost({
+      type: "POST",
+      url: FLOW_CANCELAR,
+      contentType: "application/json",
+      data: JSON.stringify({
+        eventData: JSON.stringify({
+          RecordID: RECORD_ID
+        })
+      }),
+      processData: false
+    })
+    .done(function () {
+      fecharModal();
+      window.location.href = "/unidade-de-servico/";
+    })
+    .fail(function (xhr) {
+      console.error("Erro ao executar flow de cancelamento:", xhr);
+      alert("Erro ao executar o fluxo de cancelamento.");
+      btn.disabled = false;
+      btn.textContent = "SIM";
+    });
+  };
+}
+
+  function etapa1Preenchida() {
+    return !!(
+      lookupPreenchido("#cloud_fk_finalidades_solicitacao") &&
+      texto("#cloud_tipo_cadastro") !== "" &&
+      texto("#cloud_consumo_mensal") !== "" &&
+      texto("#cloud_numero_economias") !== "" &&
+      texto("#cloud_area_construida_total") !== "" &&
+      radioMarcado("cloud_is_conglomerado_empresarial")
+    );
+  }
+
+  function avaliarGrandeCliente() {
+    var finalidade = normalizar(
+      texto("#cloud_fk_finalidades_solicitacao_name") ||
+      texto("#cloud_fk_finalidades_solicitacao")
+    );
+
+    var tipoCadastro = normalizar(texto("#cloud_tipo_cadastro"));
+    var consumoMensal = numero("#cloud_consumo_mensal");
+    var numeroEconomias = parseInt(numero("#cloud_numero_economias"), 10) || 0;
+    var areaConstruidaTotal = numero("#cloud_area_construida_total");
+    var isConglomeradoEmpresarial = radioBoolean("cloud_is_conglomerado_empresarial");
+
+    var regraFinalidadeGrande =
+      finalidade.indexOf("CONDOMINIO") > -1 ||
+      finalidade.indexOf("LOTEAMENTO RESIDENCIAL") > -1 ||
+      finalidade.indexOf("LOTEAMENTO INDUSTRIAL") > -1 ||
+      finalidade.indexOf("INDUSTRIAL") > -1 ||
+      finalidade.indexOf("INSTITUCIONAL") > -1;
+
+    var regraCnpjConsumo = tipoCadastro === "CNPJ" && consumoMensal >= 100;
+    var regraConsumo = consumoMensal > 100;
+    var regraNumeroEconomias = numeroEconomias >= 10;
+    var regraNumeroEconomiasEConsumo = numeroEconomias >= 1 && consumoMensal >= 100;
+    var regraAreaConstruida = areaConstruidaTotal > 750;
+    var regraComercialConglomerado =
+      finalidade.indexOf("COMERCIAL") > -1 && isConglomeradoEmpresarial === true;
+
+    return (
+      regraFinalidadeGrande ||
+      regraCnpjConsumo ||
+      regraConsumo ||
+      regraNumeroEconomias ||
+      regraNumeroEconomiasEConsumo ||
+      regraAreaConstruida ||
+      regraComercialConglomerado
+    );
+  }
+
+  function inicializarCorrecao() {
+    if (PAGINA_ATUAL !== "1") return;
+
+    var btnOriginal = document.getElementById("btnNext");
+    if (!btnOriginal) return;
+
+    var btnNovo = btnOriginal.cloneNode(true);
+    btnOriginal.parentNode.replaceChild(btnNovo, btnOriginal);
+
+    btnNovo.addEventListener("click", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      var submitBtn = submitEtapaAtual();
+      if (!submitBtn) {
+        alert("Não encontrei o botão interno de envio da etapa 1.");
+        return;
+      }
+
+      if (!etapa1Preenchida()) {
+        alert("Preencha todos os campos obrigatórios da etapa 1.");
+        return;
+      }
+
+      var isGrandeCliente = avaliarGrandeCliente();
+
+      if (!isGrandeCliente) {
+        abrirModalPequenoCliente();
+        return;
+      }
+
+      btnNovo.disabled = true;
+      btnNovo.textContent = "PROCESSANDO...";
+
+      if (!window.shell || typeof shell.ajaxSafePost !== "function") {
+        alert("shell.ajaxSafePost não está disponível.");
+        btnNovo.disabled = false;
+        btnNovo.textContent = "AVANÇAR";
+        return;
+      }
+
+      // CORREÇÃO: flow primeiro, depois protege o campo e submete
+      shell.ajaxSafePost({
+        type: "POST",
+        url: FLOW_PAGINA,
+        contentType: "application/json",
+        data: JSON.stringify({
+          eventData: JSON.stringify({
+            RecordID: RECORD_ID,
+            Pagina: "2"
+          })
+        }),
+        processData: false
+      })
+      .done(function () {
+        console.log("FLOW executado com sucesso -> Pagina: 2");
+        // Protege o campo para que o postback não sobrescreva
+        protegerCampoPagina();
+        submitBtn.click();
+        setTimeout(function () {
+          window.location.reload();
+        }, 1200);
+      })
+      .fail(function (xhr) {
+        console.error("Erro ao executar flow página 2:", xhr);
+        alert("Erro ao executar o fluxo de avanço.");
+        btnNovo.disabled = false;
+        btnNovo.textContent = "AVANÇAR";
+      });
+    });
+  }
+
+  setTimeout(inicializarCorrecao, 800);
+  setTimeout(inicializarCorrecao, 1800);
+  setTimeout(inicializarCorrecao, 3000);
+})();
+
+
+// =====================================================
+// BOTÃO SALVAR
+// SUBMITE SOMENTE O FORM 2
+// APÓS O RETORNO COM SUCESSO, FECHA O MODAL DA PÁGINA PAI
+// =====================================================
+document.addEventListener("DOMContentLoaded", function () {
+
+  const btnSalvarTudo =
+    document.getElementById("btnSalvarTudo");
+
+  const CHAVE_SUBMIT_FORM_2 =
+    "pp_submit_form_2_{{ solicitacaoId }}";
+
+  function obterSecaoForm2() {
+    return document.getElementById("secao-etapa-2");
+  }
+
+  function obterSubmitForm2() {
+    const secaoForm2 = obterSecaoForm2();
+
+    if (!secaoForm2) {
+      return null;
+    }
+
+    return (
+      secaoForm2.querySelector("input[id$='UpdateButton']") ||
+      secaoForm2.querySelector("input[id$='InsertButton']") ||
+      secaoForm2.querySelector("button[id$='UpdateButton']") ||
+      secaoForm2.querySelector("button[id$='InsertButton']") ||
+      secaoForm2.querySelector("button[type='submit']") ||
+      secaoForm2.querySelector("input[type='submit']")
+    );
+  }
+
+  function elementoVisivel(elemento) {
+    if (!elemento) {
+      return false;
+    }
+
+    return !!(
+      elemento.offsetWidth ||
+      elemento.offsetHeight ||
+      elemento.getClientRects().length
+    );
+  }
+
+  // =====================================================
+// VALIDAÇÃO EXCLUSIVA DO FORM 2
+// NÃO CONSIDERA FORM 1, FORM 3 OU ANEXOS
+// =====================================================
+
+function campoForm2Visivel(campo) {
+  if (!campo) {
+    return false;
+  }
+
+  const estilo = window.getComputedStyle(campo);
+
+  if (
+    estilo.display === "none" ||
+    estilo.visibility === "hidden"
+  ) {
+    return false;
+  }
+
+  return !!(
+    campo.offsetWidth ||
+    campo.offsetHeight ||
+    campo.getClientRects().length
+  );
+}
+
+function obterCamposObrigatoriosForm2() {
+  const secaoForm2 = obterSecaoForm2();
+
+  if (!secaoForm2) {
+    return [];
+  }
+
+  const camposEncontrados = [];
+
+  function adicionarCampo(campo) {
+    if (!campo) {
+      return;
+    }
+
+    // Garante que o campo pertence ao Form 2
+    if (!secaoForm2.contains(campo)) {
+      return;
+    }
+
+    if (campo.disabled) {
+      return;
+    }
+
+    const tipo =
+      String(campo.type || "").toLowerCase();
+
+    /*
+      Não valida botões, arquivos ou controles internos.
+      Dessa forma, anexos não entram na regra.
+    */
+    if (
+      tipo === "submit" ||
+      tipo === "button" ||
+      tipo === "reset" ||
+      tipo === "file" ||
+      tipo === "image"
+    ) {
+      return;
+    }
+
+    /*
+      Lookup do Power Pages possui um input hidden
+      e outro campo visível terminado em "_name".
+
+      Valida somente o campo visível.
+    */
+    if (tipo === "hidden") {
+      if (!campo.id) {
+        return;
+      }
+
+      const campoNomeLookup =
+        document.getElementById(
+          campo.id + "_name"
+        );
+
+      if (
+        campoNomeLookup &&
+        secaoForm2.contains(campoNomeLookup) &&
+        campoForm2Visivel(campoNomeLookup)
+      ) {
+        campo = campoNomeLookup;
+      } else {
+        return;
+      }
+    }
+
+    // Ignora campos ocultos por regra condicional
+    if (!campoForm2Visivel(campo)) {
+      return;
+    }
+
+    if (!camposEncontrados.includes(campo)) {
+      camposEncontrados.push(campo);
+    }
+  }
+
+  // 1. Campos com required ou aria-required
+  secaoForm2
+    .querySelectorAll(
+      "input[required], " +
+      "select[required], " +
+      "textarea[required], " +
+      "input[aria-required='true'], " +
+      "select[aria-required='true'], " +
+      "textarea[aria-required='true']"
+    )
+    .forEach(adicionarCampo);
+
+  // 2. Labels obrigatórios do Power Pages
+  secaoForm2
+    .querySelectorAll(
+      "label.required[for], " +
+      ".info.required label[for], " +
+      ".required label[for]"
+    )
+    .forEach(function (label) {
+      const idCampo =
+        label.getAttribute("for");
+
+      if (!idCampo) {
+        return;
+      }
+
+      adicionarCampo(
+        document.getElementById(idCampo)
+      );
+    });
+
+  // 3. Validadores RequiredFieldValidator do Power Pages
+  secaoForm2
+    .querySelectorAll("[controltovalidate]")
+    .forEach(function (validator) {
+      const funcaoValidacao =
+        String(
+          validator.getAttribute(
+            "evaluationfunction"
+          ) || ""
+        ).toLowerCase();
+
+      /*
+        Considera somente validação obrigatória.
+        Não usa RegexValidator ou outros validadores.
+      */
+      if (
+        !funcaoValidacao.includes(
+          "requiredfield"
+        )
+      ) {
+        return;
+      }
+
+      const idCampo =
+        validator.getAttribute(
+          "controltovalidate"
+        );
+
+      if (!idCampo) {
+        return;
+      }
+
+      adicionarCampo(
+        document.getElementById(idCampo)
+      );
+    });
+
+  // 4. Containers marcados como required
+  secaoForm2
+    .querySelectorAll(".required")
+    .forEach(function (marcador) {
+      const container =
+        marcador.closest("td") ||
+        marcador.closest(".form-group") ||
+        marcador.closest(".control");
+
+      if (!container) {
+        return;
+      }
+
+      const campo = container.querySelector(
+        "input:not([type='hidden']):not([type='file']), " +
+        "select, " +
+        "textarea"
+      );
+
+      adicionarCampo(campo);
+    });
+
+  return camposEncontrados;
+}
+
+function campoObrigatorioForm2Preenchido(campo) {
+  if (!campo || campo.disabled) {
+    return true;
+  }
+
+  const secaoForm2 = obterSecaoForm2();
+
+  const tipo =
+    String(campo.type || "").toLowerCase();
+
+  const tag =
+    String(campo.tagName || "").toLowerCase();
+
+  // Radio
+  if (tipo === "radio") {
+    const nomeGrupo = campo.name;
+
+    if (!nomeGrupo) {
+      return campo.checked;
+    }
+
+    const radios = Array.from(
+      secaoForm2.querySelectorAll(
+        "input[type='radio']"
+      )
+    ).filter(function (radio) {
+      return radio.name === nomeGrupo;
+    });
+
+    return radios.some(function (radio) {
+      return !radio.disabled && radio.checked;
+    });
+  }
+
+  // Checkbox obrigatório
+  if (tipo === "checkbox") {
+    return campo.checked;
+  }
+
+  // Select
+  if (tag === "select") {
+    const valor =
+      String(campo.value || "").trim();
+
+    return (
+      valor !== "" &&
+      valor !== "null" &&
+      valor !== "-1"
+    );
+  }
+
+  // Campo de texto, número, data, textarea ou lookup name
+  return String(campo.value || "").trim() !== "";
+}
+
+function todosObrigatoriosForm2Preenchidos() {
+  const campos =
+    obterCamposObrigatoriosForm2();
+
+  /*
+    Não havendo campos obrigatórios visíveis no Form 2,
+    o botão pode ser habilitado.
+  */
+  if (campos.length === 0) {
+    return true;
+  }
+
+  const pendentes = campos.filter(function (campo) {
+    return !campoObrigatorioForm2Preenchido(campo);
+  });
+
+  console.log(
+    "Campos obrigatórios pendentes somente do Form 2:",
+    pendentes.map(function (campo) {
+      return {
+        id: campo.id || "",
+        nome: campo.name || "",
+        tipo: campo.type || "",
+        valor: campo.value || ""
+      };
+    })
+  );
+
+  return pendentes.length === 0;
+}
+
+// =====================================================
+// VERIFICA INFORMAÇÕES INVÁLIDAS SOMENTE NO FORM 2
+// CPF, CNPJ, RG, DATA E OUTRAS VALIDAÇÕES DO FORMULÁRIO
+// =====================================================
+function form2TemInformacaoInvalida() {
+  const secaoForm2 = obterSecaoForm2();
+
+  if (!secaoForm2) {
+    return true;
+  }
+
+  // ===================================================
+  // 1. CAMPOS MARCADOS COMO INVÁLIDOS
+  // ===================================================
+  const camposForm2 = Array.from(
+    secaoForm2.querySelectorAll(
+      "input, select, textarea"
+    )
+  );
+
+  const campoInvalido = camposForm2.some(function (campo) {
+    if (!campo || campo.disabled) {
+      return false;
+    }
+
+    const tipo =
+      String(campo.type || "").toLowerCase();
+
+    if (
+      tipo === "hidden" ||
+      tipo === "file" ||
+      tipo === "submit" ||
+      tipo === "button"
+    ) {
+      return false;
+    }
+
+    // Campo oculto por alguma condição não bloqueia
+    if (!elementoVisivel(campo)) {
+      return false;
+    }
+
+    // Marcações utilizadas pelo Power Pages e scripts customizados
+    if (
+      campo.getAttribute("aria-invalid") === "true" ||
+      campo.classList.contains("input-validation-error") ||
+      campo.classList.contains("is-invalid") ||
+      campo.classList.contains("invalid")
+    ) {
+      return true;
+    }
+
+    // Validação nativa do navegador: pattern, data, número etc.
+    if (
+      campo.validity &&
+      campo.validity.valid === false
+    ) {
+      return true;
+    }
+
+    return false;
+  });
+
+  if (campoInvalido) {
+    return true;
+  }
+
+  // ===================================================
+  // 2. VALIDADORES ASP.NET / POWER PAGES
+  // ===================================================
+  if (
+    typeof window.Page_Validators !== "undefined" &&
+    Array.isArray(window.Page_Validators)
+  ) {
+    const possuiValidadorInvalido =
+      window.Page_Validators.some(function (validator) {
+        if (!validator) {
+          return false;
+        }
+
+        // Considera somente validadores dentro do Form 2
+        if (!secaoForm2.contains(validator)) {
+          return false;
+        }
+
+        const idCampo =
+          validator.controltovalidate ||
+          validator.getAttribute?.("controltovalidate");
+
+        const campoRelacionado =
+          idCampo
+            ? document.getElementById(idCampo)
+            : null;
+
+        /*
+          Se o campo relacionado não estiver dentro do Form 2,
+          o validador não participa.
+        */
+        if (
+          campoRelacionado &&
+          !secaoForm2.contains(campoRelacionado)
+        ) {
+          return false;
+        }
+
+        /*
+          CNPJ ou qualquer outro campo condicional:
+          se o campo estiver oculto, não deve bloquear.
+        */
+        if (
+          campoRelacionado &&
+          !elementoVisivel(campoRelacionado)
+        ) {
+          return false;
+        }
+
+        return validator.isvalid === false;
+      });
+
+    if (possuiValidadorInvalido) {
+      return true;
+    }
+  }
+
+  // ===================================================
+  // 3. MENSAGENS VISÍVEIS DE ERRO
+  // ===================================================
+  const seletoresErro = [
+    ".validation-summary-errors",
+    ".field-validation-error",
+    ".input-validation-error",
+    ".invalid-feedback",
+    ".validation-message",
+    ".notification.error",
+    ".alert-danger",
+    ".has-error",
+    ".text-danger",
+    "[role='alert']",
+    "span.validator",
+    "span[id*='Validator']",
+    "span[id*='validator']"
+  ].join(",");
+
+  const mensagensErro = Array.from(
+    secaoForm2.querySelectorAll(seletoresErro)
+  );
+
+  const mensagemInvalidaVisivel =
+    mensagensErro.some(function (mensagem) {
+      if (!mensagem) {
+        return false;
+      }
+
+      if (!elementoVisivel(mensagem)) {
+        return false;
+      }
+
+      const texto =
+        String(
+          mensagem.innerText ||
+          mensagem.textContent ||
+          ""
+        )
+          .replace(/\s+/g, " ")
+          .trim();
+
+      if (!texto) {
+        return false;
+      }
+
+      /*
+        Considera mensagens de informação inválida,
+        inclusive CPF, CNPJ, RG e data.
+      */
+      return (
+        /inv[aá]lid[oa]/i.test(texto) ||
+        /cpf/i.test(texto) ||
+        /cnpj/i.test(texto) ||
+        /\brg\b/i.test(texto) ||
+        /data/i.test(texto) ||
+        /formato/i.test(texto) ||
+        /incorret[oa]/i.test(texto) ||
+        /n[aã]o corresponde/i.test(texto) ||
+        /n[aã]o permitido/i.test(texto)
+      );
+    });
+
+  return mensagemInvalidaVisivel;
+}
+
+function atualizarEstadoBotaoSalvarTudo() {
+  if (!btnSalvarTudo) {
+    return;
+  }
+
+  if (
+    btnSalvarTudo.dataset.executando === "true"
+  ) {
+    return;
+  }
+
+  const obrigatoriosPreenchidos =
+    todosObrigatoriosForm2Preenchidos();
+
+  const possuiInformacaoInvalida =
+    form2TemInformacaoInvalida();
+
+  const podeSalvar =
+    obrigatoriosPreenchidos &&
+    !possuiInformacaoInvalida;
+
+  btnSalvarTudo.disabled = !podeSalvar;
+
+  btnSalvarTudo.setAttribute(
+    "aria-disabled",
+    String(!podeSalvar)
+  );
+
+  btnSalvarTudo.classList.toggle(
+    "btn-cloud-disabled",
+    !podeSalvar
+  );
+
+  console.log("Estado do SALVAR:", {
+    obrigatoriosPreenchidos:
+      obrigatoriosPreenchidos,
+
+    possuiInformacaoInvalida:
+      possuiInformacaoInvalida,
+
+    podeSalvar:
+      podeSalvar
+  });
+}
+
+function registrarValidacaoBotaoSalvarTudo() {
+  const secaoForm2 = obterSecaoForm2();
+
+  if (!secaoForm2) {
+    console.error(
+      "A seção #secao-etapa-2 não foi encontrada."
+    );
+
+    return;
+  }
+
+  /*
+    Os eventos são registrados somente no Form 2.
+  */
+  function agendarAtualizacaoBotaoSalvar() {
+  /*
+    Executa imediatamente e novamente depois,
+    permitindo que máscaras e validadores de CPF,
+    CNPJ, RG e data atualizem as mensagens.
+  */
+  atualizarEstadoBotaoSalvarTudo();
+
+  setTimeout(
+    atualizarEstadoBotaoSalvarTudo,
+    50
+  );
+
+  setTimeout(
+    atualizarEstadoBotaoSalvarTudo,
+    250
+  );
+
+  setTimeout(
+    atualizarEstadoBotaoSalvarTudo,
+    600
+  );
+}
+
+secaoForm2.addEventListener(
+  "input",
+  agendarAtualizacaoBotaoSalvar
+);
+
+secaoForm2.addEventListener(
+  "change",
+  agendarAtualizacaoBotaoSalvar
+);
+
+secaoForm2.addEventListener(
+  "blur",
+  agendarAtualizacaoBotaoSalvar,
+  true
+);
+
+secaoForm2.addEventListener(
+  "keyup",
+  agendarAtualizacaoBotaoSalvar
+);
+
+  secaoForm2.addEventListener(
+    "click",
+    function () {
+      setTimeout(
+        atualizarEstadoBotaoSalvarTudo,
+        100
+      );
+
+      setTimeout(
+        atualizarEstadoBotaoSalvarTudo,
+        400
+      );
+    }
+  );
+
+  /*
+    Atualizações realizadas por lookup, máscara
+    ou scripts internos do Power Pages.
+  */
+  const observer =
+    new MutationObserver(function () {
+      setTimeout(
+        atualizarEstadoBotaoSalvarTudo,
+        50
+      );
+    });
+
+  observer.observe(secaoForm2, {
+    childList: true,
+    subtree: true,
+    attributes: true,
+    attributeFilter: [
+      "value",
+      "checked",
+      "disabled",
+      "style",
+      "class",
+      "aria-invalid"
+    ]
+  });
+
+  atualizarEstadoBotaoSalvarTudo();
+
+  setTimeout(
+    atualizarEstadoBotaoSalvarTudo,
+    300
+  );
+
+  setTimeout(
+    atualizarEstadoBotaoSalvarTudo,
+    800
+  );
+
+  setTimeout(
+    atualizarEstadoBotaoSalvarTudo,
+    1500
+  );
+
+  setTimeout(
+    atualizarEstadoBotaoSalvarTudo,
+    3000
+  );
+
+  setInterval(function () {
+    if (
+      btnSalvarTudo &&
+      btnSalvarTudo.dataset.executando !== "true"
+    ) {
+      atualizarEstadoBotaoSalvarTudo();
+    }
+  }, 500);
+}
+
+  function formularioTemErro() {
+    const secaoForm2 = obterSecaoForm2();
+
+    if (!secaoForm2) {
+      return false;
+    }
+
+    const resumoErro = secaoForm2.querySelector(
+      ".validation-summary-errors, " +
+      ".alert-danger, " +
+      ".notification.error, " +
+      "#ValidationSummary"
+    );
+
+    if (
+      resumoErro &&
+      elementoVisivel(resumoErro) &&
+      (resumoErro.innerText || "").trim() !== ""
+    ) {
+      return true;
+    }
+
+    const campoComErro = secaoForm2.querySelector(
+      ".input-validation-error, " +
+      ".field-validation-error, " +
+      ".has-error"
+    );
+
+    return !!(
+      campoComErro &&
+      elementoVisivel(campoComErro)
+    );
+  }
+
+  function restaurarBotaoSalvar() {
+      if (!btnSalvarTudo) {
+        return;
+      }
+
+      btnSalvarTudo.dataset.executando = "false";
+      btnSalvarTudo.textContent = "SALVAR";
+
+      /*
+        Não habilita diretamente.
+
+        Reavalia os campos obrigatórios antes de decidir
+        se o botão pode ser habilitado.
+      */
+      atualizarEstadoBotaoSalvarTudo();
+    }
+
+  function limparControleSubmit() {
+    sessionStorage.removeItem(CHAVE_SUBMIT_FORM_2);
+  }
+
+  function avisarPaginaPaiQueSalvou() {
+    if (!window.parent || window.parent === window) {
+      console.warn(
+        "A página não está sendo executada dentro do modal da página pai."
+      );
+
+      restaurarBotaoSalvar();
+      return;
+    }
+
+    console.log(
+      "Formulário 2 salvo com sucesso. Avisando a página pai."
+    );
+
+    window.parent.postMessage(
+      {
+        tipo: "ATUALIZAR_DADOS_SOLICITACAO_OK"
+      },
+      window.location.origin
+    );
+  }
+
+  function finalizarComSucesso() {
+    limparControleSubmit();
+    avisarPaginaPaiQueSalvou();
+  }
+
+  function finalizarComErro() {
+    limparControleSubmit();
+    restaurarBotaoSalvar();
+  }
+
+  // Inicia a regra de habilitação do botão SALVAR
+registrarValidacaoBotaoSalvarTudo();
+
+
+  // ===================================================
+  // RETORNO DO POSTBACK DO FORMULÁRIO
+  // ===================================================
+
+
+
+  const submitAnteriorPendente =
+    sessionStorage.getItem(CHAVE_SUBMIT_FORM_2) === "aguardando";
+
+  if (submitAnteriorPendente) {
+
+    console.log(
+      "Página recarregada após o submit do Formulário 2."
+    );
+
+    setTimeout(function () {
+
+      if (formularioTemErro()) {
+        console.warn(
+          "O Formulário 2 retornou com erro de validação."
+        );
+
+        finalizarComErro();
+        return;
+      }
+
+      finalizarComSucesso();
+
+    }, 800);
+
+    return;
+  }
+
+  if (!btnSalvarTudo) {
+    console.error(
+      "Botão #btnSalvarTudo não encontrado."
+    );
+
+    return;
+  }
+
+  // ===================================================
+  // CLIQUE NO BOTÃO SALVAR
+  // ===================================================
+  btnSalvarTudo.addEventListener("click", function (event) {
+
+          event.preventDefault();
+          event.stopPropagation();
+
+          if (btnSalvarTudo.dataset.executando === "true") {
+        return;
+      }
+
+      /*
+        Segurança adicional.
+
+        Mesmo que alguém remova o disabled pelo navegador,
+        o formulário não será enviado enquanto existirem
+        campos obrigatórios não preenchidos.
+      */
+      const obrigatoriosPreenchidos =
+          todosObrigatoriosForm2Preenchidos();
+
+        const possuiInformacaoInvalida =
+          form2TemInformacaoInvalida();
+
+        if (!obrigatoriosPreenchidos) {
+          atualizarEstadoBotaoSalvarTudo();
+
+          alert(
+            "Preencha todos os campos obrigatórios antes de salvar."
+          );
+
+          return;
+        }
+
+        if (possuiInformacaoInvalida) {
+          atualizarEstadoBotaoSalvarTudo();
+
+          alert(
+            "Corrija as informações inválidas antes de salvar."
+          );
+
+          return;
+        }
+
+      const secaoForm2 = obterSecaoForm2();
+      const submitForm2 = obterSubmitForm2();
+
+    if (!secaoForm2) {
+      alert(
+        "A seção do Formulário 2 não foi encontrada."
+      );
+
+      return;
+    }
+
+    if (!submitForm2) {
+      alert(
+        "O botão interno de salvar do Formulário 2 não foi encontrado."
+      );
+
+      return;
+    }
+
+    btnSalvarTudo.dataset.executando = "true";
+    btnSalvarTudo.disabled = true;
+    btnSalvarTudo.setAttribute(
+      "aria-disabled",
+      "true"
+    );
+
+    btnSalvarTudo.textContent =
+      "ATUALIZANDO INFORMAÇÕES...";
+
+    /*
+      Marca que o Formulário 2 foi enviado.
+
+      Se o Entity Form recarregar o iframe, este valor será
+      encontrado no próximo carregamento e a página pai será
+      avisada somente depois do retorno do submit.
+    */
+    sessionStorage.setItem(
+      CHAVE_SUBMIT_FORM_2,
+      "aguardando"
+    );
+
+    let requisicaoAjaxFinalizada = false;
+
+    // =================================================
+    // CASO O ENTITY FORM UTILIZE AJAX
+    // =================================================
+    try {
+
+      if (
+        window.Sys &&
+        Sys.WebForms &&
+        Sys.WebForms.PageRequestManager
+      ) {
+
+        const pageRequestManager =
+          Sys.WebForms.PageRequestManager.getInstance();
+
+        const handlerFimRequisicao = function () {
+
+          pageRequestManager.remove_endRequest(
+            handlerFimRequisicao
+          );
+
+          if (requisicaoAjaxFinalizada) {
+            return;
+          }
+
+          requisicaoAjaxFinalizada = true;
+
+          setTimeout(function () {
+
+            if (formularioTemErro()) {
+              finalizarComErro();
+              return;
+            }
+
+            finalizarComSucesso();
+
+          }, 400);
+        };
+
+        pageRequestManager.add_endRequest(
+          handlerFimRequisicao
+        );
+      }
+
+    } catch (erro) {
+
+      console.warn(
+        "PageRequestManager não disponível. " +
+        "O retorno será tratado após o postback.",
+        erro
+      );
+    }
+
+    // Executa exclusivamente o submit do Form 2
+    submitForm2.click();
+
+    /*
+      Se a validação impedir o submit e a página não recarregar,
+      remove o controle pendente e libera novamente o botão.
+    */
+    setTimeout(function () {
+
+      if (
+        !requisicaoAjaxFinalizada &&
+        formularioTemErro()
+      ) {
+        finalizarComErro();
+      }
+
+    }, 1200);
+  });
+});
+</script>

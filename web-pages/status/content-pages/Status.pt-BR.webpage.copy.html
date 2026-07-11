@@ -1,0 +1,4368 @@
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+
+{% assign solicitacaoId = request.params["id"] %} {% assign nomeUsuario = user.fullname | default: "usuário" %}
+
+
+{% fetchxml solicitacao %}
+<fetch top="1">
+  <entity name="cloud_solicitacoes">
+
+    <attribute name="cloud_status_atual" />
+    <attribute name="cloud_etapa" />
+    <attribute name="cloud_fk_municipios" />
+    <attribute name="cloud_fase" />
+    <attribute name="cloud_id_solicitacoes" />
+    <attribute name="cloud_numero_economias" />
+    <attribute name="cloud_is_orcamento_solicitado" />
+    <attribute name="cloud_is_importacao" />
+
+    <!-- MUNICIPIO -->
+    <link-entity name="cloud_municipios"
+                 from="cloud_municipiosid"
+                 to="cloud_fk_municipios"
+                 link-type="outer"
+                 alias="municipio">
+                 
+
+        <!-- REGIONAL -->
+        <link-entity name="cloud_regionais"
+                     from="cloud_regionaisid"
+                     to="cloud_fk_regionais"
+                    link-type="outer"
+                     alias="regional">
+
+            <attribute name="cloud_shared_mailbox"/>
+            <attribute name="cloud_nome_regional"/>
+
+        </link-entity>
+
+    </link-entity>
+
+    <filter>
+      <condition attribute="cloud_solicitacoesid"
+                 operator="eq"
+                 value="{{ solicitacaoId }}" />
+      <condition attribute="createdon"
+                 operator="le"
+                 value='{{ "today" | date: "yyyy-MM-dd HH:mm:ss" }}' />
+    </filter>
+
+  </entity>
+</fetch>
+{% endfetchxml %}
+
+{% assign listaFinalidades = "" %}
+
+{% for finalidade in finalidades.results.entities %}
+  {% if listaFinalidades != "" %}
+    {% assign listaFinalidades = listaFinalidades | append: ", " %}
+  {% endif %}
+  {% assign listaFinalidades = listaFinalidades | append: finalidade.cloud_nome_finalidade %}
+{% endfor %}
+
+{% assign registro = solicitacao.results.entities | first %} 
+
+{% assign isOrcamentoSolicitado = false %}
+{% if registro and registro.cloud_is_orcamento_solicitado == true %}
+  {% assign isOrcamentoSolicitado = true %}
+{% endif %}
+
+{% assign faseAtualRedirect = "" %}
+{% if registro and registro.cloud_fase %}
+  {% assign faseAtualRedirect = registro.cloud_fase.label | upcase | strip %}
+{% endif %}
+
+<script>
+(function () {
+  const recordId = "{{ solicitacaoId }}";
+  const isOrcamentoSolicitado = {{ isOrcamentoSolicitado | json }};
+  const faseAtual = "{{ faseAtualRedirect }}";
+  const pathAtual = window.location.pathname.toLowerCase();
+
+  if (!recordId) return;
+
+  let destino = "";
+
+  if (isOrcamentoSolicitado === true) {
+    destino = "/status-projeto-aegea/?id=" + encodeURIComponent(recordId);
+  } else if (faseAtual === "PROJETO") {
+    destino = "/status-projeto/?id=" + encodeURIComponent(recordId);
+  } else if (faseAtual === "OBRA") {
+    destino = "/status-obra/?id=" + encodeURIComponent(recordId);
+  }
+
+  if (destino && !pathAtual.includes(destino.split("?")[0].toLowerCase())) {
+    window.location.replace(destino);
+  }
+})();
+</script>
+
+{% if registro.cloud_is_importacao == true %}
+<style>.card-termo {display: none !important; }</style>
+{%endif%}
+
+{% assign emailRegional = "" %}
+{% assign nomeRegional = "" %}
+
+{% if registro %}
+  {% assign emailRegional = registro["regional.cloud_shared_mailbox"] %}
+  {% assign nomeRegional = registro["regional.cloud_nome_regional"] %}
+{% endif %}
+{%- comment -%} 
+FASES DA TIMELINE
+1 - DIRETRIZES TÉCNICAS
+2 - PROJETO
+3 - OBRA
+
+A fase FINALIZAÇÃO não será mais exibida na timeline.
+Caso o registro esteja em FINALIZAÇÃO, ele será tratado visualmente como OBRA.
+{%- endcomment -%}
+
+{% assign faseLabel = "" %}
+{% if registro and registro.cloud_fase %}
+  {% assign faseLabel = registro.cloud_fase.label | upcase | strip %}
+{% endif %}
+
+{% assign currentIdx = 1 %}
+
+{% if faseLabel == "PROJETO" %}
+  {% assign currentIdx = 2 %}
+{% elsif faseLabel == "OBRA" or faseLabel == "FINALIZAÇÃO" %}
+  {% assign currentIdx = 3 %}
+{% endif %}
+
+{%- comment -%}
+Timeline com 3 pontos possui 2 segmentos:
+DIRETRIZES -> PROJETO -> OBRA
+{%- endcomment -%}
+
+{% assign totalSegments = 2 %}
+
+{% assign doneSegments = currentIdx | minus: 2 %}
+{% if doneSegments < 0 %}
+  {% assign doneSegments = 0 %}
+{% endif %}
+
+{% assign donePercent = doneSegments | times: 100 | divided_by: totalSegments %}
+
+{% assign currentEndSegments = currentIdx | minus: 1 %}
+{% assign currentEndPercent = currentEndSegments | times: 100 | divided_by: totalSegments %}
+
+{% assign municipioId = "" %}
+{% assign etapaValue = "" %}
+
+{% if registro.cloud_fk_municipios %}
+  {% assign municipioId = registro.cloud_fk_municipios.id %}
+{% endif %}
+
+{% assign etapaValue = "" %}
+{% if registro and registro.cloud_etapa %}
+  {% assign etapaValue = registro.cloud_etapa.value %}
+{% endif %}
+
+
+{% assign etapaLabel = "" %}
+{% if registro and registro.cloud_etapa %}
+  {% assign etapaLabel = registro.cloud_etapa.label | upcase | strip %}
+{% endif %}
+
+{% assign statusValue = "" %}
+{% if registro and registro.cloud_status_atual %}
+  {% assign statusValue = registro.cloud_status_atual.value %}
+{% endif %}
+
+{% assign actionIdx = 1 %}
+
+{% if statusValue == 586450000 %}
+  {% assign actionIdx = 1 %}
+{% elsif statusValue == 586450001 %}
+  {% assign actionIdx = 2 %}
+{% elsif statusValue == 586450002 %}
+  {% assign actionIdx = 3 %}
+{% elsif statusValue == 586450003 %}
+  {% assign actionIdx = 4 %}
+{% elsif statusValue == 586450024 %}
+  {% assign actionIdx = 4 %}
+{% elsif statusValue == 586450004 %}
+  {% assign actionIdx = 5 %}
+  {% elsif statusValue == 586450009 %}
+ {% assign actionIdx = 5 %}
+{% elsif statusValue == 586450005 %}
+  {% assign actionIdx = 6 %}
+{% elsif statusValue == 586450006 %}
+  {% assign actionIdx = 6 %}
+{% elsif statusValue == 586450010 %}
+  {% assign actionIdx = 7 %}
+{% elsif statusValue == 586450008 %}
+  {% assign actionIdx = 7 %}
+{% elsif statusValue == 586450029 %}
+  {% assign actionIdx = 7 %}
+{% endif %}
+
+{% assign totalActionSegments = 6 %}
+{% assign doneActionSegments = actionIdx | minus: 1 %}
+{% assign actionDonePercent = doneActionSegments | times: 100 | divided_by: totalActionSegments %}
+
+{% assign tipoTaxaValue = "" %}
+
+{% case etapaLabel %}
+  {% when "ENTRADA" %}
+    {% assign tipoTaxaValue = 586450000 %}
+  {% when "REVALIDAÇÃO" %}
+    {% assign tipoTaxaValue = 586450001 %}
+  {% when "REANÁLISE" %}
+    {% assign tipoTaxaValue = 586450000 %}
+{% endcase %}
+
+
+
+{% fetchxml municipios %}
+<fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="false">
+  <entity name="cloud_municipios">   
+    <attribute name="cloud_id_municipio" />
+    <attribute name="cloud_nome_municipio" />
+<filter>
+  <condition attribute="createdon" operator="le" value='{{ "today" | date: "yyyy-MM-dd HH:mm:ss" }}' />
+</filter>
+  </entity>
+</fetch>
+{% endfetchxml %}
+
+
+
+{% fetchxml taxas %}
+<fetch top="1">
+  <entity name="cloud_taxas">
+
+    <!-- Valores -->
+    <attribute name="cloud_valor_total" />
+    <attribute name="cloud_valor_agua" />
+    <attribute name="cloud_valor_agua_e_esgoto" />
+    <attribute name="cloud_valor_esgoto" />
+
+    <!-- Relacionamentos -->
+    <attribute name="cloud_fk_municipios" />
+    <attribute name="cloud_tipo_taxa" />
+    <attribute name="cloud_status" />
+    <attribute name="createdon" />
+
+    <!-- Filtros -->
+    <filter type="and">
+      <condition attribute="cloud_status" operator="eq" value="586450000" />
+      <condition attribute="cloud_fk_municipios" operator="eq" value="{{municipioId}}" />
+      <condition attribute="cloud_tipo_taxa" operator="eq" value="{{tipoTaxaValue}}" />
+      <condition attribute="createdon" operator="le" value='{{ "today" | date: "yyyy-MM-dd HH:mm:ss" }}' />
+    </filter>
+    <order attribute="createdon" descending="true" />
+  </entity>
+</fetch>
+{% endfetchxml %}
+{% assign taxaEncontrada = taxas.results.entities | first %}
+{% assign taxaValor = "" %}
+{% if taxaEncontrada and taxaEncontrada.cloud_valor_total %}
+  {% assign taxaValor = taxaEncontrada.cloud_valor_total | round: 2 %}
+{% endif %}
+<input type="hidden" id="pp-recordid" value="{{ solicitacaoId }}" />
+<input type="hidden" id="pp-valortaxa" value="{{ taxaEncontrada.cloud_valor_total | round: 2 }}" />
+{% assign numeroEconomias = registro.cloud_numero_economias | default: "" %}
+{% assign registro = solicitacao.results.entities | first %}
+{% assign municipioId = registro.cloud_fk_municipios.id | default: "" %}
+{% assign nomeMunicipio = "" %}
+{% for municipio in municipios.results.entities %}
+  {% if municipio.cloud_municipiosid == municipioId %}
+    {% assign nomeMunicipio = municipio.cloud_nome_municipio %}
+  {% endif %}
+{% endfor %}
+{% fetchxml logAlteracoes %}
+<fetch top="1">
+  <entity name="cloud_log_alteracoes">
+    <attribute name="cloud_log_alteracoesid" />
+    <attribute name="cloud_campo_alterado" />
+    <attribute name="cloud_valor_antigo" />
+    <attribute name="cloud_valor_novo" />
+    <attribute name="createdon" />
+    <filter type="and">
+      <condition attribute="cloud_fk_solicitacoes"
+                 operator="eq"
+                 value="{{ solicitacaoId }}" />
+      <condition attribute="cloud_campo_alterado"
+                 operator="eq"
+                 value="586450001" />
+      <condition attribute="cloud_valor_novo"
+                 operator="eq"
+                 value="{{ numeroEconomias }}" />
+                 <condition attribute="createdon" operator="le" value='{{ "today" | date: "yyyy-MM-dd HH:mm:ss" }}' />
+    </filter>
+    <order attribute="createdon" descending="true" />
+  </entity>
+</fetch>
+{% endfetchxml %}
+{% assign ultimoLog = logAlteracoes.results.entities | first %}
+
+{% fetchxml boletos %}
+<fetch top="1">
+  <entity name="cloud_boletos">
+    
+    <attribute name="cloud_boletosid" />
+    <attribute name="createdon" />
+    <attribute name="cloud_fase_processo" />
+    <attribute name="cloud_etapa_processo" />
+    <attribute name="cloud_fk_solicitacoes" />
+    <attribute name="cloud_link_pasta_sharepoint" />
+    <attribute name="cloud_motivos_reprovacao" />
+    <attribute name="cloud_status_atual" />
+    <attribute name="cloud_data_vencimento" />
+    <attribute name="cloud_file_boleto" />
+    <attribute name="cloud_data_vencimento_boleto" />
+    <attribute name="cloud_file_comprovante" />
+    <filter >
+      
+      <condition attribute="cloud_fk_solicitacoes"
+                 operator="eq"
+                 value="{{ solicitacaoId }}" />
+                 <condition attribute="createdon" operator="le" value='{{ "today" | date: "yyyy-MM-dd HH:mm:ss" }}' />
+    </filter>
+    <order attribute="createdon" descending="true" />
+  </entity>
+</fetch>
+{% endfetchxml %}
+
+{% fetchxml boletosreprovados %}
+<fetch top="1">
+  <entity name="cloud_boletos">
+    
+    <attribute name="cloud_boletosid" />
+    <attribute name="createdon" />
+    <attribute name="cloud_fase_processo" />
+    <attribute name="cloud_etapa_processo" />
+    <attribute name="cloud_fk_solicitacoes" />
+    <attribute name="cloud_link_pasta_sharepoint" />
+    <attribute name="cloud_motivos_reprovacao" />
+    <attribute name="cloud_status_atual" />
+    <attribute name="cloud_file_boleto" />
+    <attribute name="cloud_file_comprovante" />
+    <filter type="and">
+  <condition attribute="cloud_fk_solicitacoes"
+             operator="eq"
+             value="{{ solicitacaoId }}" />
+             
+  <condition attribute="cloud_status_atual"
+             operator="eq"
+             value="586450004" />
+
+  <condition attribute="createdon"
+             operator="le"
+             value='{{ "today" | date: "yyyy-MM-dd HH:mm:ss" }}' />
+</filter>
+    <order attribute="createdon" descending="true" />
+  </entity>
+</fetch>
+{% endfetchxml %}
+
+
+{% assign boleto = boletos.results.entities | first %}
+
+{% assign boletoId = "" %}
+{% if boleto %}
+  {% assign boletoId = boleto.cloud_boletosid %}
+{% endif %}
+
+
+
+
+{% assign dataVencimentoBoletoFinal = "" %}
+
+{% if boleto and boleto.cloud_data_vencimento_boleto %}
+  {% assign dataVencimentoBoletoFinal = boleto.cloud_data_vencimento_boleto %}
+{% elsif boleto and boleto.cloud_data_vencimento %}
+  {% assign dataVencimentoBoletoFinal = boleto.cloud_data_vencimento %}
+{% endif %}
+
+{% assign boletoreprovado = boletosreprovados.results.entities | first %}
+
+{% fetchxml analiseTecnica %}
+<fetch top="1">
+  <entity name="cloud_analises_tecnicas">
+    <attribute name="cloud_data_inicio_analise" />
+    <attribute name="cloud_data_prazo_final_analise" />
+    <attribute name="cloud_dias_restantes" />
+    <attribute name="cloud_status_analise" />
+    <attribute name="cloud_file_oficio_analise_preliminar" />
+    <attribute name="cloud_comentarios" />
+    <attribute name="cloud_analises_tecnicasid" />
+    <attribute name="cloud_data_vencimento_oficio" />
+    <attribute name="createdon" />
+    <filter type="and">
+
+
+      <condition attribute="cloud_fk_solicitacoes"
+                 operator="eq"
+                 value="{{ solicitacaoId }}" />
+                 <condition attribute="createdon" operator="le" value='{{ "today" | date: "yyyy-MM-dd HH:mm:ss" }}' />
+    </filter>
+    <order attribute="createdon" descending="true" />
+  </entity>
+</fetch>
+{% endfetchxml %}
+
+{% fetchxml analiseTecnicaAnalisada %}
+<fetch top="1">
+  <entity name="cloud_analises_tecnicas">
+    <attribute name="cloud_data_inicio_analise" />
+    <attribute name="cloud_data_prazo_final_analise" />
+    <attribute name="cloud_dias_restantes" />
+    <attribute name="cloud_status_analise" />
+    <attribute name="cloud_file_oficio_analise_preliminar" />
+    <attribute name="cloud_comentarios" />
+    <attribute name="cloud_analises_tecnicasid" />
+    <attribute name="cloud_data_vencimento_oficio" />
+    <attribute name="createdon" />
+    <filter type="and">
+
+  <condition attribute="cloud_fk_solicitacoes"
+             operator="eq"
+             value="{{ solicitacaoId }}" />
+
+  <condition attribute="cloud_status_analise"
+             operator="eq"
+             value="586450003" />
+
+  <condition attribute="createdon"
+             operator="le"
+             value='{{ "today" | date: "yyyy-MM-dd HH:mm:ss" }}' />
+
+</filter>
+    <order attribute="createdon" descending="true" />
+  </entity>
+</fetch>
+{% endfetchxml %}
+
+
+{% assign analise = analiseTecnica.results.entities | first %}
+{% assign analiseanalisada = analiseTecnicaAnalisada.results.entities | first %}
+
+{% assign dataVencimentoOficio = "" %}
+{% assign oficioVencido = false %}
+
+{% if analise and analise.cloud_data_vencimento_oficio %}
+  {% assign dataVencimentoOficio = analise.cloud_data_vencimento_oficio %}
+  {% assign dataVencimentoOficioNumero = analise.cloud_data_vencimento_oficio | date: "yyyyMMdd" | plus: 0 %}
+  {% assign dataHojeNumero = "today" | date: "yyyyMMdd" | plus: 0 %}
+
+  {% if dataVencimentoOficioNumero < dataHojeNumero %}
+    {% assign oficioVencido = true %}
+  {% endif %}
+{% endif %}
+
+{% if statusValue == 586450029 %}
+  {% assign oficioVencido = true %}
+{% endif %}
+
+
+{% assign analiseId = "" %}
+{% if analise %}
+  {% assign analiseId = analise.cloud_analises_tecnicasid %}
+{% endif %}
+{% assign diasRestantes = "" %}
+{% if analise and analise.cloud_dias_restantes %}
+  {% assign diasRestantes = analise.cloud_dias_restantes %}
+{% endif %}
+
+
+{% capture iconClock %}
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock-history" viewBox="0 0 16 16">
+  <path d="M8.515 1.019A7 7 0 0 0 8 1V0a8 8 0 0 1 .589.022zm2.004.45a7 7 0 0 0-.985-.299l.219-.976q.576.129 1.126.342zm1.37.71a7 7 0 0 0-.439-.27l.493-.87a8 8 0 0 1 .979.654l-.615.789a7 7 0 0 0-.418-.302zm1.834 1.79a7 7 0 0 0-.653-.796l.724-.69q.406.429.747.91zm.744 1.352a7 7 0 0 0-.214-.468l.893-.45a8 8 0 0 1 .45 1.088l-.95.313a7 7 0 0 0-.179-.483m.53 2.507a7 7 0 0 0-.1-1.025l.985-.17q.1.58.116 1.17zm-.131 1.538q.05-.254.081-.51l.993.123a8 8 0 0 1-.23 1.155l-.964-.267q.069-.247.12-.501m-.952 2.379q.276-.436.486-.908l.914.405q-.24.54-.555 1.038zm-.964 1.205q.183-.183.35-.378l.758.653a8 8 0 0 1-.401.432z"/>
+  <path d="M8 1a7 7 0 1 0 4.95 11.95l.707.707A8.001 8.001 0 1 1 8 0z"/>
+  <path d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5"/>
+</svg>
+{% endcapture %}
+
+{% capture iconLock %}
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lock" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M8 0a4 4 0 0 1 4 4v2.05a2.5 2.5 0 0 1 2 2.45v5a2.5 2.5 0 0 1-2.5 2.5h-7A2.5 2.5 0 0 1 2 13.5v-5a2.5 2.5 0 0 1 2-2.45V4a4 4 0 0 1 4-4M4.5 7A1.5 1.5 0 0 0 3 8.5v5A1.5 1.5 0 0 0 4.5 15h7a1.5 1.5 0 0 0 1.5-1.5v-5A1.5 1.5 0 0 0 11.5 7zM8 1a3 3 0 0 0-3 3v2h6V4a3 3 0 0 0-3-3"/>
+</svg>
+{% endcapture %}
+
+{% capture iconCheck %}
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+</svg>
+{% endcapture %}
+
+{% capture iconExclamation %}
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-circle" viewBox="0 0 16 16">
+  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+  <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0M7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0z"/>
+</svg>
+{% endcapture %}
+
+<div class="mobile-top-actions">
+  <button
+    type="button"
+    class="btn-cloud btn-cloud-outline btn-voltar-topo"
+    onclick="window.location.href='/Minhas-Solicitações/';">
+    Voltar
+  </button>
+
+  <button
+    type="button"
+    class="btn-cloud btn-cloud-outline btn-solicitacao-topo"
+    onclick="window.location.reload();"
+    title="Clique para atualizar a página">
+    Solicitação #{{ registro.cloud_id_solicitacoes }}
+  </button>
+</div>
+
+<!-- BLOCO DAS TIMELINES -->
+<div class="timeline-glass-card">
+
+  <!-- TIMELINE 1 -->
+  <div class="timeline-block">
+    <div class="timeline-block-title titulo-fase-atual">
+  Fase atual da solicitação
+</div>
+
+    <div class="timeline-card">
+      <div class="timeline-wrap">
+        <div class="timeline-line-base"></div>
+        <div
+            class="timeline-line-done"
+            style="
+              width: {{ donePercent }}%;
+              --mobile-fase-done: {{ currentIdx | minus: 1 }};
+            ">
+          </div>
+        {% if currentIdx > 1 %}
+        <div class="timeline-line-current" style="left: {{ donePercent }}%; width: {{ currentEndPercent | minus: donePercent }}%;"></div>
+        {% endif %}
+
+        <div class="tnode p1 {% if currentIdx > 1 %}etapa-superada{% elsif currentIdx == 1 %}etapa-atual{% else %}etapa-futura{% endif %}"
+     data-tooltip="Definição das diretrizes técnicas do processo">
+  {% if currentIdx > 1 %}
+    {{ iconCheck }}
+  {% elsif currentIdx == 1 %}
+    {{ iconClock }}
+  {% else %}
+    {{ iconLock }}
+  {% endif %}
+</div>
+
+<div class="tnode p2 {% if currentIdx > 2 %}etapa-superada{% elsif currentIdx == 2 %}etapa-atual{% else %}etapa-futura{% endif %}"
+     data-tooltip="Elaboração e validação do projeto">
+  {% if currentIdx > 2 %}
+    {{ iconCheck }}
+  {% elsif currentIdx == 2 %}
+    {{ iconClock }}
+  {% else %}
+    {{ iconLock }}
+  {% endif %}
+</div>
+
+<div class="tnode p3 {% if currentIdx > 3 %}etapa-superada{% elsif currentIdx == 3 %}etapa-atual{% else %}etapa-futura{% endif %}"
+     data-tooltip="Execução da obra conforme projeto aprovado">
+  {% if currentIdx > 3 %}
+    {{ iconCheck }}
+  {% elsif currentIdx == 3 %}
+    {{ iconClock }}
+  {% else %}
+    {{ iconLock }}
+  {% endif %}
+</div>
+
+
+        <div class="timeline-label p1">DIRETRIZES TÉCNICAS</div>
+        <div class="timeline-label p2">PROJETO</div>
+        <div class="timeline-label p3">OBRA</div>
+      </div>
+    </div>
+  </div>
+
+  {% if faseLabel == "DIRETRIZES TÉCNICAS" %}
+  <!-- TIMELINE 2 -->
+  {% if registro.cloud_fase.value != 586450001 %}
+  <div class="timeline-block">
+    <div class="timeline-block-title titulo-proximos-passos">
+  Próximos passos da fase atual
+</div>
+
+    <div class="timeline-card timeline-actions
+    {% if registro.cloud_status_atual.value == 586450009 %}
+      status-reprovado
+    {% elsif registro.cloud_status_atual.value == 586450006 %}
+      status-reprovado
+    {% elsif registro.cloud_status_atual.value == 586450008 %}
+      status-reprovado
+    {% elsif registro.cloud_status_atual.value == 586450024 %}
+      status-reprovado
+    {% endif %}
+    ">
+      <div class="timeline-wrap">
+        <div class="timeline-line-base"></div>
+        <div class="timeline-line-done"
+             style="width: {{ actionDonePercent }}%;"></div>
+
+        <div class="tnode p1 {% if actionIdx > 1 %}etapa-superada{% elsif actionIdx == 1 %}etapa-atual{% else %}etapa-futura{% endif %}"
+     data-tooltip="Solicitação registrada no sistema. Necessita confirmação de aceite da taxa">
+
+  {% if actionIdx > 1 %}
+    {{ iconCheck }}
+  {% elsif actionIdx == 1 %}
+    {{ iconClock }}
+  {% else %}
+    {{ iconLock }}
+  {% endif %}
+</div>
+
+<div class="tnode p2 {% if actionIdx > 2 %}etapa-superada{% elsif actionIdx == 2 %}etapa-atual{% else %}etapa-futura{% endif %}"
+     data-tooltip="Neste passo, o solicitante deve aceitar o pagamento do valor apontado na taxa municipal">
+  {% if actionIdx > 2 %}
+    {{ iconCheck }}
+  {% elsif actionIdx == 2 %}
+    {{ iconClock }}
+  {% else %}
+    {{ iconLock }}
+  {% endif %}
+</div>
+
+<div class="tnode p3 {% if actionIdx > 3 %}etapa-superada{% elsif actionIdx == 3 %}etapa-atual{% else %}etapa-futura{% endif %}"
+     data-tooltip="Nesta etapa é necessário gerar e anexar um Boleto de pagamento da taxa pela equipe responsável">
+  {% if actionIdx > 3 %}
+    {{ iconCheck }}
+  {% elsif actionIdx == 3 %}
+    {{ iconClock }}
+  {% else %}
+    {{ iconLock }}
+  {% endif %}
+</div>
+
+<div class="tnode p4
+  {% if registro.cloud_status_atual.value == 586450024 %}
+    etapa-reprovada
+  {% elsif actionIdx > 4 %}
+    etapa-superada
+  {% elsif actionIdx == 4 %}
+    etapa-atual
+  {% else %}
+    etapa-futura
+  {% endif %}"
+  data-tooltip="Esse ponto indica que o boleto foi gerado, será necessário o pagamento da taxa pelo solicitante e o anexo do comprovante do pagamento na solicitação">
+  {% if registro.cloud_status_atual.value == 586450024 %}
+    {{ iconExclamation }}
+  {% elsif actionIdx > 4 %}
+    {{ iconCheck }}
+  {% elsif actionIdx == 4 %}
+    {{ iconClock }}
+  {% else %}
+    {{ iconLock }}
+  {% endif %}
+</div>
+
+<div class="tnode p5
+  {% if registro.cloud_status_atual.value == 586450009 %}
+    etapa-reprovada
+  {% elsif actionIdx > 5 %}
+    etapa-superada
+  {% elsif actionIdx == 5 %}
+    etapa-atual
+  {% else %}
+    etapa-futura
+  {% endif %}"
+     data-tooltip="Com o comprovante anexado, a unidade realiza a análise e validação do pagamento">
+  {% if registro.cloud_status_atual.value == 586450009 %}
+    {{ iconExclamation }}
+  {% elsif actionIdx > 5 %}
+    {{ iconCheck }}
+  {% elsif actionIdx == 5 %}
+    {{ iconClock }}
+  {% else %}
+    {{ iconLock }}
+  {% endif %}
+</div>
+
+<div class="tnode p6
+  {% if registro.cloud_status_atual.value == 586450006 %}
+    etapa-reprovada
+  {% elsif actionIdx > 6 %}
+    etapa-superada
+  {% elsif actionIdx == 6 %}
+    etapa-atual
+  {% else %}
+    etapa-futura
+  {% endif %}"
+     data-tooltip="Após a aprovação do comprovante de pagamento, é iniciada uma Análise técnica e documental do processo">
+  {% if registro.cloud_status_atual.value == 586450006 %}
+    {{ iconExclamation }}
+  {% elsif actionIdx > 6 %}
+    {{ iconCheck }}
+  {% elsif actionIdx == 6 %}
+    {{ iconClock }}
+  {% else %}
+    {{ iconLock }}
+  {% endif %}
+</div>
+
+<div class="tnode p7
+  {% if registro.cloud_status_atual.value == 586450008 or oficioVencido %}
+    etapa-reprovada
+  {% elsif actionIdx == 7 %}
+    etapa-atual
+  {% else %}
+    etapa-futura
+  {% endif %}"
+     data-tooltip="{% if oficioVencido %}O Ofício venceu e será necessário iniciar a revalidação.{% else %}Processo concluído com sucesso{% endif %}">
+  {% if registro.cloud_status_atual.value == 586450008 or oficioVencido %}
+    {{ iconExclamation }}
+  {% elsif actionIdx == 7 %}
+    {{ iconClock }}
+  {% else %}
+    {{ iconLock }}
+  {% endif %}
+</div>
+        <div class="timeline-label p1
+          {% if actionIdx > 1 %}past
+          {% elsif actionIdx == 1 %}present
+          {% else %}future{% endif %}">
+          {% if actionIdx > 1 %}
+            SOLICITAÇÃO<br>CRIADA
+          {% elsif actionIdx == 1 %}
+            CRIANDO<br>SOLICITAÇÃO
+          {% else %}
+            CRIAR<br>SOLICITAÇÃO
+          {% endif %}
+        </div>
+
+        <div class="timeline-label p2
+          {% if actionIdx > 2 %}past
+          {% elsif actionIdx == 2 %}present
+          {% else %}future{% endif %}">
+          {% if actionIdx > 2 %}
+            TAXA<br>ACEITA
+          {% elsif actionIdx == 2 %}
+            AGUARDANDO<br>ACEITE DA TAXA
+          {% else %}
+            ACEITAR<br>TAXA
+          {% endif %}
+        </div>
+
+        <div class="timeline-label p3
+          {% if actionIdx > 3 %}past
+          {% elsif actionIdx == 3 %}present
+          {% else %}future{% endif %}">
+          {% if actionIdx > 3 %}
+            BOLETO<br>GERADO
+          {% elsif actionIdx == 3 %}
+            GERANDO<br>BOLETO
+          {% else %}
+            GERAR<br>BOLETO DA TAXA
+          {% endif %}
+        </div>
+
+        <div class="timeline-label p4
+          {% if actionIdx > 4 %}past
+          {% elsif actionIdx == 4 or registro.cloud_status_atual.value == 586450024 %}present
+          {% else %}future{% endif %}">
+          {% if registro.cloud_status_atual.value == 586450024 %}
+            BOLETO<br>VENCIDO
+          {% elsif actionIdx > 4 %}
+            COMPROVANTE<br>ANEXADO
+          {% elsif actionIdx == 4 %}
+            AGUARDANDO<br>PAGAMENTO<br>DA TAXA
+          {% else %}
+            PAGAR<br>TAXA
+          {% endif %}
+        </div>
+
+        <div class="timeline-label p5
+          {% if actionIdx > 5 %}past
+          {% elsif actionIdx == 5 %}present
+          {% else %}future{% endif %}">
+          {% if registro and registro.cloud_status_atual.value == 586450009 %}
+            COMPROVANTE<br>RECUSADO
+          {% elsif actionIdx > 5 %}
+            COMPROVANTE<br>VÁLIDO
+          {% elsif actionIdx == 5 %}
+            PAGAMENTO<br>EM ANÁLISE
+          {% else %}
+            VALIDAR<br>COMPROVANTE
+          {% endif %}
+        </div>
+
+        <div class="timeline-label p6
+          {% if actionIdx > 6 %}past
+          {% elsif actionIdx == 6 %}present
+          {% else %}future{% endif %}">
+          {% if registro and registro.cloud_status_atual.value == 586450006 %}
+            DOCUMENTAÇÃO<br>REPROVADA
+          {% elsif actionIdx > 6 %}
+            ANÁLISE<br>CONCLUÍDA
+          {% elsif actionIdx == 6 %}
+            SOB ANÁLISE<br>TÉCNICA
+          {% else %}
+            ANÁLISE<br>TÉCNICA
+          {% endif %}
+        </div>
+
+        <div class="timeline-label p7
+          {% if oficioVencido %}present
+          {% elsif actionIdx == 7 %}present
+          {% elsif actionIdx < 7 %}future{% endif %}">
+          {% if oficioVencido %}
+            OFÍCIO<br>VENCIDO
+          {% elsif registro and registro.cloud_status_atual.value == 586450008 %}
+            SOLICITAÇÃO<br>INVIÁVEL
+          {% elsif actionIdx == 7 %}
+            FASE<br>CONCLUÍDA
+          {% else %}
+            CONCLUIR<br>FASE
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+{% endif %}
+
+</div>
+
+
+{% if registro and registro.cloud_status_atual.value == 586450001 %}
+<div class="card-termo">
+  {% if registro.cloud_etapa.value == 586450000 %}
+  <h2>🔔 Próxima ação: Termo de Aceite da Taxa de Entrada</h2>
+  {% else %}
+  <h2>🔔 Próxima ação: Termo de Aceite da Taxa de Reanálise</h2>
+  {% endif %}
+  <p>
+    <strong>Olá {{ nomeUsuario }}, obrigado pelas informações!</strong>
+  </p>
+
+  {% if registro.cloud_etapa.value == 586450000 %}
+  <p>Após a confirmação das informações, deverá ser selecionada a opção <strong>“De acordo”</strong> para que a requisição seja encaminhada à equipe responsável pela emissão do boleto. O valor correspondente é de <strong> R$ {{ taxaEncontrada.cloud_valor_total | round: 2 }} </strong> referente à Taxa de Entrada do processo de <strong>Análise Preliminar para Viabilidade Técnica</strong>.</p>
+  {% else %}
+   <p>Após a confirmação das informações, deverá ser selecionada a opção <strong>“De acordo”</strong> para que a requisição seja encaminhada à equipe responsável pela emissão do boleto. O valor correspondente é de <strong> R$ {{ taxaEncontrada.cloud_valor_total | round: 2 }} </strong> referente à Taxa de Reanalise do processo de <strong>Análise Preliminar para Viabilidade Técnica</strong>.</p>
+   {% endif %}
+  <p>Confirme para prosseguimento.</p>
+  <div
+    style="
+    margin-top:32px;
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:16px;
+  "
+  >
+    <div>
+
+      <!--
+      {% if registro.cloud_etapa.value == 586450002 %}
+  <a href="#"
+     id="btnCancelarAlteracoes"
+     class="btn-cloud btn-cloud-outline">
+    Cancelar Alterações
+  </a>
+      {% else %}
+      {% if ultimoLog %}
+  <a href="#"
+     id="btnCancelarAlteracoes"
+     class="btn-cloud btn-cloud-outline">
+    Cancelar Alterações
+  </a>
+{% endif %}
+
+
+      {% endif %}
+      -->
+    </div>
+     <div class="modal-cloud-actions">
+
+      <button id="btnDeAcordo" class="btn-cloud">
+  DE ACORDO
+      </button>
+    </div>
+
+    
+  </div>
+</div>
+<span id="valorTaxaSpan" style="display:none;">
+  {{ taxaEncontrada.cloud_valor_total | round: 2 }}
+</span>
+<div id="modalConfirmarCancelamento" class="modal-cloud-overlay" style="display:none;">
+  <div class="modal-cloud">
+    <h3>⚠️ Cancelar alterações</h3>
+    <p>
+      Você tem certeza que deseja <strong>cancelar esta alteração</strong>?
+      <br />
+      Essa ação irá restaurar os dados anteriores.
+    </p>
+    <div class="modal-cloud-actions">
+      <button id="btnNaoCancelarAlteracao"
+              class="btn-cloud btn-cloud-outline">
+        Voltar
+      </button>
+      <button id="btnConfirmarCancelamento"
+              class="btn-cloud">
+        Confirmar cancelamento
+      </button>
+    </div>
+  </div>
+</div>
+<div id="modalCancelamentoSucesso"
+     class="modal-cloud-overlay"
+     style="display:none;">
+  <div class="modal-cloud">
+    <h3>✅ Alteração cancelada</h3>
+    <p>A alteração foi cancelada com sucesso.</p>
+<div class="modal-cloud-actions-center">
+    <button id="btnOkCancelamento"
+            class="btn-cloud">
+      OK
+    </button>
+    </div>
+  </div>
+</div>
+
+</div>
+
+{% endif %}
+{% if registro.cloud_fase.value != 586450001 %}
+{% if registro and registro.cloud_status_atual.value == 586450000 %}
+<div class="card-termo">
+  <h2>📝 Deseja continuar a Solicitação?</h2>
+  <p>
+    <strong>Olá {{ nomeUsuario }},</strong>
+  </p>
+  <p>
+    Você iniciou o processo de
+    <strong>solicitação de viabilidade técnica</strong>,
+    porém não concluiu o preenchimento do formulário.
+  </p>
+  <p>
+    O que deseja fazer agora?
+  </p>
+
+  <div
+    style="
+      margin-top:32px;
+      display:flex;
+      justify-content:flex-end;
+      flex-wrap:wrap;
+      gap:16px;
+      width:100%;
+    "
+  >
+    <button
+      type="button"
+      id="btnContinuarSolicitacao"
+      class="btn-cloud">
+      CONTINUAR DE ONDE PAROU
+    </button>
+  </div>
+</div>
+{% endif %}
+{% endif %}
+
+{% if registro and registro.cloud_status_atual.value == 586450002 %}
+<div class="card-termo">
+  <h2>⏳ Próxima ação: Estamos gerando o seu boleto</h2>
+  <p>
+    <strong>Olá {{ nomeUsuario }}, obrigado por confirmar o aceite da taxa!</strong>
+  </p>
+  <p>
+    Em breve enviaremos o boleto solicitado.
+  </p>
+</div>
+{% endif %}
+
+{% if registro %}
+  {% if registro.cloud_status_atual.value == 586450003 or registro.cloud_status_atual.value == 586450024 %}
+<div class="card-termo">
+
+  
+ {% if registro.cloud_status_atual.value == 586450024 %}
+    <h2>⛔ Seu boleto de pagamento de taxa venceu!</h2>
+    <p>
+      <strong>Olá {{ nomeUsuario }},</strong><br />
+      Seu boleto disponível não foi pago e o prazo de pagamento expirou. Para dar continuidade ao processo, siga os passos abaixo:
+    </p>
+  {% else %} 
+
+
+    <h2>💳 Próxima ação: Baixar boleto, pagar e adicionar comprovante</h2>
+    <p>
+      <strong>Olá {{ nomeUsuario }},</strong><br />
+      Seu boleto já está disponível. Para dar continuidade ao processo, siga os passos abaixo:
+    </p>
+
+
+   {% endif %} 
+
+
+{% if dataVencimentoBoletoFinal != "" %}
+
+
+
+  <div style="
+    margin:16px 0 20px;
+    padding:12px 16px;
+    background:{% if registro.cloud_status_atual.value == 586450024 %}#fef2f2{% else %}#eff6ff{% endif %};
+    border-left:4px solid {% if registro.cloud_status_atual.value == 586450024 %}#dc2626{% else %}#2563eb{% endif %};
+    border-radius:6px;
+    color:{% if registro.cloud_status_atual.value == 586450024 %}#7f1d1d{% else %}#1e3a8a{% endif %};
+  ">
+    <strong>⚠️ Aviso:</strong>
+    {% if registro.cloud_status_atual.value == 586450024 %}
+      O boleto venceu em <strong>{{ dataVencimentoBoletoFinal | date: "dd/MM/yyyy" }}</strong>.
+    {% else %}
+      O vencimento do boleto será em <strong>{{ dataVencimentoBoletoFinal | date: "dd/MM/yyyy" }}</strong>.
+    {% endif %}
+  </div>
+{% endif %}
+
+  <ul style="margin:16px 0 24px 18px; color:#1f2937; line-height:1.6;">
+    {% if registro.cloud_status_atual.value == 586450024 %}
+      <li>📥 Baixe o boleto ou solicite um novo</li>
+    {% else %}
+      <li>📥 Baixe o boleto</li>
+    {% endif %}
+    <li>💰 Realize o pagamento</li>
+    <li>📎 Envie o comprovante de pagamento</li>
+  </ul>
+
+  <div
+      style="
+        display:flex;
+        justify-content:flex-end;
+        flex-wrap:wrap;
+        gap:16px;
+        margin-top:24px;
+        width:100%;
+      "
+    >
+    
+{% fetchxml fetchBoletoMaisRecente %}
+<fetch version="1.0"
+       output-format="xml-platform"
+       mapping="logical"
+       distinct="false"
+       top="1">
+
+  <entity name="cloud_boletos">
+
+    <attribute name="cloud_boletosid" />
+    <attribute name="cloud_file_boleto" />
+    <attribute name="cloud_fk_solicitacoes" />
+    <attribute name="cloud_status_atual" />
+    <attribute name="cloud_data_vencimento" />
+    <attribute name="createdon" />
+
+    <filter type="and">
+
+      <condition
+        attribute="cloud_fk_solicitacoes"
+        operator="eq"
+        value="{{ solicitacaoId }}" />
+
+      <!-- Considera somente registros que realmente possuem boleto -->
+      <condition
+        attribute="cloud_file_boleto"
+        operator="not-null" />
+
+      <condition
+        attribute="createdon"
+        operator="le"
+        value='{{ "today" | date: "yyyy-MM-dd HH:mm:ss" }}' />
+
+    </filter>
+
+    <!-- Mais recente primeiro -->
+    <order attribute="createdon" descending="true" />
+
+  </entity>
+</fetch>
+{% endfetchxml %}
+
+{% assign boletoMaisRecente = fetchBoletoMaisRecente.results.entities | first %}
+
+{% if boletoMaisRecente and boletoMaisRecente.cloud_file_boleto %}
+
+  <button
+    type="button"
+    id="btnBaixarBoletoMaisRecente"
+    class="btn-cloud btn-cloud-outline"
+    onclick="baixarBoletoMaisRecente()">
+    BAIXAR BOLETO
+  </button>
+
+  <script>
+    function baixarBoletoMaisRecente() {
+      var url = "{{ boletoMaisRecente.cloud_file_boleto.Url }}";
+      var nome = "{{ boletoMaisRecente.cloud_file_boleto.Name }}";
+
+      if (!url) {
+        alert("Boleto não disponível.");
+        return;
+      }
+
+      var link = document.createElement("a");
+
+      link.href = url;
+      link.download = nome || "boleto.pdf";
+
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  </script>
+
+{% endif %}
+
+   {% if registro.cloud_status_atual.value == 586450024 %}
+        <button
+          type="button"
+          id="btnSolicitarNovoBoletoMesmoFluxo"
+          class="btn-cloud btn-cloud-outline">
+          SOLICITAR NOVO BOLETO
+        </button>
+      {% endif %}
+
+    <div class="upload-doc-lista" style="width:100%; margin-top:24px;">
+
+<div class="upload-doc-lista-head">
+  <div class="upload-doc-lista-titulo">Comprovantes anexados</div>
+</div>
+
+
+{% if boleto and boleto.cloud_file_comprovante %}
+  <div class="upload-doc-grid">
+    <div class="upload-doc-item" data-boleto-id="{{ boletoId }}">
+      <div class="upload-doc-icon">📄</div>
+
+      <div class="upload-doc-info">
+        <a
+          class="upload-doc-nome upload-doc-link"
+          href="{{ boleto.cloud_file_comprovante.Url }}"
+          download="{{ boleto.cloud_file_comprovante.Name }}"
+          target="_blank">
+          {{ boleto.cloud_file_comprovante.Name | default: "Comprovante anexado" }}
+        </a>
+      </div>
+
+      <button
+        type="button"
+        class="upload-doc-trash btnExcluirComprovante"
+        title="Excluir comprovante"
+        data-boleto-id="{{ boletoId }}">
+        🗑️
+      </button>
+    </div>
+  </div>
+
+
+
+{% else %}
+  <div class="upload-doc-vazio">
+    Nenhum comprovante anexado até o momento.
+  </div>
+{% endif %}
+
+<div
+  class="comprovante-inline-container"
+  data-boleto-id="{{ boletoId }}">
+
+  <div class="comprovante-inline-header">
+    <div>
+      <strong>
+        {% if boleto and boleto.cloud_file_comprovante %}
+          Alterar comprovante
+        {% else %}
+          Adicionar comprovante
+        {% endif %}
+      </strong>
+      <span>
+        Carregue o arquivo abaixo para atualizar o comprovante de pagamento.
+      </span>
+    </div>
+  </div>
+
+  <div class="comprovante-inline-frame-box">
+    <iframe
+      class="iframe-comprovante-inline"
+      src="/anexo-comprovante/?id={{ boletoId }}"
+      frameborder="0"
+      scrolling="no">
+    </iframe>
+  </div>
+
+  
+</div>
+
+<div class="upload-doc-bottom-actions" style="justify-content:flex-end;">
+  <button
+    type="button"
+    id="btnEnviarComprovanteAnalise"
+    class="btn-cloud {% unless boleto and boleto.cloud_file_comprovante %}btn-cloud-disabled{% endunless %}"
+    data-boleto-id="{{ boletoId }}"
+    data-tem-comprovante="{% if boleto and boleto.cloud_file_comprovante %}true{% else %}false{% endif %}"
+    {% unless boleto and boleto.cloud_file_comprovante %}disabled aria-disabled="true"{% endunless %}>
+    ENVIAR COMPROVANTE PARA ANÁLISE
+  </button>
+</div>
+
+
+</div>
+
+  </div>
+</div>
+  {% endif %}
+{% endif %}
+
+
+
+
+<div id="modalConfirmacaoTaxa" class="modal-cloud-overlay" style="display:none;">
+  <div class="modal-cloud">
+    <h3 id="tituloModalTaxa">⚠️ Confirmação de Aceite</h3>
+    <p id="textoModalTaxa">Você confirma que está de acordo com o valor da taxa?</p>
+    <p id="blocoValorTaxa" style="font-size:18px;font-weight:700;">
+      Valor da taxa:
+      <span style="color:#0027bd;">
+        R$ {{ taxaEncontrada.cloud_valor_total | round: 2 }}
+      </span>
+    </p>
+    <div class="modal-cloud-actions">
+      <button id="btnCancelarModal" class="btn-cloud btn-cloud-outline">
+        Cancelar
+      </button>
+      <button id="btnConfirmarModal" class="btn-cloud">
+        Confirmar
+      </button>
+    </div>
+  </div>
+</div>
+<div id="modalSucesso" class="modal-cloud-overlay" style="display:none;">
+  <div class="modal-cloud">
+    <h3 id="tituloModalSucesso">✅ Solicitação enviada</h3>
+    <p id="textoModalSucesso">Confirmação registrada com sucesso.</p>
+<div class="modal-cloud-actions-center">
+    <button type="button" id="btnOkSucesso" class="btn-cloud">
+      OK
+    </button>
+    </div>
+    </div>
+  </div>
+<div id="modalSucessoComprovante"
+     class="modal-cloud-overlay"
+     style="display:none;">
+  <div class="modal-cloud">
+    <h3>✅ Comprovante salvo</h3>
+    <p>O comprovante foi enviado com sucesso.</p>
+    <div class="modal-cloud-actions-center">
+    <button id="btnOkComprovante" class="btn-cloud">
+      OK
+    </button>
+  </div>
+  </div>
+</div>
+{% if registro and registro.cloud_status_atual.value == 586450004 %}
+<div class="card-termo">
+  <h2>⏳ Aguardando validação do comprovante</h2>
+  <p>
+    <strong>Olá {{ nomeUsuario }},</strong>
+  </p>
+  <p>
+    Recebemos o seu comprovante de pagamento e ele está
+    <strong>em análise pela nossa equipe</strong>.
+  </p>
+  <p>
+    Assim que a validação for concluída, você será notificado <strong>por e-mail</strong>
+    e o processo seguirá para a próxima etapa.
+  </p>
+</div>
+
+{% endif %}
+{% if registro and registro.cloud_status_atual.value == 586450009 %}
+
+<div class="card-termo">
+  <h2>⛔ Seu comprovante de pagamento foi reprovado</h2>
+  <p>
+    <strong>Olá {{ nomeUsuario }},</strong>
+  </p>
+  <p>
+    O seu pagamento foi
+    <strong style="color:#dc2626;">REPROVADO</strong>.
+  </p>
+  {% if boletoreprovado and boletoreprovado.cloud_motivos_reprovacao %}
+  <div style="
+    margin:16px 0;
+    padding:12px 16px;
+    background:#fef2f2;
+    border-left:4px solid #dc2626;
+    border-radius:6px;
+    color:#7f1d1d;
+  ">
+    <strong>Motivo da reprovação:</strong><br />
+    {{ boletoreprovado.cloud_motivos_reprovacao }}
+  </div>
+  {% endif %}
+  <p>
+  Baixe novamente o Boleto caso necessário e submeta um novo comprovante para continuar.
+</p>
+
+{% fetchxml fetchBoletoNovoComprovanteReprovado %}
+<fetch version="1.0"
+       output-format="xml-platform"
+       mapping="logical"
+       distinct="false"
+       top="1">
+  <entity name="cloud_boletos">
+    <attribute name="cloud_boletosid" />
+    <attribute name="cloud_file_boleto" />
+    <attribute name="cloud_data_vencimento" />
+    <attribute name="cloud_status_atual" />
+    <attribute name="cloud_fk_solicitacoes" />
+    <attribute name="createdon" />
+    <filter type="and">
+      <condition attribute="cloud_fk_solicitacoes"
+                 operator="eq"
+                 value="{{ solicitacaoId }}" />
+    </filter>
+    <order attribute="createdon" descending="true" />
+  </entity>
+</fetch>
+{% endfetchxml %}
+
+{% assign boletoNovoComprovanteReprovado = fetchBoletoNovoComprovanteReprovado.results.entities | first %}
+
+{% if boletoNovoComprovanteReprovado and boletoNovoComprovanteReprovado.cloud_data_vencimento %}
+  {% assign dataVencNovoBoleto = boletoNovoComprovanteReprovado.cloud_data_vencimento | date: "yyyyMMdd" | plus: 0 %}
+  {% assign dataHojeNumero = "today" | date: "yyyyMMdd" | plus: 0 %}
+ 
+  <!--
+  {% if dataVencNovoBoleto < dataHojeNumero %}
+ 
+  <div style="
+      margin:16px 0 20px;
+      padding:12px 16px;
+      background:#fef2f2;
+      border-left:4px solid #dc2626;
+      border-radius:6px;
+      color:#7f1d1d;
+    ">
+      <strong>⚠️ Aviso:</strong>
+      O novo boleto venceu em
+      <strong>{{ boletoNovoComprovanteReprovado.cloud_data_vencimento | date: "dd/MM/yyyy" }}</strong>.
+    </div>
+  {% else %}
+    <div style="
+      margin:16px 0 20px;
+      padding:12px 16px;
+      background:#eff6ff;
+      border-left:4px solid #2563eb;
+      border-radius:6px;
+      color:#1e3a8a;
+    ">
+       <strong>⚠️ Aviso:</strong>
+      O vencimento do novo boleto será em
+      <strong>{{ boletoNovoComprovanteReprovado.cloud_data_vencimento | date: "dd/MM/yyyy" }}</strong>. 
+    </div>
+    
+  {% endif %}
+  -->
+{% endif %}
+  <div style="
+  margin-top:16px;
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:16px;
+">
+
+{% fetchxml fetchBoleto %}
+<fetch version="1.0" 
+       output-format="xml-platform" 
+       mapping="logical" 
+       distinct="false" 
+       top="1">
+
+  <entity name="cloud_boletos">
+
+    <attribute name="cloud_boletosid"/>
+    <attribute name="cloud_file_boleto" />
+    <attribute name="cloud_fk_solicitacoes" />
+    <attribute name="cloud_status_atual" />
+    <attribute name="createdon" />
+
+    <filter type="and">
+      
+      <condition attribute="cloud_fk_solicitacoes" 
+                 operator="eq" 
+                 value="{{ solicitacaoId }}" />
+
+      
+      <condition attribute="cloud_status_atual"
+                 operator="eq"
+                 value="586450001" />
+
+    </filter>
+
+    
+    <order attribute="createdon" descending="true" />
+
+  </entity>
+</fetch>
+{% endfetchxml %}
+
+
+{% for item in fetchBoleto.results.entities%}
+  {% if item.cloud_file_boleto %}
+      <button
+      type="button"
+      class="btn-cloud btn-cloud-outline"
+      onclick="baixarBoleto()">
+      BAIXAR NOVO BOLETO
+    </button>
+
+    <script>
+    function baixarBoleto() {
+      var url = "{{ item.cloud_file_boleto.Url }}";
+      var nome = "{{ item.cloud_file_boleto.Name }}";
+
+      if (!url) {
+        alert("Boleto não disponível.");
+        return;
+      }
+
+      var link = document.createElement("a");
+      link.href = url;
+      link.download = nome || "boleto.pdf";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+    </script>
+
+ {% endif %}
+{% endfor %} 
+
+
+<div class="upload-doc-lista" style="width:100%; margin-top:24px;">
+
+<div class="upload-doc-lista-head">
+  <div class="upload-doc-lista-titulo">Comprovantes anexados</div>
+</div>
+
+{% if boleto and boleto.cloud_file_comprovante %}
+  <div class="upload-doc-grid">
+    <div class="upload-doc-item">
+      <div class="upload-doc-icon">📄</div>
+
+      <div class="upload-doc-info">
+        <a
+          class="upload-doc-nome upload-doc-link"
+          href="{{ boleto.cloud_file_comprovante.Url }}"
+          download="{{ boleto.cloud_file_comprovante.Name }}"
+          target="_blank">
+          {{ boleto.cloud_file_comprovante.Name | default: "Comprovante anexado" }}
+        </a>
+      </div>
+    </div>
+  </div>
+
+
+
+{% else %}
+  <div class="upload-doc-vazio">
+    Nenhum comprovante anexado até o momento.
+  </div>
+{% endif %}
+
+<div
+  class="comprovante-inline-container"
+  data-boleto-id="{{ boletoId }}">
+
+  <div class="comprovante-inline-header">
+    <div>
+      <strong>
+        {% if boleto and boleto.cloud_file_comprovante %}
+          Alterar comprovante
+        {% else %}
+          Adicionar comprovante
+        {% endif %}
+      </strong>
+      <span>
+        Carregue o novo arquivo abaixo para substituir o comprovante reprovado.
+      </span>
+    </div>
+  </div>
+
+
+  
+  <div class="comprovante-inline-frame-box">
+    <iframe
+      class="iframe-comprovante-inline"
+      src="/anexo-comprovante/?id={{ boletoId }}"
+      frameborder="0"
+      scrolling="no">
+    </iframe>
+  </div>
+
+  <div class="comprovante-inline-loading" style="display:none;">
+    <div class="loader-anexos"></div>
+    <h3>CARREGANDO COMPROVANTE...</h3>
+    <p>Aguarde enquanto atualizamos a lista de comprovantes.</p>
+  </div>
+</div>
+
+<div class="upload-doc-bottom-actions" style="justify-content:flex-end;">
+  <button
+    type="button"
+    id="btnEnviarComprovanteAnalise"
+    class="btn-cloud {% unless boleto and boleto.cloud_file_comprovante %}btn-cloud-disabled{% endunless %}"
+    data-boleto-id="{{ boletoId }}"
+    data-tem-comprovante="{% if boleto and boleto.cloud_file_comprovante %}true{% else %}false{% endif %}"
+    {% unless boleto and boleto.cloud_file_comprovante %}disabled aria-disabled="true"{% endunless %}>
+    ENVIAR COMPROVANTE PARA ANÁLISE
+  </button>
+</div>
+
+</div>
+
+</div>
+</div>
+{% endif %}
+<div id="modalConfirmarNovoPagamento"
+     class="modal-cloud-overlay"
+     style="display:none;">
+  <div class="modal-cloud">
+
+    <h3>⚠️ Solicitar novo boleto</h3>
+<p>
+  Deseja solicitar a emissão de um novo boleto?
+</p>
+<p>
+  Caso confirme, será disponibilizado um
+  <strong>novo boleto para pagamento</strong>
+  e será necessário anexar novamente
+  um comprovante.
+</p>
+    <div class="modal-cloud-actions">
+      <button id="btnCancelarNovoPagamento"
+              class="btn-cloud btn-cloud-outline">
+        Cancelar
+      </button>
+      <button id="btnConfirmarNovoPagamento"
+              class="btn-cloud">
+        Confirmar
+      </button>
+    </div>
+  </div>
+</div>
+<div id="modalNovoPagamentoSucesso"
+     class="modal-cloud-overlay"
+     style="display:none;">
+  <div class="modal-cloud">
+    <h3>✅ Boleto disponibilizado</h3>
+    <p>
+      Seu boleto foi disponibilizado com sucesso!
+    </p>
+    <div class="modal-cloud-actions-center">
+      <button id="btnOkNovoPagamento"
+              class="btn-cloud">
+        OK
+      </button>
+    </div>
+  </div>
+</div>
+
+{% if registro and registro.cloud_status_atual.value == 586450005 %}
+<div class="card-termo">
+  <h2>⏳ Solicitação em análise técnica</h2>
+  <p>
+    <strong>Prezado(a) {{ nomeUsuario }},</strong>
+  </p>
+  <p>
+    <strong>O pagamento foi confirmado </strong> e a solicitação foi encaminhada à equipe de Análise Técnica. 
+  </p>
+  <p>
+    A análise do pedido será iniciada, bem como a elaboração do Ofício de Viabilidade Técnica para posterior encaminhamento.
+  </p>
+
+  {% if diasRestantes != "" and diasRestantes > 0 %}
+  <p>
+    O prazo estimado para conclusão é de <strong>{{ analise.cloud_dias_restantes }} dias. </strong> Após a finalização, o ofício estará disponível para download neste canal. 
+  </p>
+{% elsif diasRestantes == 0 %}
+  <p>
+    O prazo previsto para conclusão da análise se encerra hoje. Assim que finalizarem, te encaminho o relatório por e-mail e por aqui.
+  </p>
+{% endif %}
+ <p style="color:#dc2626; font-weight:600;">
+  Caso sejam identificadas inconsistências ou ausência de documentos, será solicitada a devida correção,  <strong>e o prazo será reiniciado.</strong>
+</p>
+
+
+  {% if analise %}
+  <div style="
+    margin-top:16px;
+    padding:12px 16px;
+    background:#f9fafb;
+    border-left:4px solid #0027bd;
+    border-radius:6px;
+  ">
+    <strong>📅 Cronograma de Análise Técnica:</strong><br />
+    <div style="margin-top:8px;">
+      {% if analise.cloud_data_inicio_analise %}
+  <strong>Início:</strong><br />
+  {{ analise.cloud_data_inicio_analise | date: "dd/MM/yyyy" }}<br />
+{% endif %}
+      <strong>Previsão de Conclusão:</strong><br />
+      {{ analise.cloud_data_prazo_final_analise | date: "dd/MM/yyyy" }}<br />
+
+<strong>Status da análise:</strong><br />
+
+{% assign status_raw = analise.cloud_status_analise.label | default: "" %}
+{% assign status = status_raw | upcase %}
+
+{% if status contains "AGUARDANDO VALIDAÇÃO DA DOCUMENTAÇÃO" %}
+  🟡
+{% elsif status contains "DOCUMENTAÇÃO REPROVADA" %}
+  🔴
+{% elsif status contains "EM ANDAMENTO" %}
+  🟢
+{% elsif status contains "CONCLUÍDO" %}
+  🔵
+{% else %}
+  ⚪
+{% endif %}
+
+{{ status_raw }}
+
+
+
+    </div>
+
+{% if diasRestantes != "" %}
+  <div style="margin-top:8px;">
+    {% if diasRestantes > 0 %}
+      ⏱️ <strong>Faltam {{ diasRestantes }} dias</strong> para o término da análise.
+    {% elsif diasRestantes == 0 %}
+      ⏱️ <strong>O prazo se encerra hoje.</strong>
+    {% else %}
+      {% assign diasExpirados = diasRestantes | times: -1 %}
+      ⚠️ <strong>O prazo expirou há {{ diasExpirados }} {% if diasExpirados == 1 %}dia{% else %}dias{% endif %}.</strong>
+    {% endif %}
+  </div>
+{% endif %}
+
+
+  </div>
+  {% endif %}
+
+</div>
+
+{% endif %}
+
+{% assign isPortalAvancoProjeto = true %}
+
+
+{% if registro and registro.cloud_status_atual.value == 586450010 or registro.cloud_status_atual.value == 586450029 %}
+
+<div class="card-termo">
+  <h2>✅ Análise técnica concluída: Documentação aprovada!</h2>
+  <p>
+    <strong>Olá {{ nomeUsuario }},</strong>
+  </p>
+  <p>
+    Sua solicitação foi considerada como
+    <strong style="color:#16a34a;">VIÁVEL</strong>
+    e a análise técnica foi
+    <strong style="color:#16a34a;">CONCLUÍDA</strong>.
+  </p>
+
+  {% if analise and analise.cloud_comentarios %}
+<div style="
+  margin:16px 0;
+  padding:12px 16px;
+  background:#ecfdf5;
+  border-left:4px solid #16a34a;
+  border-radius:6px;
+  color:#065f46;
+">
+  <strong>Comentário da análise:</strong><br />
+  {{ analise.cloud_comentarios }}
+</div>
+{% endif %}
+{% unless isPortalAvancoProjeto %}
+  <p>
+    Para continuar o processo, envie o
+    <strong>Projeto</strong>
+    para o e-mail:
+  </p>
+
+  {% assign emailRegional = registro["regional.cloud_shared_mailbox"] | default: "alias@dominio.com.br" %}
+
+  <p style="
+    margin-top:12px;
+    font-size:18px;
+    font-weight:700;
+    background:#f3f4f6;
+    padding:12px 16px;
+    border-radius:8px;
+  ">
+    📧 
+    <a href="mailto:{{ emailRegional }}"
+       style="color:#0027bd;text-decoration:none;">
+       {{ emailRegional }}
+    </a>
+  </p>
+
+  <p style="margin-top:16px;color:#374151;">
+    Após o envio do projeto, nossa equipe dará continuidade às próximas etapas do processo.
+  </p>
+{% endunless %}
+
+    {% if dataVencimentoOficio != "" %}
+  {% if oficioVencido %}
+    <div style="margin:18px 0;padding:16px 18px;background:#fef2f2;border-left:4px solid #dc2626;border-radius:8px;color:#7f1d1d;">
+      <strong>⚠️ Aviso importante:</strong><br>
+      O Ofício venceu em:
+      <strong>{{ dataVencimentoOficio | date: "dd/MM/yyyy" }}</strong>.
+    </div>
+  {% else %}
+    <div style="margin:18px 0;padding:16px 18px;background:#eff6ff;border-left:4px solid #2563eb;border-radius:8px;color:#1e3a8a;">
+      <strong>⚠️ Aviso importante:</strong><br>
+      O Ofício vence em:
+      <strong>{{ dataVencimentoOficio | date: "dd/MM/yyyy" }}</strong>.
+    </div>
+  {% endif %}
+{% endif %}
+
+  {% if isPortalAvancoProjeto %}
+  <p>
+    Deseja avançar sua solicitação para a fase de
+    <strong>PROJETO</strong>?
+  </p>
+{% endif %}
+  
+<div
+  style="
+    margin-top:32px;
+    display:flex;
+    justify-content:flex-end;
+    flex-wrap:wrap;
+    gap:16px;
+    width:100%;
+  "
+>
+
+<!-- Baixar Ofício ou iniciar revalidação -->
+{% if oficioVencido %}
+
+  <div style="
+    width:100%;
+    padding:16px 18px;
+    background:#fef2f2;
+    border-left:4px solid #dc2626;
+    border-radius:8px;
+    color:#7f1d1d;
+    box-sizing:border-box;
+    line-height:1.6;
+  ">
+    <strong>⚠️ Ofício vencido</strong><br>
+
+    {% if dataVencimentoOficio != "" %}
+      O prazo de validade do Ofício encerrou em
+      <strong>{{ dataVencimentoOficio | date: "dd/MM/yyyy" }}</strong>.
+    {% else %}
+      O prazo de validade do Ofício está vencido.
+    {% endif %}
+
+    <br>
+    Para continuar com a solicitação, será necessário iniciar uma nova etapa de revalidação.
+  </div>
+
+  <button
+    type="button"
+    id="btnIniciarRevalidacao"
+    class="btn-cloud">
+    INICIAR REVALIDAÇÃO
+  </button>
+
+{% else %}
+
+{% fetchxml fetchAnaliseTecnica %}
+<fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="false">
+  <entity name="cloud_analises_tecnicas">
+    <attribute name="cloud_analises_tecnicasid" />
+    <attribute name="cloud_file_oficio_analise_preliminar" />
+    <attribute name="cloud_fk_solicitacoes" />
+    <filter>
+      <condition attribute="cloud_status_analise"
+                 operator="eq"
+                 value="586450003" />
+                 
+      <condition attribute="cloud_fk_solicitacoes" operator="eq" value="{{solicitacaoId}}" />
+    </filter>
+  </entity>
+</fetch>
+{% endfetchxml %}
+
+{% for item in fetchAnaliseTecnica.results.entities %}
+  {% if item.cloud_file_oficio_analise_preliminar %}
+
+    <button
+      type="button"
+      class="btn-cloud btn-cloud-outline"
+      onclick="baixarOficio_{{ forloop.index }}()">
+      Baixar Ofício
+    </button>
+
+    <script>
+      function baixarOficio_{{ forloop.index }}() {
+
+        var url = "{{ item.cloud_file_oficio_analise_preliminar.Url }}";
+        var nome = "{{ item.cloud_file_oficio_analise_preliminar.Name }}";
+
+        if (!url) {
+          alert("Ofício não disponível.");
+          return;
+        }
+
+        var link = document.createElement("a");
+        link.href = url;
+        link.download = nome || "oficio.pdf";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+    </script>
+
+  {% endif %}
+{% endfor %}
+
+<!--
+  <a
+      href="/_api/cloud_analises_tecnicases({{ analise.cloud_analises_tecnicasid }})/cloud_file_oficio_analise_preliminar/$value"
+      download="{{ analise.cloud_file_oficio_analise_preliminar_name }}"
+      class="btn-cloud btn-cloud-outline">
+      Baixar Ofício
+  </a> -->
+
+  {% if isPortalAvancoProjeto %}
+  <button
+    type="button"
+    id="btnAvancarFase"
+    class="btn-cloud">
+    AVANÇAR FASE
+  </button>
+{% endif %}
+
+{% endif %}
+  </div>
+</div>
+
+{% endif %}
+<div id="modalConfirmarAvancoFase"
+     class="modal-cloud-overlay"
+     style="display:none;">
+  <div class="modal-cloud">
+    <h3>⚠️ Avançar fase</h3>
+    <p>
+      Deseja avançar a fase para
+      <strong>PROJETO</strong>?
+    </p>
+    <div class="modal-cloud-actions">
+      <button id="btnCancelarAvancoFase" type="button" class="btn-cloud btn-cloud-outline">Cancelar</button>
+      <button id="btnConfirmarAvancoFase"
+              class="btn-cloud">
+        Confirmar
+      </button>
+    </div>
+  </div>
+</div>
+
+<div id="modalAvancoFaseSucesso"
+     class="modal-cloud-overlay"
+     style="display:none;">
+  <div class="modal-cloud">
+    <h3>🎉 Fase avançada com sucesso!</h3>
+    <p>
+      A solicitação foi encaminhada para a fase de
+      <strong>PROJETO</strong>.
+    </p>
+    <div class="modal-cloud-actions-center">
+      <button type="button" id="btnOkAvancoFase" class="btn-cloud">OK</button>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+{% if registro and registro.cloud_status_atual.value == 586450006 %}
+
+{% fetchxml anexosDiretrizesReprovadas %}
+<fetch>
+  <entity name="annotation">
+    <attribute name="annotationid" />
+    <attribute name="filename" />
+    <attribute name="filesize" />
+    <attribute name="mimetype" />
+    <attribute name="createdon" />
+    <attribute name="documentbody" />
+    <attribute name="isdocument" />
+
+    <filter type="and">
+      <condition attribute="objectid" operator="eq" value="{{ solicitacaoId }}" />
+      <condition attribute="createdon" operator="le" value='{{ "today" | date: "yyyy-MM-dd HH:mm:ss" }}' />
+      <condition attribute="isdocument" operator="eq" value="1" />
+    </filter>
+
+    <order attribute="createdon" descending="true" />
+  </entity>
+</fetch>
+{% endfetchxml %}
+
+{% assign totalAnexosDiretrizes = anexosDiretrizesReprovadas.results.entities.size %}
+
+<div class="card-termo">
+  <h2>⛔ Documentação não aprovada!</h2>
+  <p>
+    <strong>Olá {{ nomeUsuario }},</strong>
+  </p>
+  <p>
+    Infelizmente sua documentação ainda é
+    <strong>insuficiente</strong> para prosseguir
+    para a próxima fase.
+  </p>
+
+  {% if analise and analise.cloud_comentarios %}
+  <div style="
+    margin:16px 0;
+    padding:12px 16px;
+    background:#fef2f2;
+    border-left:4px solid #dc2626;
+    border-radius:6px;
+    color:#7f1d1d;
+  ">
+    <strong>Motivos da reprovação:</strong><br />
+    {{ analise.cloud_comentarios }}
+  </div>
+  {% endif %}
+
+  <div
+    style="
+      margin-top:32px;
+      display:flex;
+      justify-content:flex-end;
+      flex-wrap:wrap;
+      gap:16px;
+    "
+  >
+<div style="width:100%;flex-basis:100%;">
+  <div style="
+    margin:18px 0 16px;
+    padding:14px 16px;
+    background:#eff6ff;
+    border-left:4px solid #2563eb;
+    border-radius:10px;
+    color:#1e3a8a;
+    font-weight:700;
+    line-height:1.5;
+    width:100%;
+    box-sizing:border-box;
+  ">
+    ⚠️ Você pode listar até 15 anexos! Após incluir ao menos 1 arquivo clique em 'ENVIAR ANEXOS'.
+  </div>
+</div>
+    <div class="upload-doc-lista" style="width:100%;">
+
+<div class="upload-doc-lista-head">
+  <div class="upload-doc-lista-titulo">Documentos anexados</div>
+</div>
+
+{% if totalAnexosDiretrizes == 0 %}
+  <div class="upload-doc-vazio">
+    Nenhum anexo enviado até o momento.
+  </div>
+{% else %}
+  <div class="upload-doc-grid">
+    {% for anexo in anexosDiretrizesReprovadas.results.entities %}
+      <div class="upload-doc-item" data-anexo-id="{{ anexo.annotationid }}">
+        <div class="upload-doc-icon">📄</div>
+
+        <div class="upload-doc-info">
+          <a
+            class="upload-doc-nome upload-doc-link"
+            href="data:{{ anexo.mimetype | default: 'application/octet-stream' }};base64,{{ anexo.documentbody }}"
+            download="{{ anexo.filename | default: 'arquivo' }}"
+            target="_blank">
+            {{ anexo.filename | default: "Arquivo sem nome" }}
+          </a>
+        </div>
+
+        <button
+          type="button"
+          class="upload-doc-trash btnExcluirAnexoDiretrizes"
+          title="Excluir arquivo"
+          data-anexo-id="{{ anexo.annotationid }}">
+          🗑️
+        </button>
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+
+<div
+  class="anexo-diretrizes-inline-container"
+  data-record-id="{{ solicitacaoId }}">
+
+  <div class="anexo-diretrizes-inline-frame-box">
+    <iframe
+      class="iframe-anexo-diretrizes-inline"
+      src="/anexos-diretrizes/?id={{ solicitacaoId }}"
+      frameborder="0"
+      scrolling="no">
+    </iframe>
+  </div>
+</div>
+
+<div class="upload-doc-bottom-actions" style="justify-content:flex-end;">
+
+  {% if totalAnexosDiretrizes > 0 %}
+    <button
+      type="button"
+      id="btnLimparAnexosDiretrizes"
+      class="btn-cloud btn-cloud-outline"
+      style="margin-right:auto;">
+      LIMPAR ANEXOS
+    </button>
+  {% endif %}
+
+  <button
+    type="button"
+    id="btnEnviarArquivosDiretrizes"
+    class="btn-cloud {% if totalAnexosDiretrizes == 0 %}btn-cloud-disabled{% endif %}"
+    data-qtd-anexos="{{ totalAnexosDiretrizes }}"
+    {% if totalAnexosDiretrizes == 0 %}disabled aria-disabled="true"{% endif %}>
+    ENVIAR ANEXOS
+  </button>
+
+</div>
+
+</div>
+
+  </div>
+</div>
+{% endif %}
+
+
+
+
+{% if registro and registro.cloud_status_atual.value == 586450008 %}
+<div class="card-termo">
+  <h2>⛔ Análise técnica concluída: Solicitação inviável</h2>
+  <p>
+    <strong>Olá {{ nomeUsuario }},</strong>
+  </p>
+  <p>
+    Sua solicitação foi considerada como
+    <strong style="color:#dc2626;">INVIÁVEL</strong>
+    e não podemos seguir com sua solicitação.
+  </p>
+{% if analiseanalisada and analiseanalisada.cloud_comentarios %}
+<div style="
+  margin:16px 0;
+  padding:12px 16px;
+  background:#fef2f2;
+  border-left:4px solid #dc2626;
+  border-radius:6px;
+  color:#7f1d1d;
+">
+  <strong>Comentário da análise:</strong><br />
+  {{ analiseanalisada.cloud_comentarios }}
+</div>
+{% endif %}
+  <div
+    style="
+      margin-top:32px;
+      display:flex;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      gap:16px;
+    "
+  >
+  {% fetchxml fetchAnaliseTecnica %}
+<fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="false">
+  <entity name="cloud_analises_tecnicas">
+    <attribute name="cloud_analises_tecnicasid" />
+    <attribute name="cloud_data_vencimento_oficio"/>
+    <attribute name="cloud_file_oficio_analise_preliminar" />
+    <attribute name="cloud_fk_solicitacoes" />
+    <filter>
+      <condition attribute="cloud_fk_solicitacoes" operator="eq" value="{{solicitacaoId}}" />
+    </filter>
+  </entity>
+</fetch>
+{% endfetchxml %}
+{% for item in fetchAnaliseTecnica.results.entities %}
+  {% if item.cloud_file_oficio_analise_preliminar %}
+
+    <button
+      type="button"
+      class="btn-cloud btn-cloud-outline"
+      onclick="baixarOficio_{{ forloop.index }}()">
+      Baixar Ofício
+    </button>
+
+    <script>
+      function baixarOficio_{{ forloop.index }}() {
+
+        var url = "{{ item.cloud_file_oficio_analise_preliminar.Url }}";
+        var nome = "{{ item.cloud_file_oficio_analise_preliminar.Name }}";
+
+        if (!url) {
+          alert("Ofício não disponível.");
+          return;
+        }
+
+        var link = document.createElement("a");
+        link.href = url;
+        link.download = nome || "oficio.pdf";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+    </script>
+
+  {% endif %}
+{% endfor %}
+
+    <button
+      type="button"
+      class="btn-cloud"
+      onclick="window.location.href='/'">
+      CRIAR NOVA SOLICITAÇÃO
+    </button>
+  </div>
+</div>
+
+{% endif %}
+<!--{% if registro and registro.cloud_status_atual.value == 202410001 %}
+
+ <div class="card-termo">
+  <h2>✅ Fase de Diretrizes Técnicas finalizada com sucesso!</h2>
+
+  <p>
+    <strong>Olá {{ nomeUsuario }},</strong>
+  </p>
+
+  <p>
+    A fase de <strong>Diretrizes Técnicas</strong> foi concluída com êxito.
+  </p>
+
+  <p>
+    Para continuar o processo, envie o
+    <strong>Projeto</strong>
+    para o e-mail:
+  </p>
+
+  <p style="
+    margin-top:12px;
+    font-size:18px;
+    font-weight:700;
+    background:#f3f4f6;
+    padding:12px 16px;
+    border-radius:8px;
+  ">
+    📧 <a href="mailto:alias@dominio.com.br"
+          style="color:#0027bd;text-decoration:none;">
+      alias@dominio.com.br
+    </a>
+  </p>
+
+  <p style="margin-top:16px;color:#374151;">
+    Após o envio do projeto, nossa equipe dará continuidade às próximas etapas do processo.
+  </p>
+</div>
+
+{% endif %}-->
+
+<div class="row sectionBlockLayout text-start" style="display: flex; flex-wrap: wrap; margin: 0px; min-height: auto; padding: 8px;">
+  <div class="container" style="padding: 0px; display: flex; flex-wrap: wrap;"><div class="col-lg-12 columnBlockLayout" style="flex-grow: 1; display: flex; flex-direction: column; min-width: 250px;"></div></div>
+</div>
+
+<a href="/Minhas-Solicitações/" class="voltar-fab-mobile" aria-label="Voltar">
+  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/>
+  </svg>
+</a>
+
+<a href="/FAQ/" class="faq-fab" aria-label="Posso ajudar?">
+  ?
+  <span class="faq-fab-tooltip">Posso ajudar?</span>
+</a>
+<div id="modalConfirmarExclusao"
+     class="modal-cloud-overlay"
+     style="display:none;">
+  <div class="modal-cloud">
+    <h3>🗑️ Cancelar e excluir solicitação</h3>
+    <p>
+      Você deseja realmente <strong>cancelar e excluir esta solicitação</strong>?
+    </p>
+    <p style="color:#b91c1c;font-weight:600;">
+      Esta ação não poderá ser desfeita.
+    </p>
+    <div class="modal-cloud-actions">
+      <button id="btnNaoExcluir"
+              class="btn-cloud btn-cloud-outline">
+        Voltar
+      </button>
+      <button id="btnConfirmarExclusao"
+              class="btn-cloud">
+        Confirmar exclusão
+      </button>
+    </div>
+  </div>
+</div>
+
+<div id="modalExclusaoSucesso"
+     class="modal-cloud-overlay"
+     style="display:none;">
+  <div class="modal-cloud">
+    <h3>✅ Solicitação excluída</h3>
+
+    <p>A solicitação foi excluída com sucesso.</p>
+<div class="modal-cloud-actions-center">
+    <button id="btnOkExclusao"
+            class="btn-cloud">
+      OK
+    </button>
+    </div>
+  </div>
+</div>
+
+<div id="modalConfirmarRevalidacao" class="modal-cloud-overlay" style="display:none;">
+  <div class="modal-cloud">
+    <h3>⚠️ Confirmar revalidação</h3>
+
+    <p>Deseja re-iniciar a fase em etapa de <strong>REVALIDAÇÃO</strong>?</p>
+
+    <div class="modal-cloud-actions">
+      <button id="btnCancelarRevalidacao" class="btn-cloud btn-cloud-outline" type="button">
+        CANCELAR
+      </button>
+
+      <button id="btnConfirmarRevalidacao" class="btn-cloud" type="button">
+        CONFIRMAR
+      </button>
+    </div>
+  </div>
+</div>
+
+<div id="modalSucessoRevalidacao" class="modal-cloud-overlay" style="display:none;">
+  <div class="modal-cloud">
+    <h3>✅ Revalidação iniciada com sucesso!</h3>
+
+    <p>Sua solicitação foi direcionada para a etapa de revalidação.</p>
+
+    <div class="modal-cloud-actions-center">
+      <button id="btnOkRevalidacao" class="btn-cloud" type="button">
+        OK
+      </button>
+    </div>
+  </div>
+</div>
+
+<div id="modalAnexoDiretrizes" class="modal-cloud-overlay" style="display:none;">
+  <div class="modal-cloud modal-anexo-preliminar">
+
+    <button type="button" id="btnFecharModalAnexoDiretrizes" class="modal-close-x">×</button>
+
+    <div id="boxIframeAnexoDiretrizes">
+      <iframe
+        id="iframeAnexoDiretrizes"
+        src=""
+        frameborder="0"
+        class="iframe-anexo-preliminar">
+      </iframe>
+    </div>
+
+    <div id="boxCarregandoAnexosDiretrizes" class="carregando-anexos-box" style="display:none;">
+      <div class="loader-anexos"></div>
+      <h3>STATUS: CARREGANDO ANEXOS...</h3>
+      
+    </div>
+
+  </div>
+</div>
+
+<div id="modalConfirmarEnviarArquivosDiretrizes" class="modal-cloud-overlay" style="display:none;">
+  <div class="modal-cloud">
+    <h3>⚠️ Enviar arquivos para análise</h3>
+
+    <p id="textoConfirmarEnviarArquivosDiretrizes">
+        Deseja confirmar o envio de
+        <strong>{{ totalAnexosDiretrizes }}</strong>
+        anexo(s) para uma nova análise técnica?
+      </p>
+
+    <div class="modal-cloud-actions">
+      <button id="btnCancelarEnviarArquivosDiretrizes" type="button" class="btn-cloud btn-cloud-outline">
+        CANCELAR
+      </button>
+
+      <button id="btnConfirmarEnviarArquivosDiretrizes" type="button" class="btn-cloud">
+        CONFIRMAR
+      </button>
+    </div>
+  </div>
+</div>
+
+<div id="modalSucessoEnviarArquivosDiretrizes" class="modal-cloud-overlay" style="display:none;">
+  <div class="modal-cloud">
+    <h3>✅ Anexos enviados com sucesso!</h3>
+
+    <p>
+      Os anexos foram enviados para uma nova análise técnica.
+    </p>
+
+    <div class="modal-cloud-actions-center">
+      <button id="btnOkEnviarArquivosDiretrizes" type="button" class="btn-cloud">
+        OK
+      </button>
+    </div>
+  </div>
+</div>
+
+<div id="modalConfirmarExclusaoAnexoDiretrizes" class="modal-cloud-overlay" style="display:none;">
+  <div class="modal-cloud">
+    <h3>🗑️ Excluir anexos</h3>
+
+    <p id="textoConfirmarExclusaoAnexoDiretrizes">
+      Deseja excluir este anexo?
+    </p>
+
+    <div class="modal-cloud-actions">
+      <button id="btnCancelarExclusaoAnexoDiretrizes" class="btn-cloud btn-cloud-outline" type="button">
+        CANCELAR
+      </button>
+
+      <button id="btnConfirmarExclusaoAnexoDiretrizes" class="btn-cloud" type="button">
+        CONFIRMAR EXCLUSÃO
+      </button>
+    </div>
+  </div>
+</div>
+
+<div id="modalSucessoExclusaoAnexoDiretrizes" class="modal-cloud-overlay" style="display:none;">
+  <div class="modal-cloud">
+    <h3>✅ Exclusão concluída</h3>
+
+    <p>Os anexos foram excluídos com sucesso.</p>
+
+    <div class="modal-cloud-actions-center">
+      <button id="btnOkExclusaoAnexoDiretrizes" class="btn-cloud" type="button">
+        OK
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<div id="modalSucessoEnvioComprovanteAnalise"
+     class="modal-cloud-overlay"
+     style="display:none;">
+  <div class="modal-cloud">
+    <h3>✅ Comprovante enviado com sucesso!</h3>
+
+    <p>
+      O comprovante foi enviado para análise com sucesso.
+    </p>
+
+    <div class="modal-cloud-actions-center">
+      <button
+        id="btnOkSucessoEnvioComprovanteAnalise"
+        type="button"
+        class="btn-cloud">
+        OK
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<div id="modalConfirmarExclusaoComprovante"
+     class="modal-cloud-overlay"
+     style="display:none;">
+  <div class="modal-cloud">
+    <h3>🗑️ Excluir comprovante</h3>
+
+    <p>
+      Deseja realmente excluir o comprovante anexado?
+    </p>
+
+    <p style="color:#b91c1c;font-weight:600;">
+      Após confirmar, será necessário anexar um novo comprovante para continuar.
+    </p>
+
+    <div class="modal-cloud-actions">
+      <button id="btnCancelarExclusaoComprovante"
+              class="btn-cloud btn-cloud-outline"
+              type="button">
+        CANCELAR
+      </button>
+
+      <button id="btnConfirmarExclusaoComprovante"
+              class="btn-cloud"
+              type="button">
+        CONFIRMAR EXCLUSÃO
+      </button>
+    </div>
+  </div>
+</div>
+
+<div id="modalSucessoExclusaoComprovante"
+     class="modal-cloud-overlay"
+     style="display:none;">
+  <div class="modal-cloud">
+    <h3>✅ Comprovante excluído</h3>
+
+    <p>
+      O comprovante foi excluído com sucesso.
+    </p>
+
+    <div class="modal-cloud-actions-center">
+      <button id="btnOkExclusaoComprovante"
+              class="btn-cloud"
+              type="button">
+        OK
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  /* =====================================================
+   LISTENER PRIORITÁRIO - ANEXOS DIRETRIZES INLINE
+   Colocar no TOPO do script da página pai
+   ===================================================== */
+(function () {
+  if (window.__listenerAnexosDiretrizesInline === true) return;
+  window.__listenerAnexosDiretrizesInline = true;
+
+  let refreshAgendado = false;
+
+  function atualizarListaParaCarregando() {
+    const container = document.querySelector(".anexo-diretrizes-inline-container");
+    if (!container) {
+      console.warn("⚠️ Container .anexo-diretrizes-inline-container não encontrado.");
+      return;
+    }
+
+    const lista = container.closest(".upload-doc-lista");
+    if (!lista) {
+      console.warn("⚠️ Lista .upload-doc-lista não encontrada.");
+      return;
+    }
+
+    const vazio = lista.querySelector(".upload-doc-vazio");
+    if (vazio) vazio.style.display = "none";
+
+    let grid = lista.querySelector(".upload-doc-grid");
+
+    if (!grid) {
+      grid = document.createElement("div");
+      grid.className = "upload-doc-grid";
+      lista.insertBefore(grid, container);
+    }
+
+    const itensExistentes = grid.querySelectorAll(
+      ".upload-doc-item:not(.upload-doc-item-carregando)"
+    );
+
+    itensExistentes.forEach(function (item) {
+      item.classList.add("upload-doc-item-carregando");
+
+      const trash = item.querySelector(".upload-doc-trash");
+      if (trash) trash.style.display = "none";
+
+      const icon = item.querySelector(".upload-doc-icon");
+      if (icon) {
+        icon.innerHTML = '<span class="upload-doc-spinner"></span>';
+      }
+
+      const info = item.querySelector(".upload-doc-info");
+      if (info && !info.querySelector(".upload-doc-status-carregando")) {
+        const status = document.createElement("div");
+        status.className = "upload-doc-status-carregando";
+        status.innerHTML = "CARREGANDO ANEXOS...";
+        info.appendChild(status);
+      }
+    });
+
+    let itemLoading = grid.querySelector(".upload-doc-item-loading-novo");
+
+    if (!itemLoading) {
+      itemLoading = document.createElement("div");
+      itemLoading.className =
+        "upload-doc-item upload-doc-item-carregando upload-doc-item-loading-novo";
+
+      itemLoading.innerHTML = `
+        <div class="upload-doc-icon">
+          <span class="upload-doc-spinner"></span>
+        </div>
+
+        <div class="upload-doc-info">
+          <div class="upload-doc-nome">
+            CARREGANDO ANEXOS...
+          </div>
+          
+        </div>
+      `;
+
+      grid.appendChild(itemLoading);
+    }
+  }
+
+  function agendarRefresh() {
+    if (refreshAgendado) return;
+    refreshAgendado = true;
+
+    setTimeout(function () {
+      window.location.reload();
+    }, 9000);
+  }
+
+  window.addEventListener("message", function (event) {
+    if (!event.data) return;
+
+    console.log("📥 PAI recebeu mensagem:", event.data);
+
+    if (
+      event.data.type === "ANEXO_DIRETRIZES_CARREGANDO" ||
+      event.data.type === "ANEXO_PRELIMINAR_CARREGANDO"
+    ) {
+      atualizarListaParaCarregando();
+      agendarRefresh();
+    }
+  });
+})();
+/* =====================================================
+   TRAVA GLOBAL: IMPEDE ENVIO AUTOMÁTICO DOS ANEXOS
+   O FLOW SÓ PODE RODAR APÓS CLIQUE REAL EM CONFIRMAR
+   ===================================================== */
+(function () {
+  const FLOW_BLOQUEADO =
+    "/_api/cloudflow/v1.0/trigger/d5a3f4c1-3a00-f111-8407-002248dedebb";
+
+  window.__ENVIO_ANEXOS_DIRETRIZES_CONFIRMADO = false;
+
+  const timer = setInterval(function () {
+    if (!window.shell || typeof shell.ajaxSafePost !== "function") return;
+    if (shell.ajaxSafePost.__guardadoEnvioAnexos === true) {
+      clearInterval(timer);
+      return;
+    }
+
+    const ajaxOriginal = shell.ajaxSafePost;
+
+    shell.ajaxSafePost = function (options) {
+      const url = options && options.url ? String(options.url) : "";
+
+      if (
+        url.includes(FLOW_BLOQUEADO) &&
+        window.__ENVIO_ANEXOS_DIRETRIZES_CONFIRMADO !== true
+      ) {
+        console.warn(
+          "⛔ BLOQUEADO: tentativa de executar o flow de envio de anexos sem confirmação manual.",
+          url
+        );
+
+        return {
+          done: function () { return this; },
+          fail: function (callback) {
+            if (typeof callback === "function") {
+              callback({
+                status: 0,
+                responseText: "Envio bloqueado: confirmação manual não realizada."
+              });
+            }
+            return this;
+          },
+          always: function (callback) {
+            if (typeof callback === "function") callback();
+            return this;
+          }
+        };
+      }
+
+      return ajaxOriginal.apply(this, arguments);
+    };
+
+    shell.ajaxSafePost.__guardadoEnvioAnexos = true;
+    clearInterval(timer);
+  }, 200);
+})();
+
+(function () {
+  function el(id) {
+    return document.getElementById(id);
+  }
+
+  const recordId = "{{ solicitacaoId }}";
+  const FLOW_EXCLUIR_ANEXO = "/_api/cloudflow/v1.0/trigger/274f69ba-5440-f111-bec7-7ced8da81546";
+
+  function abrirModalAnexoDiretrizes() {
+    const modal = el("modalAnexoDiretrizes");
+    const iframe = el("iframeAnexoDiretrizes");
+    const boxIframe = el("boxIframeAnexoDiretrizes");
+    const boxLoading = el("boxCarregandoAnexosDiretrizes");
+
+    if (!recordId) {
+      alert("ID da solicitação não encontrado.");
+      return;
+    }
+
+    if (boxIframe) boxIframe.style.display = "block";
+    if (boxLoading) boxLoading.style.display = "none";
+
+    iframe.src = "/anexos-diretrizes/?id=" + encodeURIComponent(recordId);
+    modal.style.display = "flex";
+  }
+
+  function fecharModalAnexoDiretrizes() {
+    const modal = el("modalAnexoDiretrizes");
+    const iframe = el("iframeAnexoDiretrizes");
+
+    if (iframe) iframe.src = "";
+    if (modal) modal.style.display = "none";
+  }
+
+  function iniciarCarregamentoAnexosDiretrizes() {
+    const boxIframe = el("boxIframeAnexoDiretrizes");
+    const boxLoading = el("boxCarregandoAnexosDiretrizes");
+    const iframe = el("iframeAnexoDiretrizes");
+
+    if (boxIframe) boxIframe.style.display = "none";
+    if (iframe) iframe.src = "";
+    if (boxLoading) boxLoading.style.display = "flex";
+
+    setTimeout(function () {
+      fecharModalAnexoDiretrizes();
+      window.location.reload();
+    }, 12000);
+  }
+function marcarItemComoExcluindo(anexoId) {
+  const item = document.querySelector(`.upload-doc-item[data-anexo-id="${anexoId}"]`);
+  if (!item) return;
+
+  item.classList.add("excluindo");
+
+  const btnTrash = item.querySelector(".btnExcluirAnexoDiretrizes");
+  if (btnTrash) btnTrash.style.display = "none";
+
+  if (!item.querySelector(".upload-doc-status-excluindo")) {
+    const status = document.createElement("div");
+    status.className = "upload-doc-status-excluindo";
+    status.innerHTML = `
+      <span class="upload-doc-spinner"></span>
+      <span>AGUARDE, EXCLUINDO...</span>
+    `;
+    item.appendChild(status);
+  }
+}
+
+function excluirAnexosDiretrizes(anexosIds) {
+  if (!window.shell || typeof shell.ajaxSafePost !== "function") {
+    alert("Contexto de segurança não disponível.");
+    return Promise.reject("shell.ajaxSafePost indisponível");
+  }
+
+  anexosIds.forEach(marcarItemComoExcluindo);
+
+  const promessas = anexosIds.map(function (anexoId) {
+    return shell.ajaxSafePost({
+      type: "POST",
+      contentType: "application/json",
+      url: FLOW_EXCLUIR_ANEXO,
+      data: JSON.stringify({
+        eventData: JSON.stringify({
+          DocumentId: recordId,
+          AnexoId: anexoId,
+          QtdAnexado: String(anexosIds.length)
+        })
+      }),
+      processData: false,
+      global: false
+    });
+  });
+
+  return Promise.all(promessas);
+}
+
+
+  el("btnFecharModalAnexoDiretrizes")?.addEventListener("click", function (e) {
+    e.preventDefault();
+    fecharModalAnexoDiretrizes();
+  });
+
+
+let anexosDiretrizesParaExcluir = [];
+
+function abrirModalExclusaoDiretrizes(anexosIds, texto) {
+  anexosDiretrizesParaExcluir = anexosIds;
+
+  const textoModal = el("textoConfirmarExclusaoAnexoDiretrizes");
+  if (textoModal) textoModal.innerText = texto;
+
+  el("modalConfirmarExclusaoAnexoDiretrizes").style.display = "flex";
+}
+
+document.querySelectorAll(".btnExcluirAnexoDiretrizes").forEach(function (btn) {
+  btn.addEventListener("click", function (e) {
+    e.preventDefault();
+
+    const anexoId = btn.getAttribute("data-anexo-id");
+    if (!anexoId) return;
+
+    abrirModalExclusaoDiretrizes(
+      [anexoId],
+      "Deseja excluir este anexo?"
+    );
+  });
+});
+
+el("btnLimparAnexosDiretrizes")?.addEventListener("click", function (e) {
+  e.preventDefault();
+
+  const anexos = Array.from(document.querySelectorAll(".btnExcluirAnexoDiretrizes"))
+    .map(btn => btn.getAttribute("data-anexo-id"))
+    .filter(Boolean);
+
+  if (anexos.length === 0) {
+    alert("Nenhum anexo para excluir.");
+    return;
+  }
+
+  abrirModalExclusaoDiretrizes(
+    anexos,
+    "Deseja excluir todos os anexos?"
+  );
+});
+
+el("btnCancelarExclusaoAnexoDiretrizes")?.addEventListener("click", function (e) {
+  e.preventDefault();
+  el("modalConfirmarExclusaoAnexoDiretrizes").style.display = "none";
+});
+
+el("btnConfirmarExclusaoAnexoDiretrizes")?.addEventListener("click", function (e) {
+  e.preventDefault();
+
+  const btn = e.currentTarget;
+  if (btn.dataset.executando === "true") return;
+
+  btn.dataset.executando = "true";
+  btn.disabled = true;
+
+  const textoOriginal = btn.innerText;
+  btn.innerText = "EXCLUINDO...";
+
+  el("modalConfirmarExclusaoAnexoDiretrizes").style.display = "none";
+
+  excluirAnexosDiretrizes(anexosDiretrizesParaExcluir)
+    .then(function () {
+      const tempoRefresh =
+        anexosDiretrizesParaExcluir.length > 1 ? 7000 : 4000;
+
+      setTimeout(function () {
+        window.location.reload();
+      }, tempoRefresh);
+    })
+    .catch(function (erro) {
+      console.error("Erro ao excluir anexo(s):", erro);
+      alert("Erro ao excluir anexo(s).");
+      btn.disabled = false;
+      btn.innerText = textoOriginal;
+      btn.dataset.executando = "false";
+    });
+});
+
+el("btnOkExclusaoAnexoDiretrizes")?.addEventListener("click", function (e) {
+  e.preventDefault();
+  window.location.reload();
+});
+
+
+  const FLOW_ENVIAR_ARQUIVOS_DIRETRIZES =
+  "/_api/cloudflow/v1.0/trigger/d5a3f4c1-3a00-f111-8407-002248dedebb";
+
+el("btnEnviarArquivosDiretrizes")?.addEventListener("click", function (e) {
+  e.preventDefault();
+
+  const qtdAnexos = Number(
+    this.getAttribute("data-qtd-anexos") ||
+    document.querySelectorAll(".btnExcluirAnexoDiretrizes").length ||
+    "{{ totalAnexosDiretrizes }}" ||
+    0
+  );
+
+  if (qtdAnexos <= 0) {
+    return;
+  }
+
+  const textoModal = el("textoConfirmarEnviarArquivosDiretrizes");
+
+  if (textoModal) {
+    textoModal.innerHTML =
+      "Deseja confirmar o envio de <strong>" +
+      qtdAnexos +
+      "</strong> anexo(s) para uma nova análise técnica?";
+  }
+
+  const modalConfirmar = el("modalConfirmarEnviarArquivosDiretrizes");
+  if (modalConfirmar) modalConfirmar.style.display = "flex";
+});
+
+el("btnCancelarEnviarArquivosDiretrizes")?.addEventListener("click", function (e) {
+  e.preventDefault();
+
+  const modalConfirmar = el("modalConfirmarEnviarArquivosDiretrizes");
+  if (modalConfirmar) modalConfirmar.style.display = "none";
+});
+
+el("btnConfirmarEnviarArquivosDiretrizes")?.addEventListener("click", function (e) {
+  e.preventDefault();
+  e.stopPropagation();
+
+  const btn = e.currentTarget;
+
+  if (btn.dataset.executando === "true") return;
+
+  /*
+    Segurança: só aceita clique real do usuário.
+    Se algum script tentar clicar automaticamente, não executa.
+  */
+  if (e.isTrusted !== true) {
+    console.warn("⛔ Clique automático bloqueado no CONFIRMAR envio de anexos.");
+    return;
+  }
+
+  const modalConfirmar = el("modalConfirmarEnviarArquivosDiretrizes");
+
+  if (!modalConfirmar || modalConfirmar.style.display !== "flex") {
+    console.warn("⛔ Envio bloqueado: modal de confirmação não está aberto.");
+    return;
+  }
+
+  if (!recordId) {
+    alert("RecordID não encontrado.");
+    return;
+  }
+
+  if (!window.shell || typeof shell.ajaxSafePost !== "function") {
+    alert("Contexto de segurança não disponível.");
+    return;
+  }
+
+  btn.dataset.executando = "true";
+  btn.disabled = true;
+
+  const textoOriginal = btn.innerText;
+  btn.innerText = "PROCESSANDO...";
+
+  /*
+    Libera o flow somente neste momento:
+    clique real no botão CONFIRMAR.
+  */
+  window.__ENVIO_ANEXOS_DIRETRIZES_CONFIRMADO = true;
+
+  shell.ajaxSafePost({
+    type: "POST",
+    contentType: "application/json",
+    url: FLOW_ENVIAR_ARQUIVOS_DIRETRIZES,
+    data: JSON.stringify({
+      eventData: JSON.stringify({
+        RecordID: recordId
+      })
+    }),
+    processData: false,
+    global: false
+  })
+    .done(function () {
+      const modalSucesso = el("modalSucessoEnviarArquivosDiretrizes");
+
+      if (modalConfirmar) modalConfirmar.style.display = "none";
+      if (modalSucesso) modalSucesso.style.display = "flex";
+    })
+    .fail(function (xhr) {
+      console.error("Erro ao enviar anexos para análise:", xhr);
+      alert("Erro ao enviar anexos para análise.");
+    })
+    .always(function () {
+      window.__ENVIO_ANEXOS_DIRETRIZES_CONFIRMADO = false;
+
+      btn.disabled = false;
+      btn.innerText = textoOriginal;
+      btn.dataset.executando = "false";
+    });
+});
+
+
+el("btnOkEnviarArquivosDiretrizes")?.addEventListener("click", function (e) {
+  e.preventDefault();
+
+  const btn = e.currentTarget;
+
+  btn.disabled = true;
+  btn.innerText = "ATUALIZANDO...";
+
+  setTimeout(function () {
+    const modalSucesso = el("modalSucessoEnviarArquivosDiretrizes");
+
+    if (modalSucesso) {
+      modalSucesso.style.display = "none";
+    }
+
+    window.location.reload();
+  }, 4000);
+});
+
+function atualizarListaDiretrizesParaCarregando() {
+  const container = document.querySelector(".anexo-diretrizes-inline-container");
+  if (!container) return;
+
+  const lista = container.closest(".upload-doc-lista");
+  if (!lista) return;
+
+  const vazio = lista.querySelector(".upload-doc-vazio");
+  if (vazio) vazio.style.display = "none";
+
+  let grid = lista.querySelector(".upload-doc-grid");
+
+  if (!grid) {
+    grid = document.createElement("div");
+    grid.className = "upload-doc-grid";
+    lista.insertBefore(grid, container);
+  }
+
+  const itensExistentes = grid.querySelectorAll(".upload-doc-item:not(.upload-doc-item-carregando)");
+
+  if (itensExistentes.length > 0) {
+    itensExistentes.forEach(function (item) {
+      item.classList.add("upload-doc-item-carregando");
+
+      const trash = item.querySelector(".upload-doc-trash");
+      if (trash) trash.style.display = "none";
+
+      const icon = item.querySelector(".upload-doc-icon");
+      if (icon) {
+        icon.innerHTML = `<span class="upload-doc-spinner"></span>`;
+      }
+
+      const info = item.querySelector(".upload-doc-info");
+      if (info && !info.querySelector(".upload-doc-status-carregando")) {
+        const status = document.createElement("div");
+        status.className = "upload-doc-status-carregando";
+        status.innerHTML = "CARREGANDO ANEXOS...";
+        info.appendChild(status);
+      }
+    });
+  }
+
+  let itemLoading = grid.querySelector(".upload-doc-item-loading-novo");
+
+  if (!itemLoading) {
+    itemLoading = document.createElement("div");
+    itemLoading.className = "upload-doc-item upload-doc-item-carregando upload-doc-item-loading-novo";
+
+    itemLoading.innerHTML = `
+      <div class="upload-doc-icon">
+        <span class="upload-doc-spinner"></span>
+      </div>
+
+      <div class="upload-doc-info">
+        <div class="upload-doc-nome">
+          CARREGANDO ANEXOS...
+        </div>
+        <div class="upload-doc-status-carregando">
+          Aguarde enquanto atualizamos a lista de anexos.
+        </div>
+      </div>
+    `;
+
+    grid.appendChild(itemLoading);
+  }
+}
+
+let refreshAnexosDiretrizesAgendado = false;
+
+function agendarRefreshAnexosDiretrizes(tempo) {
+  if (refreshAnexosDiretrizesAgendado) return;
+
+  refreshAnexosDiretrizesAgendado = true;
+
+  setTimeout(function () {
+    window.location.reload();
+  }, tempo || 9000);
+}
+
+window.addEventListener("message", function (event) {
+  if (!event.data) return;
+
+  console.log("📥 Pai recebeu mensagem:", event.data);
+
+  if (event.data.type === "ANEXO_DIRETRIZES_CARREGANDO") {
+    atualizarListaDiretrizesParaCarregando();
+
+    /*
+      O refresh fica na página pai.
+      Não depende do sucesso da página filha.
+      Dá tempo do Power Pages salvar o anexo em annotation.
+    */
+    agendarRefreshAnexosDiretrizes(9000);
+    return;
+  }
+});
+
+})();
+
+(function () {
+  const FLOW_REVALIDACAO = "/_api/cloudflow/v1.0/trigger/a997cb3f-1d1d-f111-8341-7ced8da81546";
+  let novoUrlID = "";
+
+  function el(id) {
+    return document.getElementById(id);
+  }
+
+  function abrir(id) {
+    const modal = el(id);
+    if (modal) modal.style.display = "flex";
+  }
+
+  function fechar(id) {
+    const modal = el(id);
+    if (modal) modal.style.display = "none";
+  }
+
+  el("btnIniciarRevalidacao")?.addEventListener("click", function (e) {
+    e.preventDefault();
+    abrir("modalConfirmarRevalidacao");
+  });
+
+  el("btnCancelarRevalidacao")?.addEventListener("click", function (e) {
+    e.preventDefault();
+    fechar("modalConfirmarRevalidacao");
+  });
+
+  el("btnConfirmarRevalidacao")?.addEventListener("click", function (e) {
+    e.preventDefault();
+
+    const btn = e.target;
+    const recordID = el("pp-recordid")?.value;
+
+    if (!recordID) {
+      alert("RecordID não encontrado.");
+      return;
+    }
+
+    if (!window.shell || typeof shell.ajaxSafePost !== "function") {
+      alert("Contexto de segurança não disponível.");
+      return;
+    }
+
+    if (btn.dataset.executando === "true") return;
+
+    btn.dataset.executando = "true";
+    btn.disabled = true;
+
+    const textoOriginal = btn.innerText;
+    btn.innerText = "PROCESSANDO...";
+
+    const payload = {
+      eventData: JSON.stringify({
+        RecordID: recordID
+      })
+    };
+
+    shell.ajaxSafePost({
+      type: "POST",
+      contentType: "application/json",
+      url: FLOW_REVALIDACAO,
+      data: JSON.stringify(payload),
+      processData: false,
+      global: false
+    })
+    .done(function (res) {
+      try {
+        if (typeof res === "string") {
+          res = JSON.parse(res);
+        }
+
+        novoUrlID =
+          res?.urlID ||
+          res?.UrlID ||
+          res?.urlId ||
+          res?.urlid ||
+          "";
+      } catch (erro) {
+        console.warn("Retorno do fluxo não veio como JSON:", res);
+      }
+
+      fechar("modalConfirmarRevalidacao");
+      abrir("modalSucessoRevalidacao");
+    })
+    .fail(function (xhr) {
+      console.error("❌ Erro ao iniciar revalidação:", xhr);
+      alert("Erro ao iniciar a revalidação.");
+    })
+    .always(function () {
+      btn.disabled = false;
+      btn.innerText = textoOriginal;
+      btn.dataset.executando = "false";
+    });
+  });
+
+  el("btnOkRevalidacao")?.addEventListener("click", function (e) {
+  e.preventDefault();
+
+  fechar("modalSucessoRevalidacao");
+
+  if (!novoUrlID) {
+    alert("O fluxo não retornou a variável urlID.");
+    return;
+  }
+
+  window.location.href = "/status/?id=" + encodeURIComponent(novoUrlID);
+});
+})();
+ (function () {
+  const modal = document.querySelector("#modalNovosDocumentos .modal-cloud");
+  if (!modal) return;
+
+  if (modal.querySelector(".modal-close-x")) return;
+
+  const btn = document.createElement("button");
+  btn.className = "modal-close-x";
+  btn.type = "button";
+  btn.innerHTML = "&times;";
+  btn.setAttribute("aria-label", "Fechar");
+  btn.onclick = function () {
+    document.getElementById("modalNovosDocumentos").style.display = "none";
+  };
+
+  modal.appendChild(btn);
+})();
+document.addEventListener("click", function (e) {
+    if (e.target.classList.contains("modal-close-x")) {
+      document.getElementById("modalNovosDocumentos").style.display = "none";
+    }
+  });
+
+(function () {
+
+  var flowUrl = "/_api/cloudflow/v1.0/trigger/06bfccd0-bcef-f011-8406-7ced8da81546";
+
+  var intervalo = setInterval(function () {
+    var btnDeAcordo = document.getElementById("btnDeAcordo");
+    var btnSolicitarNovoBoletoMesmoFluxo = document.getElementById("btnSolicitarNovoBoletoMesmoFluxo");
+    var btnConfirmar = document.getElementById("btnConfirmarModal");
+    var btnCancelar = document.getElementById("btnCancelarModal");
+    var btnOkSucesso = document.getElementById("btnOkSucesso");
+    var modalConfirmacao = document.getElementById("modalConfirmacaoTaxa");
+    var modalSucesso = document.getElementById("modalSucesso");
+    var recordID = "{{ solicitacaoId }}";
+    var valorTaxa = "{{ taxaValor }}";
+
+    if (
+        (btnDeAcordo || btnSolicitarNovoBoletoMesmoFluxo) &&
+        btnConfirmar &&
+        btnCancelar &&
+        modalConfirmacao &&
+        window.shell &&
+        typeof shell.ajaxSafePost === "function"
+      ) {
+        clearInterval(intervalo);
+        configurarEventos();
+      }
+
+    function configurarEventos() {
+
+     if (btnDeAcordo && btnDeAcordo.dataset.bound !== "true") {
+  btnDeAcordo.dataset.bound = "true";
+
+  btnDeAcordo.addEventListener("click", function (e) {
+    e.preventDefault();
+
+    var tituloModalTaxa = document.getElementById("tituloModalTaxa");
+    var textoModalTaxa = document.getElementById("textoModalTaxa");
+    var blocoValorTaxa = document.getElementById("blocoValorTaxa");
+
+    if (tituloModalTaxa) {
+      tituloModalTaxa.innerText = "⚠️ Confirmação de Aceite";
+    }
+
+    if (textoModalTaxa) {
+      textoModalTaxa.innerText = "Você confirma que está de acordo com o valor da taxa?";
+    }
+
+    if (blocoValorTaxa) {
+      blocoValorTaxa.style.display = "block";
+    }
+
+    if (btnSolicitarNovoBoletoMesmoFluxo) {
+      btnSolicitarNovoBoletoMesmoFluxo.dataset.ultimoClique = "false";
+    }
+
+    modalConfirmacao.style.display = "flex";
+  });
+}
+
+    if (btnSolicitarNovoBoletoMesmoFluxo && btnSolicitarNovoBoletoMesmoFluxo.dataset.bound !== "true") {
+      btnSolicitarNovoBoletoMesmoFluxo.dataset.bound = "true";
+
+      btnSolicitarNovoBoletoMesmoFluxo.addEventListener("click", function (e) {
+        e.preventDefault();
+
+        var tituloModalTaxa = document.getElementById("tituloModalTaxa");
+        var textoModalTaxa = document.getElementById("textoModalTaxa");
+        var blocoValorTaxa = document.getElementById("blocoValorTaxa");
+
+        if (tituloModalTaxa) {
+          tituloModalTaxa.innerText = "⚠️ Solicitar novo boleto";
+        }
+
+        if (textoModalTaxa) {
+          textoModalTaxa.innerText = "Deseja solicitar a emissão de um novo boleto?";
+        }
+
+        if (blocoValorTaxa) {
+          blocoValorTaxa.style.display = "block";
+        }
+
+        btnSolicitarNovoBoletoMesmoFluxo.dataset.ultimoClique = "true";
+
+        modalConfirmacao.style.display = "flex";
+      });
+    }
+
+      btnCancelar.addEventListener("click", function (e) {
+        e.preventDefault();
+        modalConfirmacao.style.display = "none";
+      });
+
+
+      btnConfirmar.addEventListener("click", function () {
+
+        if (btnConfirmar.dataset.executando === "true") return;
+
+        btnConfirmar.dataset.executando = "true";
+        btnConfirmar.disabled = true;
+
+        var textoOriginal = btnConfirmar.innerText;
+        btnConfirmar.innerText = "Processando...";
+
+        if (!recordID || !valorTaxa) {
+          alert("Erro ao obter dados da solicitação.");
+          resetarBotao();
+          return;
+        }
+
+
+
+        var payload = {
+          eventData: JSON.stringify({
+            RecordID: recordID,
+            ValorTaxa: valorTaxa
+          })
+        };
+
+        shell.ajaxSafePost({
+          type: "POST",
+          contentType: "application/json",
+          url: flowUrl,
+          data: JSON.stringify(payload),
+          processData: false,
+          global: false
+        })
+        .done(function () {
+  var tituloModalSucesso = document.getElementById("tituloModalSucesso");
+  var textoModalSucesso = document.getElementById("textoModalSucesso");
+
+  if (btnSolicitarNovoBoletoMesmoFluxo && btnSolicitarNovoBoletoMesmoFluxo.dataset.ultimoClique === "true") {
+    if (tituloModalSucesso) {
+      tituloModalSucesso.innerText = "✅ Novo boleto solicitado";
+    }
+    if (textoModalSucesso) {
+      textoModalSucesso.innerText = "A solicitação do novo boleto foi registrada com sucesso.";
+    }
+    btnSolicitarNovoBoletoMesmoFluxo.dataset.ultimoClique = "false";
+  } else {
+    if (tituloModalSucesso) {
+      tituloModalSucesso.innerText = "✅ Solicitação enviada";
+    }
+    if (textoModalSucesso) {
+      textoModalSucesso.innerText = "Confirmação registrada com sucesso.";
+    }
+  }
+
+  modalConfirmacao.style.display = "none";
+  modalSucesso.style.display = "flex";
+})
+        .fail(function (xhr) {
+})
+        .always(function () {
+          resetarBotao();
+        });
+
+        function resetarBotao() {
+          btnConfirmar.disabled = false;
+          btnConfirmar.innerText = textoOriginal;
+          btnConfirmar.dataset.executando = "false";
+        }
+      });
+
+
+btnOkSucesso.addEventListener("click", function () {
+
+ 
+  if (modalSucesso) modalSucesso.style.display = "none";
+
+  
+  if (modalConfirmacao) modalConfirmacao.style.display = "none";
+
+ 
+
+window.location.reload();
+
+
+});
+
+
+    }
+
+  }, 300);
+
+})();
+
+(function () {
+
+  var btn = document.getElementById("btnBaixarOficio");
+  if (!btn) return;
+
+  btn.addEventListener("click", function (e) {
+    e.preventDefault();
+
+    var analiseId = "{{ analise.cloud_analises_tecnicasid }}";
+
+    if (!analiseId) {
+      alert("Boleto não encontrado.");
+      return;
+    }
+
+    var url =
+      "/_api/data/v9.2/cloud_analises_tecnicases(" +
+      analiseId +
+      ")/cloud_file_oficio_analise_preliminar/$value";
+
+    if (!window.shell || typeof shell.ajaxSafeGet !== "function") {
+      alert("Contexto de segurança não disponível.");
+      return;
+    }
+
+    shell.ajaxSafeGet({
+      type: "GET",
+      url: url,
+      xhrFields: {
+        responseType: "blob" 
+      },
+      success: function (data, status, xhr) {
+
+        var blob = data;
+
+
+        var fileName = "boleto.pdf";
+        var disposition = xhr.getResponseHeader("Content-Disposition");
+
+        if (disposition && disposition.indexOf("filename=") !== -1) {
+          fileName = disposition.split("filename=")[1].replace(/"/g, "");
+        }
+
+
+        var link = document.createElement("a");
+        var downloadUrl = window.URL.createObjectURL(blob);
+
+        link.href = downloadUrl;
+        link.download = fileName;
+        document.body.appendChild(link);
+        link.click();
+
+        link.remove();
+        window.URL.revokeObjectURL(downloadUrl);
+      },
+      error: function (xhr) {
+        console.error("❌ Erro ao baixar boleto:", xhr);
+        alert("Erro ao baixar o boleto. Verifique permissões.");
+      }
+    });
+
+  });
+
+})();
+
+
+
+
+(function () {
+
+  var flowUrl =
+    "/_api/cloudflow/v1.0/trigger/203e0892-f9e8-f011-8543-000d3a5ae560";
+
+  var intervalo = setInterval(function () {
+
+    var btnAbrir      = document.getElementById("btnCancelarAlteracoes");
+    var btnConfirmar  = document.getElementById("btnConfirmarCancelamento");
+    var btnVoltar     = document.getElementById("btnNaoCancelarAlteracao");
+    var btnOk         = document.getElementById("btnOkCancelamento");
+
+    var modalConfirm  = document.getElementById("modalConfirmarCancelamento");
+    var modalSucesso  = document.getElementById("modalCancelamentoSucesso");
+
+    var recordID = "{{ solicitacaoId }}";
+    var logID    = "{{ ultimoLog.cloud_log_alteracoesid }}";
+
+    if (
+      btnAbrir &&
+      btnConfirmar &&
+      btnVoltar &&
+      modalConfirm &&
+      window.shell &&
+      typeof shell.ajaxSafePost === "function"
+    ) {
+      clearInterval(intervalo);
+      configurarEventos();
+    }
+
+    function configurarEventos() {
+
+
+      btnAbrir.addEventListener("click", function (e) {
+        e.preventDefault();
+        modalConfirm.style.display = "flex";
+      });
+
+      btnVoltar.addEventListener("click", function () {
+        modalConfirm.style.display = "none";
+      });
+
+
+      btnConfirmar.addEventListener("click", function () {
+
+        if (btnConfirmar.dataset.executando === "true") return;
+
+        btnConfirmar.dataset.executando = "true";
+        btnConfirmar.disabled = true;
+
+        var textoOriginal = btnConfirmar.innerText;
+        btnConfirmar.innerText = "Processando...";
+
+        if (!recordID || !logID) {
+          alert("Erro ao identificar a alteração.");
+          resetar();
+          return;
+        }
+
+        var payload = {
+          eventData: JSON.stringify({
+            RecordID: recordID,
+            LogID: logID
+          })
+        };
+
+
+        shell.ajaxSafePost({
+          type: "POST",
+          contentType: "application/json",
+          url: flowUrl,
+          data: JSON.stringify(payload),
+          processData: false,
+          global: false
+        })
+        .done(function () {
+          modalConfirm.style.display = "none";
+          modalSucesso.style.display = "flex";
+        })
+        .fail(function (xhr) {
+          console.error("❌ Erro ao cancelar alteração:", xhr);
+          alert("Erro ao cancelar a alteração.");
+        })
+        .always(function () {
+          resetar();
+        });
+
+        function resetar() {
+          btnConfirmar.disabled = false;
+          btnConfirmar.innerText = textoOriginal;
+          btnConfirmar.dataset.executando = "false";
+        }
+      });
+
+
+      btnOk.addEventListener("click", function () {
+        window.location.replace(
+          "/minhas-solicitacoes/?refreshlist=1&nocache=" + Date.now()
+        );
+      });
+
+    }
+
+  }, 300);
+
+})();
+
+(function () {
+
+  let effectsLayer = document.querySelector(".effects-layer");
+  if (!effectsLayer) {
+    effectsLayer = document.createElement("div");
+    effectsLayer.className = "effects-layer";
+    document.body.appendChild(effectsLayer); 
+  }
+
+  function explodirFogos(x, y) {
+
+    const cores = [
+      "var(--brand-color)",
+      "var(--secondary-color)",
+      "#ffffff"
+    ];
+
+    for (let i = 0; i < 200; i++) {
+
+      const confetti = document.createElement("div");
+      confetti.className = "confetti";
+
+      const angle = Math.random() * 2 * Math.PI;
+      const distance = 100 + Math.random() * 340;
+
+      confetti.style.setProperty("--dx", `${Math.cos(angle) * distance}px`);
+      confetti.style.setProperty("--dy", `${Math.sin(angle) * distance}px`);
+      confetti.style.backgroundColor =
+        cores[Math.floor(Math.random() * cores.length)];
+
+      confetti.style.left = `${x}px`;
+      confetti.style.top  = `${y}px`;
+
+      effectsLayer.appendChild(confetti);
+
+      setTimeout(() => confetti.remove(), 1000);
+    }
+  }
+
+  const idsOk = [
+    "btnOkExclusao",
+    "btnOkCancelamento",
+    "btnOkSucesso",
+    "btnOkAvancoFase",
+    "btnOk"
+  ];
+
+  function bindExplosao() {
+    idsOk.forEach(id => {
+      const btn = document.getElementById(id);
+      if (!btn || btn.dataset.confetti === "true") return;
+
+      btn.dataset.confetti = "true";
+
+      btn.addEventListener("click", function () {
+        const rect = btn.getBoundingClientRect();
+
+        const x = rect.left + rect.width / 2;
+        const y = rect.top - 12; 
+
+        explodirFogos(x, y);
+      });
+    });
+  }
+
+  bindExplosao();
+
+  new MutationObserver(bindExplosao)
+    .observe(document.body, { childList: true, subtree: true });
+
+})();
+(function () {
+
+  var flowUrl =
+    "/_api/cloudflow/v1.0/trigger/8ce80190-36f8-f011-8406-7ced8da81546";
+
+  var intervalo = setInterval(function () {
+
+    var btnAbrir     = document.getElementById("btnNovoPagamento")
+    var btnConfirmar = document.getElementById("btnConfirmarNovoPagamento");
+    var btnCancelar  = document.getElementById("btnCancelarNovoPagamento");
+    var btnOk        = document.getElementById("btnOkNovoPagamento");
+
+    var modalConfirm = document.getElementById("modalConfirmarNovoPagamento");
+    var modalSucesso = document.getElementById("modalNovoPagamentoSucesso");
+
+    var recordID = "{{ solicitacaoId }}";
+
+    if (
+      btnAbrir &&
+      btnConfirmar &&
+      btnCancelar &&
+      modalConfirm &&
+      window.shell &&
+      typeof shell.ajaxSafePost === "function"
+    ) {
+      clearInterval(intervalo);
+      configurarEventos();
+    }
+
+    function configurarEventos() {
+
+      btnAbrir.addEventListener("click", function (e) {
+        e.preventDefault();
+        modalConfirm.style.display = "flex";
+      });
+
+      btnCancelar.addEventListener("click", function () {
+        modalConfirm.style.display = "none";
+      });
+
+      btnConfirmar.addEventListener("click", function () {
+
+        if (btnConfirmar.dataset.executando === "true") return;
+
+        btnConfirmar.dataset.executando = "true";
+        btnConfirmar.disabled = true;
+        var textoOriginal = btnConfirmar.innerText;
+        btnConfirmar.innerText = "Processando...";
+        if (!recordID) {
+          alert("Erro ao identificar a solicitação.");
+          resetar();
+          return;
+        }
+
+        var payload = {
+          eventData: JSON.stringify({
+            RecordID: recordID
+          })
+        };
+
+
+        shell.ajaxSafePost({
+          type: "POST",
+          contentType: "application/json",
+          url: flowUrl,
+          data: JSON.stringify(payload),
+          processData: false,
+          global: false
+        })
+        .done(function () {
+          modalConfirm.style.display = "none";
+          modalSucesso.style.display = "flex";
+        })
+        .fail(function (xhr) {
+          console.error("❌ Erro Novo Pagamento:", xhr);
+          alert("Erro ao retornar para a etapa de pagamento.");
+        })
+        .always(function () {
+          resetar();
+        });
+
+        function resetar() {
+          btnConfirmar.disabled = false;
+          btnConfirmar.innerText = textoOriginal;
+          btnConfirmar.dataset.executando = "false";
+        }
+      });
+
+      btnOk.addEventListener("click", function () {
+        window.location.replace(
+          "/minhas-solicitacoes/?refreshlist=1&nocache=" + Date.now()
+        );
+      });
+    }
+
+  }, 300);
+
+})();
+(function () {
+
+  var flowUrl =
+    "/_api/cloudflow/v1.0/trigger/a16c5a35-56fa-f011-8406-002248de77b7";
+
+  var intervalo = setInterval(function () {
+
+    var btnAvancar   = document.getElementById("btnAvancarFase");
+    var btnCancelar  = document.getElementById("btnCancelarAvancoFase");
+    var btnConfirmar = document.getElementById("btnConfirmarAvancoFase");
+    var btnOk        = document.getElementById("btnOkAvancoFase");
+
+    var modalConfirm = document.getElementById("modalConfirmarAvancoFase");
+    var modalSucesso = document.getElementById("modalAvancoFaseSucesso");
+
+    var recordID = "{{ solicitacaoId }}";
+
+    if (
+      btnAvancar &&
+      btnCancelar &&
+      btnConfirmar &&
+      btnOk &&
+      modalConfirm &&
+      modalSucesso &&
+      window.shell &&
+      typeof shell.ajaxSafePost === "function"
+    ) {
+      clearInterval(intervalo);
+      configurarEventos();
+    }
+
+    function configurarEventos() {
+
+      if (btnAvancar.dataset.bound === "true") return;
+      btnAvancar.dataset.bound = "true";
+
+
+      btnAvancar.addEventListener("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        modalConfirm.style.display = "flex";
+      });
+
+
+      btnCancelar.addEventListener("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        modalConfirm.style.display = "none";
+        return false;
+      }, true);
+
+
+      btnConfirmar.addEventListener("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        if (btnConfirmar.dataset.executando === "true") return;
+
+        btnConfirmar.dataset.executando = "true";
+        btnConfirmar.disabled = true;
+
+        var textoOriginal = btnConfirmar.innerText;
+        btnConfirmar.innerText = "Processando...";
+
+        var payload = {
+          eventData: JSON.stringify({
+            RecordID: recordID,
+            AnaliseID: "{{ analiseId }}"
+          })
+        };
+
+        shell.ajaxSafePost({
+          type: "POST",
+          contentType: "application/json",
+          url: flowUrl,
+          data: JSON.stringify(payload),
+          processData: false,
+          global: false
+        })
+        .done(function () {
+          modalConfirm.style.display = "none";
+          modalSucesso.style.display = "flex";
+        })
+        .fail(function (xhr) {
+          console.error("❌ Erro ao avançar fase:", {
+            status: xhr?.status,
+            responseText: xhr?.responseText
+          });
+          alert("Erro ao avançar a fase.");
+        })
+        .always(function () {
+          btnConfirmar.disabled = false;
+          btnConfirmar.innerText = textoOriginal;
+          btnConfirmar.dataset.executando = "false";
+        });
+      });
+
+      btnOk.addEventListener("click", function (e) {
+        e.preventDefault();
+
+        const modalSucesso = document.getElementById("modalAvancoFaseSucesso");
+        const modalConfirm = document.getElementById("modalConfirmarAvancoFase");
+
+        // 🔥 fogos
+        const rect = btnOk.getBoundingClientRect();
+        const x = rect.left + rect.width / 2;
+        const y = rect.top - 12;
+
+        if (typeof explodirFogos === "function") {
+          explodirFogos(x, y);
+        }
+
+        // 📴 fecha modais
+        if (modalSucesso) modalSucesso.style.display = "none";
+        if (modalConfirm) modalConfirm.style.display = "none";
+
+        // 🔗 REDIRECIONAMENTO CORRETO
+        setTimeout(function () {
+          window.location.replace(
+            "/status-projeto/?id={{ solicitacaoId }}"
+          );
+        }, 600);
+      });
+
+
+    }
+
+  }, 300);
+
+})();
+
+
+
+
+(function () {
+
+  const intervalo = setInterval(function () {
+
+    const botoesExcluir = document.querySelectorAll('[data-action="excluir-solicitacao"]');
+    const modalExcluir = document.getElementById("modalConfirmarExclusao");
+
+   
+
+    clearInterval(intervalo);
+    
+
+    botoesExcluir.forEach(btn => {
+      btn.addEventListener("click", function (e) {
+        e.preventDefault();
+
+
+        modalExcluir.style.display = "flex";
+      });
+    });
+
+  }, 200);
+
+})();
+
+(function () {
+
+  function abrirModalExclusao() {
+    const modal = document.getElementById("modalConfirmarExclusao");
+
+    if (!modal) {
+      alert("Modal de exclusão não existe nesta tela. Coloque o HTML do modal fora do IF do status 586450001.");
+      console.error("❌ #modalConfirmarExclusao não encontrado no DOM.");
+      return;
+    }
+
+    modal.style.display = "flex";
+  }
+
+  document.addEventListener("click", function (e) {
+
+    const btnExcluir = e.target.closest('[data-action="excluir-solicitacao"]');
+    if (btnExcluir) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      abrirModalExclusao();
+      return;
+    }
+
+
+
+  }, true);
+
+})();
+(function () {
+
+  var intervalo = setInterval(function () {
+
+    var btnContinuar = document.getElementById("btnContinuarSolicitacao");
+
+    if (btnContinuar) {
+      clearInterval(intervalo);
+      configurarEventos(btnContinuar);
+    }
+
+  }, 300);
+
+  function configurarEventos(btn) {
+
+    if (btn.dataset.bound === "true") return;
+    btn.dataset.bound = "true";
+
+    btn.addEventListener("click", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      if (btn.dataset.executando === "true") return;
+      btn.dataset.executando = "true";
+
+      var textoOriginal = btn.innerText;
+      btn.innerText = "Carregando...";
+      btn.classList.add("disabled");
+
+      var url = new URL(window.location.href);
+      var recordID = url.searchParams.get("id") || "{{ solicitacaoId }}";
+
+      if (!recordID) {
+        alert("Solicitação não identificada.");
+        resetar();
+        return;
+      }
+
+      // 🔥 explode fogos igual aos demais botões
+      if (typeof explodirFogos === "function") {
+        var rect = btn.getBoundingClientRect();
+        var x = rect.left + rect.width / 2;
+        var y = rect.top - 12;
+        explodirFogos(x, y);
+      }
+
+      // 🔗 redireciona para edição da solicitação atual
+      setTimeout(function () {
+        window.location.href = "/Editar-Solicitacoes/?id=" + encodeURIComponent(recordID);
+      }, 600);
+
+      function resetar() {
+        btn.dataset.executando = "false";
+        btn.innerText = textoOriginal;
+        btn.classList.remove("disabled");
+      }
+    });
+
+  }
+
+})();
+
+
+
+(function () {
+  const FLOW_URL = "/_api/cloudflow/v1.0/trigger/87913ed4-15f1-f011-8406-002248de77b7";
+  const RECORD_ID = "{{ solicitacaoId }}";
+
+  function el(id) {
+    return document.getElementById(id);
+  }
+
+  document.addEventListener("click", function (e) {
+    const btn = e.target.closest("#btnEnviarComprovanteAnalise");
+    if (!btn) return;
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (btn.dataset.executando === "true") return;
+
+    const boletoId = btn.getAttribute("data-boleto-id");
+
+    if (!RECORD_ID) {
+      alert("RecordID não encontrado.");
+      return;
+    }
+
+    if (!boletoId) {
+      alert("BoletoID não encontrado.");
+      return;
+    }
+
+    if (!window.shell || typeof shell.ajaxSafePost !== "function") {
+      alert("Contexto de segurança não disponível.");
+      return;
+    }
+
+    btn.dataset.executando = "true";
+    btn.disabled = true;
+
+    const textoOriginal = btn.innerText;
+    btn.innerText = "ENVIANDO COMPROVANTE...";
+
+    shell.ajaxSafePost({
+      type: "POST",
+      contentType: "application/json",
+      url: FLOW_URL,
+      data: JSON.stringify({
+        eventData: JSON.stringify({
+          RecordID: RECORD_ID,
+          BoletoID: boletoId
+        })
+      }),
+      processData: false,
+      global: false
+    })
+    .done(function () {
+      btn.innerText = textoOriginal;
+      btn.disabled = false;
+      btn.dataset.executando = "false";
+
+      const modal = el("modalSucessoEnvioComprovanteAnalise");
+      if (modal) modal.style.display = "flex";
+    })
+    .fail(function (xhr) {
+      console.error("Erro ao enviar comprovante para análise:", xhr);
+      alert("Erro ao enviar comprovante para análise.");
+
+      btn.innerText = textoOriginal;
+      btn.disabled = false;
+      btn.dataset.executando = "false";
+    });
+  }, true);
+
+  el("btnOkSucessoEnvioComprovanteAnalise")?.addEventListener("click", function (e) {
+    e.preventDefault();
+
+    const btn = e.currentTarget;
+    btn.disabled = true;
+    btn.innerText = "ATUALIZANDO...";
+
+    setTimeout(function () {
+      const modal = el("modalSucessoEnvioComprovanteAnalise");
+      if (modal) modal.style.display = "none";
+
+      window.location.reload();
+    }, 3000);
+  });
+})();
+
+
+(function () {
+  let jaAtualizouItemComprovante = false;
+  let jaAgendouRefreshComprovante = false;
+
+  function atualizarItemListaParaCarregando() {
+    if (jaAtualizouItemComprovante) return;
+    jaAtualizouItemComprovante = true;
+
+    const container = document.querySelector(".comprovante-inline-container");
+    if (!container) return;
+
+    const lista = container.closest(".upload-doc-lista");
+    if (!lista) return;
+
+    const vazio = lista.querySelector(".upload-doc-vazio");
+    if (vazio) vazio.style.display = "none";
+
+    let grid = lista.querySelector(".upload-doc-grid");
+
+    if (!grid) {
+      grid = document.createElement("div");
+      grid.className = "upload-doc-grid";
+      lista.insertBefore(grid, container);
+    }
+
+    let item = grid.querySelector(".upload-doc-item");
+
+    if (!item) {
+      item = document.createElement("div");
+      item.className = "upload-doc-item upload-doc-item-carregando";
+      grid.appendChild(item);
+    }
+
+    item.innerHTML = `
+      <div class="upload-doc-icon">
+        <span class="upload-doc-spinner"></span>
+      </div>
+
+      <div class="upload-doc-info">
+        <div class="upload-doc-nome">
+          CARREGANDO COMPROVANTE...
+        </div>
+      </div>
+    `;
+  }
+
+  function agendarRefreshComprovante() {
+    if (jaAgendouRefreshComprovante) return;
+    jaAgendouRefreshComprovante = true;
+
+    setTimeout(function () {
+      window.location.reload();
+    }, 2500);
+  }
+
+  window.addEventListener("message", function (event) {
+    if (!event.data) return;
+
+    if (event.data.type === "ANEXO_COMPROVANTE_CARREGANDO") {
+      atualizarItemListaParaCarregando();
+      return;
+    }
+
+    if (event.data.type === "ANEXO_COMPROVANTE_SALVO") {
+      atualizarItemListaParaCarregando();
+      agendarRefreshComprovante();
+      return;
+    }
+  });
+})();
+(function () {
+  const FLOW_EXCLUIR_COMPROVANTE =
+    "/_api/cloudflow/v1.0/trigger/e0adb382-ee5b-f111-a826-002248de77b7";
+
+  let BoletoID = "";
+
+  function el(id) {
+    return document.getElementById(id);
+  }
+
+  function abrirModal(id) {
+    const modal = el(id);
+    if (modal) modal.style.display = "flex";
+  }
+
+  function fecharModal(id) {
+    const modal = el(id);
+    if (modal) modal.style.display = "none";
+  }
+
+  function marcarComprovanteComoExcluindo(boletoId) {
+    const item = document.querySelector(
+      `.upload-doc-item[data-boleto-id="${boletoId}"]`
+    );
+
+    if (!item) return;
+
+    item.classList.add("excluindo");
+
+    const btnTrash = item.querySelector(".btnExcluirComprovante");
+    if (btnTrash) btnTrash.style.display = "none";
+
+    const icon = item.querySelector(".upload-doc-icon");
+    if (icon) {
+      icon.innerHTML = '<span class="upload-doc-spinner"></span>';
+    }
+
+    const info = item.querySelector(".upload-doc-info");
+    if (info) {
+      info.innerHTML = `
+        <div class="upload-doc-nome">
+          EXCLUINDO COMPROVANTE...
+        </div>
+        <div class="upload-doc-status-excluindo">
+          Aguarde enquanto removemos o arquivo.
+        </div>
+      `;
+    }
+  }
+
+  document.addEventListener("click", function (e) {
+    const btn = e.target.closest(".btnExcluirComprovante");
+    if (!btn) return;
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    BoletoID = btn.getAttribute("data-boleto-id") || "";
+
+    if (!BoletoID) {
+      alert("BoletoID não encontrado.");
+      return;
+    }
+
+    abrirModal("modalConfirmarExclusaoComprovante");
+  }, true);
+
+  el("btnCancelarExclusaoComprovante")?.addEventListener("click", function (e) {
+    e.preventDefault();
+
+    BoletoID = "";
+    fecharModal("modalConfirmarExclusaoComprovante");
+  });
+
+  el("btnConfirmarExclusaoComprovante")?.addEventListener("click", function (e) {
+    e.preventDefault();
+
+    const btn = e.currentTarget;
+
+    if (btn.dataset.executando === "true") return;
+
+    if (!BoletoID) {
+      alert("BoletoID não encontrado.");
+      return;
+    }
+
+    if (!window.shell || typeof shell.ajaxSafePost !== "function") {
+      alert("Contexto de segurança não disponível.");
+      return;
+    }
+
+    btn.dataset.executando = "true";
+    btn.disabled = true;
+
+    const textoOriginal = btn.innerText;
+    btn.innerText = "EXCLUINDO...";
+
+    fecharModal("modalConfirmarExclusaoComprovante");
+    marcarComprovanteComoExcluindo(BoletoID);
+
+    shell.ajaxSafePost({
+      type: "POST",
+      contentType: "application/json",
+      url: FLOW_EXCLUIR_COMPROVANTE,
+      data: JSON.stringify({
+        eventData: JSON.stringify({
+          BoletoID: BoletoID
+        })
+      }),
+      processData: false,
+      global: false
+    })
+    .done(function () {
+      abrirModal("modalSucessoExclusaoComprovante");
+    })
+    .fail(function (xhr) {
+      console.error("Erro ao excluir comprovante:", xhr);
+      alert("Erro ao excluir comprovante.");
+
+      btn.disabled = false;
+      btn.innerText = textoOriginal;
+      btn.dataset.executando = "false";
+    })
+    .always(function () {
+      btn.disabled = false;
+      btn.innerText = textoOriginal;
+      btn.dataset.executando = "false";
+    });
+  });
+
+  el("btnOkExclusaoComprovante")?.addEventListener("click", function (e) {
+    e.preventDefault();
+
+    const btn = e.currentTarget;
+    btn.disabled = true;
+    btn.innerText = "ATUALIZANDO...";
+
+    setTimeout(function () {
+      window.location.reload();
+    }, 1000);
+  });
+})();
+
+/* =====================================================
+   POSICIONA AS TIMELINES DEPOIS DO ÚLTIMO CARD VISÍVEL
+   ===================================================== */
+(function posicionarTimelinesNoFinal() {
+
+  function elementoEstaVisivel(elemento) {
+    if (!elemento) return false;
+
+    const estilo = window.getComputedStyle(elemento);
+
+    return (
+      estilo.display !== "none" &&
+      estilo.visibility !== "hidden" &&
+      elemento.getClientRects().length > 0
+    );
+  }
+
+  function obterBlocoCompletoDoCard(card) {
+
+    /*
+      Alguns cards estão dentro desta estrutura:
+
+      div com max-width
+        div.card-etapa
+          div.card-termo
+
+      Nesse caso, movimentamos o bloco externo completo,
+      e não apenas o .card-termo.
+    */
+    const cardEtapa = card.closest(".card-etapa");
+
+    if (!cardEtapa) {
+      return card;
+    }
+
+    const containerExterno = cardEtapa.parentElement;
+
+    if (
+      containerExterno &&
+      containerExterno !== document.body &&
+      containerExterno.children.length === 1 &&
+      !containerExterno.classList.contains("modal-cloud-overlay")
+    ) {
+      return containerExterno;
+    }
+
+    return cardEtapa;
+  }
+
+  function moverTimeline() {
+
+    const timeline = document.querySelector(".timeline-glass-card");
+
+    if (!timeline) {
+      console.warn("Timeline não encontrada na página.");
+      return;
+    }
+
+    /*
+      Busca somente cards da página.
+      Cards que eventualmente estiverem dentro de modais
+      serão ignorados.
+    */
+    const cardsVisiveis = Array.from(
+      document.querySelectorAll(".card-termo")
+    ).filter(function (card) {
+
+      const estaDentroDeModal =
+        card.closest(".modal-cloud-overlay");
+
+      return (
+        !estaDentroDeModal &&
+        elementoEstaVisivel(card)
+      );
+
+    });
+
+    if (!cardsVisiveis.length) {
+      console.warn("Nenhum card visível encontrado.");
+      return;
+    }
+
+    const ultimoCard =
+      cardsVisiveis[cardsVisiveis.length - 1];
+
+    const blocoReferencia =
+      obterBlocoCompletoDoCard(ultimoCard);
+
+    /*
+      Move a timeline para depois do último card visível.
+    */
+    blocoReferencia.insertAdjacentElement(
+      "afterend",
+      timeline
+    );
+
+    timeline.classList.add(
+      "timeline-posicionada-no-final"
+    );
+
+    console.log(
+      "Timeline posicionada depois do último card visível."
+    );
+  }
+
+  if (document.readyState === "loading") {
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      moverTimeline
+    );
+
+  } else {
+
+    moverTimeline();
+
+  }
+
+})();
+</script>

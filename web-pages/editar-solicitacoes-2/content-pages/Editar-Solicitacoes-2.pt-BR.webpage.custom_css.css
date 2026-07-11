@@ -1,0 +1,766 @@
+ /* FAB - POSSO AJUDAR */
+.faq-fab {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+
+  background: #0027bd;
+  color: #ffffff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 26px;
+  font-weight: 800;
+  text-decoration: none;
+
+  box-shadow:
+    0 6px 16px rgba(0, 39, 189, 0.45);
+
+  z-index: 9999;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.faq-fab:hover {
+  transform: translateY(-4px);
+  background: #001e99;
+  box-shadow:
+    0 10px 24px rgba(0, 39, 189, 0.55);
+}
+
+/* Tooltip */
+.faq-fab-tooltip {
+  position: absolute;
+  right: 68px;
+  white-space: nowrap;
+
+  background: #111827;
+  color: #ffffff;
+  font-size: 13px;
+  padding: 6px 10px;
+  border-radius: 6px;
+
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(4px);
+  transition: all 0.2s ease;
+}
+
+.faq-fab:hover .faq-fab-tooltip {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.btn-minhas-solicitacoes {
+  background-color: #0027bd;
+  color: #ffffff !important;
+  padding: 14px 28px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none !important;
+  display: inline-block;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+}
+
+.btn-minhas-solicitacoes:hover,
+.btn-minhas-solicitacoes:focus,
+.btn-minhas-solicitacoes:active {
+  background-color: #17e3cb;
+  color: #0027bd !important;
+  text-decoration: none !important;  
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+}
+
+/* ===============================
+   BOTÕES
+   =============================== */
+/* ===============================
+   BOTÃO PRIMÁRIO – PADRÃO FLUENT
+   =============================== */
+.btn-cloud {
+  background-color: var(--brand-color) !important;
+  color: #ffffff !important;
+  width: auto !important;
+  min-width: 180px !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 32px !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  border-radius: 8px !important;
+  border: none !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  box-shadow: none !important;
+  text-decoration: none !important;
+}
+
+/* Hover */
+.btn-cloud:hover {
+  background-color: var(--secondary-color) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 12px rgba(23, 227, 203, 0.4) !important;
+}
+
+/* Active */
+.btn-cloud:active {
+  transform: translateY(0) !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Focus (acessibilidade) */
+.btn-cloud:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(23, 227, 203, 0.35) !important;
+}
+
+.btn-cloud-outline {
+  background-color: #ffffff !important;
+  color: var(--brand-color) !important;
+  border: 2px solid var(--brand-color) !important;
+}
+
+.btn-cloud-outline:hover {
+  background-color: var(--secondary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(23, 227, 203, 0.4);
+}
+
+.btn-cloud-outline {
+  background-color: #ffffff !important;
+  color: var(--brand-color) !important;
+  border: 2px solid var(--brand-color) !important;
+  border-radius: 8px !important;
+}
+
+/* Hover outline */
+.btn-cloud-outline:hover {
+  background-color: var(--secondary-color) !important;
+  color: #ffffff !important;
+  border-color: var(--secondary-color) !important;
+}
+
+/* Active outline */
+.btn-cloud-outline:active {
+  transform: translateY(0) !important;
+}
+
+/* Focus outline */
+.btn-cloud-outline:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(23, 227, 203, 0.35) !important;
+}
+.fsa-card{
+background:#fff;
+border-radius:16px;
+padding:32px;
+box-shadow:0 10px 15px -3px rgba(0,0,0,0.05),0 4px 6px -2px rgba(0,0,0,0.02);
+border:1px solid #f3f4f6;
+width:100%;
+max-width:100%;
+margin:auto;
+}
+
+.fsa-header{
+text-align:center;
+margin-bottom:30px;
+}
+
+.fsa-title{
+color:#0027bd;
+font-size:32px;
+font-weight:700;
+margin-bottom:8px;
+}
+
+.fsa-subtitle{
+color:#6b7280;
+font-size:16px;
+}
+
+.fsa-step-indicator{
+display:flex;
+align-items:center;
+justify-content:center;
+gap:12px;
+margin-top:16px;
+}
+
+.fsa-step-circle{
+width:36px;
+height:36px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-weight:700;
+background:#e5e7eb;
+}
+
+.fsa-step-circle.active{
+background:#17e3cb;
+color:white;
+}
+
+.fsa-step-circle.total{
+background:#0027bd;
+color:white;
+}
+
+.fsa-step{
+display:none;
+}
+
+.fsa-step.active{
+display:block;
+}
+
+.fsa-buttons{
+margin-top:30px;
+display:flex;
+}
+
+.fsa-buttons.right{
+justify-content:flex-end;
+}
+
+.fsa-buttons.left{
+justify-content:flex-start;
+}
+
+.fsa-buttons.between{
+justify-content:space-between;
+}
+
+.entityform .actions{
+display:flex;
+justify-content:space-between;
+gap:12px;
+margin-top:24px;
+}
+
+.entityform input[type="submit"]{
+background:#0027bd;
+border:none;
+padding:10px 22px;
+border-radius:8px;
+color:white;
+font-weight:600;
+}
+
+.entityform input[type="submit"]:hover{
+background:#001e91;
+}
+.fsa-step{
+display:none;
+}
+
+.fsa-step.active{
+display:block;
+}
+
+.fsa-buttons{
+display:flex;
+margin-bottom:20px;
+}
+
+.fsa-buttons.right{
+justify-content:flex-end;
+}
+
+.fsa-buttons.left{
+justify-content:flex-start;
+}
+
+.fsa-buttons.between{
+justify-content:space-between;
+}
+.fsa-step{
+display:none;
+}
+
+.fsa-step.active{
+display:block;
+}
+
+
+.fsa-nav-buttons{
+display:flex;
+justify-content:flex-end;
+gap:12px;
+margin-top:30px;
+}
+.fsa-form-card{
+
+background:#ffffff;
+padding:40px;
+border-radius:10px;
+border:1px solid #e5e7eb;
+width:100%;
+max-width:100%;
+padding:40px 0;
+
+}
+.fsa-form-card .ppFlexContainer{
+width:100%;
+max-width:100%;
+height: 100%;
+max-height: 100%;
+}
+
+.fsa-form-card .container,
+.fsa-form-card .container-fluid{
+max-width:100% !important;
+width:100% !important;
+}
+
+.fsa-page-shell{
+  width: 100%;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.fsa-white-card{
+  width: 100%;
+  max-width: none;
+  margin: 0 !important;
+  padding: 42px 36px 32px;
+  background: rgba(255, 255, 255, 0.94);
+  border-radius: 22px;
+  overflow: visible !important;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.08);
+  border: 1px solid rgba(229, 231, 235, 0.9);
+  box-sizing: border-box;
+}
+
+#custom-modern-form.modern-form-wrapper{
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.form-header{
+  margin-bottom: 18px;
+}
+
+.fsa-step-indicator{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin: 10px 0 26px;
+}
+
+.power-pages-form-container{
+  width: 100%;
+}
+
+.fsa-nav-buttons{
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 26px;
+}
+
+.fsa-white-card .row{
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.fsa-white-card .col-12{
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+@media (max-width: 768px){
+  .fsa-white-card{
+    padding: 26px 18px 22px;
+    border-radius: 18px;
+  }
+
+  #custom-modern-form.modern-form-wrapper{
+    max-width: 100%;
+  }
+}
+/* ===============================
+   CONTAINER NOVOS ANEXOS - ETAPA 2
+   =============================== */
+
+.fsa-anexos-container {
+  width: 100%;
+  margin-top: 34px;
+  padding: 28px 30px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 39, 189, 0.12);
+  border-radius: 18px;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.06);
+}
+
+.fsa-anexos-header {
+  margin-bottom: 22px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.fsa-anexos-header h3 {
+  margin: 0 0 6px 0;
+  color: #0027bd;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.fsa-anexos-header p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 15px;
+}
+
+.fsa-anexos-form {
+  width: 100%;
+}
+
+.fsa-anexos-container .entityform .actions {
+  justify-content: flex-end;
+}
+
+@media (max-width: 768px) {
+  .fsa-anexos-container {
+    padding: 22px 18px;
+    border-radius: 16px;
+  }
+}
+.fsa-anexos-action {
+  width: 100%;
+  margin: 24px 0 10px 0;
+}
+
+.btn-fsa-anexos-full {
+  width: 100%;
+  min-height: 116px;
+  padding: 28px 32px;
+  border-radius: 22px;
+  border: 2px dashed rgba(0, 39, 189, 0.35);
+  background: #ffffff;
+  color: #0027bd;
+  font-size: 22px;
+  font-weight: 800;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+  transition: all .25s ease;
+  position: relative;
+}
+
+.btn-fsa-anexos-full:hover {
+  border-color: #17e3cb;
+  background: #f8fffd;
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(23, 227, 203, 0.22);
+}
+
+.btn-fsa-anexos-full {
+  position: relative;
+}
+
+.btn-fsa-anexos-full::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 12px);
+  transform: translateX(-50%) translateY(8px);
+  min-width: 260px;
+  max-width: 420px;
+  padding: 12px 16px;
+  border-radius: 14px;
+  background: rgba(0, 0, 0, 0.82);
+  color: #17e3cb;
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1.4;
+  text-align: center;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  box-shadow: 0 12px 28px rgba(0,0,0,.22);
+  transition: all .22s ease;
+  z-index: 9999;
+}
+
+.btn-fsa-anexos-full::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 5px);
+  transform: translateX(-50%) translateY(8px) rotate(45deg);
+  width: 14px;
+  height: 14px;
+  background: rgba(0, 0, 0, 0.82);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: all .22s ease;
+  z-index: 9998;
+}
+
+.btn-fsa-anexos-full:hover::after,
+.btn-fsa-anexos-full:hover::before,
+.btn-fsa-anexos-full:focus::after,
+.btn-fsa-anexos-full:focus::before {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.btn-fsa-anexos-full:hover::before,
+.btn-fsa-anexos-full:focus::before {
+  transform: translateX(-50%) translateY(0) rotate(45deg);
+}
+
+.fsa-anexos-action {
+  position: relative;
+  overflow: visible !important;
+  z-index: 20;
+}
+
+.power-pages-form-container,
+.fsa-step,
+#step2,
+#custom-modern-form {
+  overflow: visible !important;
+}
+
+.fsa-anexos-wrapper{
+  width:100vw;
+  max-width:none;
+  margin:40px 0 24px 50%;
+  transform:translateX(-50%);
+  padding:0 32px;
+  background:transparent;
+  border:none;
+  box-shadow:none;
+}
+
+.fsa-anexos-grid{
+  width:100%;
+  display:grid;
+  grid-template-columns:repeat(auto-fill, 380px);
+  gap:12px 14px;
+  justify-content:start;
+  align-items:start;
+}
+
+.fsa-anexo-card{
+  width:380px;
+  height:55px;
+  background:#fff;
+  border:1px solid #d9dee7;
+  border-radius:8px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 15px;
+  margin:0;
+  transition:border-color .15s ease;
+  box-shadow:none;
+}
+
+.fsa-anexo-card:hover {
+  border-color: #0027bd;
+}
+
+.fsa-anexo-nome {
+  flex: 1;
+  min-width: 0;
+  color: #0047c7;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fsa-anexo-nome:hover {
+  color: #0027bd;
+  text-decoration: none;
+}
+
+.fsa-anexo-delete {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #111827;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.fsa-anexo-delete:hover {
+  color: #0027bd;
+  background: transparent;
+}
+
+.fsa-anexo-delete svg {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+
+@media(max-width:1300px){
+  .fsa-anexos-grid{
+    grid-template-columns:repeat(2, 380px);
+  }
+}
+
+@media(max-width:900px){
+  .fsa-anexos-grid{
+    grid-template-columns:1fr;
+  }
+
+  .fsa-anexo-card{
+    width:100%;
+  }
+}
+
+.fsa-anexo-card.is-deleting{
+  position:relative;
+  pointer-events:none;
+  opacity:.72;
+  border-color:#0027bd;
+  overflow:hidden;
+}
+
+.fsa-anexo-card.is-deleting::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    90deg,
+    transparent,
+    rgba(0,39,189,.12),
+    transparent
+  );
+  animation:fsaDeletingWave 1.1s linear infinite;
+}
+
+.fsa-anexo-card.is-deleting .fsa-anexo-link{
+  color:#64748b;
+}
+
+.fsa-anexo-card.is-deleting .fsa-anexo-delete{
+  color:#0027bd;
+  animation:fsaTrashPulse .8s ease-in-out infinite alternate;
+}
+
+.fsa-anexo-card.is-deleting .fsa-anexo-delete::after{
+  content:" Excluindo...";
+  font-size:12px;
+  font-weight:700;
+  margin-left:8px;
+  color:#0027bd;
+  white-space:nowrap;
+}
+
+@keyframes fsaDeletingWave{
+  from{ transform:translateX(-100%); }
+  to{ transform:translateX(100%); }
+}
+
+@keyframes fsaTrashPulse{
+  from{ transform:scale(1); }
+  to{ transform:scale(1.15); }
+}
+
+/* ======================================================
+   REMOVE ESPAÇO ENTRE LABEL E TEXTAREA - OBSERVAÇÕES
+   ====================================================== */
+
+#cloud_observacoes_label + .validators,
+td[data-logical-name="cloud_observacoes"] .validators,
+td[data-logical-name="cloud_observacoes"] div.validators {
+  display: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 0 !important;
+  overflow: hidden !important;
+}
+
+/* Aproxima a caixa de texto do título */
+td[data-logical-name="cloud_observacoes"] .control {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Remove espaçamento interno gerado no container do campo */
+td[data-logical-name="cloud_observacoes"] .table-info {
+  margin-bottom: 4px !important;
+  padding-bottom: 0 !important;
+}
+
+/* Calendário - troca fundo branco dos dias de #FFFFFF para #FAFAFA */
+.bootstrap-datetimepicker-widget.dropdown-menu.usetwentyfour.bottom.pull-right
+  .datepicker-days table tbody tr td.day button,
+.bootstrap-datetimepicker-widget .datepicker-days td.day button,
+.bootstrap-datetimepicker-widget .datepicker table tr td button {
+  background: #FAFAFA !important;
+  background-color: #FAFAFA !important;
+}
+
+/* Fundo geral do calendário */
+.bootstrap-datetimepicker-widget,
+.bootstrap-datetimepicker-widget .datepicker,
+.bootstrap-datetimepicker-widget .datepicker-days,
+.bootstrap-datetimepicker-widget .datepicker-days table,
+.bootstrap-datetimepicker-widget .datepicker-days tbody,
+.bootstrap-datetimepicker-widget .datepicker-days tr,
+.bootstrap-datetimepicker-widget .datepicker-days td {
+  background: #FAFAFA !important;
+  background-color: #FAFAFA !important;
+}
+
+/* Calendário - texto azul no dia selecionado */
+.bootstrap-datetimepicker-widget .datepicker-days table tbody tr td.day.active button,
+.bootstrap-datetimepicker-widget .datepicker-days table tbody tr td.active button,
+.bootstrap-datetimepicker-widget .datepicker-days td.active button {
+  color: #0027bd !important;
+  -webkit-text-fill-color: #0027bd !important;
+}
+
+/* ======================================================
+   REMOVE A PRIMEIRA LINHA VAZIA DO FORM FSA — ETAPA 2
+   ====================================================== */
+
+#step2 .entity-form table.section > tbody > tr:first-child {
+  display: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+}
+
+#step2 .entity-form table.section > tbody > tr:first-child > td {
+  display: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+}

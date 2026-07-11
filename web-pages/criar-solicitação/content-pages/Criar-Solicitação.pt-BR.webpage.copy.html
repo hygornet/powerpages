@@ -1,0 +1,242 @@
+{% assign url = request.url | downcase %} 
+{% assign mid_image = "/logo-aegea-personalizado.png" %} 
+{% assign url_contato = "www.aegea.com.br/contato/" %} 
+{% assign url_dominio_unidade = "" %} 
+{% if url contains settings["URLCorsan"] %} 
+{% assign mid_image = "/corsan-centralized.png" %} 
+{% assign url_dominio_unidade = settings["URLCorsan"] %} 
+{% assign url_contato = "https://corsan.com.br/canais-de-relacionamento/" %} 
+{% elsif url contains settings["URLAguasDoPara"] %} 
+{% assign mid_image = "/centro_para.png" %} 
+{% assign url_dominio_unidade = settings["URLAguasDoPara"] %} 
+{% assign url_contato = "https://www.aguasdopara.com.br/contato/" %} 
+{% elsif url contains settings["URLAguasDeGuariroba"] %} 
+{% assign mid_image = "/centro_guariroba.png" %} 
+{% assign url_dominio_unidade = settings["URLAguasDeGuariroba"] %} 
+{% assign url_contato = "https://www.aguasguariroba.com.br/contato/" %} 
+{% elsif url contains settings["URLAguasDeManaus"] %} 
+{% assign mid_image = "/centro_manaus.png" %} 
+{% assign url_dominio_unidade = settings["URLAguasDeManaus"] %} 
+{% assign url_contato = "https://www.aguasdemanaus.com.br/contato/" %} 
+{% elsif url contains settings["URLProlagos"] %} 
+{% assign mid_image = "/centro_prolagos.png" %} 
+{% assign url_dominio_unidade = settings["URLProlagos"] %} 
+{% assign url_contato = "https://www.prolagos.com.br/contato/" %} 
+{% endif %} {% fetchxml unidade %}
+<fetch>
+  <entity name="cloud_unidades">
+    <attribute name="cloud_docs_obrigatorios" />
+    <attribute name="cloud_docs_condicionais" />
+    <attribute name="cloud_id_unidade" />
+    <attribute name="cloud_nome_unidade" />
+    <attribute name="cloud_unidadesid" />
+    <attribute name="cloud_dominio" />
+    <filter>
+      <condition attribute="cloud_dominio" operator="eq" value="{{url_dominio_unidade}}" />
+    </filter>
+  </entity>
+</fetch>
+{% endfetchxml %} 
+{% assign unidadeRegistro = unidade.results.entities | first %} 
+{% assign docsCondicionais = unidadeRegistro.cloud_docs_condicionais %} 
+{% assign unidadeRegistro = unidade.results.entities | first %} 
+{% assign docsObrigatorios = unidadeRegistro.cloud_docs_obrigatorios %}
+<script>
+  window.PORTAL_ATIVO_DOMINIO = "{{ url_dominio_unidade | escape }}";
+</script>
+
+<div class="row sectionBlockLayout" style="display: flex; flex-wrap: wrap; margin: 0px; min-height: auto; padding: 80px 0px 40px; background-color: rgb(249, 250, 251);">
+  <div class="container" style="padding: 0px; display: flex; flex-wrap: wrap; column-gap: 0px;">
+    <div
+      class="col-lg-6 columnBlockLayout"
+      style="flex-grow: 1; min-width: 250px; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; width: calc(50% + 0px);
+            padding: 0px 15px;"
+    >
+      <img
+        id="midImageUnidade"
+        src="{{ mid_image }}"
+        alt="Logo"
+        data-default-mid-image="{{ mid_image }}"
+        style="max-width: 100%; width: 540px; height: 400px;
+          margin-bottom: 24px; border-radius: 12px;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.08);"
+      />
+    </div>
+ <div
+  class="col-lg-6 columnBlockLayout"
+  style="
+    flex-grow: 1;
+    min-width: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: calc(50% + 0px);
+    padding: 0 15px;
+  "
+>
+  <div
+      style="
+        width: 100%;
+        max-width: 760px;
+        padding: 32px 30px;
+        border-radius: 24px;
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+      "
+    >
+    <h1 style="text-align: left; margin: 0 0 15px 0; color: #0027bd;">
+      Viabilidade Técnica
+      <span aria-label="Texto para Empreendimentos" style="position: relative;">
+        para Empreendimentos
+      </span>
+    </h1>
+
+    <p
+      style="
+        text-align: left;
+        font-size: 18px;
+        color: #0027bd;
+        max-width: 2000px;
+        line-height: 1.6;
+        margin: 0 0 32px 0;
+      "
+    >
+      Este portal é destinado a manter o empreendedor atualizado quanto suas solicitações, visualização do histórico e controle de todas as solicitações iniciadas por este site.
+    </p>
+
+    <div
+      style="
+        background: rgba(255, 255, 255, 0.96);
+        border-left: 4px solid var(--portalThemeColor4);
+        padding: 20px 24px;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        max-width: 700px;
+        width: 100%;
+      "
+    >
+      <p
+        class="smallText"
+        style="
+          margin: 0;
+          font-size: 15px;
+          color: #374151;
+          line-height: 1.5;
+        "
+      >
+        <strong>Sua solicitação é para um imóvel residencial?</strong><br />
+        Caso sua solicitação seja referente a unidade residencial ou uso particular, o atendimento não é realizado por este canal.
+        Para esses casos, por favor utilize nossos canais de atendimento ao cliente, acessando o 
+        <a
+          href="{{url_contato}}"
+          aria-label="Vínculo alias@dominio.com.br Pressione Enter para editar"
+          style="
+            font-weight: 600;
+            text-decoration: underline;
+            color: var(--portalThemeColor4);
+          "
+        >
+          Fale Conosco
+        </a>.
+      </p>
+    </div>
+  </div>
+</div>
+  </div>
+
+
+ <div class="row sectionBlockLayout" style="display: flex; flex-wrap: wrap; margin: 0px; min-height: auto; padding: 40px 0px 80px; background-color: rgb(249, 250, 251); border: 0px solid rgb(200, 198, 196);">
+    <div class="container" style="padding: 0px; display: flex; flex-wrap: wrap;">
+      <div class="col-lg-12" style="margin-bottom: -20px; padding: 0 15px 0 15px;">
+        <h2 style="text-align: center;">Documentação Necessária</h2>
+        <p style="text-align: center;">Organize seus arquivos antes de prosseguir.</p>
+      </div>
+      <div class="col-lg-6 columnBlockLayout" style="flex-grow: 1; min-width: 250px; display: flex; flex-direction: column; padding: 15px;">
+        <div style="background-color: #ffffff; border-radius: 16px; padding: 32px; height: 100%; border: 1px solid #e5e7eb; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
+          <div style="display: flex; align-items: center; margin-bottom: 24px;">
+            <div style="width: 40px; height: 40px; border-radius: 8px; background-color: #fee2e2; display: flex; justify-content: center; align-items: center; margin-right: 16px;"><span style="font-size: 20px; color: #b91c1c;">!</span></div>
+            <h4 style="margin: 0; font-size: 20px; font-weight: 700; color: #1f2937;">Itens Obrigatórios</h4>
+          </div>
+          {% if docsObrigatorios %} {{ docsObrigatorios}} {% else %}
+          <p span style="font-size: 14px; color: #6b7280;">Nenhuma documentação condicional foi configurada para esta unidade.</p>
+          {% endif %}
+        </div>
+      </div>
+      <div class="col-lg-6 columnBlockLayout" style="flex-grow: 1; min-width: 250px; display: flex; flex-direction: column; padding: 15px;">
+        <div style="background-color: #ffffff; border-radius: 16px; padding: 32px; height: 100%; border: 1px solid #e5e7eb; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
+          <div style="display: flex; align-items: center; margin-bottom: 24px;">
+            <div style="width: 40px; height: 40px; border-radius: 8px; background-color: #dbeafe; display: flex; justify-content: center; align-items: center; margin-right: 16px;"><span style="font-size: 20px; color: #1d4ed8;">📄</span></div>
+            <h4 style="margin: 0; font-size: 20px; font-weight: 700; color: #1f2937;">Conforme Aplicável</h4>
+          </div>
+          {% if docsCondicionais %} {{ docsCondicionais}} {% else %}
+          <p span style="font-size: 14px; color: #6b7280;">Nenhuma documentação obrigatória foi configurada para esta unidade.</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div id="form-foco-solicitacao">
+ 
+      
+<div class="fsa-page-shell">
+  <div class="fsa-white-card">
+    <div id="custom-modern-form" class="modern-form-wrapper">
+      
+      <div class="form-header">
+        <h2 style="text-align: center;">Formulário de Solicitação de Análise (FSA)</h2>
+        <p style="text-align: center;">
+          <b aria-label="Texto Preencha os dados abaixo para darmos sequência." style="position: relative;">
+            Preencha os dados abaixo para darmos sequência.
+          </b>
+        </p>
+      </div>
+
+      <div class="fsa-step-indicator">
+        <span class="fsa-step-text">ETAPA</span>
+        <div class="fsa-step-circle active" id="stepNumber">1</div>
+        <span class="fsa-step-text">DE</span>
+        <div class="fsa-step-circle total">3</div>
+      </div>
+
+      <div class="power-pages-form-container">
+
+        
+        {% entityform name: 'Iniciar Solicitação' %}
+
+
+      </div>
+
+      <div class="fsa-nav-buttons" id="navWizardButtons">
+        <button type="button" class="btn-cloud btn-cloud-disabled" id="btnNext" disabled>
+          AVANÇAR
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+
+      </div>
+
+    </div>
+  </div>
+
+ 
+
+  <!-- FAB - POSSO AJUDAR -->
+
+  <a href="/FAQ/" class="faq-fab" aria-label="Posso ajudar?">
+    ?
+    <span class="faq-fab-tooltip">Posso ajudar?</span>
+  </a>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+</div>
+

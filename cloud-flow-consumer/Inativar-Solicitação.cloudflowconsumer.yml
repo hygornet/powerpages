@@ -1,0 +1,8 @@
+adx_CloudFlowConsumer_adx_webrole:
+- 1e16f3b3-b319-4d15-a71e-bd149be9381d
+adx_cloudflowconsumerid: 82267c47-5ff6-f011-8406-002248de77b7
+adx_flowapiurl: /_api/cloudflow/v1.0/trigger/2361651b-5ff6-f011-8406-002248de77b7
+adx_flowtriggerurl: ''
+adx_metadata: ''
+adx_name: Inativar Solicitação
+adx_processid: 2361651b-5ff6-f011-8406-002248de77b7

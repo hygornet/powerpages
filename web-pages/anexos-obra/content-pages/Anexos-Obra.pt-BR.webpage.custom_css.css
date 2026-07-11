@@ -1,0 +1,72 @@
+header,
+footer,
+nav,
+.navbar,
+.navbar-static-top,
+.page-header,
+.breadcrumb,
+.footer,
+.site-footer,
+.siteHeader,
+.siteFooter,
+#header,
+#footer,
+#navbar,
+#mainContent > .row:first-child {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+}
+
+body,
+html {
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+}
+
+main,
+#mainContent,
+.container,
+.row,
+.sectionBlockLayout,
+.columnBlockLayout,
+.col-lg-12 {
+  margin: 0 !important;
+  padding: 0 !important;
+  max-width: none !important;
+  width: 100% !important;
+}
+
+#custom-modern-form,
+#custom-modern-form .power-pages-form-container,
+#custom-modern-form .ppFlexContainer {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Oculta somente a área do botão salvar, mas mantém o submit disponível para o JS */
+#custom-modern-form .actions {
+  position: absolute !important;
+  left: -9999px !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+}
+
+/* Esconde mensagem visual de sucesso, mas mantém no DOM para o JS detectar */
+#custom-modern-form .alert-success,
+#custom-modern-form .notification.success,
+#custom-modern-form [data-form-success] {
+  position: absolute !important;
+  left: -9999px !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+}

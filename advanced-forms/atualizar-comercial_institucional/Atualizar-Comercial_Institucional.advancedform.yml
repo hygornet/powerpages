@@ -1,0 +1,12 @@
+adx_authenticationrequired: true
+adx_editexistingrecordpermitted: true
+adx_multiplerecordsperuserpermitted: true
+adx_name: Atualizar Comercial_Institucional
+adx_progressindicatorenabled: true
+adx_progressindicatorposition: 756150000
+adx_progressindicatortype: 756150000
+adx_startnewsessiononload: true
+adx_startstep: 6829398a-3a82-42a3-a585-b2f80cc213ac
+adx_webformid: 79aa4eb5-8761-462a-8059-8a715eafa7db
+statecode: 1
+statuscode: 2

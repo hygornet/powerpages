@@ -1,0 +1,616 @@
+
+
+{% fetchxml unidadesDropdown %}
+<fetch version="1.0" mapping="logical" distinct="false">
+  <entity name="cloud_unidades">
+    <attribute name="cloud_unidadesid" />
+    <attribute name="cloud_nome_unidade" />
+    <attribute name="cloud_dominio" />
+    <attribute name="cloud_img_logo_azul" />
+    <attribute name="cloud_img_logo_turquesa" />
+    <attribute name="cloud_img_logo_branco" />
+    <attribute name="cloud_img_foto_unidade" />
+    <order attribute="cloud_nome_unidade" descending="false" />
+    <filter>
+      <condition attribute="statecode" operator="eq" value="0" />
+      <condition attribute="cloud_nome_unidade" operator="not-null" />
+    </filter>
+  </entity>
+</fetch>
+{% endfetchxml %}
+
+{% assign homeurl = website.adx_partialurl %}
+
+{% fetchxml unidadesHeader %}
+<fetch version="1.0" mapping="logical" distinct="false">
+  <entity name="cloud_unidades">
+    <attribute name="cloud_unidadesid" />
+    <attribute name="cloud_nome_unidade" />
+    <attribute name="cloud_dominio" />
+    <order attribute="cloud_nome_unidade" descending="false" />
+    <filter>
+      <condition attribute="statecode" operator="eq" value="0" />
+      <condition attribute="cloud_dominio" operator="not-null" />
+    </filter>
+  </entity>
+</fetch>
+{% endfetchxml %}
+
+<header class="aegea-header-wrap" role="banner">
+  <div class="skip-to-content">
+    <a href="#mainContent">{{ resx.Skip_To_Content | default: "Skip to main content" }}</a>
+  </div>
+
+  <div class="aegea-header-box">
+
+    <!-- BARRA SUPERIOR -->
+    <div class="aegea-top-strip">
+      <div class="container custom-container aegea-top-strip-inner">
+
+        
+
+        <div class="aegea-top-right">
+          <ul class="aegea-top-menu">
+            <li class="aegea-top-menu-item">
+              <a href="https://www.aegea.com.br/" target="_blank" rel="noopener noreferrer" class="aegea-top-link">
+                AEGEA INSTITUCIONAL
+              </a>
+            </li>
+
+            <li class="aegea-top-menu-item">
+              <a href="https://institutoaegea.com.br/" target="_blank" rel="noopener noreferrer" class="aegea-top-link">
+                INSTITUTO AEGEA
+              </a>
+            </li>
+<!-- 
+            <li class="aegea-top-menu-item aegea-top-menu-dropdown" id="aegeaUnidadesMenu">
+              <a
+                href="#"
+                class="aegea-top-link aegea-top-dropdown-toggle"
+                id="unidadesDropdownToggle"
+                aria-expanded="false"
+                aria-haspopup="true"
+              >
+                <span>UNIDADES</span>
+                <span class="aegea-top-caret" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="10" height="10">
+                    <path
+                      d="M6 9l6 6 6-6"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    ></path>
+                  </svg>
+                </span>
+              </a>
+
+              <ul class="aegea-top-dropdown-menu" id="unidadesDropdownMenu">
+  <li>
+    <a
+      class="aegea-unidade-item is-selected"
+      href="#"
+      data-value="default"
+      data-logo="{{ logo | escape }}"
+      data-footer-logo=""
+      data-photo=""
+    >
+      <span class="aegea-unidade-check">✔</span>
+      <span class="aegea-unidade-text">Padrão (Default)</span>
+    </a>
+  </li>
+
+  {% assign unidades_ids_renderizadas = "|" %}
+
+{% for unidade in unidadesDropdown.results.entities %}
+  <li>
+    <a
+      class="aegea-unidade-item"
+      href="#"
+      data-value="{{ unidade.cloud_nome_unidade | escape }}"
+      data-logo="{{ unidade.cloud_img_logo_azul.url | escape }}"
+      data-footer-logo="{{ unidade.cloud_img_logo_branco.url | escape }}"
+      data-photo="{{ unidade.cloud_img_foto_unidade.url | escape }}"
+    >
+      <span class="aegea-unidade-check">✔</span>
+      <span class="aegea-unidade-text">{{ unidade.cloud_nome_unidade | escape }}</span>
+    </a>
+  </li>
+{% endfor %}
+            </li>
+-->
+
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- BARRA PRINCIPAL -->
+    <div class="aegea-main-strip navbar navbar-expand-xl navbar-dark static-top">
+      <div class="container custom-container aegea-main-strip-inner">
+
+        <div class="aegea-logo navbar-brand navbar-header">
+          {% editable snippets 'Mobile Header' type: 'html' %}
+        </div>
+
+        <button
+          type="button"
+          class="navbar-toggler collapsed custom-navbar-toggler aegea-navbar-toggler"
+          title='{{ snippets["Header/Toggle Navigation"] | default: resx["Toggle_Navigation"] | h }}'
+          data-bs-toggle="collapse"
+          data-bs-target="#navbar"
+          aria-expanded="false"
+          onclick="setHeight();"
+        >
+          <span class="visually-hidden">
+            {{ snippets["Header/Toggle Navigation"] | default: resx.Toggle_Navigation | h }}
+          </span>
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div id="navbar" class="navbar-collapse collapse aegea-main-collapse">
+          {% assign primary_nav = weblinks.Default %}
+
+          {% if primary_nav %}
+            <nav
+              aria-label='{{ resx.Main_Navigation | default: "Main Navigation" }}'
+              class='aegea-main-nav {% if primary_nav.editable %}xrm-entity xrm-editable-adx_weblinkset{% endif %}'
+              data-weblinks-maxdepth="2"
+            >
+              {% assign current_path = request.path | default: "/" | downcase | split: "?" | first | replace: "~", "" | strip %}
+{% if current_path == blank %}
+  {% assign current_path = "/" %}
+{% endif %}
+{% unless current_path == "/" %}
+  {% assign current_last = current_path | slice: -1, 1 %}
+  {% unless current_last == "/" %}
+    {% assign current_path = current_path | append: "/" %}
+  {% endunless %}
+{% endunless %}
+
+<ul class="aegea-main-menu nav navbar-nav weblinks">
+  {% for link in primary_nav.weblinks %}
+    {% assign sublinks = empty %}
+    {% if link.display_page_child_links %}
+      {% if link.url != null %}
+        {% assign sublinks = sitemap[link.url].children %}
+      {% endif %}
+    {% else %}
+      {% assign sublinks = link.weblinks %}
+    {% endif %}
+
+    {% assign active_class = "" %}
+    {% assign parent_active = false %}
+    {% assign link_url = link.url | default: "#" | downcase | split: "?" | first | replace: "~", "" | strip %}
+    {% assign normalized_link_url = link_url %}
+
+    {% if normalized_link_url != "#" and normalized_link_url != blank %}
+      {% assign link_last = normalized_link_url | slice: -1, 1 %}
+      {% unless link_last == "/" %}
+        {% assign normalized_link_url = normalized_link_url | append: "/" %}
+      {% endunless %}
+    {% endif %}
+
+    {% if normalized_link_url != "#" and current_path == normalized_link_url %}
+      {% assign active_class = "is-active" %}
+    {% endif %}
+
+    {% if sublinks.size > 0 %}
+      {% for sublink in sublinks %}
+        {% assign sublink_url = sublink.url | default: "#" | downcase | split: "?" | first | replace: "~", "" | strip %}
+        {% assign normalized_sublink_url = sublink_url %}
+
+        {% if normalized_sublink_url != "#" and normalized_sublink_url != blank %}
+          {% assign sublink_last = normalized_sublink_url | slice: -1, 1 %}
+          {% unless sublink_last == "/" %}
+            {% assign normalized_sublink_url = normalized_sublink_url | append: "/" %}
+          {% endunless %}
+        {% endif %}
+
+        {% if normalized_sublink_url != "#" and current_path == normalized_sublink_url %}
+          {% assign parent_active = true %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+
+    <li class="nav-item weblink {% if sublinks.size > 0 %}dropdown{% endif %} {% if parent_active %}is-active-parent{% endif %}">
+      <a
+        aria-label="{{ link.name | escape }}"
+        {% if sublinks.size > 0 %}
+          href="#"
+          role="button"
+          class="dropdown-toggle nav-link aegea-main-link {% if active_class != '' %}{{ active_class }}{% endif %}"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+          {% if parent_active %}aria-current="page"{% endif %}
+        {% else %}
+          class="nav-link aegea-main-link {% if active_class != '' %}{{ active_class }}{% endif %}"
+          href="{{ link.url | escape }}"
+          aria-roledescription="link"
+          {% if active_class != '' %}aria-current="page"{% endif %}
+        {% endif %}
+        {% if link.Open_In_New_Window %}target="_blank"{% endif %}
+        {% if link.nofollow %}rel="nofollow"{% endif %}
+        {% if link.tooltip %}title="{{ link.tooltip | escape }}"{% endif %}
+      >
+        {{ link.name | escape }}
+      </a>
+
+      {% if sublinks.size > 0 %}
+        <ul class="dropdown-menu dropdown-menu-end">
+          {% for sublink in sublinks %}
+            {% assign sublink_url = sublink.url | default: "#" | downcase | split: "?" | first | replace: "~", "" | strip %}
+            {% assign normalized_sublink_url = sublink_url %}
+            {% assign sublink_active = "" %}
+
+            {% if normalized_sublink_url != "#" and normalized_sublink_url != blank %}
+              {% assign sublink_last = normalized_sublink_url | slice: -1, 1 %}
+              {% unless sublink_last == "/" %}
+                {% assign normalized_sublink_url = normalized_sublink_url | append: "/" %}
+              {% endunless %}
+            {% endif %}
+
+            {% if normalized_sublink_url != "#" and current_path == normalized_sublink_url %}
+              {% assign sublink_active = "is-active" %}
+            {% endif %}
+
+            <li>
+              <a
+                class="dropdown-item {{ sublink_active }}"
+                href="{{ sublink.url }}"
+                {% if sublink_active != "" %}aria-current="page"{% endif %}
+                {% if sublink.Open_In_New_Window %}target="_blank"{% endif %}
+                {% if sublink.nofollow %}rel="nofollow"{% endif %}
+                {% if sublink.tooltip %}title="{{ sublink.tooltip | escape }}"{% endif %}
+              >
+                {{ sublink.name | default: sublink.title | escape }}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </li>
+  {% endfor %}
+</ul>
+
+              {% editable primary_nav %}
+            </nav>
+          {% endif %}
+
+          <div class="aegea-main-actions">
+
+            {% if user %}
+              <div class="nav-item dropdown aegea-user-desktop">
+                {% assign username = user.fullname | escape %}
+
+                <a
+                  href="#"
+                  class="nav-link dropdown-toggle aegea-user-link"
+                  data-bs-toggle="dropdown"
+                  role="button"
+                  aria-expanded="false"
+                >
+                  <span class="username">{{ username | default: resx.Default_Profile_name }}</span>
+
+                  <span class="aegea-user-trigger-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="14" height="14">
+                      <path
+                        d="M6 9l6 6 6-6"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></path>
+                    </svg>
+                  </span>
+                </a>
+
+                <ul class="dropdown-menu dropdown-menu-end aegea-user-dropdown">
+                  {% assign show_profile_nav = settings['Header/ShowAllProfileNavigationLinks'] | boolean | default: true %}
+                  {% if show_profile_nav %}
+                    {% assign profile_nav = weblinks['Profile Navigation'] %}
+                    {% if profile_nav %}
+                      {% for link in profile_nav.weblinks %}
+                        <li>
+                          <a class="dropdown-item" href="{{ link.url | escape }}" title="{{ link.name | escape }}">
+                            {{ link.name | escape }}
+                          </a>
+                        </li>
+                      {% endfor %}
+                    {% endif %}
+                  {% else %}
+                    <li>
+                      <a class="dropdown-item" href="{{ sitemarkers['Profile'].url | escape }}">
+                        {{ snippets["Profile Link Text"] | default: resx.Profile_Text | escape }}
+                      </a>
+                    </li>
+                  {% endif %}
+
+                  <li class="dropdown-divider" role="separator" aria-hidden="true"></li>
+
+                  <li>
+                    <a class="dropdown-item" href="{% if homeurl %}/{{ homeurl }}{% endif %}{{ website.sign_out_url_substitution }}">
+                      {{ snippets['links/logout'] | default: resx.Sign_Out | escape }}
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            {% endif %}
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+ <script>
+  
+
+document.addEventListener("DOMContentLoaded", function () {
+  const menu = document.getElementById("aegeaUnidadesMenu");
+  const toggle = document.getElementById("unidadesDropdownToggle");
+  const dropdown = document.getElementById("unidadesDropdownMenu");
+  const headerLogo = document.getElementById("aegeaHeaderLogo");
+
+  if (!menu || !toggle || !dropdown) return;
+
+  const STORAGE_KEY = "aegea_unidade_selecionada";
+  const STORAGE_LOGO_KEY = "aegea_unidade_logo";
+  const STORAGE_PHOTO_KEY = "aegea_unidade_photo";
+  const STORAGE_FOOTER_LOGO_KEY = "aegea_unidade_footer_logo";
+  const items = Array.from(dropdown.querySelectorAll(".aegea-unidade-item"));
+
+function saveFooterLogo(value) {
+  try {
+    localStorage.setItem(STORAGE_FOOTER_LOGO_KEY, value || "");
+  } catch (e) {}
+}
+
+function getSavedFooterLogo() {
+  try {
+    return localStorage.getItem(STORAGE_FOOTER_LOGO_KEY) || "";
+  } catch (e) {
+    return "";
+  }
+}
+  function closeDropdown() {
+    menu.classList.remove("is-open");
+    toggle.setAttribute("aria-expanded", "false");
+  }
+
+  function setSelected(value) {
+    items.forEach(function (item) {
+      const currentValue = item.getAttribute("data-value") || "";
+      item.classList.toggle("is-selected", currentValue === value);
+    });
+  }
+
+  function saveValue(value) {
+    try {
+      localStorage.setItem(STORAGE_KEY, value);
+    } catch (e) {}
+  }
+
+  function getSavedValue() {
+    try {
+      return localStorage.getItem(STORAGE_KEY) || "default";
+    } catch (e) {
+      return "default";
+    }
+  }
+
+  function saveLogo(value) {
+    try {
+      localStorage.setItem(STORAGE_LOGO_KEY, value || "");
+    } catch (e) {}
+
+
+
+  }
+
+    function savePhoto(value) {
+    try {
+      localStorage.setItem(STORAGE_PHOTO_KEY, value || "");
+    } catch (e) {}
+  }
+  function getSavedLogo() {
+    try {
+      return localStorage.getItem(STORAGE_LOGO_KEY) || "";
+    } catch (e) {
+      return "";
+    }
+  }
+
+function updateHeaderLogo(selectedValue) {
+  if (!headerLogo) return;
+
+  const defaultLogo = headerLogo.getAttribute("data-default-logo") || "";
+  let targetLogo = defaultLogo;
+
+  const logoMap = {
+    "águas de guariroba": "/centro_guariroba.png",
+    "aguas de guariroba": "/centro_guariroba.png",
+
+    "águas de manaus": "/centro_manaus.png",
+    "aguas de manaus": "/centro_manaus.png",
+
+    "águas do pará": "/centro_para.png",
+    "aguas do para": "/centro_para.png",
+    "águas do para": "/centro_para.png",
+    "aguas do pará": "/centro_para.png",
+
+    "prolagos": "/centro_prolagos.png",
+
+    "corsan": "/corsan-centralized.png"
+  };
+
+  if (selectedValue && selectedValue !== "default") {
+    const normalizedValue = String(selectedValue).trim().toLowerCase();
+
+    if (logoMap[normalizedValue]) {
+      targetLogo = logoMap[normalizedValue];
+    }
+  }
+
+  if (targetLogo) {
+    headerLogo.setAttribute("src", targetLogo);
+    saveLogo(targetLogo);
+  }
+}
+
+  const initialValue = getSavedValue();
+  setSelected(initialValue);
+  updateHeaderLogo(initialValue);
+
+  toggle.addEventListener("click", function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+    menu.classList.toggle("is-open");
+    toggle.setAttribute("aria-expanded", menu.classList.contains("is-open") ? "true" : "false");
+  });
+
+  items.forEach(function (item) {
+    item.addEventListener("click", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      const value = item.getAttribute("data-value") || "default";
+      const logo = item.getAttribute("data-logo") || "";
+      const footerLogo = item.getAttribute("data-footer-logo") || "";
+      const photo = item.getAttribute("data-photo") || "";
+
+      saveValue(value);
+      saveLogo(logo);
+      saveFooterLogo(footerLogo);
+      savePhoto(photo);
+
+      setSelected(value);
+      updateHeaderLogo(value);
+      closeDropdown();
+
+      window.location.reload();
+    });
+  });
+  document.addEventListener("click", function (e) {
+    if (!menu.contains(e.target)) {
+      closeDropdown();
+    }
+  });
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") {
+      closeDropdown();
+    }
+  });
+});
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  function normalizePath(value) {
+    if (!value) return "/";
+    try {
+      const url = new URL(value, window.location.origin);
+      let path = (url.pathname || "/").toLowerCase().trim();
+      if (path !== "/" && path.endsWith("/")) {
+        path = path.slice(0, -1);
+      }
+      return path || "/";
+    } catch (e) {
+      let path = String(value).toLowerCase().trim();
+      path = path.split("?")[0].replace(/^~\//, "/").replace(/\/+$/, "");
+      return path || "/";
+    }
+  }
+
+  function updateActiveMenu() {
+    const currentPath = normalizePath(window.location.pathname);
+
+    document.querySelectorAll(".aegea-main-menu > li").forEach(function (li) {
+      li.classList.remove("is-active-parent");
+
+      const mainLink = li.querySelector(":scope > a.aegea-main-link");
+      const subLinks = li.querySelectorAll(":scope > ul.dropdown-menu a.dropdown-item");
+
+      let matched = false;
+
+      if (mainLink) {
+        mainLink.classList.remove("is-active");
+        mainLink.removeAttribute("aria-current");
+
+        const href = mainLink.getAttribute("href");
+        if (href && href !== "#") {
+          const normalizedMain = normalizePath(href);
+          if (normalizedMain === currentPath) {
+            mainLink.classList.add("is-active");
+            mainLink.setAttribute("aria-current", "page");
+            matched = true;
+          }
+        }
+      }
+
+      subLinks.forEach(function (subLink) {
+        subLink.classList.remove("is-active");
+        subLink.removeAttribute("aria-current");
+
+        const href = subLink.getAttribute("href");
+        if (href && href !== "#") {
+          const normalizedSub = normalizePath(href);
+          if (normalizedSub === currentPath) {
+            subLink.classList.add("is-active");
+            subLink.setAttribute("aria-current", "page");
+            li.classList.add("is-active-parent");
+            matched = true;
+          }
+        }
+      });
+
+      if (!matched && mainLink) {
+        mainLink.classList.remove("is-active");
+        mainLink.removeAttribute("aria-current");
+      }
+    });
+  }
+
+  const header = document.querySelector(".aegea-header-wrap");
+  const desktopMq = window.matchMedia("(min-width: 1200px)");
+
+  function updateStickyHeader() {
+    if (!header) return;
+
+    const isDesktop = desktopMq.matches;
+    const isScrolled = isDesktop && window.scrollY > 16;
+
+    document.body.classList.toggle("aegea-header-scrolled", isScrolled);
+
+    requestAnimationFrame(() => {
+      const height = header.offsetHeight || 0;
+      document.documentElement.style.setProperty("--aegea-header-space", height + "px");
+    });
+  }
+
+  updateActiveMenu();
+  updateStickyHeader();
+
+  window.addEventListener("scroll", updateStickyHeader, { passive: true });
+  window.addEventListener("resize", function () {
+    updateActiveMenu();
+    updateStickyHeader();
+  });
+
+  if (desktopMq.addEventListener) {
+    desktopMq.addEventListener("change", updateStickyHeader);
+  } else {
+    desktopMq.addListener(updateStickyHeader);
+  }
+});
+
+</script>
+
+
+</header>

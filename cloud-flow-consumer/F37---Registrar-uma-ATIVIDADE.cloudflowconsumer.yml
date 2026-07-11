@@ -1,0 +1,8 @@
+adx_CloudFlowConsumer_adx_webrole:
+- 1e16f3b3-b319-4d15-a71e-bd149be9381d
+adx_cloudflowconsumerid: e29c87d2-0b4d-f111-bec7-002248dedebb
+adx_flowapiurl: /_api/cloudflow/v1.0/trigger/0d3c3fbe-0b4d-f111-bec7-002248de77b7
+adx_flowtriggerurl: ''
+adx_metadata: ''
+adx_name: F37 - Registrar uma ATIVIDADE
+adx_processid: 0d3c3fbe-0b4d-f111-bec7-002248de77b7

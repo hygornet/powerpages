@@ -1,0 +1,478 @@
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_fk_finalidades_solicitacao
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_fieldisrequired: false
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Qual é a Finalidade do Empreendimento?"
+      }
+    ]
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_webformmetadataid: 029c9b14-2690-483e-8034-76f56aee1758
+  adx_webformstep: 48c5e849-13bb-f011-bbd3-000d3a5976b0
+- adx_adddescription: true
+  adx_attributelogicalname: cloud_is_conglomerado_empresarial
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Selecione 'Sim' se este CNPJ estiver associado a mais de um local de consumo (matriz e filiais, por exemplo)."
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_fieldisrequired: false
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Este CNPJ já é (ou será) utilizado para cadastrar outros endereços/filiais com nossa companhia de água?"
+      }
+    ]
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_webformmetadataid: 094c0faf-dced-418d-bd37-87d05c322123
+  adx_webformstep: 48c5e849-13bb-f011-bbd3-000d3a5976b0
+- adx_adddescription: true
+  adx_attributelogicalname: cloud_gc_finalidade
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Selecione a atividade que melhor descreve o uso da água no local:<br> <ul> <li>A. Moradia (Ex: casa, apartamento)</li> <li>B. Condomínio / Loteamento Residencial</li> <li>C. Comercial (Ex: loja, restaurante, armazém, hotel)</li> <li>D. Industrial (Ex: fábrica, transformação de matéria-prima)</li> <li>E. Loteamento Industrial</li> <li>F. Institucional (Ex: escola, hospital, órgão público)</li></ul>"
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_fieldisrequired: false
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "1) Qual é a finalidade principal do seu empreendimento?"
+      }
+    ]
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_webformmetadataid: 1d146f87-4a80-41df-ac95-172bff0660ad
+  adx_webformstep: 48c5e849-13bb-f011-bbd3-000d3a5976b0
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_tipo_cadastro
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_fieldisrequired: false
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "O cadastro da ligação de água será feito em nome de:"
+      }
+    ]
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_webformmetadataid: 5103a973-7d1e-4461-abea-e5b499bd8b69
+  adx_webformstep: 48c5e849-13bb-f011-bbd3-000d3a5976b0
+- adx_adddescription: true
+  adx_attributelogicalname: cloud_gc_numero_de_economias
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Exemplos: 1 para uma casa ou loja única; 10 para um prédio com 10 apartamentos; 5 para um centro comercial com 5 lojas."
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_fieldisrequired: false
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "5) Quantas unidades independentes de consumo existem (ou existirão) no local?"
+      }
+    ]
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_webformmetadataid: 59281ea7-f364-4ce5-b901-c2a3bf0af0b1
+  adx_webformstep: 48c5e849-13bb-f011-bbd3-000d3a5976b0
+- adx_adddescription: true
+  adx_attributelogicalname: cloud_area_construida_total
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Informe o total de área construída do empreendimento. Caso não se aplique (ex: apenas um loteamento), insira 0."
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_fieldisrequired: false
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Qual é a área construída total (em m²)?"
+      }
+    ]
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_webformmetadataid: 6a3ac442-c568-4d4c-b165-f75e60639129
+  adx_webformstep: 48c5e849-13bb-f011-bbd3-000d3a5976b0
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_gc_tipo_cadastro
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_fieldisrequired: false
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "2) O cadastro da ligação de água será feito em nome de:"
+      }
+    ]
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_webformmetadataid: 7973275c-35d2-4093-b82f-ad8cfcec4563
+  adx_webformstep: 48c5e849-13bb-f011-bbd3-000d3a5976b0
+- adx_adddescription: true
+  adx_attributelogicalname: cloud_gc_area_construida_total
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Informe o total de área construída do empreendimento. Caso não se aplique (ex: apenas um loteamento), insira 0."
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_fieldisrequired: false
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "4) Qual é a área construída total (em m²)?"
+      }
+    ]
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_webformmetadataid: 9c5d796e-d510-4c12-994f-55001f9172e0
+  adx_webformstep: 48c5e849-13bb-f011-bbd3-000d3a5976b0
+- adx_adddescription: true
+  adx_attributelogicalname: cloud_finalidade_empreendimento
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Selecione a atividade que melhor descreve o uso da água no local:<ul>   <li>Residencial (Ex: casa, apartamento)</li>   <li>Condomínio / Loteamento Residencial</li>   <li>Comercial (Ex: loja, restaurante, armazém, hotel)</li>   <li>Industrial (Ex: fábrica, transformação de matéria-prima)</li>   <li>Loteamento Industrial</li>   <li>Institucional (Ex: escola, hospital, órgão público)</li> </ul>"
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_fieldisrequired: false
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Qual é a finalidade principal do seu empreendimento?"
+      }
+    ]
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_webformmetadataid: a5b53187-97d6-434d-a9fb-84ccd60819e3
+  adx_webformstep: 48c5e849-13bb-f011-bbd3-000d3a5976b0
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_fk_contato
+  adx_descriptionposition: 100000000
+  adx_fieldisrequired: false
+  adx_ignoredefaultvalue: false
+  adx_onsavefromattribute: contactid
+  adx_onsavetype: 100000002
+  adx_purchasecreateinvoiceonpayment: false
+  adx_purchasefulfillorderonpayment: false
+  adx_purchaserequiresshipping: false
+  adx_randomizeoptionsetvalues: false
+  adx_setvalueonsave: true
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_webformmetadataid: b1d27b88-60bb-f011-bbd3-000d3a5976b0
+  adx_webformstep: 48c5e849-13bb-f011-bbd3-000d3a5976b0
+- adx_adddescription: true
+  adx_attributelogicalname: cloud_id_solicitacao
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Selecione a atividade que melhor descreve o uso da água no local.\"  Opções (Escolha):  A. Moradia (Ex: casa, apartamento)   B. Condomínio / Loteamento Residencial    C. Comercial (Ex: loja, restaurante, armazém, hotel)   D. Industrial (Ex: fábrica, transformação de matéria-prima)   E. Loteamento Industrial    F. Institucional (Ex: escola, hospital, órgão público)"
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_fieldisrequired: false
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "ID_SOLICITACAO"
+      }
+    ]
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_validationregularexpressionerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_webformmetadataid: b34ba1d4-13a3-4ebf-931e-063c98438f21
+  adx_webformstep: 48c5e849-13bb-f011-bbd3-000d3a5976b0
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_fk_municipios
+  adx_descriptionposition: 100000000
+  adx_fieldisrequired: false
+  adx_ignoredefaultvalue: false
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Município da Obra"
+      }
+    ]
+  adx_purchasecreateinvoiceonpayment: false
+  adx_purchasefulfillorderonpayment: false
+  adx_purchaserequiresshipping: false
+  adx_randomizeoptionsetvalues: false
+  adx_setvalueonsave: false
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_webformmetadataid: ca7722de-2dfd-f011-8406-7ced8da81546
+  adx_webformstep: 48c5e849-13bb-f011-bbd3-000d3a5976b0
+- adx_adddescription: true
+  adx_attributelogicalname: cloud_numero_economias
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Exemplos: 1 para uma casa ou loja única; 10 para um prédio com 10 apartamentos; 5 para um centro comercial com 5 lojas."
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_fieldisrequired: false
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Quantas unidades independentes de consumo existem (ou existirão) no local?"
+      }
+    ]
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_webformmetadataid: d475ffc6-0994-419b-8361-cd49969f32a7
+  adx_webformstep: 48c5e849-13bb-f011-bbd3-000d3a5976b0
+- adx_adddescription: true
+  adx_attributelogicalname: cloud_gc_consumo_estimado_mes
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Informe uma estimativa do volume total. Lembre-se: 1 m³ (metro cúbico) equivale a 1.000 litros de água."
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_fieldisrequired: false
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "3) Qual é o consumo total de água estimado por mês (em m³)?"
+      }
+    ]
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_webformmetadataid: dd8a208d-4ef9-46ed-bf2c-242b76666b59
+  adx_webformstep: 48c5e849-13bb-f011-bbd3-000d3a5976b0
+- adx_adddescription: true
+  adx_attributelogicalname: cloud_gc_cnpj_multiplos_enderecos
+  adx_controlstyle: 756150001
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Selecione 'Sim' se este CNPJ estiver associado a mais de um local de consumo (matriz e filiais, por exemplo)."
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_fieldisrequired: false
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "6) Este CNPJ já é (ou será) utilizado para cadastrar outros endereços/filiais com nossa companhia de água?"
+      }
+    ]
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_webformmetadataid: e2114355-4c80-4ab1-95b6-fc289e43fab3
+  adx_webformstep: 48c5e849-13bb-f011-bbd3-000d3a5976b0
+- adx_adddescription: true
+  adx_attributelogicalname: cloud_consumo_mensal
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Informe uma estimativa do volume total. Lembre-se: 1 m³ (metro cúbico) equivale a 1.000 litros de água."
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_fieldisrequired: false
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Qual é o consumo total de água estimado por mês (em m³)?"
+      }
+    ]
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_webformmetadataid: e7e72e55-18b4-4e1a-b1b5-ace1296d7435
+  adx_webformstep: 48c5e849-13bb-f011-bbd3-000d3a5976b0

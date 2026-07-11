@@ -1,0 +1,24 @@
+adx_appendquerystring: false
+adx_associatecurrentportaluser: true
+adx_attachfilemaxsize: 
+adx_attachfilestoragelocation: 756150000
+adx_captcharequired: false
+adx_entityformid: 12b344d1-a890-44d8-8678-eb6624bd7c74
+adx_entityname: cloud_solicitacoes
+adx_entitypermissionsenabled: true
+adx_entitysourcetype: 0
+adx_formname: GRANDES CLIENTES
+adx_geolocation_maptype: 756150000
+adx_hideformonsuccess: true
+adx_maximumnooffiles: 5
+adx_mode: 100000000
+adx_name: Iniciar Solicitação
+adx_onsuccess: 756150001
+adx_recordidquerystringparametername: 
+adx_redirecturl: 
+adx_redirecturlappendentityidquerystring: true
+adx_redirecturlquerystringname: id
+adx_redirectwebpage: beddea4f-1826-3f68-91d3-3adcc0f3e353
+adx_setentityreference: false
+adx_showcaptchaforauthenticatedusers: false
+adx_targetentityportaluserlookupattribute: cloud_fk_contato

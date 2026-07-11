@@ -1,0 +1,16 @@
+adx_accountrelationship: 
+adx_append: false
+adx_appendto: false
+adx_contactrelationship: 
+adx_create: false
+adx_delete: false
+adx_entitylogicalname: cloud_unidades
+adx_entityname: UNIDADE
+adx_entitypermission_webrole:
+- 1e16f3b3-b319-4d15-a71e-bd149be9381d
+adx_entitypermissionid: c28cfc09-723a-4373-b9ae-cc53b1cf9440
+adx_parententitypermission: 
+adx_parentrelationship: 
+adx_read: true
+adx_scope: 756150000
+adx_write: false

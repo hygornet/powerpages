@@ -1,0 +1,81 @@
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_numero_economias
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_entityform: 3abe6aa7-8cb1-4fa4-add0-07c605272936
+  adx_entityformmetadataid: 0d1bf52e-1e19-44ba-ba74-4a3b56c59a77
+  adx_fieldisrequired: false
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Número de Economias"
+      }
+    ]
+  adx_name: Alterar Número de Economias cloud_numero_economias
+  adx_prepopulatetype: 0
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_numero_economias
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_entityform: 3abe6aa7-8cb1-4fa4-add0-07c605272936
+  adx_entityformforcreate: 3abe6aa7-8cb1-4fa4-add0-07c605272936
+  adx_entityformmetadataid: 8c2d106e-bcdf-f011-8543-000d3a5ae560
+  adx_fieldisrequired: false
+  adx_ignoredefaultvalue: false
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Número de Economias"
+      }
+    ]
+  adx_name: Alterar Número de Economias cloud_numero_economias
+  adx_prepopulatetype: 0
+  adx_randomizeoptionsetvalues: false
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_setvalueonsave: false
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: true
+  adx_validationregularexpression: ^\d{1,10}$
+  adx_validationregularexpressionerrormessage: >-
+    [
+      {
+        "LCID": 1033,
+        "Value": "Número incorreto! Por gentileza forneça apenas número inteiro."
+      },
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]

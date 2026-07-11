@@ -1,0 +1,39 @@
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_nome_empreendimento
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_entityform: 94a62490-46ea-4b6b-a7c1-d33e172d2a5d
+  adx_entityformmetadataid: 566b146a-c046-4540-8dc3-2cc942cc927a
+  adx_fieldisrequired: false
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Nome do Empreendimento"
+      }
+    ]
+  adx_name: Editar Nome do Empreendimento cloud_nome_empreendimento
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_validationregularexpressionerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]

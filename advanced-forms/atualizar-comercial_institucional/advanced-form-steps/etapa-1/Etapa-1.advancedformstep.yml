@@ -1,0 +1,28 @@
+adx_attachfilelabel: >-
+  [
+    {
+      "LCID": 1046,
+      "Value": ""
+    }
+  ]
+adx_attachfilemaxsize: 
+adx_attachfilestoragelocation: 756150000
+adx_captcharequired: false
+adx_containername: ''
+adx_entitypermissionsenabled: true
+adx_formname: GRANDES CLIENTES A
+adx_hideformonsuccess: true
+adx_maximumnooffiles: 5
+adx_mode: 100000001
+adx_movepreviouspermitted: false
+adx_name: Etapa 1
+adx_nextstep: 30762e6a-022a-4021-a9dc-fb17c0e7a279
+adx_referencequerystringisprimarykey: true
+adx_showcaptchaforauthenticatedusers: false
+adx_storageaccountname: ''
+adx_successmessage: ''
+adx_targetentitylogicalname: cloud_solicitacoes
+adx_type: 100000001
+adx_validationsummarylinksenabled: true
+adx_webform: 79aa4eb5-8761-462a-8059-8a715eafa7db
+adx_webformstepid: 6829398a-3a82-42a3-a585-b2f80cc213ac

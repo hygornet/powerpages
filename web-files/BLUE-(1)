@@ -1,0 +1,110 @@
+
+$presetThemeId: df88c9ca-e24f-4eca-af9a-880e7b8559a0;
+$isModified: true;
+
+$name: BLUE;
+
+$color1: #0027bd;
+$color2: #1276CE;
+$color3: #e2e5f0;
+$color4: #17e3cb;
+$color5: #F4F9FD;
+$color6: #AFD2F0;
+$color7: #FFFFFF;
+$color8: #323130;
+$color9: #004184;
+$color10: #fafafa;
+$color11: rgba(0, 4, 255, 0);
+$color12: ;
+
+$primaryColor: $color2;
+$headerColor: $color1;
+$headerMenuTextColor: $color7;
+$headerMenuHoverColor: $color4;
+$bodyBackground: $color10;
+$footerColor: $color4;
+$footerTextColor: $color8;
+$footerTextFont: Open Sans;
+$footerTextWeight: 400;
+$footerTextSize: 16;
+
+$headerMenuTextFont: Poppins;
+$headerMenuTextWeight: 400;
+$headerMenuTextSize: 16;
+$headerMenuHoverStyle: Underline;
+
+$siteTitlecolor: $color4;
+$siteTitlefont: Poppins;
+$siteTitleweight: 500;
+$siteTitlesize: 25;
+
+$h1font: Inter;
+$h1weight: 700;
+$h1size: 40;
+$h1color: $color1;
+
+$h2font: Inter;
+$h2weight: 500;
+$h2size: 36;
+$h2color: $color1;
+
+$h3font: Inter;
+$h3weight: 400;
+$h3size: 24;
+$h3color: $color1;
+
+$h4font: Inter;
+$h4weight: 700;
+$h4size: 24;
+$h4color: $color1;
+
+$h5font: Inter;
+$h5weight: 700;
+$h5size: 14;
+$h5color: $color8;
+
+$p1font: Open Sans;
+$p1weight: 400;
+$p1size: 18;
+$p1color: $color8;
+
+$p2font: Arial;
+$p2weight: 400;
+$p2size: 16;
+$p2color: $color8;
+
+$afont: Open Sans;
+$aweight: 400;
+$asize: 14;
+$atextcolor: $color4;
+$astyle: Plain text;
+$aonhoverstyle: Underline;
+$aonhovertextcolor: $color9;
+
+$button1style: Filled;
+$button1radius: 2;
+$button1font: Open Sans;
+$button1weight: 600;
+$button1size: 14;
+$button1fillcolor: $color4;
+$button1textcolor: $color7;
+$button1onhoverstyle: Filled;
+$button1onhoverfillcolor: $color9;
+$button1onhovertextcolor: $color7;
+
+$button2style: Outline;
+$button2radius: 2;
+$button2font: Open Sans;
+$button2weight: 600;
+$button2size: 14;
+$button2fillcolor: $color4;
+$button2textcolor: $color4;
+$button2onhoverstyle: Filled;
+$button2onhoverfillcolor: $color4;
+$button2onhovertextcolor: $color7;
+
+$sectioncolumnmargintopbottom: 60;
+$sectioncolumnmarginunit: px;
+$sectioncolumnpaddingunit: px;
+$sectioncolumncontentpadding: 16;
+

@@ -1,0 +1,8 @@
+adx_CloudFlowConsumer_adx_webrole:
+- 1e16f3b3-b319-4d15-a71e-bd149be9381d
+adx_cloudflowconsumerid: b8b828f3-781b-f111-8341-7ced8da81546
+adx_flowapiurl: /_api/cloudflow/v1.0/trigger/c6fe04cf-781b-f111-8341-7ced8da81546
+adx_flowtriggerurl: ''
+adx_metadata: ''
+adx_name: F16 - APAGAR Item de componente na solicitação
+adx_processid: c6fe04cf-781b-f111-8341-7ced8da81546

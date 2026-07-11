@@ -1,0 +1,25 @@
+{% assign protocolo = entity %}
+
+{% case protocolo.new_status %}
+  {% when 'Aguardando Análise Técnica' %}
+    <div class="painel-aguardando-analise">
+      <h2>Status: Aguardando Análise Técnica</h2>
+      <p>Seu protocolo está aguardando análise técnica. Aguarde contato.</p>
+      <!-- pode colocar links, botões, campos específicos aqui -->
+    </div>
+  {% when 'Em Análise Técnica' %}
+    <div class="painel-em-analise">
+      <h2>Status: Em Análise Técnica</h2>
+      <p>Estamos analisando seu protocolo.</p>
+    </div>
+  {% when 'Aprovado' %}
+    <div class="painel-aprovado">
+      <h2>Status: Aprovado</h2>
+      <p>Parabéns — seu protocolo foi aprovado.</p>
+    </div>
+  {% else %}
+    <div class="painel-outro">
+      <h2>Status: Outro</h2>
+      <p>Etapa atual: {{ protocolo.new_status }}</p>
+    </div>
+{% endcase %}

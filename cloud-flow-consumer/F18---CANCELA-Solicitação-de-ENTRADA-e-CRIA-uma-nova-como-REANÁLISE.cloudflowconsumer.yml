@@ -1,0 +1,8 @@
+adx_CloudFlowConsumer_adx_webrole:
+- 1e16f3b3-b319-4d15-a71e-bd149be9381d
+adx_cloudflowconsumerid: 6ba4294e-1d1d-f111-8342-002248de77b7
+adx_flowapiurl: /_api/cloudflow/v1.0/trigger/a997cb3f-1d1d-f111-8341-7ced8da81546
+adx_flowtriggerurl: ''
+adx_metadata: ''
+adx_name: F18 - CANCELA Solicitação de ENTRADA e CRIA uma nova como REANÁLISE
+adx_processid: a997cb3f-1d1d-f111-8341-7ced8da81546

@@ -1,0 +1,7 @@
+adx_CloudFlowConsumer_adx_webrole: []
+adx_cloudflowconsumerid: 21c1fd5b-f620-f111-88b1-7ced8da81546
+adx_flowapiurl: /_api/cloudflow/v1.0/trigger/5a025853-f620-f111-88b2-002248de77b7
+adx_flowtriggerurl: ''
+adx_metadata: ''
+adx_name: F22 - ALTERAR status para EM ANÁLISE DE DOCUMENTOS COMPLEMENTARES
+adx_processid: 5a025853-f620-f111-88b2-002248de77b7

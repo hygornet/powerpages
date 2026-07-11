@@ -1,0 +1,67 @@
+  /* FAB - POSSO AJUDAR */
+.faq-fab {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+
+  background: #0027bd;
+  color: #ffffff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 26px;
+  font-weight: 800;
+  text-decoration: none;
+
+  box-shadow:
+    0 6px 16px rgba(0, 39, 189, 0.45);
+
+  z-index: 9999;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.faq-fab:hover {
+  transform: translateY(-4px);
+  background: #001e99;
+  box-shadow:
+    0 10px 24px rgba(0, 39, 189, 0.55);
+}
+
+/* Tooltip */
+.faq-fab-tooltip {
+  position: absolute;
+  right: 68px;
+  white-space: nowrap;
+
+  background: #111827;
+  color: #ffffff;
+  font-size: 13px;
+  padding: 6px 10px;
+  border-radius: 6px;
+
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(4px);
+  transition: all 0.2s ease;
+}
+
+.faq-fab:hover .faq-fab-tooltip {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Oculta a opção "Gerenciar autenticação externa" */
+a[href="/Account/Manage/ChangeLogin"],
+a[href*="/Account/Manage/ChangeLogin"] {
+  display: none !important;
+}
+
+
+

@@ -1,0 +1,8 @@
+adx_CloudFlowConsumer_adx_webrole:
+- 1e16f3b3-b319-4d15-a71e-bd149be9381d
+adx_cloudflowconsumerid: e8b7d662-551d-f111-8342-002248de77b7
+adx_flowapiurl: /_api/cloudflow/v1.0/trigger/bf6c404b-551d-f111-8342-002248dedebb
+adx_flowtriggerurl: ''
+adx_metadata: ''
+adx_name: F19 - Avançar status para AGUARDANDO RECEBIMENTO DE DOCS CRUCIAIS
+adx_processid: bf6c404b-551d-f111-8342-002248dedebb

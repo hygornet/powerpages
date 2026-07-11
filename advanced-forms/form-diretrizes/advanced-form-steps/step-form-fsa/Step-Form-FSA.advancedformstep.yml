@@ -1,0 +1,68 @@
+adx_accept: 
+adx_allowmultiplefiles: true
+adx_appendquerystring: false
+adx_associatecurrentportaluser: false
+adx_attachfile: true
+adx_attachfilelabel: >-
+  [
+    {
+      "LCID": 1046,
+      "Value": "Anexos"
+    }
+  ]
+adx_attachfilemaxsize: 5000
+adx_attachfilerequired: true
+adx_attachfilerestrictaccept: false
+adx_attachfilestoragelocation: 756150000
+adx_autogeneratesteps: false
+adx_captcharequired: false
+adx_createautonumber: false
+adx_editexistingrecordpermitted: false
+adx_entitypermissionsenabled: true
+adx_entitysourcestep: 48c5e849-13bb-f011-bbd3-000d3a5976b0
+adx_entitysourcetype: 100000003
+adx_forceallfieldsrequired: false
+adx_formname: Form_FSA
+adx_geolocation_displaymap: false
+adx_geolocation_enabled: false
+adx_geolocation_maptype: 756150000
+adx_hideformonsuccess: true
+adx_loguser: false
+adx_maximumnooffiles: 10
+adx_mode: 100000001
+adx_movepreviouspermitted: true
+adx_multiplerecordsperuserpermitted: false
+adx_name: Step Form FSA
+adx_nextstep: e43e68c9-9cd6-f011-8543-000d3a3113d7
+adx_populatereferenceentitylookupfield: false
+adx_portaluserlookupattributeisactivityparty: false
+adx_previousbuttontext: >-
+  [
+    {
+      "LCID": 1046,
+      "Value": ""
+    }
+  ]
+adx_previousstep: 48c5e849-13bb-f011-bbd3-000d3a5976b0
+adx_recommendedfieldsrequired: true
+adx_redirecturlappendentityidquerystring: false
+adx_referenceentityshowreadonlyform: false
+adx_referenceentitysourcetype: 100000001
+adx_referencequerystringisprimarykey: true
+adx_renderwebresourcesinline: false
+adx_setentityreference: false
+adx_showcaptchaforauthenticatedusers: false
+adx_showownerfields: false
+adx_showunsupportedfields: false
+adx_successmessage: >-
+  [
+    {
+      "LCID": 1046
+    }
+  ]
+adx_targetentitylogicalname: cloud_solicitacoes
+adx_tooltipenabled: false
+adx_type: 100000001
+adx_validationsummarylinksenabled: true
+adx_webform: 23cc022e-13bb-f011-bbd3-000d3a5976b0
+adx_webformstepid: 69c42821-19d2-f011-8543-000d3a3113d7

@@ -1,0 +1,16 @@
+adx_accountrelationship: 
+adx_append: false
+adx_appendto: false
+adx_contactrelationship: 
+adx_create: false
+adx_delete: false
+adx_entitylogicalname: cloud_regionais
+adx_entityname: REGIONAIS
+adx_entitypermission_webrole:
+- 1e16f3b3-b319-4d15-a71e-bd149be9381d
+adx_entitypermissionid: 2b4ccded-2418-4ced-9432-3677ef2ff0da
+adx_parententitypermission: c28cfc09-723a-4373-b9ae-cc53b1cf9440
+adx_parentrelationship: cloud_regionais_fk_unidades_cloud_unidades
+adx_read: true
+adx_scope: 756150003
+adx_write: false

@@ -1,0 +1,33 @@
+adx_attachfilelabel: >-
+  [
+    {
+      "LCID": 1046,
+      "Value": ""
+    }
+  ]
+adx_attachfilemaxsize: 
+adx_attachfilestoragelocation: 756150000
+adx_captcharequired: false
+adx_containername: ''
+adx_entityformid: 71f309c9-3237-48ff-bc32-8c522d82af50
+adx_entityname: contact
+adx_entitypermissionsenabled: true
+adx_entitysourcetype: 756150001
+adx_formname: Profile Web Form (Enhanced)
+adx_hideformonsuccess: true
+adx_maximumnooffiles: 5
+adx_mode: 100000001
+adx_name: Profile Web Form (Enhanced)
+adx_onsuccess: 756150000
+adx_recordidquerystringparametername: id
+adx_redirecturl: 
+adx_redirectwebpage: 
+adx_showcaptchaforauthenticatedusers: false
+adx_storageaccountname: ''
+adx_successmessage: >-
+  [
+    {
+      "LCID": 1046,
+      "Value": ""
+    }
+  ]

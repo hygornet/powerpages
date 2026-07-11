@@ -1,0 +1,30 @@
+adx_accept: 
+adx_allowmultiplefiles: true
+adx_attachfile: true
+adx_attachfilelabel: >-
+  [
+    {
+      "LCID": 1046,
+      "Value": "Anexos"
+    }
+  ]
+adx_attachfilemaxsize: 4000
+adx_attachfilerestrictaccept: false
+adx_attachfilestoragelocation: 756150000
+adx_containername: ''
+adx_entitypermissionsenabled: true
+adx_formname: Form_FSA A
+adx_hideformonsuccess: true
+adx_maximumnooffiles: 10
+adx_mode: 100000001
+adx_movepreviouspermitted: true
+adx_name: Etapa 2
+adx_nextstep: 89d150fd-34d1-472c-9ae2-f33a19058c5d
+adx_referencequerystringisprimarykey: true
+adx_storageaccountname: ''
+adx_successmessage: ''
+adx_targetentitylogicalname: cloud_solicitacoes
+adx_type: 100000001
+adx_validationsummarylinksenabled: true
+adx_webform: 79aa4eb5-8761-462a-8059-8a715eafa7db
+adx_webformstepid: 30762e6a-022a-4021-a9dc-fb17c0e7a279

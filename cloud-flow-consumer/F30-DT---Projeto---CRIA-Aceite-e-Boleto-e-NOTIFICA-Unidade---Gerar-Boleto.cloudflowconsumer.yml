@@ -1,0 +1,8 @@
+adx_CloudFlowConsumer_adx_webrole:
+- 1e16f3b3-b319-4d15-a71e-bd149be9381d
+adx_cloudflowconsumerid: 26b0e627-5444-f111-bec7-002248de77b7
+adx_flowapiurl: /_api/cloudflow/v1.0/trigger/39814c3b-4244-f111-bec7-7ced8da81546
+adx_flowtriggerurl: ''
+adx_metadata: ''
+adx_name: F30-DT - Projeto | CRIA Aceite e Boleto e NOTIFICA Unidade | Gerar Boleto
+adx_processid: 39814c3b-4244-f111-bec7-7ced8da81546

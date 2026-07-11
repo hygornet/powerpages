@@ -1,0 +1,8 @@
+adx_CloudFlowConsumer_adx_webrole:
+- 1e16f3b3-b319-4d15-a71e-bd149be9381d
+adx_cloudflowconsumerid: a2d1a34f-56fa-f011-8406-7ced8da81546
+adx_flowapiurl: /_api/cloudflow/v1.0/trigger/a16c5a35-56fa-f011-8406-002248de77b7
+adx_flowtriggerurl: ''
+adx_metadata: ''
+adx_name: Avançar para a Fase de Projeto
+adx_processid: a16c5a35-56fa-f011-8406-002248de77b7

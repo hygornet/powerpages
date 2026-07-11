@@ -1,0 +1,171 @@
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_status_atual
+  adx_descriptionposition: 100000000
+  adx_fieldisrequired: false
+  adx_ignoredefaultvalue: false
+  adx_onsavetype: 100000000
+  adx_onsavevalue: 586450001
+  adx_purchasecreateinvoiceonpayment: false
+  adx_purchasefulfillorderonpayment: false
+  adx_purchaserequiresshipping: false
+  adx_randomizeoptionsetvalues: false
+  adx_setvalueonsave: true
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_webformmetadataid: 061539f9-b9da-f011-8543-000d3a3113d7
+  adx_webformstep: d75b4cd0-9dd6-f011-8543-000d3a3113d7
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_volume_agua_processo
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_fieldisrequired: false
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Volume de Água do Processo"
+      }
+    ]
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_webformmetadataid: 2c145b0d-3f1e-48db-bceb-832c30e56b7a
+  adx_webformstep: d75b4cd0-9dd6-f011-8543-000d3a3113d7
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_is_projecao_ampliacao
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_fieldisrequired: false
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "É um Projeto de Ampliação?"
+      }
+    ]
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_webformmetadataid: 31e7204b-4639-4e9d-a097-658ccdd0b1ba
+  adx_webformstep: d75b4cd0-9dd6-f011-8543-000d3a3113d7
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_descricao_ativdades
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_fieldisrequired: false
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Descrição das Atividades"
+      }
+    ]
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_webformmetadataid: 92d05fc5-ebcf-4f10-a651-7d612432575d
+  adx_webformstep: d75b4cd0-9dd6-f011-8543-000d3a3113d7
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_descricao_atividades
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_fieldisrequired: false
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Descrição das Atividades"
+      }
+    ]
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_webformmetadataid: b78b2cc8-963e-43fa-8f60-3fd1f35b4a25
+  adx_webformstep: d75b4cd0-9dd6-f011-8543-000d3a3113d7
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_numero_funcionarios
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_fieldisrequired: false
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Número de Funcionários"
+      }
+    ]
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_webformmetadataid: da46fb1c-f549-4724-8f99-2151a18d520b
+  adx_webformstep: d75b4cd0-9dd6-f011-8543-000d3a3113d7

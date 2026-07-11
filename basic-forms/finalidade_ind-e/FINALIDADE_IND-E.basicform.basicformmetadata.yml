@@ -1,0 +1,132 @@
+- adx_adddescription: true
+  adx_attributelogicalname: cloud_volume_agua_processo
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Obs.: Lembre-se 1m³ (metro cúbico) equivale a 1.000 litros de água."
+      }
+    ]
+  adx_descriptionposition: 100000001
+  adx_entityform: 46c1b083-5fc1-44c4-8d50-98f710bc519c
+  adx_entityformmetadataid: 0f41729b-d270-46d0-be22-3e98e4a34962
+  adx_fieldisrequired: true
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Volume de Água do Processo"
+      }
+    ]
+  adx_name: FINALIDADE_IND E cloud_volume_agua_processo
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_validationregularexpressionerrormessage: ''
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_is_projecao_ampliacao
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_entityform: 46c1b083-5fc1-44c4-8d50-98f710bc519c
+  adx_entityformmetadataid: 63755835-2f28-4da9-8c6c-a8c3b4cc7025
+  adx_fieldisrequired: false
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "É projeto de ampliação?"
+      }
+    ]
+  adx_name: FINALIDADE_IND E cloud_is_projecao_ampliacao
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_validationregularexpressionerrormessage: ''
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_numero_funcionarios
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_entityform: 46c1b083-5fc1-44c4-8d50-98f710bc519c
+  adx_entityformmetadataid: e461efb0-3d5c-41d0-a4b6-8d96d19e8754
+  adx_fieldisrequired: true
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Número de Funcionários"
+      }
+    ]
+  adx_name: FINALIDADE_IND E cloud_numero_funcionarios
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_validationregularexpressionerrormessage: ''
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_descricao_atividades
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_entityform: 46c1b083-5fc1-44c4-8d50-98f710bc519c
+  adx_entityformmetadataid: f7139375-ab6c-45f6-a2bf-a03306324f7d
+  adx_fieldisrequired: true
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Descrição das Atividades"
+      }
+    ]
+  adx_name: FINALIDADE_IND E cloud_descricao_atividades
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_validationregularexpressionerrormessage: ''

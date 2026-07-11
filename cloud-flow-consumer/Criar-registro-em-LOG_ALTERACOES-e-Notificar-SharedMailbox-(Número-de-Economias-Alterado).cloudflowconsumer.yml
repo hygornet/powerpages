@@ -1,0 +1,8 @@
+adx_CloudFlowConsumer_adx_webrole:
+- 1e16f3b3-b319-4d15-a71e-bd149be9381d
+adx_cloudflowconsumerid: a5533f7e-e2e7-f011-8543-000d3a5ae560
+adx_flowapiurl: /_api/cloudflow/v1.0/trigger/8a44f186-b5e4-f011-8543-000d3a5ae560
+adx_flowtriggerurl: ''
+adx_metadata: ''
+adx_name: Criar registro em LOG_ALTERACOES e Notificar SharedMailbox (Número de Economias Alterado)
+adx_processid: 8a44f186-b5e4-f011-8543-000d3a5ae560

@@ -1,0 +1,16 @@
+adx_accountrelationship: 
+adx_append: true
+adx_appendto: true
+adx_contactrelationship: 
+adx_create: true
+adx_delete: true
+adx_entitylogicalname: annotation
+adx_entityname: ANEXOS OBRA
+adx_entitypermission_webrole:
+- 1e16f3b3-b319-4d15-a71e-bd149be9381d
+adx_entitypermissionid: 04251a4d-d329-4659-8e5e-5c1e9bc3d521
+adx_parententitypermission: 530940db-0e5e-4efb-917c-cce9cb6d5cfd
+adx_parentrelationship: cloud_analises_obra_Annotations
+adx_read: true
+adx_scope: 756150003
+adx_write: true

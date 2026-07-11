@@ -1,0 +1,33 @@
+- adx_adddescription: true
+  adx_attributelogicalname: cloud_file_comprovante
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Você pode carregar um PDF com até 32MB"
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_entityform: d31ab4e3-12b3-4f19-ad6b-5d1d2cea9d07
+  adx_entityformmetadataid: fcfc5d06-f850-4f32-8270-25ebf4f7fac4
+  adx_fieldisrequired: false
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Anexar comprovante"
+      }
+    ]
+  adx_name: Incluir Comprovante cloud_file_comprovante
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_validationregularexpressionerrormessage: ''

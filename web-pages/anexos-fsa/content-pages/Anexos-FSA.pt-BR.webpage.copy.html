@@ -1,0 +1,1306 @@
+{% assign solicitacaoId = request.params["id"] | default: "" %} 
+
+
+{% fetchxml anexosAnnotation %}
+<fetch>
+  <entity name="annotation">
+    <attribute name="annotationid" />
+    <attribute name="filename" />
+    <attribute name="mimetype" />
+    <attribute name="filesize" />
+    <attribute name="createdon" />
+    <attribute name="subject" />
+    <filter>
+      <condition attribute="objectid" operator="eq" value="{{ solicitacaoId }}" />
+      <condition attribute="isdocument" operator="eq" value="1" />
+      <condition attribute="createdon" operator="le" value='{{ "today" | date: "yyyy-MM-dd HH:mm:ss" }}' />
+    </filter>
+    <order attribute="createdon" descending="true" />
+  </entity>
+</fetch>
+{% endfetchxml %}
+{% assign qtdAnexos = anexosAnnotation.results.entities.size | default: 0 %}
+
+
+<style>
+
+
+  /* ===============================
+     BOTÃO PRIMÁRIO – PADRÃO FLUENT
+     =============================== */
+  .btn-cloud {
+    background-color: var(--brand-color) !important;
+    color: #ffffff !important;
+    width: auto !important;
+    min-width: 180px !important;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 32px !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+    border: none !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    box-shadow: none !important;
+    text-decoration: none !important;
+  }
+
+  /* Hover */
+  .btn-cloud:hover {
+    background-color: var(--secondary-color) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(23, 227, 203, 0.4) !important;
+  }
+
+  /* Active */
+  .btn-cloud:active {
+    transform: translateY(0) !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2) !important;
+  }
+
+  /* Focus (acessibilidade) */
+  .btn-cloud:focus {
+    outline: none !important;
+    box-shadow: 0 0 0 3px rgba(23, 227, 203, 0.35) !important;
+  }
+
+  /* ===============================
+     BOTÃO SECUNDÁRIO – OUTLINE
+     =============================== */
+  .btn-cloud-outline {
+    background-color: #ffffff !important;
+    color: var(--brand-color) !important;
+    border: 2px solid var(--brand-color) !important;
+    border-radius: 8px !important;
+  }
+
+  /* Hover outline */
+  .btn-cloud-outline:hover {
+    background-color: var(--secondary-color) !important;
+    color: #ffffff !important;
+    border-color: var(--secondary-color) !important;
+  }
+
+  /* Active outline */
+  .btn-cloud-outline:active {
+    transform: translateY(0) !important;
+  }
+
+  /* Focus outline */
+  .btn-cloud-outline:focus {
+    outline: none !important;
+    box-shadow: 0 0 0 3px rgba(23, 227, 203, 0.35) !important;
+  }
+  /* ======================================
+     REMOVE SUBLINHADO DOS BOTÕES <a>
+     ====================================== */
+  .btn-cloud,
+  .btn-cloud:hover,
+  .btn-cloud:focus,
+  .btn-cloud:active,
+  .btn-cloud-outline,
+  .btn-cloud-outline:hover,
+  .btn-cloud-outline:focus,
+  .btn-cloud-outline:active {
+    text-decoration: none !important;
+  }
+    .custom-top-actions {
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      margin-bottom: 18px;
+    }
+
+    .btn-voltar-custom {
+      background: #ffffff;
+      color: #0027bd;
+      border: 2px solid #0027bd;
+      border-radius: 10px;
+      padding: 10px 18px;
+      font-weight: 700;
+      letter-spacing: .3px;
+      cursor: pointer;
+      transition: .2s ease;
+      min-width: 130px;
+    }
+
+    .btn-voltar-custom:hover {
+      background: #0027bd;
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+
+    .custom-form-actions {
+      margin-top: 18px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+    }
+
+    .btn-salvar-custom {
+      background: #0027bd;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 12px 22px;
+      font-weight: 700;
+      letter-spacing: .3px;
+      cursor: pointer;
+      transition: .2s ease;
+      min-width: 140px;
+    }
+
+    .btn-salvar-custom:hover {
+      opacity: .92;
+      transform: translateY(-1px);
+    }
+
+    .btn-salvar-custom:disabled {
+      opacity: .65;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .cloud-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, .45);
+      z-index: 99999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .cloud-modal {
+      width: 100%;
+      max-width: 460px;
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 20px 50px rgba(0,0,0,.18);
+      overflow: hidden;
+      animation: modalShow .18s ease-out;
+    }
+
+    .cloud-modal-header {
+      padding: 18px 22px;
+      background: linear-gradient(135deg, #0027bd, #17e3cb);
+      color: #fff;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .cloud-modal-body {
+      padding: 24px 22px 18px;
+      color: #1f2937;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    .cloud-modal-footer {
+      padding: 0 22px 22px;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .cloud-btn-ok {
+      background: #0027bd;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 22px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    @keyframes modalShow {
+      from {
+        opacity: 0;
+        transform: translateY(8px) scale(.98);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+  #custom-modern-form,
+  #custom-modern-form > div,
+  #custom-modern-form .entity-form,
+  #custom-modern-form .form-horizontal,
+  #custom-modern-form .tab,
+  #custom-modern-form .tab-column,
+  #custom-modern-form .sectionBlockLayout,
+  #custom-modern-form fieldset {
+    border-radius: 24px !important;
+    overflow: hidden !important;
+  }
+
+  #custom-modern-form {
+    background: rgba(255, 255, 255, 0.9) !important;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+
+  #custom-modern-preform,
+  #custom-modern-preform > div,
+  #custom-modern-preform .entity-form,
+  #custom-modern-preform .form-horizontal,
+  #custom-modern-preform .tab,
+  #custom-modern-preform .tab-column,
+  #custom-modern-preform .sectionBlockLayout,
+  #custom-modern-preform fieldset {
+    border-radius: 24px !important;
+    overflow: hidden !important;
+  }
+
+  #custom-modern-preform {
+    background: rgba(255, 255, 255, 0.6) !important;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    margin-top: 24px !important;
+  }
+
+  .titulo-anexo-topo{
+    width:100%;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:16px;
+    margin:0 0 16px 0;
+    overflow:visible !important;
+    position:relative;
+    z-index:20;
+  }
+
+  .titulo-anexo-textos{
+    display:flex;
+    flex-direction:column;
+    min-width:0;
+    overflow:visible !important;
+  }
+
+  .titulo-anexo-linha1{
+    margin:0 0 6px 0 !important;
+    font-size:32px;
+    font-weight:800;
+    line-height:1.2;
+  }
+
+  .titulo-anexo-linha2{
+    margin:0 !important;
+    font-size:24px;
+    font-weight:600;
+    line-height:1.2;
+  }
+
+  .tooltip-ajuda-wrap{
+    position:relative;
+    display:flex;
+    align-items:flex-start;
+    justify-content:flex-end;
+    min-width:72px;
+    overflow:visible !important;
+    z-index:999999 !important;
+  }
+
+  .btn-ajuda-documento{
+    width:64px;
+    height:64px;
+    min-width:64px;
+    border-radius:50%;
+    border:2px solid #0b5ed7;
+    background:transparent;
+    color:#0b5ed7;
+    font-size:30px;
+    font-weight:800;
+    line-height:1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    box-shadow:none;
+    margin-top:2px;
+    transition:
+      transform 0.6s ease,
+      background-color 0.35s ease,
+      border-color 0.35s ease,
+      color 0.35s ease,
+      box-shadow 0.35s ease;
+    transform-style:preserve-3d;
+    position:relative;
+    z-index:2;
+  }
+
+  .btn-ajuda-documento:hover{
+    background:#17e3cb;
+    border-color:#17e3cb;
+    color:#003b49;
+    transform:rotateY(180deg) scale(1.08);
+    box-shadow:0 10px 24px rgba(23, 227, 203, 0.35);
+  }
+
+  .tooltip-ajuda-box{
+    position:absolute;
+    top:calc(100% + 14px);
+    right:0;
+    min-width:320px;
+    max-width:460px;
+    padding:16px 18px;
+    border-radius:16px;
+    background:rgba(0, 0, 0, 0.8);
+    color:#17e3cb;
+    text-align:left;
+    box-shadow:0 12px 30px rgba(0,0,0,0.28);
+    opacity:0;
+    visibility:hidden;
+    transform:translateY(8px);
+    transition:
+      opacity 0.25s ease,
+      visibility 0.25s ease,
+      transform 0.25s ease;
+    z-index:999999 !important;
+    pointer-events:none;
+    overflow:visible !important;
+  }
+
+  .tooltip-ajuda-box::before{
+    content:"";
+    position:absolute;
+    top:-7px;
+    right:22px;
+    width:14px;
+    height:14px;
+    background:rgba(0, 0, 0, 0.8);
+    transform:rotate(45deg);
+  }
+
+  .tooltip-ajuda-titulo{
+    font-size:16px;
+    font-weight:800;
+    color:#17e3cb;
+    margin:0 0 10px 0;
+  }
+
+  .tooltip-ajuda-texto{
+    font-size:14px;
+    line-height:1.55;
+    font-weight:500;
+    color:#17e3cb;
+    white-space:normal;
+    word-break:break-word;
+  }
+
+  .tooltip-ajuda-wrap:hover .tooltip-ajuda-box,
+  .tooltip-ajuda-wrap:focus-within .tooltip-ajuda-box{
+    opacity:1;
+    visibility:visible;
+    transform:translateY(0);
+  }
+  .badge-status-doc {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 10px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .3px;
+  text-transform: uppercase;
+  vertical-align: middle;
+  background: #eef2ff;
+  color: #0027bd;
+  border: 1px solid rgba(0, 39, 189, .18);
+}
+
+.card-anexos-existentes {
+  width: 100%;
+  margin: 18px 0 24px 0;
+  padding: 18px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, rgba(255,255,255,.95), rgba(240,253,250,.95));
+  border: 1px solid rgba(23, 227, 203, .35);
+  box-shadow: 0 12px 28px rgba(15, 23, 42, .08);
+}
+
+.card-anexos-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.card-anexos-title {
+  margin: 0;
+  color: #0027bd;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.card-anexos-count {
+  background: #17e3cb;
+  color: #003b49;
+  font-size: 12px;
+  font-weight: 800;
+  padding: 5px 10px;
+  border-radius: 999px;
+}
+
+.lista-anexos-existentes {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.item-anexo-existente {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+}
+
+.item-anexo-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.item-anexo-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: #eef2ff;
+  color: #0027bd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.item-anexo-textos {
+  min-width: 0;
+}
+
+.item-anexo-nome {
+  font-size: 14px;
+  font-weight: 800;
+  color: #111827;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 520px;
+}
+
+.item-anexo-meta {
+  margin-top: 3px;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.item-anexo-tipo {
+  display: inline-flex;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: #f3f4f6;
+  color: #374151;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.btn-excluir-anexo {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  border: 1px solid #fecaca;
+  background: #fff1f2;
+  color: #dc2626;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-excluir-anexo:hover {
+  background: #dc2626;
+  color: #ffffff;
+}
+
+.item-anexo-existente {
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease,
+    border-color .25s ease,
+    background .25s ease;
+}
+
+.item-anexo-existente:hover {
+  transform: translateY(-5px);
+  border-color: #17e3cb;
+  background: rgba(23, 227, 203, 0.18) !important;
+  box-shadow:
+    0 14px 28px rgba(23, 227, 203, 0.22),
+    0 0 0 1px rgba(23, 227, 203, 0.35);
+}
+
+.item-anexo-acoes {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.btn-download-anexo,
+.btn-excluir-anexo {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.btn-download-anexo {
+  border: 1px solid rgba(23, 227, 203, .55);
+  background: rgba(23, 227, 203, .12);
+  color: #003b49;
+}
+
+.btn-download-anexo:hover {
+  background: #17e3cb;
+  color: #003b49;
+}
+
+.btn-download-anexo::after,
+.btn-excluir-anexo::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,.82);
+  color: #17e3cb;
+  padding: 5px 8px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 800;
+  opacity: 0;
+  pointer-events: none;
+  white-space: nowrap;
+  transition: .2s ease;
+  z-index: 9999;
+}
+
+.btn-download-anexo:hover::after,
+.btn-excluir-anexo:hover::after {
+  opacity: 1;
+}
+
+#MessagePanel,
+#MessagePanel.message,
+#MessagePanel.alert,
+#MessagePanel.alert-success,
+#MessagePanel.alert-info,
+div[id="MessagePanel"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+  border: none !important;
+}
+
+</style>
+
+<div class="row sectionBlockLayout text-start" style="display: flex; flex-wrap: wrap; margin: 0px; min-height: auto; padding: 8px;">
+  <div class="container" style="display: flex; flex-wrap: wrap;">
+    <div
+      style="
+  width:100%;
+  margin:24px 0 20px 0;
+  display:flex;
+  justify-content:flex-start;
+  align-items:center;
+"
+    >
+      <button id="btnVoltarProjeto" type="button" class="btn-cloud btn-cloud-outline">VOLTAR</button>
+    </div>
+    <div id="custom-modern-preform" class="container" style="display: flex; flex-wrap: wrap;">
+      <div class="col-lg-12 columnBlockLayout" style="flex-grow: 1; display: flex; flex-direction: column; min-width: 250px; padding: 16px; margin: 60px 0px;">
+        <div class="titulo-anexo-topo">
+          <div class="titulo-anexo-textos">
+            <h2 class="page-title titulo-anexo-linha1">
+              <strong>📂 Anexos FSA</strong>
+            </h2>
+          </div>
+
+          <div class="tooltip-ajuda-wrap">
+            <button type="button" class="btn-ajuda-documento" aria-label="O que é?">?</button>
+          </div>
+        </div>
+
+  {% if anexosAnnotation.results.entities.size > 0 %}
+    <div class="card-anexos-existentes">
+      <div class="card-anexos-header">
+        <h4 class="card-anexos-title">📎 Anexos já enviados</h4>
+        <span class="card-anexos-count">
+          {{ anexosAnnotation.results.entities.size }} arquivo(s)
+        </span>
+      </div>
+
+      <div class="lista-anexos-existentes">
+        {% for anexo in anexosAnnotation.results.entities %}
+          {% assign nomeArquivo = anexo.filename | default: "Arquivo sem nome" %}
+          {% assign tipoArquivo = anexo.mimetype | default: "arquivo" %}
+          {% assign extensao = nomeArquivo | split: "." | last | upcase %}
+
+          <div class="item-anexo-existente" data-annotation-id="{{ anexo.annotationid }}">
+              <div 
+                class="item-anexo-download"
+                role="button"
+                tabindex="0"
+                data-download-url="/_api/annotations({{ anexo.annotationid }})/documentbody/$value"
+                data-filename="{{ nomeArquivo | escape }}"
+                title="Baixar {{ nomeArquivo }}"
+              >
+                <div class="item-anexo-info">
+                  <div class="item-anexo-icon">📄</div>
+
+                  <div class="item-anexo-textos">
+                    <div class="item-anexo-nome" title="{{ nomeArquivo }}">
+                      {{ nomeArquivo }}
+                    </div>
+
+                    <div class="item-anexo-meta">
+                      <span class="item-anexo-tipo">{{ extensao }}</span>
+                      &nbsp;•&nbsp;
+                      {{ tipoArquivo }}
+                      &nbsp;•&nbsp;
+                      ID: {{ anexo.annotationid }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="item-anexo-acoes">
+                <button 
+                  type="button"
+                  class="btn-download-anexo"
+                  title="Baixar documento"
+                  data-tooltip="DOWNLOAD"
+                >
+                  ⬇️
+                </button>
+
+            
+                    <button 
+                      type="button"
+                      class="btn-excluir-anexo"
+                      title="Excluir anexo"
+                      data-tooltip="EXCLUIR"
+                      data-annotation-id="{{ anexo.annotationid }}"
+                      data-filename="{{ nomeArquivo | escape }}"
+                    >
+                      🗑️
+                    </button>
+                  
+              </div>
+            </div>
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+
+
+<div class="custom-refresh-actions">
+  <button id="btnAtualizarPagina" type="button" class="btn-cloud btn-cloud-outline">
+    ATUALIZAR
+  </button>
+</div>
+
+        {% if qtdAnexos < 15 %}
+          <div id="custom-modern-form" class="modern-form-wrapper">
+            {% entityform name: 'Novos Anexos' %}
+          </div>
+        {% else %}
+
+
+          <div class="card-anexos-existentes">
+            <div class="card-anexos-header">
+              <h4 class="card-anexos-title">Limite de anexos atingido</h4>
+            </div>
+            <p style="margin:0;color:#374151;font-weight:600;">
+              Este documento já possui 15 arquivos anexados. Para enviar um novo arquivo, exclua um dos anexos existentes.
+            </p>
+          </div>
+        {% endif %}
+
+        <div id="acoesSalvarAnexos" style="display:none !important;"></div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div id="modalSalvarArquivos" class="cloud-modal-overlay" aria-hidden="true">
+  <div class="cloud-modal" role="dialog" aria-modal="true" aria-labelledby="modalSalvarArquivosTitulo">
+    <div class="cloud-modal-header" id="modalSalvarArquivosTitulo">Sucesso</div>
+    <div class="cloud-modal-body">Arquivos SALVO com sucesso.</div>
+    <div class="cloud-modal-footer">
+      <button id="btnOkSalvarArquivos" type="button" class="cloud-btn-ok">OK</button>
+    </div>
+  </div>
+</div>
+<div id="modalExcluirAnexo" class="cloud-modal-overlay" aria-hidden="true">
+  <div class="cloud-modal" role="dialog" aria-modal="true">
+    <div class="cloud-modal-header">Confirmar exclusão</div>
+    <div class="cloud-modal-body">
+      Deseja excluir o anexo <strong id="nomeArquivoExcluir"></strong>?
+    </div>
+    <div class="cloud-modal-footer" style="gap:10px;">
+      <button id="btnCancelarExcluirAnexo" type="button" class="btn-cloud btn-cloud-outline">CANCELAR</button>
+      <button id="btnConfirmarExcluirAnexo" type="button" class="btn-cloud">EXCLUIR</button>
+    </div>
+  </div>
+</div>
+
+<div id="modalAnexoExcluidoSucesso" class="cloud-modal-overlay" aria-hidden="true">
+  <div class="cloud-modal" role="dialog" aria-modal="true">
+    <div class="cloud-modal-header">Sucesso</div>
+    <div class="cloud-modal-body">
+      Anexo excluído com sucesso.
+    </div>
+    <div class="cloud-modal-footer">
+      <button id="btnOkAnexoExcluido" type="button" class="cloud-btn-ok">OK</button>
+    </div>
+  </div>
+</div>
+<script>
+  (function () {
+    var SOLICITACAO_ID = "{{ solicitacaoId | escape }}";
+    var STORAGE_KEY = "anexos_documentos_projetos_submit_ok";
+    var STORAGE_UPLOAD_KEY = "upload_pendente_anexo_{{ solicitacaoId | escape }}";
+    var TEMPO_MINIMO_CARREGANDO_MS = 12000;
+    var QTD_ANEXOS_ATUAL = Number("{{ qtdAnexos | default: 0 }}");
+    var TEMPO_ESPERA_UPLOAD_MS = 8000;
+
+    function byId(id) {
+      return document.getElementById(id);
+    }
+
+    function isVisible(el) {
+      return !!(el && (el.offsetWidth || el.offsetHeight || el.getClientRects().length));
+    }
+
+    function getNativeSubmitButton() {
+      return document.querySelector(
+        "#InsertButton, #UpdateButton, input[type='submit'][name$='InsertButton'], input[type='submit'][name$='UpdateButton'], .actions input[type='submit']"
+      );
+    }
+
+    function getMessagePanel() {
+      return byId("MessagePanel");
+    }
+
+    function getMessageText() {
+      var panel = getMessagePanel();
+      if (!panel) return "";
+      return (panel.innerText || panel.textContent || "").trim().toLowerCase();
+    }
+
+    function isErrorMessage() {
+      var panel = getMessagePanel();
+      var text = getMessageText();
+      if (!panel) return false;
+
+      return (
+        /alert-danger|validation-summary-errors|error/i.test(panel.className || "") ||
+        text.indexOf("erro") > -1 ||
+        text.indexOf("error") > -1 ||
+        text.indexOf("falhou") > -1 ||
+        text.indexOf("failed") > -1
+      );
+    }
+
+    function isSuccessMessage() {
+      var panel = getMessagePanel();
+      var text = getMessageText();
+      if (!panel || !isVisible(panel)) return false;
+
+      return (
+        /alert-success|success/i.test(panel.className || "") ||
+        text.indexOf("sucesso") > -1 ||
+        text.indexOf("salvo") > -1 ||
+        text.indexOf("saved") > -1 ||
+        text.indexOf("success") > -1
+      );
+    }
+
+    function openModal() {
+      var modal = byId("modalSalvarArquivos");
+      if (modal) {
+        modal.style.display = "flex";
+        modal.setAttribute("aria-hidden", "false");
+      }
+    }
+
+    function closeModal() {
+      var modal = byId("modalSalvarArquivos");
+      if (modal) {
+        modal.style.display = "none";
+        modal.setAttribute("aria-hidden", "true");
+      }
+    }
+
+    function hideNativeSuccessMessage() {
+      var panel = getMessagePanel();
+      if (panel && isSuccessMessage() && !isErrorMessage()) {
+        panel.style.display = "none";
+      }
+    }
+
+    function resetSaveButton() {
+      var btnSalvar = byId("btnSalvarArquivosCustom");
+      if (btnSalvar) {
+        btnSalvar.disabled = false;
+        btnSalvar.textContent = "SALVAR NA LISTA";
+      }
+    }
+
+    function atualizarPaginaAtual() {
+        closeModal();
+        window.location.reload();
+      }
+
+      function handlePostSubmitFeedback() {
+        var pending = sessionStorage.getItem(STORAGE_KEY) === "1";
+        if (!pending) return;
+
+        if (isErrorMessage()) {
+          sessionStorage.removeItem(STORAGE_KEY);
+          resetSaveButton();
+          return;
+        }
+
+        if (isSuccessMessage() && !isErrorMessage()) {
+          sessionStorage.removeItem(STORAGE_KEY);
+          hideNativeSuccessMessage();
+
+          setTimeout(function () {
+            window.location.reload();
+          }, TEMPO_ESPERA_UPLOAD_MS);
+        }
+      }
+      function ocultarFormEnquantoCarrega() {
+        var form = document.getElementById("custom-modern-form");
+
+        if (form && QTD_ANEXOS_ATUAL < 15) {
+          form.style.display = "block";
+        }
+      }
+
+      var anexoSelecionadoParaExcluir = {
+        anexoId: "",
+        filename: "",
+        qtdAnexado: "{{ qtdAnexos }}"
+      };
+
+var FLOW_EXCLUIR_ANEXO_URL = "/_api/cloudflow/v1.0/trigger/274f69ba-5440-f111-bec7-7ced8da81546";
+
+function abrirModalExcluirAnexo(annotationId, filename) {
+  anexoSelecionadoParaExcluir.anexoId = annotationId;
+  anexoSelecionadoParaExcluir.filename = filename;
+
+  var nomeArquivo = byId("nomeArquivoExcluir");
+  var modal = byId("modalExcluirAnexo");
+
+  if (nomeArquivo) nomeArquivo.textContent = filename || "arquivo selecionado";
+
+  if (modal) {
+    modal.style.display = "flex";
+    modal.setAttribute("aria-hidden", "false");
+  }
+}
+
+function fecharModalExcluirAnexo() {
+  var modal = byId("modalExcluirAnexo");
+
+  if (modal) {
+    modal.style.display = "none";
+    modal.setAttribute("aria-hidden", "true");
+  }
+}
+
+function abrirModalSucessoExclusao() {
+  var modal = byId("modalAnexoExcluidoSucesso");
+
+  if (modal) {
+    modal.style.display = "flex";
+    modal.setAttribute("aria-hidden", "false");
+  }
+}
+
+function executarFlowExcluirAnexo() {
+  var btn = byId("btnConfirmarExcluirAnexo");
+
+  if (!anexoSelecionadoParaExcluir.anexoId) {
+    alert("Não foi possível identificar o anexo.");
+    return;
+  }
+
+  if (btn) {
+    btn.disabled = true;
+    btn.textContent = "EXCLUINDO...";
+  }
+
+  var payloadFlow = {
+    DocumentId: "{{ solicitacaoId | escape }}",
+    AnexoId: anexoSelecionadoParaExcluir.anexoId,
+    QtdAnexado: String(anexoSelecionadoParaExcluir.qtdAnexado)
+  };
+
+  console.log("Payload enviado ao Flow:", payloadFlow);
+
+  shell.getTokenDeferred().done(function (token) {
+    $.ajax({
+      url: "/_api/cloudflow/v1.0/trigger/274f69ba-5440-f111-bec7-7ced8da81546",
+      type: "POST",
+      contentType: "application/json; charset=utf-8",
+      headers: {
+        "__RequestVerificationToken": token
+      },
+      data: JSON.stringify({
+        eventData: JSON.stringify(payloadFlow)
+      }),
+      success: function (response) {
+        console.log("Flow executado com sucesso:", response);
+        fecharModalExcluirAnexo();
+
+        setTimeout(function () {
+          window.location.reload();
+        }, 3000);
+      },
+      error: function (xhr) {
+        console.error("Erro ao executar flow:", xhr.responseText || xhr);
+
+        alert("Erro ao excluir o anexo. Verifique o console do navegador.");
+
+        if (btn) {
+          btn.disabled = false;
+          btn.textContent = "EXCLUIR";
+        }
+      }
+    });
+  }).fail(function () {
+    alert("Não foi possível obter o token do portal.");
+
+    if (btn) {
+      btn.disabled = false;
+      btn.textContent = "EXCLUIR";
+    }
+  });
+}
+
+function controlarBotoesSalvarAnexos() {
+  var acoes = byId("acoesSalvarAnexos");
+  var form = byId("custom-modern-form");
+  if (!acoes || !form) return;
+
+  var temArquivoSelecionado = false;
+
+  var textoForm = (form.innerText || form.textContent || "").toLowerCase();
+
+  if (
+    textoForm.indexOf(".pdf") > -1 ||
+    textoForm.indexOf(".jpg") > -1 ||
+    textoForm.indexOf(".jpeg") > -1 ||
+    textoForm.indexOf(".png") > -1 ||
+    textoForm.indexOf(".doc") > -1 ||
+    textoForm.indexOf(".docx") > -1 ||
+    textoForm.indexOf(".xls") > -1 ||
+    textoForm.indexOf(".xlsx") > -1
+  ) {
+    temArquivoSelecionado = true;
+  }
+
+  acoes.style.display = temArquivoSelecionado ? "flex" : "none";
+}
+
+    document.addEventListener("DOMContentLoaded", function () {
+      var btnSalvar = byId("btnSalvarArquivosCustom");
+      var btnOk = byId("btnOkSalvarArquivos");
+      var btnVoltar = byId("btnVoltarProjeto");
+      var btnCancelarAnexos = byId("btnCancelarAnexos");
+      var panel = getMessagePanel();
+
+      controlarBotoesSalvarAnexos();
+      verificarUploadPendenteAoCarregar();
+
+      var btnAtualizarPagina = byId("btnAtualizarPagina");
+
+        if (btnAtualizarPagina) {
+          btnAtualizarPagina.addEventListener("click", function () {
+            window.location.reload();
+          });
+        }  
+
+      document.addEventListener("change", function (e) {
+        if (
+          e.target &&
+          e.target.closest("#custom-modern-form") &&
+          e.target.matches("input[type='file']")
+        ) {
+          setTimeout(function () {
+            acionarSubmitAutomaticoAnexo();
+          }, 1000);
+        }
+      });
+
+      var formWrapper = byId("custom-modern-form");
+      if (formWrapper) {
+        var formObserver = new MutationObserver(function () {
+          controlarBotoesSalvarAnexos();
+        });
+
+        formObserver.observe(formWrapper, {
+          childList: true,
+          subtree: true,
+          characterData: true
+        });
+      }
+
+      var painelMensagem = byId("MessagePanel");
+
+        if (painelMensagem) {
+          painelMensagem.style.display = "none";
+        }
+
+        function criarItemCarregandoUpload() {
+  if (document.getElementById("itemAnexoCarregandoTemp")) return;
+
+  var lista = document.querySelector(".lista-anexos-existentes");
+  var card = document.querySelector(".card-anexos-existentes");
+
+  if (!lista) {
+    card = document.createElement("div");
+    card.className = "card-anexos-existentes";
+    card.innerHTML = `
+      <div class="card-anexos-header">
+        <h4 class="card-anexos-title">📎 Anexos já enviados</h4>
+        <span class="card-anexos-count">Carregando...</span>
+      </div>
+      <div class="lista-anexos-existentes"></div>
+    `;
+
+    var form = document.getElementById("custom-modern-form");
+    if (form && form.parentNode) {
+      form.parentNode.insertBefore(card, form);
+    }
+
+    lista = card.querySelector(".lista-anexos-existentes");
+  }
+
+  var item = document.createElement("div");
+  item.id = "itemAnexoCarregandoTemp";
+  item.className = "item-anexo-carregando";
+  item.innerHTML = `
+    <div class="spinner-upload">⏳</div>
+    <div>
+      <div class="texto-upload">CARREGANDO ANEXO...</div>
+      <div class="subtexto-upload">
+  Aguarde. O arquivo está sendo salvo e pode levar alguns segundos para aparecer na lista.
+  <br>
+  <strong>Caso esteja demorando muito, clique em ATUALIZAR.</strong>
+</div>
+    </div>
+  `;
+
+  lista.prepend(item);
+  ocultarFormEnquantoCarrega();
+
+}
+
+function salvarUploadPendente() {
+  localStorage.setItem(STORAGE_UPLOAD_KEY, JSON.stringify({
+    qtdAntes: QTD_ANEXOS_ATUAL,
+    criadoEm: Date.now(),
+    manterAte: Date.now() + TEMPO_MINIMO_CARREGANDO_MS
+  }));
+}
+
+function limparUploadPendente() {
+  localStorage.removeItem(STORAGE_UPLOAD_KEY);
+}
+
+function verificarUploadPendenteAoCarregar() {
+  var dadosTexto = localStorage.getItem(STORAGE_UPLOAD_KEY);
+  if (!dadosTexto) return;
+
+  var dados;
+
+  try {
+    dados = JSON.parse(dadosTexto);
+  } catch (e) {
+    limparUploadPendente();
+    return;
+  }
+
+  var agora = Date.now();
+  var manterAte = Number(dados.manterAte || 0);
+
+  if (agora < manterAte) {
+    criarItemCarregandoUpload();
+    ocultarFormEnquantoCarrega();
+
+    setTimeout(function () {
+      window.location.reload();
+    }, manterAte - agora);
+
+    return;
+  }
+
+  limparUploadPendente();
+}
+
+function acionarSubmitAutomaticoAnexo() {
+  var nativeSubmit = getNativeSubmitButton();
+
+  if (!nativeSubmit) {
+    console.warn("Submit nativo do formulário não encontrado.");
+    return;
+  }
+
+  if (window.__submitAnexoAutomaticoEmExecucao === true) {
+    return;
+  }
+
+  window.__submitAnexoAutomaticoEmExecucao = true;
+
+  salvarUploadPendente();
+  criarItemCarregandoUpload();
+
+  sessionStorage.setItem(STORAGE_KEY, "1");
+
+  setTimeout(function () {
+    nativeSubmit.click();
+  }, 800);
+}
+
+
+      document.querySelectorAll(".btn-download-anexo").forEach(function (btn) {
+        btn.addEventListener("click", function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+
+          var anexoId = this.closest(".item-anexo-existente").getAttribute("data-annotation-id");
+
+          if (!anexoId) {
+            alert("Não foi possível identificar o anexo.");
+            return;
+          }
+
+          window.location.href = "/_entity/annotation/" + anexoId + "/fileattachment";
+        });
+      });
+
+      if (btnVoltar) {
+          btnVoltar.addEventListener("click", function () {
+            window.location.href = "/editar-solicitacoes-etapa2/?id={{ solicitacaoId }}";
+          });
+        }
+
+
+      if (btnCancelarAnexos) {
+          btnCancelarAnexos.addEventListener("click", function () {
+            window.location.reload();
+          });
+        }
+      
+      if (btnOk) {
+          btnOk.addEventListener("click", atualizarPaginaAtual);
+        }
+
+      handlePostSubmitFeedback();
+
+      if (panel) {
+        var observer = new MutationObserver(function () {
+          handlePostSubmitFeedback();
+        });
+
+        observer.observe(panel, {
+          childList: true,
+          subtree: true,
+          attributes: true,
+          attributeFilter: ["class", "style"]
+        });
+      }
+      document.querySelectorAll(".btn-excluir-anexo").forEach(function (btn) {
+  btn.addEventListener("click", function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    abrirModalExcluirAnexo(
+      this.getAttribute("data-annotation-id"),
+      this.getAttribute("data-filename")
+    );
+  });
+});
+
+var btnCancelarExcluir = byId("btnCancelarExcluirAnexo");
+if (btnCancelarExcluir) {
+  btnCancelarExcluir.addEventListener("click", fecharModalExcluirAnexo);
+}
+
+var btnConfirmarExcluir = byId("btnConfirmarExcluirAnexo");
+if (btnConfirmarExcluir) {
+  btnConfirmarExcluir.addEventListener("click", executarFlowExcluirAnexo);
+}
+
+var btnOkAnexoExcluido = byId("btnOkAnexoExcluido");
+if (btnOkAnexoExcluido) {
+  btnOkAnexoExcluido.addEventListener("click", function () {
+    window.location.reload();
+  });
+}
+document.querySelectorAll(".item-anexo-download").forEach(function (item) {
+  item.addEventListener("click", function () {
+    var url = this.getAttribute("data-download-url");
+    var filename = this.getAttribute("data-filename") || "arquivo";
+
+    if (!url) return;
+
+    var link = document.createElement("a");
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  });
+
+  item.addEventListener("keydown", function (e) {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      this.click();
+    }
+  });
+});
+    });
+  })();
+</script>

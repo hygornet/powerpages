@@ -1,0 +1,231 @@
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_fk_municipios
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_entityform: 12b344d1-a890-44d8-8678-eb6624bd7c74
+  adx_entityformmetadataid: 2ba2a6aa-8f9b-4150-bbfd-521154f2185c
+  adx_fieldisrequired: true
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Município da Obra"
+      }
+    ]
+  adx_name: Iniciar Solicitação cloud_fk_municipios
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_validationregularexpressionerrormessage: ''
+- adx_adddescription: true
+  adx_attributelogicalname: cloud_consumo_mensal
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Lembre-se 1m³ (metro cúbico) equivale a 1.000 litros de água."
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_entityform: 12b344d1-a890-44d8-8678-eb6624bd7c74
+  adx_entityformmetadataid: 59702b97-6c68-4e2f-bae0-9c479286c341
+  adx_fieldisrequired: true
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Qual o volume de água a ser consumido por mês?"
+      }
+    ]
+  adx_name: Iniciar Solicitação cloud_consumo_mensal
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_validationregularexpressionerrormessage: ''
+- adx_adddescription: true
+  adx_attributelogicalname: cloud_is_conglomerado_empresarial
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Selecione 'Sim' se este CNPJ estiver associado a mais de um local de consumo (matriz e filiais, por exemplo)."
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_entityform: 12b344d1-a890-44d8-8678-eb6624bd7c74
+  adx_entityformmetadataid: 794b590d-ae25-4056-908f-80a546678dc5
+  adx_fieldisrequired: true
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Este CNPJ já é (ou será) utilizado para cadastrar outros endereços/filiais com nossa companhia de água?"
+      }
+    ]
+  adx_name: Iniciar Solicitação cloud_is_conglomerado_empresarial
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_validationregularexpressionerrormessage: ''
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_fk_finalidades_solicitacao
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_entityform: 12b344d1-a890-44d8-8678-eb6624bd7c74
+  adx_entityformmetadataid: 932114a2-4d95-4115-9ed1-886cf5a33a04
+  adx_fieldisrequired: true
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Qual é a Finalidade do Empreendimento?"
+      }
+    ]
+  adx_name: Iniciar Solicitação cloud_fk_finalidades_solicitacao
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_validationregularexpressionerrormessage: ''
+- adx_adddescription: true
+  adx_attributelogicalname: cloud_numero_economias
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Exemplo: considere as unidades como apartamentos, casas, lotes, salas comerciais, lojas ou unidades industriais."
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_entityform: 12b344d1-a890-44d8-8678-eb6624bd7c74
+  adx_entityformmetadataid: a1a6a84d-8e6b-46de-908a-1b4dfaf57151
+  adx_fieldisrequired: true
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Informe a quantidade total de unidades comercializáveis previstas no empreendimento."
+      }
+    ]
+  adx_name: Iniciar Solicitação cloud_numero_economias
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_validationregularexpressionerrormessage: ''
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_tipo_cadastro
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_entityform: 12b344d1-a890-44d8-8678-eb6624bd7c74
+  adx_entityformmetadataid: a56771bb-fbd6-461d-bfe6-cf7ac43b077e
+  adx_fieldisrequired: true
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "O cadastro da ligação de água será feito em nome de:"
+      }
+    ]
+  adx_name: Iniciar Solicitação cloud_tipo_cadastro
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_validationregularexpressionerrormessage: ''
+- adx_adddescription: true
+  adx_attributelogicalname: cloud_area_construida_total
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Informe o total de área construída do empreendimento. Caso não se aplique (ex: apenas um loteamento), insira 0."
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_entityform: 12b344d1-a890-44d8-8678-eb6624bd7c74
+  adx_entityformmetadataid: e065623f-a169-41cb-a4eb-358f45e93c1b
+  adx_fieldisrequired: true
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Qual é a área construída total (em m²)?"
+      }
+    ]
+  adx_name: Iniciar Solicitação cloud_area_construida_total
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_validationregularexpressionerrormessage: ''

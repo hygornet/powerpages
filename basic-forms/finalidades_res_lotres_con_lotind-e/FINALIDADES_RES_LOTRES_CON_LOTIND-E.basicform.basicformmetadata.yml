@@ -1,0 +1,396 @@
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_qtd_apt_1_dorm_menor_12
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_entityform: b79633f1-6201-4a54-969c-41e8dfc0067c
+  adx_entityformmetadataid: 042ee34a-2c83-44c3-8510-1f376e47be44
+  adx_fieldisrequired: true
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Qtd. Apto. 1 Dorm. menor que 12 m²"
+      }
+    ]
+  adx_name: FINALIDADES_RES_LOTRES_CON_LOTIND E cloud_qtd_apt_1_dorm_menor_12
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_validationregularexpressionerrormessage: ''
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_qtd_apt_3_dorm_menor_12
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_entityform: b79633f1-6201-4a54-969c-41e8dfc0067c
+  adx_entityformmetadataid: 2d11c96b-bc93-4ecb-b240-9264f453074d
+  adx_fieldisrequired: true
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Qtd. Apto. 3 Dorm. menor que 12 m²"
+      }
+    ]
+  adx_name: FINALIDADES_RES_LOTRES_CON_LOTIND E cloud_qtd_apt_3_dorm_menor_12
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_validationregularexpressionerrormessage: ''
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_tipo_ocupacao
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_entityform: b79633f1-6201-4a54-969c-41e8dfc0067c
+  adx_entityformmetadataid: 32fa6c9d-2288-4061-a5a3-f8011b37f8bb
+  adx_fieldisrequired: true
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Tipo de Ocupação"
+      }
+    ]
+  adx_name: FINALIDADES_RES_LOTRES_CON_LOTIND E cloud_tipo_ocupacao
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_validationregularexpressionerrormessage: ''
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_quantidade_box
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_entityform: b79633f1-6201-4a54-969c-41e8dfc0067c
+  adx_entityformmetadataid: 3a7066e7-9c0b-4d97-97e8-7c8c6361a03d
+  adx_fieldisrequired: true
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Quantidade de banheiros com chuveiro"
+      }
+    ]
+  adx_name: FINALIDADES_RES_LOTRES_CON_LOTIND E cloud_quantidade_box
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_validationregularexpressionerrormessage: ''
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_qtd_apt_2_dorm_maior_12
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_entityform: b79633f1-6201-4a54-969c-41e8dfc0067c
+  adx_entityformmetadataid: 79165e99-9cc3-4d16-9001-ca376ed19d3a
+  adx_fieldisrequired: true
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Qtd. Apto. 2 Dorm. maior que 12 m²"
+      }
+    ]
+  adx_name: FINALIDADES_RES_LOTRES_CON_LOTIND E cloud_qtd_apt_2_dorm_maior_12
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_validationregularexpressionerrormessage: ''
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_qtd_apt_3_dorm_maior_12
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_entityform: b79633f1-6201-4a54-969c-41e8dfc0067c
+  adx_entityformmetadataid: 7c331210-1d2f-4bdd-9ff2-5d01c82d3615
+  adx_fieldisrequired: true
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Qtd. Apto. 3 Dorm. maior que 12 m²"
+      }
+    ]
+  adx_name: FINALIDADES_RES_LOTRES_CON_LOTIND E cloud_qtd_apt_3_dorm_maior_12
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_validationregularexpressionerrormessage: ''
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_tipo_parcelamento
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_entityform: b79633f1-6201-4a54-969c-41e8dfc0067c
+  adx_entityformmetadataid: 9e96af80-cb2e-4fee-bb62-3f611c5a22e9
+  adx_fieldisrequired: true
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Tipo de Parcelamento"
+      }
+    ]
+  adx_name: FINALIDADES_RES_LOTRES_CON_LOTIND E cloud_tipo_parcelamento
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_validationregularexpressionerrormessage: ''
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_qtd_apt_4_dorm_maior_12
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_entityform: b79633f1-6201-4a54-969c-41e8dfc0067c
+  adx_entityformmetadataid: ad4edfac-e717-47c5-b9d4-ed42031a8e87
+  adx_fieldisrequired: true
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Qtd. Apto. 4 Dorm. maior que 12 m²"
+      }
+    ]
+  adx_name: FINALIDADES_RES_LOTRES_CON_LOTIND E cloud_qtd_apt_4_dorm_maior_12
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_validationregularexpressionerrormessage: ''
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_qtd_apt_2_dorm_menor_12
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_entityform: b79633f1-6201-4a54-969c-41e8dfc0067c
+  adx_entityformmetadataid: b0a17782-8031-4c40-84db-979f60ffddd2
+  adx_fieldisrequired: true
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Qtd. Apto. 2 Dorm. menor que 12 m²"
+      }
+    ]
+  adx_name: FINALIDADES_RES_LOTRES_CON_LOTIND E cloud_qtd_apt_2_dorm_menor_12
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_validationregularexpressionerrormessage: ''
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_qtd_apt_1_dorm_maior_12
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_entityform: b79633f1-6201-4a54-969c-41e8dfc0067c
+  adx_entityformmetadataid: c8c589c2-1310-4641-92e4-6f8ac60f346d
+  adx_fieldisrequired: true
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Qtd. Apto. 1 Dorm. menor que 12 m²"
+      }
+    ]
+  adx_name: FINALIDADES_RES_LOTRES_CON_LOTIND E cloud_qtd_apt_1_dorm_maior_12
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_validationregularexpressionerrormessage: ''
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_qtd_apt_4_dorm_menor_12
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_entityform: b79633f1-6201-4a54-969c-41e8dfc0067c
+  adx_entityformmetadataid: fb12e395-f495-4ef4-abbf-81d7052d6854
+  adx_fieldisrequired: true
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Qtd. Apto. 4 Dorm. menor que 12 m²"
+      }
+    ]
+  adx_name: FINALIDADES_RES_LOTRES_CON_LOTIND E cloud_qtd_apt_4_dorm_menor_12
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_validationregularexpressionerrormessage: ''
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_tipo_medicao
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_entityform: b79633f1-6201-4a54-969c-41e8dfc0067c
+  adx_entityformmetadataid: ff9ed688-c020-4370-bd44-1e81f1b09a11
+  adx_fieldisrequired: true
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Localização da medição de consumo do empreendimento"
+      }
+    ]
+  adx_name: FINALIDADES_RES_LOTRES_CON_LOTIND E cloud_tipo_medicao
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_validationregularexpressionerrormessage: ''

@@ -1,0 +1,157 @@
+<!--
+<script>
+$(document).ready(function() {
+
+    // Adiciona o campo Endereço
+    $('#ContentContainer_MainContent_MainContent_ShowUserName').next().next().after(
+        '<div class="form-group">' +
+            '<label class="col-sm-4 control-label required">Endereço</label>' +
+            '<div class="col-sm-8">' +
+                '<input type="text" name="nameEndereco" id="address1_line1" class="form-control" aria-required="true">' +
+            '</div>' +
+        '</div>'
+    );
+
+    // Adiciona o botão customizado
+    $('#SubmitButton').after(
+        '<input type="submit" value="Registrar" id="mySubmitButton" class="btn btn-primary">'
+    );
+
+    // Esconde o botão original
+    $('#SubmitButton').hide();
+
+     $("#mySubmitButton").click(function()
+        {
+            var endereco = document.getElementById("address1_line1");
+            console.log("O endereço é: "+endereco);
+            localStorage.setItem("end", endereco);
+            $('#SubmitButton').click();    
+            return false;
+       });
+
+
+});
+</script> -->
+
+
+
+ <!--<script>
+$(document).ready(function() {
+    
+    // HTML dos campos novos.
+    // Usamos 'row mb-3' para garantir o espaçamento IDÊNTICO ao padrão da página.
+    // Adicionamos 'oninput' no CEP e Celular para forçar apenas números.
+    var customFields = 
+        // Campo: Nome Completo
+        '<div class="row mb-3">' +
+            '<label class="col-md-4 col-form-label required fw-bold" style="text-align: right;">Nome Completo</label>' +
+            '<div class="col-md-8">' +
+                '<input type="text" id="fullname_field" class="form-control" required>' +
+            '</div>' +
+        '</div>' +
+
+        // Campo: Endereço
+        '<div class="row mb-3">' +
+            '<label class="col-md-4 col-form-label required fw-bold" style="text-align: right;">Endereço</label>' +
+            '<div class="col-md-8">' +
+                '<input type="text" id="address1_line1_field" class="form-control" placeholder="Rua, número e bairro" required>' +
+            '</div>' +
+        '</div>' +
+
+        // Campo: Estado
+        '<div class="row mb-3">' +
+            '<label class="col-md-4 col-form-label required fw-bold" style="text-align: right;">Estado</label>' +
+            '<div class="col-md-8">' +
+                '<select id="address1_state_field" class="form-control" required>' +
+                    '<option value="">Selecione...</option>' +
+                    '<option value="SP">São Paulo</option>' +
+                    '<option value="RJ">Rio de Janeiro</option>' +
+                    '<option value="MG">Minas Gerais</option>' +
+                    '<option value="RS">Rio Grande do Sul</option>' +
+                    // Adicione mais estados conforme necessário
+                '</select>' +
+            '</div>' +
+        '</div>' +
+
+        // Campo: Cidade
+        '<div class="row mb-3">' +
+            '<label class="col-md-4 col-form-label required fw-bold" style="text-align: right;">Cidade</label>' +
+            '<div class="col-md-8">' +
+                '<select id="address1_city_field" class="form-control" required>' +
+                    '<option value="">Selecione...</option>' +
+                    '<option value="Sao Paulo">São Paulo</option>' +
+                    '<option value="Rio de Janeiro">Rio de Janeiro</option>' +
+                    '<option value="Belo Horizonte">Belo Horizonte</option>' +
+                    // Adicione mais cidades conforme necessário
+                '</select>' +
+            '</div>' +
+        '</div>' +
+
+        // Campo: CEP (Apenas Números)
+        '<div class="row mb-3">' +
+            '<label class="col-md-4 col-form-label required fw-bold" style="text-align: right;">CEP</label>' +
+            '<div class="col-md-8">' +
+                '<input type="text" id="address1_postalcode_field" class="form-control" placeholder="Apenas números" maxlength="8" oninput="this.value = this.value.replace(/[^0-9]/g, \'\')" required>' +
+            '</div>' +
+        '</div>' +
+
+        // Campo: Celular (Apenas Números)
+        '<div class="row mb-3" style="padding-bottom:25px;">' +
+            '<label class="col-md-4 col-form-label required fw-bold" style="text-align: right;">Telefone Celular</label>' +
+            '<div class="col-md-8">' +
+                '<input type="text" id="mobilephone_field" class="form-control" placeholder="DDD + Número (apenas dígitos)" maxlength="11" oninput="this.value = this.value.replace(/[^0-9]/g, \'\')" required>' +
+            '</div>' +
+        '</div>';
+
+    // INSERÇÃO: Procura o campo 'Confirmar Senha', pega a linha (row) inteira dele e insere DEPOIS.
+    $('#ContentContainer_MainContent_MainContent_ConfirmPasswordLabel').closest('.row').after(customFields);
+
+    // BOTÃO: Cria novo botão e esconde o original
+    $('#SubmitButton').after('<input type="submit" value="Registrar" id="mySubmitButton" class="btn btn-primary">');
+    $('#SubmitButton').hide();
+
+    // LÓGICA DE ENVIO
+    $("#mySubmitButton").click(function(e) {
+        e.preventDefault(); // Evita comportamento padrão
+
+        // Validação: Verifica se algum dos campos novos está vazio
+        var emptyFields = false;
+        
+        // Lista de IDs para verificar
+        var idsToCheck = [
+            "#fullname_field", 
+            "#address1_line1_field", 
+            "#address1_state_field", 
+            "#address1_city_field", 
+            "#address1_postalcode_field", 
+            "#mobilephone_field"
+        ];
+
+        // Loop de verificação
+        for (var i = 0; i < idsToCheck.length; i++) {
+            if ($(idsToCheck[i]).val() === "") {
+                emptyFields = true;
+                $(idsToCheck[i]).addClass("is-invalid"); // Adiciona borda vermelha do Bootstrap
+            } else {
+                $(idsToCheck[i]).removeClass("is-invalid");
+            }
+        }
+
+        if (emptyFields) {
+            alert("Por favor, preencha todos os campos obrigatórios.");
+            return false;
+        }
+
+        // Se tudo estiver preenchido, salva no LocalStorage
+        //localStorage.setItem("fullname", $("#fullname_field").val());
+        //localStorage.setItem("address1_composite", $("#address1_line1_field").val());
+        //localStorage.setItem("address1_state", $("#address1_state_field").val());
+        //localStorage.setItem("address1_city", $("#address1_city_field").val());
+        //localStorage.setItem("address1_postalcode", $("#address1_postalcode_field").val());
+        //localStorage.setItem("mobilephone", $("#mobilephone_field").val());
+
+        // Clica no botão original para enviar
+        $('#SubmitButton').click();
+    });
+});
+</script> -->

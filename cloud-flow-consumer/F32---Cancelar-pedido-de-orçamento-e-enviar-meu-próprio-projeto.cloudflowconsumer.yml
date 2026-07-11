@@ -1,0 +1,8 @@
+adx_CloudFlowConsumer_adx_webrole:
+- 1e16f3b3-b319-4d15-a71e-bd149be9381d
+adx_cloudflowconsumerid: 602a84e7-ef4a-f111-bec7-7ced8da81546
+adx_flowapiurl: /_api/cloudflow/v1.0/trigger/7be5052b-ed4a-f111-bec7-7ced8da81546
+adx_flowtriggerurl: ''
+adx_metadata: ''
+adx_name: F32 - Cancelar pedido de orçamento e enviar meu próprio projeto
+adx_processid: 7be5052b-ed4a-f111-bec7-7ced8da81546

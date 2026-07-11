@@ -1,0 +1,12 @@
+- adx_botconsumerid: 03cdcaa5-aecb-f011-bbd2-000d3a3113d7
+  adx_botschemaname: crb9d_77d6f7cf-bd40-4a7d-87cc-52406423b4b3
+  adx_configjson: '{"skillConfigViewName":"AEGEA Viabilidade Tecnica bot Answers"}'
+  adx_name: Bot Consumer
+- adx_botconsumerid: 44eb791e-eddc-f011-8543-000d3a5ae560
+  adx_botschemaname: cr487_53a44902-08e1-41d3-b573-182d848cd55a
+  adx_configjson: '{"skillConfigViewName":"AEGEA - aegea-viabilidade bot Answers"}'
+  adx_name: Bot Consumer
+- adx_botconsumerid: fda1b1b6-13b9-f011-bbd3-000d3a5976b0
+  adx_botschemaname: crb9d_2209f051-5e67-46ef-bcfd-29f376b80f99
+  adx_configjson: '{"skillConfigViewName":"AEGEA bot Answers"}'
+  adx_name: Bot Consumer

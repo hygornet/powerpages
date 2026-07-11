@@ -1,0 +1,8 @@
+adx_CloudFlowConsumer_adx_webrole:
+- 1e16f3b3-b319-4d15-a71e-bd149be9381d
+adx_cloudflowconsumerid: 6d54fbd0-3a00-f111-8406-002248de77b7
+adx_flowapiurl: /_api/cloudflow/v1.0/trigger/d5a3f4c1-3a00-f111-8407-002248dedebb
+adx_flowtriggerurl: ''
+adx_metadata: ''
+adx_name: F10-DT RETORNA Status de 'DOCUMENTAÇÃO REPROVADA' para 'EM ANÁLISE TÉCNICA'
+adx_processid: d5a3f4c1-3a00-f111-8407-002248dedebb

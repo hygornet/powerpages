@@ -1,0 +1,2311 @@
+{% assign url = request.url | downcase %} 
+{% assign mid_image = "/logo-aegea-personalizado.png" %} 
+{% assign url_contato = "www.aegea.com.br/contato/" %} 
+{% assign url_dominio_unidade = "" %} 
+{% if url contains settings["URLCorsan"] %} 
+{% assign mid_image = "/corsan-centralized.png" %} 
+{% assign url_dominio_unidade = settings["URLCorsan"] %} 
+{% assign url_contato = "https://corsan.com.br/canais-de-relacionamento/" %} 
+{% elsif url contains settings["URLAguasDoPara"] %} 
+{% assign mid_image = "/centro_para.png" %} 
+{% assign url_dominio_unidade = settings["URLAguasDoPara"] %} 
+{% assign url_contato = "https://www.aguasdopara.com.br/contato/" %} 
+{% elsif url contains settings["URLAguasDeGuariroba"] %} 
+{% assign mid_image = "/centro_guariroba.png" %} 
+{% assign url_dominio_unidade = settings["URLAguasDeGuariroba"] %} 
+{% assign url_contato = "https://www.aguasguariroba.com.br/contato/" %} 
+{% elsif url contains settings["URLAguasDeManaus"] %} 
+{% assign mid_image = "/centro_manaus.png" %} 
+{% assign url_dominio_unidade = settings["URLAguasDeManaus"] %} 
+{% assign url_contato = "https://www.aguasdemanaus.com.br/contato/" %} 
+{% elsif url contains settings["URLProlagos"] %} 
+{% assign mid_image = "/centro_prolagos.png" %} 
+{% assign url_dominio_unidade = settings["URLProlagos"] %} 
+{% assign url_contato = "https://www.prolagos.com.br/contato/" %} 
+{% endif %} {% fetchxml unidade %}
+
+
+
+<fetch>
+  <entity name="cloud_unidades">
+    <attribute name="cloud_docs_obrigatorios" />
+    <attribute name="cloud_docs_condicionais" />
+    <attribute name="cloud_id_unidade" />
+    <attribute name="cloud_nome_unidade" />
+    <attribute name="cloud_unidadesid" />
+    <attribute name="cloud_dominio" />
+    <filter>
+      <condition attribute="cloud_dominio" operator="eq" value="{{url_dominio_unidade}}" />
+    </filter>
+  </entity>
+</fetch>
+{% endfetchxml %} {% assign unidadeRegistro = unidade.results.entities | first %} {% assign docsCondicionais = unidadeRegistro.cloud_docs_condicionais %} {% assign unidadeRegistro = unidade.results.entities | first %} {% assign docsObrigatorios = unidadeRegistro.cloud_docs_obrigatorios %}
+{% assign solicitacaoId = request.params["id"] %}
+
+{% fetchxml solicitacao %}
+<fetch top="1">
+  <entity name="cloud_solicitacoes">
+
+    <attribute name="cloud_solicitacoesid" />
+    <attribute name="cloud_status_atual" />
+    <attribute name="cloud_pagina_ultimo_form" />
+
+    <filter type="and">
+      <condition attribute="cloud_solicitacoesid"
+                 operator="eq"
+                 value="{{ solicitacaoId }}" />
+                 <condition attribute="createdon" operator="le" value='{{ "today" | date: "yyyy-MM-dd HH:mm:ss" }}' />
+    </filter>
+
+
+    <link-entity name="cloud_finalidades_solicitacao"
+                 from="cloud_finalidades_solicitacaoid"
+                 to="cloud_fk_finalidades_solicitacao"
+                 link-type="outer"
+                 alias="finalidade">
+
+      <attribute name="cloud_nome_finalidade" />
+
+    </link-entity>
+    
+  </entity>
+</fetch>
+{% endfetchxml %}
+
+
+{% fetchxml anexosAnnotation %}
+<fetch>
+  <entity name="annotation">
+    <attribute name="annotationid" />
+    <attribute name="filename" />
+    <attribute name="mimetype" />
+    <attribute name="filesize" />
+    <attribute name="createdon" />
+    <filter>
+      <condition attribute="createdon" operator="le" value='{{ "today" | date: "yyyy-MM-dd HH:mm:ss" }}' />
+      <condition attribute="objectid" operator="eq" value="{{ solicitacaoId }}" />
+      <condition attribute="isdocument" operator="eq" value="1" />
+    </filter>
+    <order attribute="createdon" descending="true" />
+  </entity>
+</fetch>
+{% endfetchxml %}
+
+{% assign qtdAnexos = anexosAnnotation.results.entities.size | default: 0 %}
+{% assign restanteAnexos = 15 | minus: qtdAnexos %}
+
+
+{% assign finalidade = solicitacao.results.entities[0]["finalidade.cloud_nome_finalidade"] | default: "" | upcase %}
+
+{% assign statusAtual = solicitacao.results.entities[0]['cloud_status_atual'].value %}
+{% assign paginaUltimoFormValor = solicitacao.results.entities[0]['cloud_pagina_ultimo_form'].value | default: 586450001 %}
+
+{% assign paginaInicial = "2" %}
+{% if paginaUltimoFormValor == 586450002 %}
+  {% assign paginaInicial = "2" %}
+{% elsif paginaUltimoFormValor == 586450003 %}
+  {% assign paginaInicial = "2" %}
+{% elsif paginaUltimoFormValor == 586450004 %}
+  {% assign paginaInicial = "2" %}
+{% endif %}
+{% if statusAtual == 586450001 and paginaUltimoFormValor == 586450004 %}
+  <style>body { display:none !important; }</style>
+  <script>
+    window.location.href = "/Status/?id={{ solicitacaoId }}";
+  </script>
+{% endif %}
+
+<div class="row sectionBlockLayout" style="display: flex; flex-wrap: wrap; margin: 0px; min-height: auto; padding: 80px 0px 40px; background-color: rgb(249, 250, 251);">
+  <div class="container" style="padding: 0px; display: flex; flex-wrap: wrap; column-gap: 0px;">
+    <div
+      class="col-lg-6 columnBlockLayout"
+      style="flex-grow: 1; min-width: 250px; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; width: calc(50% + 0px);
+            padding: 0px 15px;"
+    >
+      <img
+          id="midImageUnidade"
+          src="{{ mid_image }}"
+          alt="Logo"
+          data-default-mid-image="{{ mid_image }}"
+          style="max-width: 100%; width: 540px; height: 400px;
+            margin-bottom: 24px; border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);"
+        />
+    </div>
+ <div
+  class="col-lg-6 columnBlockLayout"
+  style="
+    flex-grow: 1;
+    min-width: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: calc(50% + 0px);
+    padding: 0 15px;
+  "
+>
+  <div
+        style="
+          width: 100%;
+          max-width: 760px;
+          padding: 32px 30px;
+          border-radius: 24px;
+          background: transparent;
+          border: none;
+          box-shadow: none;
+          backdrop-filter: none;
+          -webkit-backdrop-filter: none;
+        "
+      >
+    <h1 style="text-align: left; margin: 0 0 15px 0; color: #0027bd;">
+      Viabilidade Técnica
+      <span aria-label="Texto para Empreendimentos" style="position: relative;">
+        para Empreendimentos
+      </span>
+    </h1>
+
+    <p
+      style="
+        text-align: left;
+        font-size: 18px;
+        color: #0027bd;
+        max-width: 2000px;
+        line-height: 1.6;
+        margin: 0 0 32px 0;
+      "
+    >
+      Este portal é destinado a manter o empreendedor atualizado quanto suas solicitações, visualização do histórico e controle de todas as solicitações iniciadas por este site.
+    </p>
+
+    <div
+      style="
+        background: rgba(255, 255, 255, 0.96);
+        border-left: 4px solid var(--portalThemeColor4);
+        padding: 20px 24px;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        max-width: 700px;
+        width: 100%;
+      "
+    >
+      <p
+        class="smallText"
+        style="
+          margin: 0;
+          font-size: 15px;
+          color: #374151;
+          line-height: 1.5;
+        "
+      >
+        <strong>Sua solicitação é para um imóvel residencial?</strong><br />
+        Caso sua solicitação seja referente a unidade residencial ou uso particular, o atendimento não é realizado por este canal.
+        Para esses casos, por favor utilize nossos canais de atendimento ao cliente, acessando o 
+        <a
+          href="{{url_contato}}"
+          aria-label="Vínculo alias@dominio.com.br Pressione Enter para editar"
+          style="
+            font-weight: 600;
+            text-decoration: underline;
+            color: var(--portalThemeColor4);
+          "
+        >
+          Fale Conosco
+        </a>.
+      </p>
+    </div>
+  </div>
+</div>
+  </div>
+
+
+  <div class="row sectionBlockLayout" style="display: flex; flex-wrap: wrap; margin: 0px; min-height: auto; padding: 40px 0px 80px; background-color: rgb(249, 250, 251); border: 0px solid rgb(200, 198, 196);">
+    <div class="container" style="padding: 0px; display: flex; flex-wrap: wrap;">
+      <div class="col-lg-12" style="margin-bottom: -20px; padding: 0 15px 0 15px;">
+        <h2 style="text-align: center;">Documentação Necessária</h2>
+        <p style="text-align: center;">Organize seus arquivos antes de prosseguir.</p>
+      </div>
+      <div class="col-lg-6 columnBlockLayout" style="flex-grow: 1; min-width: 250px; display: flex; flex-direction: column; padding: 15px;">
+        <div style="background-color: #ffffff; border-radius: 16px; padding: 32px; height: 100%; border: 1px solid #e5e7eb; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
+          <div style="display: flex; align-items: center; margin-bottom: 24px;">
+            <div style="width: 40px; height: 40px; border-radius: 8px; background-color: #fee2e2; display: flex; justify-content: center; align-items: center; margin-right: 16px;"><span style="font-size: 20px; color: #b91c1c;">!</span></div>
+            <h4 style="margin: 0; font-size: 20px; font-weight: 700; color: #1f2937;">Itens Obrigatórios</h4>
+          </div>
+          {% if docsObrigatorios %} {{ docsObrigatorios}} {% else %}
+          <p span style="font-size: 14px; color: #6b7280;">Nenhuma documentação condicional foi configurada para esta unidade.</p>
+          {% endif %}
+        </div>
+      </div>
+      <div class="col-lg-6 columnBlockLayout" style="flex-grow: 1; min-width: 250px; display: flex; flex-direction: column; padding: 15px;">
+        <div style="background-color: #ffffff; border-radius: 16px; padding: 32px; height: 100%; border: 1px solid #e5e7eb; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
+          <div style="display: flex; align-items: center; margin-bottom: 24px;">
+            <div style="width: 40px; height: 40px; border-radius: 8px; background-color: #dbeafe; display: flex; justify-content: center; align-items: center; margin-right: 16px;"><span style="font-size: 20px; color: #1d4ed8;">📄</span></div>
+            <h4 style="margin: 0; font-size: 20px; font-weight: 700; color: #1f2937;">Conforme Aplicável</h4>
+          </div>
+          {% if docsCondicionais %} {{ docsCondicionais}} {% else %}
+          <p span style="font-size: 14px; color: #6b7280;">Nenhuma documentação obrigatória foi configurada para esta unidade.</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="form-foco-solicitacao" class="fsa-page-shell">
+  <div class="fsa-white-card">
+    <div id="custom-modern-form" class="modern-form-wrapper">
+
+      <!-- HEADER -->
+      <div class="fsa-header" id="fsaHeader">
+
+        <h1 class="fsa-title">
+          Formulário de Solicitação de Análise (FSA)
+        </h1>
+
+        <p class="fsa-subtitle">
+          Preencha os dados abaixo para darmos sequência.
+        </p>
+
+        <div class="fsa-step-indicator">
+          <span class="fsa-step-text">ETAPA</span>
+          <div class="fsa-step-circle active" id="stepNumber">{{paginaInicial}}</div>
+          <span class="fsa-step-text">DE</span>
+          <div class="fsa-step-circle total">3</div>
+        </div>
+
+      </div>
+
+      <div style="height: 0px;"></div>
+
+      <div class="power-pages-form-container">
+
+
+          <!-- ETAPA 1 -->
+          <div class="fsa-step {% if paginaInicial == '1' or paginaInicial == '' %}active{% endif %}"
+               id="step1"
+               style="{% unless paginaInicial == '1' or paginaInicial == '' %}display:none{% endunless %}">
+            <div class="ppFlexContainer">
+              {% entityform name: 'GRANDES CLIENTES E' %}
+            </div>
+          </div>
+
+          <!-- ETAPA 2 -->
+          <div class="fsa-step {% if paginaInicial == '2' %}active{% endif %}"
+               id="step2"
+               style="{% unless paginaInicial == '2' %}display:none{% endunless %}">
+            <div class="ppFlexContainer">
+              {% entityform name: 'Form_FSA E' %}
+              <!-- CONTAINER DE ANEXOS -->
+{% if qtdAnexos > 0 %}
+
+    {% for anexo in anexosAnnotation.results.entities %}
+      <div class="fsa-anexo-card"
+           data-anexo-id="{{ anexo.annotationid }}"
+           data-anexo-nome="{{ anexo.filename | escape }}">
+
+        <a class="fsa-anexo-nome"
+           href="/_entity/annotation/{{ anexo.annotationid }}/documentbody?fileName={{ anexo.filename | url_encode }}"
+           title="{{ anexo.filename | escape }}"
+           target="_blank">
+          {{ anexo.filename }}
+        </a>
+
+        <button type="button"
+                class="fsa-anexo-delete"
+                data-anexo-id="{{ anexo.annotationid }}"
+                title="Excluir arquivo">
+
+          <svg xmlns="http://www.w3.org/2000/svg"
+               width="16"
+               height="16"
+               fill="currentColor"
+               viewBox="0 0 16 16">
+            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+            <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+          </svg>
+        </button>
+      </div>
+    {% endfor %}
+
+{% endif %}
+ 
+            </div>
+          </div>
+
+          <!-- ETAPA 3 -->
+          <div class="fsa-step {% if paginaInicial == '3' %}active{% endif %}"
+               id="step3"
+               style="{% unless paginaInicial == '3' %}display:none{% endunless %}">
+
+            {% if finalidade == "INDUSTRIAL" %}
+              <div class="ppFlexContainer">
+                {% entityform name: 'FINALIDADE_IND E' %}
+              </div>
+            {% elsif finalidade == "COMERCIAL" or finalidade == "INSTITUCIONAL" %}
+              <div class="ppFlexContainer">
+                {% entityform name: 'FINALIDADES_COM_INS E' %}
+              </div>
+            {% else %}
+              <div class="ppFlexContainer">
+                {% entityform name: 'FINALIDADES_RES_LOTRES_CON_LOTIND E' %}
+              </div>
+            {% endif %}
+
+          </div>
+
+          <div id="fsa-sucesso"
+               style="{% unless paginaInicial == '4' %}display:none{% endunless %}">
+
+            <div class="fsa-card">
+              <h2>Sua FSA foi atualizada com sucesso!</h2>
+
+              <div class="fsa-nav-buttons">
+                <button id="btnVoltarLista" class="btn-cloud">
+                  VOLTAR PARA MINHAS SOLICITAÇÕES
+                </button>
+
+                <button id="btnEditarNovamente" class="btn-cloud-outline">
+                  EDITAR NOVAMENTE
+                </button>
+
+                <button id="btnAvancarEtapa"
+                        type="button"
+                        class="btn-cloud">
+                  AVANÇAR ETAPA
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+
+
+        <div class="fsa-nav-buttons" id="navWizardButtons">
+          <button type="button" class="btn-cloud" id="btnPrev">
+            ANTERIOR
+          </button>
+          
+          <button type="button" class="btn-cloud" id="btnNext">
+            AVANÇAR
+          </button>
+
+          <button type="button" class="btn-cloud" id="btnSalvar" style="display:none">
+            SALVAR
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+  </div>
+
+  <!-- FAB - POSSO AJUDAR -->
+
+  <a href="/FAQ/" class="faq-fab" aria-label="Posso ajudar?">
+    ?
+    <span class="faq-fab-tooltip">Posso ajudar?</span>
+  </a>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+</div>
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  const target = document.getElementById("form-foco-solicitacao");
+
+  if (target) {
+
+      target.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+      });
+
+  }
+
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  const FLOW_EXCLUIR_ANEXO = "/_api/cloudflow/v1.0/trigger/274f69ba-5440-f111-bec7-7ced8da81546";
+  const DOCUMENT_ID = "{{ solicitacaoId }}";
+
+  document.querySelectorAll(".fsa-anexo-delete").forEach(function (btn) {
+
+    btn.setAttribute("title", "Excluir arquivo");
+
+    btn.addEventListener("click", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      const anexoId = btn.getAttribute("data-anexo-id");
+      const card = btn.closest(".fsa-anexo-card");
+
+      if (!anexoId) {
+        alert("ID do anexo não encontrado.");
+        return;
+      }
+
+      btn.disabled = true;
+      btn.style.opacity = "0.5";
+      btn.style.cursor = "wait";
+      
+
+btn.disabled = true;
+
+      const payload = {
+        eventData: JSON.stringify({
+          DocumentId: DOCUMENT_ID,
+          AnexoId: anexoId,
+          QtdAnexado: "0"
+        })
+      };
+
+      shell.ajaxSafePost({
+        type: "POST",
+        url: FLOW_EXCLUIR_ANEXO,
+        contentType: "application/json",
+        data: JSON.stringify(payload),
+        processData: false
+      })
+      .done(function () {
+        btn.style.opacity = "0.5";
+        btn.style.cursor = "wait";
+
+        setTimeout(function () {
+            window.location.reload();
+          }, 6000);
+              })
+      .fail(function (xhr) {
+        console.error("Erro ao excluir anexo:", xhr);
+        alert("Erro ao excluir o arquivo. Tente novamente.");
+
+        btn.disabled = false;
+        btn.style.opacity = "1";
+        btn.style.cursor = "pointer";
+      });
+
+    });
+
+  });
+
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  const STORAGE_KEY = "aegea_unidade_selecionada";
+  const midImage = document.getElementById("midImageUnidade");
+
+  if (!midImage) return;
+
+  function getSelectedUnit() {
+    try {
+      return localStorage.getItem(STORAGE_KEY) || "default";
+    } catch (e) {
+      return "default";
+    }
+  }
+
+  const unidadeSelecionada = getSelectedUnit();
+  const defaultMidImage = midImage.getAttribute("data-default-mid-image") || "";
+
+  if (!unidadeSelecionada || unidadeSelecionada.toLowerCase() === "default") {
+    midImage.src = defaultMidImage;
+    return;
+  }
+
+  const imageMap = {
+    "águas de guariroba": "/centro_guariroba.png",
+    "aguas de guariroba": "/centro_guariroba.png",
+
+    "águas de manaus": "/centro_manaus.png",
+    "aguas de manaus": "/centro_manaus.png",
+
+    "águas do pará": "/centro_para.png",
+    "aguas do para": "/centro_para.png",
+    "águas do para": "/centro_para.png",
+    "aguas do pará": "/centro_para.png",
+
+    "prolagos": "/centro_prolagos.png",
+
+    "corsan": "/corsan-centralized.png"
+  };
+
+  const key = String(unidadeSelecionada).trim().toLowerCase();
+
+  if (imageMap[key]) {
+    midImage.src = imageMap[key];
+  } else {
+    midImage.src = defaultMidImage;
+  }
+});
+
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+
+const FLOW_PAGINA = "/_api/cloudflow/v1.0/trigger/c40ce1c6-d918-f111-8342-002248de77b7";
+const FLOW_CANCELAR_POR_PEQUENO_CLIENTE = "/_api/cloudflow/v1.0/trigger/2361651b-5ff6-f011-8406-002248de77b7";
+
+const recordID = "{{ solicitacaoId }}";
+const paginaAtual = "{{ paginaInicial }}";
+const paginaAtualValor = Number("{{ paginaUltimoFormValor }}");
+const statusAtual = Number("{{ statusAtual }}");
+const qtdAnexosAnnotation = Number("{{ qtdAnexos | default: 0 }}");
+
+function isPagina1() { return paginaAtual === "1"; }
+function isPagina2() { return paginaAtual === "2"; }
+function isPagina3() { return paginaAtual === "3"; }
+function isPagina4() { return paginaAtual === "4"; }
+
+const btnNext = document.getElementById("btnNext");
+const btnPrev = document.getElementById("btnPrev");
+const btnSalvar = document.getElementById("btnSalvar");
+
+// =====================================
+// HELPERS CAMPOS / REGRAS GRANDE CLIENTE
+// =====================================
+
+function normalizarTexto(texto) {
+  return (texto || "")
+    .toString()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .toUpperCase();
+}
+
+function obterElementoCampoNoStepAtual(selector) {
+  const step = getStepAtual();
+  if (!step) return null;
+  return step.querySelector(selector) || document.querySelector(selector);
+}
+
+function obterTextoCampo(selector) {
+  const el = obterElementoCampoNoStepAtual(selector);
+  if (!el) return "";
+
+  if (el.tagName === "SELECT") {
+    const opt = el.options[el.selectedIndex];
+    return opt ? (opt.text || "").toString().trim() : "";
+  }
+
+  return (el.value || el.getAttribute("value") || "").toString().trim();
+}
+
+function obterNumeroCampo(selector) {
+  const el = obterElementoCampoNoStepAtual(selector);
+  if (!el) return 0;
+
+  let valor = (el.value || "").toString().trim();
+  if (!valor) return 0;
+
+  valor = valor.replace(/[^\d,.-]/g, "");
+
+  if (valor.indexOf(",") > -1) {
+    valor = valor.replace(/\./g, "").replace(",", ".");
+  }
+
+  const numero = parseFloat(valor);
+  return isNaN(numero) ? 0 : numero;
+}
+
+function obterBooleanRadio(baseId) {
+  const step = getStepAtual();
+
+  let radioMarcado =
+    step?.querySelector("#" + baseId + " input[type='radio']:checked") ||
+    step?.querySelector("input[name='" + baseId + "']:checked") ||
+    document.querySelector("#" + baseId + " input[type='radio']:checked") ||
+    document.querySelector("input[name='" + baseId + "']:checked");
+
+  if (!radioMarcado) return false;
+
+  const valor = normalizarTexto(radioMarcado.value);
+  return valor === "TRUE" || valor === "1" || valor === "SIM" || valor === "YES";
+}
+function obterValorLookup(baseSelector) {
+  const hiddenEl = obterElementoCampoNoStepAtual(baseSelector);
+  const nameEl = obterElementoCampoNoStepAtual(baseSelector + "_name");
+
+  const hiddenValue = hiddenEl ? (hiddenEl.value || "").toString().trim() : "";
+  const nameValue = nameEl ? (nameEl.value || "").toString().trim() : "";
+
+  return {
+    hiddenValue: hiddenValue,
+    nameValue: nameValue,
+    preenchido: hiddenValue !== "" || nameValue !== ""
+  };
+}
+
+function obterValorTextoSimples(selector) {
+  const el = obterElementoCampoNoStepAtual(selector);
+  if (!el) return "";
+
+  return (el.value || "").toString().trim();
+}
+function avaliarRegraGrandeCliente() {
+  const finalidade = normalizarTexto(
+    obterTextoCampo("#cloud_fk_finalidades_solicitacao_name") ||
+    obterTextoCampo("#cloud_fk_finalidades_solicitacao")
+  );
+
+  const tipoCadastro = normalizarTexto(
+    obterTextoCampo("#cloud_tipo_cadastro")
+  );
+
+  const consumoMensal = obterNumeroCampo("#cloud_consumo_mensal");
+  const numeroEconomias = parseInt(obterNumeroCampo("#cloud_numero_economias"), 10) || 0;
+  const areaConstruidaTotal = obterNumeroCampo("#cloud_area_construida_total");
+  const isConglomeradoEmpresarial = obterBooleanRadio("cloud_is_conglomerado_empresarial");
+
+  const regraFinalidadeGrande =
+    finalidade.indexOf("CONDOMINIO") > -1 ||
+    finalidade.indexOf("LOTEAMENTO RESIDENCIAL") > -1 ||
+    finalidade.indexOf("LOTEAMENTO INDUSTRIAL") > -1 ||
+    finalidade.indexOf("INDUSTRIAL") > -1 ||
+    finalidade.indexOf("INSTITUCIONAL") > -1;
+
+  const regraCnpjConsumo =
+    tipoCadastro === "CNPJ" &&
+    consumoMensal >= 100;
+
+  const regraConsumo = consumoMensal > 100;
+
+  const regraNumeroEconomias = numeroEconomias >= 10;
+
+  const regraNumeroEconomiasEConsumo =
+    numeroEconomias >= 1 &&
+    consumoMensal >= 100;
+
+  const regraAreaConstruida = areaConstruidaTotal > 750;
+
+  const regraComercialConglomerado =
+    finalidade.indexOf("COMERCIAL") > -1 &&
+    isConglomeradoEmpresarial === true;
+
+  return (
+    regraFinalidadeGrande ||
+    regraCnpjConsumo ||
+    regraConsumo ||
+    regraNumeroEconomias ||
+    regraNumeroEconomiasEConsumo ||
+    regraAreaConstruida ||
+    regraComercialConglomerado
+  );
+}
+
+// =====================================
+// VALIDAR CAMPOS OBRIGATÓRIOS DO STEP VISÍVEL
+// =====================================
+
+function campoVisivel(el) {
+  if (!el) return false;
+  const style = window.getComputedStyle(el);
+  if (style.display === "none" || style.visibility === "hidden") return false;
+  return !!(el.offsetWidth || el.offsetHeight || el.getClientRects().length);
+}
+
+function obterCamposObrigatoriosDoStepAtual() {
+  const step = getStepAtual();
+  if (!step) return [];
+
+  // ETAPA 1 = campos fixos da regra de negócio
+  if (paginaAtual === "1") {
+    return [
+      obterElementoCampoNoStepAtual("#cloud_fk_finalidades_solicitacao_name"),
+      obterElementoCampoNoStepAtual("#cloud_tipo_cadastro"),
+      obterElementoCampoNoStepAtual("#cloud_consumo_mensal"),
+      obterElementoCampoNoStepAtual("#cloud_numero_economias"),
+      obterElementoCampoNoStepAtual("#cloud_area_construida_total"),
+      obterElementoCampoNoStepAtual("input[name='cloud_is_conglomerado_empresarial']")
+    ].filter(Boolean);
+  }
+
+  let campos = Array.from(
+    step.querySelectorAll(
+      "input[required], select[required], textarea[required], .required input, .required select, .required textarea"
+    )
+  );
+
+  campos = campos.filter(function (el, index, arr) {
+    return arr.indexOf(el) === index && !el.disabled;
+  });
+
+  // remove tudo que estiver em linha oculta
+  campos = campos.filter(function (el) {
+    const linha =
+      el.closest("tr") ||
+      el.closest(".form-group") ||
+      el.closest(".control");
+
+    if (linha) {
+      return campoVisivel(linha);
+    }
+
+    return campoVisivel(el);
+  });
+
+  // REGRA ESPECIAL: ETAPA 2 + CPF
+  if (isPagina2()) {
+    const tipoCadastro = normalizarTexto(
+      obterTextoCampo("#cloud_tipo_cadastro")
+    );
+
+    if (tipoCadastro === "CPF") {
+      const seletoresIgnorados = [
+        "#cloud_cnpj_construtora",
+        "#cloud_nome_resp_faturamento",
+        "#cloud_nome_construtora",
+        "#cloud_cnpj_construtora_name",
+        "#cloud_nome_resp_faturamento_name",
+        "#cloud_nome_construtora_name"
+      ];
+
+      campos = campos.filter(function (el) {
+        const deveIgnorar = seletoresIgnorados.some(function (selector) {
+          const alvo = step.querySelector(selector) || document.querySelector(selector);
+          if (!alvo) return false;
+
+          const linhaDoAlvo =
+            alvo.closest("tr") ||
+            alvo.closest(".form-group") ||
+            alvo.closest(".control");
+
+          const linhaDoCampo =
+            el.closest("tr") ||
+            el.closest(".form-group") ||
+            el.closest(".control");
+
+          return (
+            el === alvo ||
+            alvo.contains(el) ||
+            (linhaDoAlvo && linhaDoCampo && linhaDoAlvo === linhaDoCampo)
+          );
+        });
+
+        return !deveIgnorar;
+      });
+    }
+  }
+
+  return campos;
+}
+
+function campoObrigatorioPreenchido(el) {
+  if (!el || el.disabled) return true;
+
+  const tipo = (el.type || "").toLowerCase();
+  const tag = (el.tagName || "").toLowerCase();
+
+  if (tipo === "radio") {
+    const nome = el.name;
+    if (!nome) return !!el.checked;
+
+    const radios = document.querySelectorAll('input[type="radio"][name="' + nome + '"]');
+    return Array.from(radios).some(function (r) {
+      return !r.disabled && r.checked;
+    });
+  }
+
+  if (tipo === "checkbox") {
+    return el.checked;
+  }
+
+  if (tag === "select") {
+    const valor = (el.value || "").trim();
+    return valor !== "" && valor !== "null" && valor !== "-1";
+  }
+
+  // lookup hidden + lookup _name
+  if (el.id && !el.value && document.getElementById(el.id + "_name")) {
+    const nomeLookup = document.getElementById(el.id + "_name");
+    return !!((nomeLookup.value || "").trim());
+  }
+
+  return (el.value || "").trim() !== "";
+}
+
+function todosObrigatoriosPreenchidosNoStepAtual() {
+  if (isPagina1()) {
+    const finalidadeLookup = obterValorLookup("#cloud_fk_finalidades_solicitacao");
+    const tipoCadastro = obterValorTextoSimples("#cloud_tipo_cadastro");
+    const consumoMensal = obterValorTextoSimples("#cloud_consumo_mensal");
+    const numeroEconomias = obterValorTextoSimples("#cloud_numero_economias");
+    const areaConstruida = obterValorTextoSimples("#cloud_area_construida_total");
+
+    const radioMarcado =
+      document.querySelector("#cloud_is_conglomerado_empresarial input[type='radio']:checked") ||
+      document.querySelector("input[name='cloud_is_conglomerado_empresarial']:checked");
+
+    const preenchido = !!(
+      finalidadeLookup.preenchido &&
+      tipoCadastro !== "" &&
+      consumoMensal !== "" &&
+      numeroEconomias !== "" &&
+      areaConstruida !== "" &&
+      radioMarcado
+    );
+
+
+    return preenchido;
+  }
+
+  const campos = obterCamposObrigatoriosDoStepAtual();
+  if (!campos.length) return false;
+
+  for (let i = 0; i < campos.length; i++) {
+    if (!campoObrigatorioPreenchido(campos[i])) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+function etapa2TemAnexo() {
+  const temAnexoNoFetch = qtdAnexosAnnotation > 0;
+
+  const step2 = document.getElementById("step2");
+  if (!step2) return temAnexoNoFetch;
+
+  const temInputComArquivo = Array.from(step2.querySelectorAll("input[type='file']")).some(function (input) {
+    return input.files && input.files.length > 0;
+  });
+
+  const temArquivoRenderizadoNoForm =
+    step2.innerText.toLowerCase().includes(".pdf") ||
+    step2.innerText.toLowerCase().includes(".jpg") ||
+    step2.innerText.toLowerCase().includes(".jpeg") ||
+    step2.innerText.toLowerCase().includes(".png") ||
+    step2.innerText.toLowerCase().includes(".doc") ||
+    step2.innerText.toLowerCase().includes(".docx") ||
+    step2.innerText.toLowerCase().includes(".xls") ||
+    step2.innerText.toLowerCase().includes(".kmz") ||
+    step2.innerText.toLowerCase().includes(".xlsx");
+
+  return temAnexoNoFetch || temInputComArquivo || temArquivoRenderizadoNoForm;
+}
+
+
+function atualizarEstadoBotoesNavegacao() {
+  if (isPagina4()) return;
+
+  const campos = obterCamposObrigatoriosDoStepAtual();
+  let podeAvancar = campos.length > 0 && campos.every(campoObrigatorioPreenchido);
+
+  if (isPagina2()) {
+    podeAvancar = podeAvancar && etapa2TemAnexo();
+  }
+
+  if (btnNext && (isPagina1() || isPagina2())) {
+    btnNext.classList.toggle("btn-cloud-disabled", !podeAvancar);
+    btnNext.disabled = !podeAvancar;
+    btnNext.setAttribute("aria-disabled", String(!podeAvancar));
+  }
+
+  if (btnSalvar && isPagina3()) {
+    btnSalvar.classList.toggle("btn-cloud-disabled", !podeAvancar);
+    btnSalvar.disabled = !podeAvancar;
+    btnSalvar.setAttribute("aria-disabled", String(!podeAvancar));
+  }
+}
+
+
+function marcarBotaoComoProcessando(botao, texto) {
+  if (!botao) return;
+  botao.dataset.processing = "true";
+  botao.dataset.blocked = "true";
+  botao.setAttribute("aria-disabled", "true");
+  botao.classList.add("btn-cloud-processing");
+  botao.classList.remove("btn-cloud-disabled");
+  botao.textContent = texto || "PROCESSANDO...";
+}
+function restaurarBotao(botao, textoOriginal) {
+  if (!botao) return;
+  botao.dataset.processing = "false";
+  botao.classList.remove("btn-cloud-processing");
+  botao.textContent = textoOriginal;
+  atualizarEstadoBotoesNavegacao();
+}
+
+function registrarEventosValidacaoStepAtual() {
+  const container = document.querySelector(".power-pages-form-container");
+  if (!container) return;
+
+  container.addEventListener("input", function () {
+    atualizarEstadoBotoesNavegacao();
+  });
+
+  container.addEventListener("change", function () {
+    atualizarEstadoBotoesNavegacao();
+  });
+
+  // importante para lookup/modal/rerender do Power Pages
+  setTimeout(atualizarEstadoBotoesNavegacao, 300);
+  setTimeout(atualizarEstadoBotoesNavegacao, 1000);
+}
+// =====================================
+// MODAL PEQUENO CLIENTE
+// =====================================
+
+function executarFlowCancelarPequenoCliente(callback) {
+  const payload = {
+    eventData: JSON.stringify({
+      RecordID: recordID
+    })
+  };
+
+  if (!window.shell || typeof shell.ajaxSafePost !== "function") {
+    alert("Contexto de segurança do Power Pages não disponível.");
+    return;
+  }
+
+  shell.ajaxSafePost({
+    type: "POST",
+    url: FLOW_CANCELAR_POR_PEQUENO_CLIENTE,
+    contentType: "application/json",
+    data: JSON.stringify(payload),
+    processData: false
+  })
+  .done(function () {
+    if (callback) callback();
+  })
+  .fail(function (xhr) {
+    console.error("Erro Flow cancelamento pequeno cliente:", xhr);
+    alert("Erro ao executar o fluxo de cancelamento da solicitação.");
+  });
+}
+
+
+const headerFSA = document.getElementById("fsaHeader");
+
+const navWizardButtons = document.getElementById("navWizardButtons");
+
+
+
+// =============================
+// CONTROLE PAGINA 4
+// =============================
+
+if (isPagina4()) {
+
+headerFSA?.style.setProperty("display","none","important");
+
+document.querySelector("#step1")?.style.setProperty("display","none","important");
+document.querySelector("#step2")?.style.setProperty("display","none","important");
+document.querySelector("#step3")?.style.setProperty("display","none","important");
+
+btnPrev?.style.setProperty("display","none","important");
+btnNext?.style.setProperty("display","none","important");
+btnSalvar?.style.setProperty("display","none","important");
+
+document.querySelector(".ppFlexContainer button")
+?.style.setProperty("display","none","important");
+
+navWizardButtons?.style.setProperty("display","none","important");
+
+setTimeout(()=>{
+btnPrev?.style.setProperty("display","none","important");
+btnNext?.style.setProperty("display","none","important");
+btnSalvar?.style.setProperty("display","none","important");
+},500)
+
+}
+
+// =====================================
+// CONTROLAR VISIBILIDADE DOS BOTÕES
+// =====================================
+
+function ajustarBotoes() {
+  if (!btnNext || !btnSalvar) return;
+
+  if (isPagina3()) {
+    btnNext.style.setProperty("display", "none", "important");
+    btnSalvar.style.setProperty("display", "inline-flex", "important");
+  } else {
+    btnNext.style.setProperty("display", "inline-flex", "important");
+    btnSalvar.style.setProperty("display", "none", "important");
+  }
+
+  atualizarEstadoBotoesNavegacao();
+}
+
+ajustarBotoes();
+
+setTimeout(ajustarBotoes,200);
+setTimeout(ajustarBotoes,600);
+setTimeout(ajustarBotoes,1200);
+
+// =====================================
+// CORRIGIR VISIBILIDADE BOTÃO ANTERIOR
+// =====================================
+
+function ajustarBotaoAnterior() {
+  if (!btnPrev) return;
+
+  if (isPagina1()) {
+    btnPrev.style.setProperty("display", "none", "important");
+  } else {
+    btnPrev.style.setProperty("display", "inline-flex", "important");
+  }
+}
+
+ajustarBotaoAnterior();
+
+// executa novamente após render do entityform
+setTimeout(ajustarBotaoAnterior, 800);
+// executa várias vezes porque o entityform re-renderiza
+registrarEventosValidacaoStepAtual();
+setTimeout(atualizarEstadoBotoesNavegacao, 300);
+setTimeout(atualizarEstadoBotoesNavegacao, 900);
+setTimeout(atualizarEstadoBotoesNavegacao, 1600);
+setTimeout(atualizarEstadoBotoesNavegacao, 2500);
+setTimeout(atualizarEstadoBotoesNavegacao, 4000);
+
+setTimeout(ajustarBotaoAnterior,200);
+setTimeout(ajustarBotaoAnterior,600);
+setTimeout(ajustarBotaoAnterior,1200);
+setTimeout(ajustarBotaoAnterior,2000);
+
+// executa imediatamente
+ajustarBotaoAnterior();
+
+// executa novamente após render do entityform
+setTimeout(ajustarBotaoAnterior, 800);
+
+  // =============================
+  // LOCALIZAR BOTÃO ENVIAR
+  // =============================
+
+  function getSubmitFormAtual() {
+
+    const stepVisivel =
+      document.querySelector("#step1:not([style*='display:none'])") ||
+      document.querySelector("#step2:not([style*='display:none'])") ||
+      document.querySelector("#step3:not([style*='display:none'])");
+
+    if (!stepVisivel) return null;
+
+    return stepVisivel.querySelector("#UpdateButton")
+      || stepVisivel.querySelector("#InsertButton")
+      || stepVisivel.querySelector('input[id$="UpdateButton"]')
+      || stepVisivel.querySelector('input[id$="InsertButton"]')
+      || stepVisivel.querySelector('button[type="submit"]')
+      || stepVisivel.querySelector('input[type="submit"]');
+
+  }
+  function getPRM() {
+    try {
+      if (
+        window.Sys &&
+        Sys.WebForms &&
+        Sys.WebForms.PageRequestManager
+      ) {
+        return Sys.WebForms.PageRequestManager.getInstance();
+      }
+    } catch (e) {}
+    return null;
+  }
+
+  function getStepAtual() {
+    return document.querySelector(".fsa-step.active")
+      || document.querySelector("#step1:not([style*='display:none'])")
+      || document.querySelector("#step2:not([style*='display:none'])")
+      || document.querySelector("#step3:not([style*='display:none'])")
+      || document.querySelector(".power-pages-form-container");
+  }
+
+  function isVisivel(el) {
+    return !!(el && (el.offsetWidth || el.offsetHeight || el.getClientRects().length));
+  }
+
+  function formTemErroAtual() {
+    const contexto = getStepAtual();
+    if (!contexto) return false;
+
+    const resumoErro = contexto.querySelector(
+      ".validation-summary-errors, .alert-danger, .notification.error, #ValidationSummary"
+    );
+
+    if (
+      resumoErro &&
+      resumoErro.innerText &&
+      resumoErro.innerText.trim().length > 0 &&
+      isVisivel(resumoErro)
+    ) {
+      return true;
+    }
+
+    const campoErro = contexto.querySelector(
+      ".input-validation-error, .field-validation-error, .has-error"
+    );
+
+    return !!campoErro;
+  }
+
+  function restaurarScroll(posY) {
+    window.scrollTo(0, posY);
+  }
+
+  function focarPrimeiroErroSemScroll(posY) {
+    const contexto = getStepAtual();
+    if (!contexto) return;
+
+    const alvo =
+      contexto.querySelector("input.input-validation-error, select.input-validation-error, textarea.input-validation-error")
+      || contexto.querySelector(".has-error input, .has-error select, .has-error textarea");
+
+    if (!alvo) return;
+
+    try {
+      alvo.focus({ preventScroll: true });
+    } catch (e) {
+      try { alvo.focus(); } catch (_) {}
+      restaurarScroll(posY);
+    }
+  }
+
+function submeterComProtecaoScroll(submitBtn, onSuccess) {
+  if (!submitBtn) {
+    alert("Botão ENVIAR do formulário não encontrado.");
+    return;
+  }
+
+  const scrollAntes = window.pageYOffset || document.documentElement.scrollTop || 0;
+  const prm = getPRM();
+  let processado = false;
+
+  function finalizar() {
+    if (processado) return;
+    processado = true;
+
+    if (formTemErroAtual()) {
+      restaurarScroll(scrollAntes);
+
+      setTimeout(function () {
+        focarPrimeiroErroSemScroll(scrollAntes);
+        restaurarScroll(scrollAntes);
+      }, 30);
+
+      if (isPagina1() || isPagina2()) {
+        restaurarBotao(btnNext, "AVANÇAR");
+      }
+
+      if (isPagina3()) {
+        restaurarBotao(btnSalvar, "SALVAR");
+      }
+
+      return;
+    }
+
+    if (typeof onSuccess === "function") {
+      onSuccess();
+    }
+  }
+
+  if (prm) {
+    const handler = function () {
+      prm.remove_endRequest(handler);
+      finalizar();
+    };
+
+    prm.add_endRequest(handler);
+  }
+
+  setTimeout(function () {
+    if (formTemErroAtual()) {
+      finalizar();
+    }
+  }, 120);
+
+  submitBtn.click();
+}
+
+
+
+  // =============================
+  // EXECUTAR FLOW
+  // =============================
+
+  function executarFlow(paginaDestino, callback) {
+
+      const mapaReferencia = {
+        "1": "A",
+        "2": "B",
+        "3": "C"
+      };
+
+      const referenciaFlow = mapaReferencia[String(paginaDestino)] || String(paginaDestino);
+
+      const payload = {
+        eventData: JSON.stringify({
+          RecordID: recordID,
+          Pagina: referenciaFlow
+        })
+      };
+
+    if (!window.shell || typeof shell.ajaxSafePost !== "function") {
+      alert("Contexto de segurança do Power Pages não disponível.");
+      return;
+    }
+
+    shell.ajaxSafePost({
+      type: "POST",
+      url: FLOW_PAGINA,
+      contentType: "application/json",
+      data: JSON.stringify(payload),
+      processData: false
+    })
+    .done(function () {
+
+      console.log("FLOW executado");
+
+      if (callback) callback();
+
+    })
+    .fail(function (xhr) {
+
+      console.error("Erro Flow:", xhr);
+      alert("Erro ao executar fluxo.");
+
+    });
+
+  }
+
+
+
+
+// =============================
+// BOTÃO SALVAR
+// =============================
+// =============================
+// BOTÃO SALVAR - NOVO BLOCO LIMPO
+// =============================
+if (btnSalvar) {
+
+  const btnSalvarNovo = btnSalvar.cloneNode(true);
+  btnSalvar.parentNode.replaceChild(btnSalvarNovo, btnSalvar);
+
+  btnSalvarNovo.addEventListener("click", function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const submitBtn = getSubmitFormAtual();
+    if (!submitBtn) {
+      alert("Botão ENVIAR do formulário da etapa 3 não foi encontrado.");
+      return;
+    }
+
+    const preenchido = todosObrigatoriosPreenchidosNoStepAtual();
+
+      if (!preenchido) {
+        alert("Preencha todos os campos obrigatórios da etapa.");
+        return;
+      }
+
+      if (isPagina2() && !etapa2TemAnexo()) {
+        alert("Anexe pelo menos um arquivo no formulário FSA E antes de avançar.");
+        atualizarEstadoBotoesNavegacao();
+        return;
+      }
+
+    btnSalvarNovo.textContent = "PROCESSANDO...";
+    btnSalvarNovo.disabled = true;
+
+    executarFlow("4", function () {
+      submeterComProtecaoScroll(submitBtn, function () {
+        window.location.reload();
+      });
+    });
+  });
+
+}
+function abrirModalRetornoPagina3(onConfirmar) {
+  const modalExistente = document.getElementById("modal-retorno-pagina3");
+  if (modalExistente) modalExistente.remove();
+
+  const modal = document.createElement("div");
+  modal.id = "modal-retorno-pagina3";
+
+  modal.innerHTML = `
+    <div class="pp-modal-backdrop">
+      <div class="pp-modal">
+        <h3>Atenção!</h3>
+
+        <p>
+          Ao retornar para a etapa anterior os anexos serão descartados e será necessário
+          anexar novamente os arquivos. Deseja retornar para a etapa 2?
+        </p>
+
+        <div class="pp-modal-actions">
+          <button id="btnCancelarRetornoPagina3" class="btn-cloud-outline">
+            CANCELAR
+          </button>
+
+          <button id="btnConfirmarRetornoPagina3" class="btn-cloud">
+            CONFIRMAR
+          </button>
+        </div>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+  document.body.style.overflow = "hidden";
+
+  function fecharModal() {
+    document.body.style.overflow = "";
+    modal.remove();
+  }
+
+  document.getElementById("btnCancelarRetornoPagina3").onclick = function () {
+    fecharModal();
+  };
+
+  document.getElementById("btnConfirmarRetornoPagina3").onclick = function () {
+    fecharModal();
+    if (typeof onConfirmar === "function") {
+      onConfirmar();
+    }
+  };
+
+  const backdrop = modal.querySelector(".pp-modal-backdrop");
+  backdrop.addEventListener("click", function (e) {
+    if (e.target === backdrop) {
+      fecharModal();
+    }
+  });
+}
+
+// =============================
+// BOTÃO ANTERIOR
+// =============================
+if (btnPrev) {
+
+  btnPrev.addEventListener("click", function (e) {
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    function executarAnteriorOriginal() {
+      btnPrev.disabled = true;
+
+      let paginaDestino = "1";
+
+      if (isPagina2()) {
+        paginaDestino = "1";
+      }
+
+      if (isPagina3()) {
+        paginaDestino = "2";
+      }
+
+      console.log("Voltando etapa -> Pagina:", paginaDestino);
+
+      executarFlow(paginaDestino, function () {
+
+        const urlAtual = new URL(window.location.href);
+        urlAtual.searchParams.delete("nocache");
+
+       setTimeout(function () {
+          window.location.href = "/Editar-Solicitacoes/?id=" + encodeURIComponent(recordID);
+        }, 400);
+
+      });
+    }
+
+    if (isPagina3()) {
+      abrirModalRetornoPagina3(function () {
+        executarAnteriorOriginal();
+      });
+      return;
+    }
+
+    executarAnteriorOriginal();
+
+  });
+
+}
+
+// =============================
+// BOTÃO AVANÇAR (PÁGINA 2)
+// Envia submit form e acessa etapa 3
+// =============================
+
+if (btnNext) {
+
+  btnNext.addEventListener("click", function (e) {
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (btnNext.dataset.processing === "true") return;
+
+    const submitBtn = getSubmitFormAtual();
+
+    if (!submitBtn) {
+      alert("Botão ENVIAR do formulário não encontrado.");
+      return;
+    }
+
+    const preenchido = todosObrigatoriosPreenchidosNoStepAtual();
+
+    if (!preenchido) {
+      alert("Preencha todos os campos obrigatórios da etapa.");
+      return;
+    }
+
+    if (isPagina2() && !etapa2TemAnexo()) {
+      alert("Anexe pelo menos um arquivo no formulário FSA E antes de avançar.");
+      atualizarEstadoBotoesNavegacao();
+      return;
+    }
+
+    marcarBotaoComoProcessando(btnNext, "PROCESSANDO...");
+
+    executarFlow("3", function () {
+
+      submeterComProtecaoScroll(submitBtn, function () {
+
+        window.location.href =
+          "/editar-solicitacoes-etapa3/?id=" + encodeURIComponent(recordID);
+
+      });
+
+    });
+
+  });
+
+}
+
+function abrirModalConfirmarSalvar(){
+
+const modal=document.createElement("div");
+
+modal.innerHTML=`
+<div class="pp-modal-backdrop">
+<div class="pp-modal">
+
+<p>Ao confirmar, os dados do formulário serão salvos e a página será encerrada.</p>
+
+<div class="pp-modal-actions">
+
+<button id="btnCancelarSalvar" class="btn-cloud-outline">
+CANCELAR
+</button>
+
+<button id="btnConfirmarSalvar" class="btn-cloud">
+CONFIRMAR
+</button>
+
+</div>
+
+</div>
+</div>
+`;
+
+document.body.appendChild(modal);
+
+// cancelar
+document.getElementById("btnCancelarSalvar").onclick=function(){
+
+modal.remove();
+
+}
+
+// confirmar
+document.getElementById("btnConfirmarSalvar").onclick=function(){
+
+modal.remove();
+
+salvarSemAvancar();
+
+}
+
+}
+
+function abrirModalSalvarAvancar(){
+
+const modal=document.createElement("div");
+
+modal.innerHTML=`
+<div class="pp-modal-backdrop">
+<div class="pp-modal">
+
+<h3>Deseja salvar atualização e avançar o status da solicitação para
+<strong>Definição de componentes</strong>?</h3>
+
+<div class="pp-modal-actions">
+
+<button id="btnCancelarSalvar" class="btn-cloud-outline">
+CANCELAR
+</button>
+
+<button id="btnSalvarAvancar" class="btn-cloud">
+SALVAR E AVANÇAR ETAPA
+</button>
+
+</div>
+
+</div>
+</div>
+`;
+
+document.body.appendChild(modal);
+
+
+document.getElementById("btnCancelarSalvar").onclick=function(){
+
+window.location.href="/status-projeto/?id={{ solicitacaoId }}";
+
+}
+
+
+document.getElementById("btnSalvarAvancar").onclick=function(){
+
+executarSalvarEAvancar();
+
+}
+
+}
+
+function executarSalvarEAvancar() {
+
+  const submitBtn = getSubmitFormAtual();
+
+  if (!submitBtn) {
+    alert("Botão ENVIAR do formulário não encontrado.");
+    return;
+  }
+
+  executarFlow("1", function () {
+
+    submeterComProtecaoScroll(submitBtn, function () {
+
+      fetch("/_api/cloudflow/v1.0/trigger/46fad9d8-5a18-f111-8341-7ced8da81546", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          RecordID: "{{ solicitacaoId }}"
+        })
+      })
+      .then(() => {
+        abrirModalSucessoAvanco();
+      });
+
+    });
+
+  });
+
+}
+
+function salvarSemAvancar() {
+
+  const submitBtn = getSubmitFormAtual();
+
+  if (!submitBtn) {
+    alert("Botão ENVIAR do formulário não encontrado.");
+    return;
+  }
+
+  submeterComProtecaoScroll(submitBtn, function () {
+    window.location.href = "/Minhas-Solicitações/";
+  });
+
+}
+
+
+function abrirModalPergunta(){
+
+  const modal = document.createElement("div");
+
+  modal.innerHTML = `
+  <div class="pp-modal-backdrop">
+      <div class="pp-modal">
+
+          <h3>Dados atualizados com sucesso!</h3>
+
+          <p>
+          Deseja avançar o status da solicitação para 
+          <strong>Definição de componentes</strong>?
+          </p>
+
+          <div class="pp-modal-actions">
+
+              <button id="btnCancelarAvanco" class="btn-cloud-outline">
+              CANCELAR
+              </button>
+
+              <button id="btnConfirmarAvanco" class="btn-cloud">
+              AVANÇAR ETAPA
+              </button>
+
+          </div>
+
+      </div>
+  </div>
+  `;
+
+  document.body.appendChild(modal);
+
+  document.getElementById("btnCancelarAvanco").onclick=function(){
+
+      window.location.href="/status-projeto/?id={{ solicitacaoId }}";
+
+  }
+
+  document.getElementById("btnConfirmarAvanco").onclick=function(){
+
+      avancarStatus();
+
+  }
+
+}
+
+function avancarStatus(){
+
+fetch("/_api/cloudflow/v1.0/trigger/46fad9d8-5a18-f111-8341-7ced8da81546",{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body: JSON.stringify({
+RecordID:"{{ solicitacaoId }}"
+})
+
+})
+.then(()=>{
+
+abrirModalSucessoAvanco();
+
+});
+
+}
+
+function abrirModalSucessoAvanco(){
+
+const modal=document.createElement("div");
+
+modal.innerHTML=`
+<div class="pp-modal-backdrop">
+<div class="pp-modal">
+
+<h3>Status avançado com sucesso!</h3>
+
+<button id="btnOkAvanco" class="btn-cloud">
+OK
+</button>
+
+</div>
+</div>
+`;
+
+document.body.appendChild(modal);
+
+document.getElementById("btnOkAvanco").onclick=function(){
+
+window.location.href="/status-projeto/?id={{ solicitacaoId }}";
+
+}
+
+}
+function abrirModalSimples(){
+
+const modal=document.createElement("div");
+
+modal.innerHTML=`
+<div class="pp-modal-backdrop">
+<div class="pp-modal">
+
+<h3>Dados atualizados com sucesso!</h3>
+
+<button id="btnOkSimples" class="btn-cloud">
+OK
+</button>
+
+</div>
+</div>
+`;
+
+document.body.appendChild(modal);
+
+document.getElementById("btnOkSimples").onclick=function(){
+
+window.location.href="/Minhas-Solicitações/";
+
+}
+
+}
+
+// =============================
+// BOTÕES CARD SUCESSO
+// =============================
+
+const btnVoltarLista = document.getElementById("btnVoltarLista");
+const btnEditarNovamente = document.getElementById("btnEditarNovamente");
+const btnAvancarEtapa = document.getElementById("btnAvancarEtapa");
+
+
+
+if(btnAvancarEtapa){
+
+if(statusAtual !== 586450011){
+
+btnAvancarEtapa.style.setProperty("display","none","important");
+
+}
+setTimeout(()=>{
+if(statusAtual !== 586450011){
+btnAvancarEtapa?.style.setProperty("display","none","important");
+}
+},500)
+
+}
+
+if(btnVoltarLista){
+
+btnVoltarLista.onclick = function(){
+
+executarFlow("1", function(){
+
+window.location.href="/Minhas-Solicitações/";
+
+});
+
+}
+
+}
+
+if(btnEditarNovamente){
+
+btnEditarNovamente.onclick = function(){
+
+executarFlow("1", function(){
+
+window.location.reload();
+
+});
+
+}
+
+}
+
+if(btnAvancarEtapa){
+
+btnAvancarEtapa.onclick = function(){
+
+const modal=document.createElement("div");
+
+modal.innerHTML=`
+<div class="pp-modal-backdrop">
+<div class="pp-modal">
+
+<h3>Deseja avançar a etapa para
+AGUARDANDO DEFINIÇÃO DE COMPONENTES?</h3>
+
+<div class="pp-modal-actions">
+
+<button id="btnCancelarAvanco" class="btn-cloud-outline">
+CANCELAR
+</button>
+
+<button id="btnConfirmarAvanco" class="btn-cloud">
+CONFIRMAR
+</button>
+
+</div>
+
+</div>
+</div>
+`;
+
+document.body.appendChild(modal);
+
+document.getElementById("btnCancelarAvanco").onclick=function(){
+
+modal.remove();
+
+}
+
+document.getElementById("btnConfirmarAvanco").onclick=function(){
+
+executarFlow("1", function(){
+
+fetch("/_api/cloudflow/v1.0/trigger/46fad9d8-5a18-f111-8341-7ced8da81546",{
+method:"POST",
+headers:{ "Content-Type":"application/json"},
+body:JSON.stringify({RecordID:recordID})
+})
+.then(()=>{
+
+abrirModalSucessoAvanco();
+
+});
+
+});
+
+}
+
+}
+
+}
+controlarFormularios();
+controlarValidadores();
+
+setTimeout(()=>{
+  controlarFormularios();
+  controlarValidadores();
+},500);
+
+setTimeout(()=>{
+  controlarFormularios();
+  controlarValidadores();
+},1000);
+
+});
+
+// =====================================
+// ATIVAR SOMENTE FORM VISÍVEL
+// =====================================
+
+function controlarFormularios() {
+
+  const steps = document.querySelectorAll(".fsa-step");
+
+  steps.forEach(step => {
+
+    const visivel = step.offsetParent !== null;
+
+    const inputs = step.querySelectorAll("input, select, textarea");
+
+    inputs.forEach(input => {
+
+      if(visivel){
+        input.removeAttribute("disabled");
+      }else{
+        input.setAttribute("disabled","disabled");
+      }
+
+    });
+
+  });
+
+}
+
+// =====================================
+// CONTROLAR VALIDADORES ASP.NET
+// =====================================
+
+function controlarValidadores(){
+
+  if(typeof(Page_Validators) === "undefined") return;
+
+  Page_Validators.forEach(function(validator){
+
+    const step = validator.closest(".fsa-step");
+
+    if(!step) return;
+
+    const visivel = step.offsetParent !== null;
+
+    if(visivel){
+
+      ValidatorEnable(validator, true);
+
+    }else{
+
+      ValidatorEnable(validator, false);
+
+    }
+
+  });
+
+}
+
+(function () {
+  const RECORD_ID = "{{ solicitacaoId }}";
+  const PAGINA_ATUAL = "{{ paginaInicial }}";
+  const FLOW_PAGINA = "/_api/cloudflow/v1.0/trigger/c40ce1c6-d918-f111-8342-002248de77b7";
+  const FLOW_CANCELAR = "/_api/cloudflow/v1.0/trigger/2361651b-5ff6-f011-8406-002248de77b7";
+
+  function normalizar(texto) {
+    return (texto || "")
+      .toString()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .trim()
+      .toUpperCase();
+  }
+
+  function texto(selector) {
+    var el = document.querySelector(selector);
+    if (!el) return "";
+
+    if (el.tagName === "SELECT") {
+      var opt = el.options[el.selectedIndex];
+      return opt ? (opt.text || "").trim() : "";
+    }
+
+    return (el.value || "").trim();
+  }
+
+  function numero(selector) {
+    var el = document.querySelector(selector);
+    if (!el) return 0;
+
+    var valor = (el.value || "").trim();
+    if (!valor) return 0;
+
+    valor = valor.replace(/[^\d,.-]/g, "");
+    if (valor.indexOf(",") > -1) {
+      valor = valor.replace(/\./g, "").replace(",", ".");
+    }
+
+    var n = parseFloat(valor);
+    return isNaN(n) ? 0 : n;
+  }
+
+  function lookupPreenchido(base) {
+    var hiddenEl = document.querySelector(base);
+    var nameEl = document.querySelector(base + "_name");
+
+    var hiddenValue = hiddenEl ? (hiddenEl.value || "").trim() : "";
+    var nameValue = nameEl ? (nameEl.value || "").trim() : "";
+
+    return hiddenValue !== "" || nameValue !== "";
+  }
+
+  function radioMarcado(nomeBase) {
+    return document.querySelector("#" + nomeBase + " input[type='radio']:checked") ||
+           document.querySelector("input[name='" + nomeBase + "']:checked");
+  }
+
+  function radioBoolean(nomeBase) {
+    var radio = radioMarcado(nomeBase);
+    if (!radio) return false;
+
+    var valor = normalizar(radio.value);
+    return valor === "TRUE" || valor === "1" || valor === "SIM" || valor === "YES";
+  }
+
+  function submitEtapaAtual() {
+    var step1 = document.querySelector("#step1:not([style*='display:none'])");
+    if (!step1) return null;
+
+    return step1.querySelector("#UpdateButton")
+      || step1.querySelector("#InsertButton")
+      || step1.querySelector('input[id$="UpdateButton"]')
+      || step1.querySelector('input[id$="InsertButton"]')
+      || step1.querySelector('button[type="submit"]')
+      || step1.querySelector('input[type="submit"]');
+  }
+
+function abrirModalPequenoCliente() {
+  var modalExistente = document.getElementById("modal-pequeno-cliente-overlay");
+  if (modalExistente) {
+    modalExistente.remove();
+  }
+
+  var overlay = document.createElement("div");
+  overlay.id = "modal-pequeno-cliente-overlay";
+
+  overlay.style.position = "fixed";
+  overlay.style.inset = "0";
+  overlay.style.width = "100vw";
+  overlay.style.height = "100vh";
+  overlay.style.background = "rgba(15, 23, 42, 0.55)";
+  overlay.style.display = "flex";
+  overlay.style.alignItems = "center";
+  overlay.style.justifyContent = "center";
+  overlay.style.zIndex = "2147483647";
+  overlay.style.padding = "24px";
+  overlay.style.boxSizing = "border-box";
+
+  overlay.innerHTML = `
+    <div
+      style="
+        width: 100%;
+        max-width: 720px;
+        background: #ffffff;
+        border-radius: 22px;
+        padding: 28px 28px 24px;
+        box-shadow: 0 24px 80px rgba(0,0,0,0.28);
+        border: 1px solid rgba(0,39,189,0.12);
+        font-family: inherit;
+      "
+    >
+      <h3 style="
+        margin: 0 0 16px 0;
+        color: #0027bd;
+        font-size: 32px;
+        line-height: 1.15;
+      ">
+        AVISO IMPORTANTE!
+      </h3>
+
+      <p style="
+        margin: 0 0 16px 0;
+        color: #475569;
+        font-size: 18px;
+        line-height: 1.7;
+      ">
+        Conforme a alteração das informações que você registrou anteriormente,
+        identificamos que sua necessidade é referente a uma
+        <strong>Unidade de Serviço Residencial</strong>.
+      </p>
+
+      <p style="
+        margin: 0 0 18px 0;
+        color: #475569;
+        font-size: 18px;
+        line-height: 1.7;
+      ">
+        Caso prossiga, essa solicitação será cancelada, pois este portal é exclusivo
+        para solicitações de <strong>Viabilidade Técnica de Empreendimentos</strong>.
+      </p>
+
+      <p style="
+        margin: 0 0 22px 0;
+        color: #334155;
+        font-size: 18px;
+        font-weight: 700;
+      ">
+        Deseja prosseguir?
+      </p>
+
+      <div style="
+        display: flex;
+        justify-content: flex-end;
+        gap: 12px;
+        flex-wrap: wrap;
+      ">
+        <button
+          id="btnNaoProsseguirPequenoCliente"
+          type="button"
+          class="btn-cloud-outline"
+          style="min-width: 120px;"
+        >
+          NÃO
+        </button>
+
+        <button
+          id="btnSimProsseguirPequenoCliente"
+          type="button"
+          class="btn-cloud"
+          style="min-width: 120px;"
+        >
+          SIM
+        </button>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(overlay);
+  document.body.style.overflow = "hidden";
+
+  function fecharModal() {
+    document.body.style.overflow = "";
+    var modal = document.getElementById("modal-pequeno-cliente-overlay");
+    if (modal) modal.remove();
+  }
+
+  overlay.addEventListener("click", function (e) {
+    if (e.target === overlay) {
+      fecharModal();
+    }
+  });
+
+  document.getElementById("btnNaoProsseguirPequenoCliente").onclick = function () {
+    fecharModal();
+  };
+
+  document.getElementById("btnSimProsseguirPequenoCliente").onclick = function () {
+    var btn = this;
+    btn.disabled = true;
+    btn.textContent = "PROCESSANDO...";
+
+    if (!window.shell || typeof shell.ajaxSafePost !== "function") {
+      alert("shell.ajaxSafePost não está disponível.");
+      btn.disabled = false;
+      btn.textContent = "SIM";
+      return;
+    }
+
+    shell.ajaxSafePost({
+      type: "POST",
+      url: FLOW_CANCELAR,
+      contentType: "application/json",
+      data: JSON.stringify({
+        eventData: JSON.stringify({
+          RecordID: RECORD_ID
+        })
+      }),
+      processData: false
+    })
+    .done(function () {
+      fecharModal();
+      window.location.href = "/unidade-de-servico/";
+    })
+    .fail(function (xhr) {
+      console.error("Erro ao executar flow de cancelamento:", xhr);
+      alert("Erro ao executar o fluxo de cancelamento.");
+      btn.disabled = false;
+      btn.textContent = "SIM";
+    });
+  };
+}
+
+  function etapa1Preenchida() {
+    return !!(
+      lookupPreenchido("#cloud_fk_finalidades_solicitacao") &&
+      texto("#cloud_tipo_cadastro") !== "" &&
+      texto("#cloud_consumo_mensal") !== "" &&
+      texto("#cloud_numero_economias") !== "" &&
+      texto("#cloud_area_construida_total") !== "" &&
+      radioMarcado("cloud_is_conglomerado_empresarial")
+    );
+  }
+
+  function avaliarGrandeCliente() {
+    var finalidade = normalizar(
+      texto("#cloud_fk_finalidades_solicitacao_name") ||
+      texto("#cloud_fk_finalidades_solicitacao")
+    );
+
+    var tipoCadastro = normalizar(texto("#cloud_tipo_cadastro"));
+    var consumoMensal = numero("#cloud_consumo_mensal");
+    var numeroEconomias = parseInt(numero("#cloud_numero_economias"), 10) || 0;
+    var areaConstruidaTotal = numero("#cloud_area_construida_total");
+    var isConglomeradoEmpresarial = radioBoolean("cloud_is_conglomerado_empresarial");
+
+    var regraFinalidadeGrande =
+      finalidade.indexOf("CONDOMINIO") > -1 ||
+      finalidade.indexOf("LOTEAMENTO RESIDENCIAL") > -1 ||
+      finalidade.indexOf("LOTEAMENTO INDUSTRIAL") > -1 ||
+      finalidade.indexOf("INDUSTRIAL") > -1 ||
+      finalidade.indexOf("INSTITUCIONAL") > -1;
+
+    var regraCnpjConsumo = tipoCadastro === "CNPJ" && consumoMensal >= 100;
+    var regraConsumo = consumoMensal > 100;
+    var regraNumeroEconomias = numeroEconomias >= 10;
+    var regraNumeroEconomiasEConsumo = numeroEconomias >= 1 && consumoMensal >= 100;
+    var regraAreaConstruida = areaConstruidaTotal > 750;
+    var regraComercialConglomerado =
+      finalidade.indexOf("COMERCIAL") > -1 && isConglomeradoEmpresarial === true;
+
+    return (
+      regraFinalidadeGrande ||
+      regraCnpjConsumo ||
+      regraConsumo ||
+      regraNumeroEconomias ||
+      regraNumeroEconomiasEConsumo ||
+      regraAreaConstruida ||
+      regraComercialConglomerado
+    );
+  }
+
+  function inicializarCorrecao() {
+    if (PAGINA_ATUAL !== "1") return;
+
+    var btnOriginal = document.getElementById("btnNext");
+    if (!btnOriginal) return;
+
+    var btnNovo = btnOriginal.cloneNode(true);
+    btnOriginal.parentNode.replaceChild(btnNovo, btnOriginal);
+
+    btnNovo.addEventListener("click", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      var submitBtn = submitEtapaAtual();
+      if (!submitBtn) {
+        alert("Não encontrei o botão interno de envio da etapa 1.");
+        return;
+      }
+
+      if (!etapa1Preenchida()) {
+        alert("Preencha todos os campos obrigatórios da etapa 1.");
+        return;
+      }
+
+      var isGrandeCliente = avaliarGrandeCliente();
+
+      if (!isGrandeCliente) {
+        abrirModalPequenoCliente();
+        return;
+      }
+
+      btnNovo.disabled = true;
+      btnNovo.textContent = "PROCESSANDO...";
+
+      if (!window.shell || typeof shell.ajaxSafePost !== "function") {
+        alert("shell.ajaxSafePost não está disponível.");
+        btnNovo.disabled = false;
+        btnNovo.textContent = "AVANÇAR";
+        return;
+      }
+
+      shell.ajaxSafePost({
+        type: "POST",
+        url: FLOW_PAGINA,
+        contentType: "application/json",
+        data: JSON.stringify({
+          eventData: JSON.stringify({
+            RecordID: RECORD_ID,
+            Pagina: "2"
+          })
+        }),
+        processData: false
+      })
+      .done(function () {
+        submitBtn.click();
+        setTimeout(function () {
+          window.location.reload();
+        }, 1200);
+      })
+      .fail(function (xhr) {
+        console.error("Erro ao executar flow página 2:", xhr);
+        alert("Erro ao executar o fluxo de avanço.");
+        btnNovo.disabled = false;
+        btnNovo.textContent = "AVANÇAR";
+      });
+    });
+  }
+
+  setTimeout(inicializarCorrecao, 800);
+  setTimeout(inicializarCorrecao, 1800);
+  setTimeout(inicializarCorrecao, 3000);
+})();
+
+document.addEventListener("DOMContentLoaded", function () {
+  const step2 = document.getElementById("step2");
+  if (!step2) return;
+
+  step2.addEventListener("change", function (e) {
+    const input = e.target;
+
+    if (!input || input.type !== "file") return;
+    if (!input.files || input.files.length === 0) return;
+
+    if (typeof atualizarEstadoBotoesNavegacao === "function") {
+      atualizarEstadoBotoesNavegacao();
+    }
+
+    setTimeout(function () {
+      window.location.reload();
+    }, 6000);
+  });
+});
+
+</script>

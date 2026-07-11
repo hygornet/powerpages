@@ -1,0 +1,21 @@
+adx_attachfilelabel: ''
+adx_attachfilemaxsize: 
+adx_attachfilestoragelocation: 756150000
+adx_captcharequired: false
+adx_containername: ''
+adx_entityformid: 39c63c39-7ee3-4245-bbf6-9758fd9437ec
+adx_entityname: cloud_solicitacoes
+adx_entitypermissionsenabled: true
+adx_entitysourcetype: 0
+adx_formname: FINALIDADE_IND
+adx_hideformonsuccess: true
+adx_maximumnooffiles: 5
+adx_mode: 100000000
+adx_name: FINALIDADE_IND
+adx_onsuccess: 756150000
+adx_recordidquerystringparametername: 
+adx_redirecturl: 
+adx_redirectwebpage: 
+adx_showcaptchaforauthenticatedusers: false
+adx_storageaccountname: ''
+adx_successmessage: ''

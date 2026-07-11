@@ -1,0 +1,335 @@
+.faq-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.faq-card {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 24px;
+  border: 1px solid #e5e7eb;
+
+  /* 3D EFFECT */
+  box-shadow:
+    0 4px 6px rgba(0, 0, 0, 0.05),
+    0 10px 20px rgba(0, 0, 0, 0.08);
+
+  transform: translateY(0);
+  transition: all 0.3s ease;
+}
+
+.faq-card:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 10px 15px rgba(0, 0, 0, 0.1),
+    0 20px 30px rgba(0, 0, 0, 0.12);
+}
+
+
+.faq-card h3 {
+  margin-bottom: 12px;
+  color: #0027bd;
+}
+
+.faq-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 12px 0;
+}
+
+.faq-card li {
+  margin-bottom: 8px;
+}
+
+.faq-card a {
+  color: #1f2937;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.faq-card a:hover {
+  text-decoration: underline;
+}
+
+.faq-more {
+  font-weight: 600;
+  color: #0027bd;
+}
+
+/* MODAL */
+.faq-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.faq-modal-content {
+  background: #ffffff;
+  padding: 24px;
+  border-radius: 10px;
+  max-width: 500px;
+  width: 90%;
+  position: relative;
+}
+
+.faq-modal-content h2 {
+  margin-top: 0;
+}
+
+.faq-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.faq-ok {
+  margin-top: 20px;
+  padding: 8px 16px;
+  background: #0027bd;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.faq-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 26px;
+  margin-bottom: 12px;
+
+  background: linear-gradient(135deg, #0027bd, #17e3cb);
+  color: #ffffff;
+
+  box-shadow:
+    0 4px 10px rgba(0, 39, 189, 0.35);
+}
+.faq-page-header {
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.faq-page-header h1 {
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #0027bd;
+  margin-bottom: 8px;
+}
+
+.faq-page-header p {
+  font-size: 16px;
+  color: #4b5563;
+}
+.faq-footer {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.btn-cloud {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 10px 22px;
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn-cloud-primary {
+  background: #0027bd;
+  color: #ffffff;
+  border: none;
+}
+
+.btn-cloud-primary:hover {
+  background: #001e99;
+}
+.faq-single-card {
+  max-width: 900px;
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 32px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.faq-single-title {
+  text-align: center;
+  margin-bottom: 32px;
+  font-size: 28px;
+  font-weight: 800;
+  color: #1f2937;
+}
+
+.faq-item {
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.faq-question {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 18px 8px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f2937;
+  text-align: left;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.faq-question:hover {
+  color: #0027bd;
+}
+
+.faq-icon {
+  transition: transform 0.3s ease;
+  font-size: 18px;
+}
+
+.faq-answer {
+  display: none;
+  padding: 0 8px 18px 8px;
+  font-size: 15px;
+  color: #4b5563;
+  line-height: 1.6;
+}
+
+.faq-item.active .faq-answer {
+  display: block;
+}
+
+.faq-item.active .faq-icon {
+  transform: rotate(180deg);
+}
+/* ===============================
+   BOTÃO SECUNDÁRIO – OUTLINE
+   =============================== */
+.btn-cloud-outline {
+  background-color: #ffffff !important;
+  color: var(--brand-color) !important;
+  border: 2px solid var(--brand-color) !important;
+  border-radius: 8px !important;
+}
+
+/* Hover outline */
+.btn-cloud-outline:hover {
+  background-color: var(--secondary-color) !important;
+  color: #ffffff !important;
+  border-color: var(--secondary-color) !important;
+}
+
+/* Active outline */
+.btn-cloud-outline:active {
+  transform: translateY(0) !important;
+}
+
+/* Focus outline */
+.btn-cloud-outline:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(23, 227, 203, 0.35) !important;
+}
+/* ======================================
+   REMOVE SUBLINHADO DOS BOTÕES <a>
+   ====================================== */
+.btn-cloud,
+.btn-cloud:hover,
+.btn-cloud:focus,
+.btn-cloud:active,
+.btn-cloud-outline,
+.btn-cloud-outline:hover,
+.btn-cloud-outline:focus,
+.btn-cloud-outline:active {
+  text-decoration: none !important;
+}
+
+/* ===============================
+   BOTÃO PRIMÁRIO – PADRÃO FLUENT
+   =============================== */
+.btn-cloud {
+  background-color: var(--brand-color) !important;
+  color: #ffffff !important;
+  width: auto !important;
+  min-width: 180px !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 32px !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  border-radius: 8px !important;
+  border: none !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  box-shadow: none !important;
+  text-decoration: none !important;
+}
+
+/* Hover */
+.btn-cloud:hover {
+  background-color: var(--secondary-color) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 12px rgba(23, 227, 203, 0.4) !important;
+}
+
+/* Active */
+.btn-cloud:active {
+  transform: translateY(0) !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Focus (acessibilidade) */
+.btn-cloud:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(23, 227, 203, 0.35) !important;
+}
+/* ===============================
+   BOTÃO SECUNDÁRIO – OUTLINE
+   =============================== */
+.btn-cloud-outline {
+  background-color: #ffffff !important;
+  color: var(--brand-color) !important;
+  border: 2px solid var(--brand-color) !important;
+  border-radius: 8px !important;
+}
+
+/* Hover outline */
+.btn-cloud-outline:hover {
+  background-color: var(--secondary-color) !important;
+  color: #ffffff !important;
+  border-color: var(--secondary-color) !important;
+}
+
+/* Active outline */
+.btn-cloud-outline:active {
+  transform: translateY(0) !important;
+}
+
+/* Focus outline */
+.btn-cloud-outline:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(23, 227, 203, 0.35) !important;
+}

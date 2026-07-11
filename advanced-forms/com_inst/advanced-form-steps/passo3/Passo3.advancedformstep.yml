@@ -1,0 +1,19 @@
+adx_attachfilelabel: ''
+adx_attachfilemaxsize: 
+adx_attachfilestoragelocation: 756150000
+adx_containername: ''
+adx_entitypermissionsenabled: true
+adx_formname: FINALIDADES_COM_INS A
+adx_hideformonsuccess: true
+adx_maximumnooffiles: 5
+adx_mode: 100000001
+adx_movepreviouspermitted: true
+adx_name: Passo3
+adx_referencequerystringisprimarykey: true
+adx_storageaccountname: ''
+adx_successmessage: ''
+adx_targetentitylogicalname: cloud_solicitacoes
+adx_type: 100000001
+adx_validationsummarylinksenabled: true
+adx_webform: 7e97a247-8629-4acb-a59f-3eb6ba91845c
+adx_webformstepid: 87e94eb5-9ffb-48a7-9a26-d93b118492c0

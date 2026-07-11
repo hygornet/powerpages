@@ -1,0 +1,16 @@
+adx_accountrelationship: 
+adx_append: false
+adx_appendto: false
+adx_contactrelationship: 
+adx_create: false
+adx_delete: false
+adx_entitylogicalname: cloud_componentes_projeto
+adx_entityname: COMPONENTES_PROJETO
+adx_entitypermission_webrole:
+- 1e16f3b3-b319-4d15-a71e-bd149be9381d
+adx_entitypermissionid: 6dbcfe7e-4c8f-4dce-8f0a-9d11039ddc2a
+adx_parententitypermission: 
+adx_parentrelationship: 
+adx_read: true
+adx_scope: 756150000
+adx_write: false

@@ -1,0 +1,40 @@
+adx_attachfile: true
+adx_attachfileaccept: '*/*'
+adx_attachfileacceptextensions: 
+adx_attachfileallowmultiple: true
+adx_attachfilelabel: >-
+  [
+    {
+      "LCID": 1046,
+      "Value": "Anexe abaixo os arquivos da sua documentação"
+    }
+  ]
+adx_attachfilemaxsize: 5000
+adx_attachfilerequired: true
+adx_attachfilerestrictaccept: false
+adx_attachfilesaveoption: 756150000
+adx_attachfilestoragelocation: 756150000
+adx_captcharequired: false
+adx_containername: ''
+adx_entityformid: f0270b14-0141-416d-bdf9-2dc783c79a8e
+adx_entityname: cloud_analise_preliminar
+adx_entitypermissionsenabled: true
+adx_entitysourcetype: 756150001
+adx_formname: Anexos Análise Preliminar
+adx_hideformonsuccess: true
+adx_maximumnooffiles: 15
+adx_mode: 100000001
+adx_name: Anexos Análise Preliminar
+adx_onsuccess: 756150000
+adx_recordidquerystringparametername: id
+adx_redirecturl: 
+adx_redirectwebpage: 
+adx_showcaptchaforauthenticatedusers: false
+adx_storageaccountname: ''
+adx_successmessage: >-
+  [
+    {
+      "LCID": 1046,
+      "Value": ""
+    }
+  ]

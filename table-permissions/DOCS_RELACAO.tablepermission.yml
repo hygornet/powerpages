@@ -1,0 +1,15 @@
+adx_accountrelationship: 
+adx_append: false
+adx_appendto: false
+adx_contactrelationship: 
+adx_create: false
+adx_delete: false
+adx_entitylogicalname: cloud_docs_relacao
+adx_entityname: DOCS_RELACAO
+adx_entitypermission_webrole: []
+adx_entitypermissionid: 54ef917c-0e7f-4ce7-9b1c-61d26039d921
+adx_parententitypermission: a41512db-5561-4b53-adc2-662e7b34f6bc
+adx_parentrelationship: cloud_docs_solicitacao_fk_docs_relacao_cloud_docs_relacao
+adx_read: true
+adx_scope: 756150003
+adx_write: false

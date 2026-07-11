@@ -1,0 +1,8 @@
+adx_CloudFlowConsumer_adx_webrole:
+- 1e16f3b3-b319-4d15-a71e-bd149be9381d
+adx_cloudflowconsumerid: 0a96f8e0-a429-f111-88b4-002248de77b7
+adx_flowapiurl: /_api/cloudflow/v1.0/trigger/645f6fc7-a429-f111-88b4-002248de77b7
+adx_flowtriggerurl: ''
+adx_metadata: ''
+adx_name: F24 - Apagar Anexos da documentação do componente
+adx_processid: 645f6fc7-a429-f111-88b4-002248de77b7

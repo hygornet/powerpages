@@ -1,0 +1,71 @@
+
+{% assign url = request.url | downcase %}
+{% assign title = "Aegea" %}
+
+{% if url contains settings["URLCorsan"] %}
+  {% assign title = "CORSAN" %}
+{% elsif url contains settings["URLAguasDoPara"] %}
+  {% assign title = "Águas do Pará" %}
+{% elsif url contains settings["URLAguasDeGuariroba"] %}
+  {% assign title = "Águas de Guariroba" %}
+{% elsif url contains settings["URLAguasDeManaus"] %}
+  {% assign title = "Águas de Manaus" %}
+{% elsif url contains settings["URLProlagos"] %}
+  {% assign title = "Prolagos" %}
+{% endif %}
+
+<p
+  id="footerCopyrightText"
+  class="smallText"
+  style="color:#ffffff!important;"
+  data-default-title="{{ title }}"
+>
+  <b>® <span id="year">{{ now | date: 'yyyy' }}</span> <span id="footerTitleText">{{ title }}</span></b>. Todos os direitos reservados.
+</p>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const STORAGE_KEY = "aegea_unidade_selecionada";
+  const titleWrapper = document.getElementById("footerCopyrightText");
+  const titleText = document.getElementById("footerTitleText");
+
+  if (!titleWrapper || !titleText) return;
+
+  function getSelectedUnit() {
+    try {
+      return localStorage.getItem(STORAGE_KEY) || "default";
+    } catch (e) {
+      return "default";
+    }
+  }
+
+  const unidadeSelecionada = getSelectedUnit();
+  const defaultTitle = titleWrapper.getAttribute("data-default-title") || "Aegea";
+
+  if (!unidadeSelecionada || unidadeSelecionada.toLowerCase() === "default") {
+    titleText.textContent = defaultTitle;
+    return;
+  }
+
+  const titleMap = {
+    "corsan": "CORSAN",
+    "águas do pará": "Águas do Pará",
+    "aguas do pará": "Águas do Pará",
+    "aguas do para": "Águas do Pará",
+    "águas do para": "Águas do Pará",
+    "águas de guariroba": "Águas de Guariroba",
+    "aguas de guariroba": "Águas de Guariroba",
+    "águas de manaus": "Águas de Manaus",
+    "aguas de manaus": "Águas de Manaus",
+    "prolagos": "Prolagos"
+  };
+
+  const key = String(unidadeSelecionada).trim().toLowerCase();
+
+  if (titleMap[key]) {
+    titleText.textContent = titleMap[key];
+  } else {
+    titleText.textContent = defaultTitle;
+  }
+});
+</script>
+

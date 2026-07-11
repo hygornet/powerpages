@@ -1,0 +1,93 @@
+<div id="custom-modern-form" class="modern-form-wrapper">
+  <div class="power-pages-form-container">
+    <div class="ppFlexContainer">
+      {% entityform name: 'Incluir Comprovante' %}
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  let usuarioSelecionouArquivo = false;
+  let jaSubmeteu = false;
+  let jaAvisouPaiSalvo = false;
+
+  function avisarPai(tipo) {
+    const params = new URLSearchParams(window.location.search);
+    const boletoId = params.get("id");
+
+    if (window.parent && window.parent !== window) {
+      window.parent.postMessage({
+        type: tipo,
+        tipo: "COMPROVANTE_FILHO_SUBMIT_OK",
+        BoletoID: boletoId,
+        boletoId: boletoId
+      }, "*");
+    }
+  }
+
+  function encontrarBotaoSalvar() {
+    return (
+      document.querySelector("#UpdateButton") ||
+      document.querySelector("input[id$='UpdateButton']") ||
+      document.querySelector("input[type='submit']") ||
+      document.querySelector("button[type='submit']")
+    );
+  }
+
+  function submeterAutomaticamente() {
+    if (!usuarioSelecionouArquivo) return;
+    if (jaSubmeteu) return;
+
+    const botaoSalvar = encontrarBotaoSalvar();
+
+    if (!botaoSalvar) {
+      console.warn("Botão salvar não encontrado.");
+      return;
+    }
+
+    jaSubmeteu = true;
+    botaoSalvar.click();
+  }
+
+  document.addEventListener("change", function (e) {
+  const inputFile = e.target;
+
+  if (!inputFile || inputFile.type !== "file") return;
+  if (!inputFile.files || inputFile.files.length === 0) return;
+
+  usuarioSelecionouArquivo = true;
+
+  // avisa a página pai imediatamente
+  avisarPai("ANEXO_COMPROVANTE_CARREGANDO");
+
+  // reduz o tempo antes do submit
+  setTimeout(function () {
+    submeterAutomaticamente();
+  }, 500);
+}, true);
+
+  const observer = new MutationObserver(function () {
+    const sucesso =
+      document.querySelector(".alert-success") ||
+      document.querySelector(".notification.success") ||
+      document.querySelector(".success") ||
+      document.querySelector("[data-form-success]");
+
+    if (sucesso && sucesso.innerText.trim() !== "" && !jaAvisouPaiSalvo) {
+      jaAvisouPaiSalvo = true;
+
+      avisarPai("ANEXO_COMPROVANTE_SALVO");
+    }
+  });
+
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+})();
+</script>
+
+<div class="row sectionBlockLayout text-start" style="display: flex; flex-wrap: wrap; min-height: auto; margin: 0px; padding: 0px; max-width: none; width: 100%;">
+  <div class="container" style="padding: 0px; display: flex; flex-wrap: wrap; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; max-width: none; width: 100%;"><div class="col-lg-12 columnBlockLayout" style="flex-grow: 1; display: flex; flex-direction: column; min-width: 250px; margin: 0px; padding: 0px; max-width: none; width: 100%;"></div></div>
+</div>

@@ -1,0 +1,99 @@
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_numero_funcionarios
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_entityform: 78d9c252-0152-4b2b-b3ee-a0ddcc6fe898
+  adx_entityformmetadataid: 455543aa-5098-4876-aac1-35c0a924e072
+  adx_fieldisrequired: true
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Número de Funcionários"
+      }
+    ]
+  adx_name: FINALIDADES_COM_INS A cloud_numero_funcionarios
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_validationregularexpressionerrormessage: ''
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_descricao_atividades
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_entityform: 78d9c252-0152-4b2b-b3ee-a0ddcc6fe898
+  adx_entityformmetadataid: 64f87c36-8fca-428f-9287-dca0bc67141b
+  adx_fieldisrequired: true
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Descrição das Atividades"
+      }
+    ]
+  adx_name: FINALIDADES_COM_INS A cloud_descricao_atividades
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_validationregularexpressionerrormessage: ''
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_estimativa_publico_diario
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_entityform: 78d9c252-0152-4b2b-b3ee-a0ddcc6fe898
+  adx_entityformmetadataid: ae415579-8108-494d-bbbc-8b31f4647ff4
+  adx_fieldisrequired: true
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Estimativa de Público Diário"
+      }
+    ]
+  adx_name: FINALIDADES_COM_INS A cloud_estimativa_publico_diario
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_validationregularexpressionerrormessage: ''

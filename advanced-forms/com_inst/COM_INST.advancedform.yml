@@ -1,0 +1,10 @@
+adx_editexistingrecordpermitted: true
+adx_multiplerecordsperuserpermitted: true
+adx_name: COM_INST
+adx_progressindicatorenabled: true
+adx_progressindicatorposition: 756150000
+adx_progressindicatortype: 756150000
+adx_startstep: 0b013f24-4130-42af-a961-365f9ffa946b
+adx_webformid: 7e97a247-8629-4acb-a59f-3eb6ba91845c
+statecode: 1
+statuscode: 2

@@ -1,0 +1,33 @@
+ .wrapper-body {
+    background-color:#fafafa;
+}
+
+/* Remove sublinhado do link pai em todos os estados */
+  a.box-link-aegea,
+  a.box-link-aegea:hover,
+  a.box-link-aegea:focus,
+  a.box-link-aegea:active,
+  a.box-link-aegea:visited {
+      text-decoration: none !important;
+      outline: none !important;
+      border: none !important;
+      display: block; /* Garante que o link ocupe o espaço correto */
+      color: inherit !important; /* Respeita as cores definidas dentro da box */
+  }
+
+  /* A REGRA DE OURO: Remove sublinhado de TODOS os filhos dentro do link */
+  a.box-link-aegea *,
+  a.box-link-aegea:hover *,
+  a.box-link-aegea:focus * {
+      text-decoration: none !important;
+      background-image: none !important; /* Power Pages as vezes usa background-image para sublinhar links */
+  }
+
+  /* Efeito de hover na box (opcional) */
+  .box-efeito {
+      transition: all 0.2s ease;
+  }
+  .box-efeito:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1) !important;
+  }

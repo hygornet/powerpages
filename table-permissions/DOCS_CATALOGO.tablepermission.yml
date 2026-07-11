@@ -1,0 +1,15 @@
+adx_accountrelationship: 
+adx_append: false
+adx_appendto: false
+adx_contactrelationship: 
+adx_create: false
+adx_delete: false
+adx_entitylogicalname: cloud_docs_catalogo
+adx_entityname: DOCS_CATALOGO
+adx_entitypermission_webrole: []
+adx_entitypermissionid: 2ab2d731-96ac-48e9-b7ba-6ea88abe63aa
+adx_parententitypermission: 54ef917c-0e7f-4ce7-9b1c-61d26039d921
+adx_parentrelationship: cloud_docs_relacao_FK_DOCS_CATALOGO_cloud_docs_catalogo
+adx_read: true
+adx_scope: 756150003
+adx_write: false

@@ -1,0 +1,475 @@
+
+
+<style>
+  .aegea-footer {
+    background-color: #0027bd; /* Fundo Branco Original */
+    color: #ffffff;
+    padding-top: 60px;
+    padding-bottom: 40px;
+    border-radius: 30px 30px 0 0;
+    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    border-top: 1px solid #eaeaea; /* Sutil borda superior se necessário */
+  }
+
+  /* Títulos das colunas (Aegea, AGENDA ESG, ETC) */
+  .aegea-footer h5, 
+  .aegea-footer h5 a {
+    font-weight: 700;
+    font-size: 14px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    color: #ffffff;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+  }
+
+  /* Listas de links */
+  .aegea-footer ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 0;
+  }
+
+  .aegea-footer ul li {
+    margin-bottom: 12px;
+  }
+
+  .aegea-footer ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 15px; /* Tamanho legível */
+    transition: color 0.2s ease;
+  }
+
+  .aegea-footer ul li a:hover {
+    color: #009688; /* Verde Aegea no hover */
+    text-decoration: underline;
+  }
+
+  /* Logo */
+  .aegea-logo-img {
+    max-width: 140px;
+    height: auto;
+    margin-bottom: 20px;
+  }
+
+  /* Linha Divisória */
+  .aegea-divider {
+    border-top: 1px solid #e0e0e0;
+    margin: 40px 0 30px 0;
+  }
+
+  /* Área Inferior (Copyright e Social) */
+  .footer-bottom-text {
+    font-size: 14px;
+    color: #ffffff;
+  }
+
+  .footer-legal-links a {
+    color: #ffffff;
+    text-decoration: none;
+    margin-right: 15px;
+    font-size: 13px;
+  }
+
+  .footer-legal-links a:hover {
+    color: #009688;
+    text-decoration: underline;
+  }
+
+  .social-icons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+  }
+
+  .social-icons a svg {
+    width: 20px;
+    height: 20px;
+    fill: #ffffff;
+    transition: fill 0.3s;
+  }
+
+  .social-icons a:hover svg {
+    fill: #009688;
+  }
+
+  /* Responsividade */
+  @media (max-width: 768px) {
+    .social-icons {
+      justify-content: flex-start;
+      margin-top: 20px;
+    }
+    .footer-legal-links {
+      margin-top: 10px;
+      display: block;
+    }
+    .footer-legal-links a {
+      display: block;
+      margin-bottom: 5px;
+    }
+  }
+</style>
+
+
+
+{% assign url = request.url | downcase %}
+{% assign contato_url = "https://www.aegea.com.br/contato/" %}
+{% assign mid_image = "/logo-aegea-personalizado.png" %}
+{% assign title = "Aegea" %}
+{% assign alt = "Aegea" %}
+{% assign facebook = "https://pt-br.facebook.com/aegeasaneamento/" %}
+{% assign youtube = "https://www.youtube.com/@aegeasaneamento" %}
+{% assign linkedin = "https://www.linkedin.com/company/aegeasaneamento/?viewAsMember=true" %}
+{% assign instagram = "https://www.instagram.com/aegea.saneamento/" %}
+
+{% if url contains settings["URLCorsan"] %}
+  {% assign contato_url = "https://corsan.com.br/canais-de-relacionamento/" %}
+  {% assign mid_image = "/corsan_footer.png" %}
+  {% assign title = "CORSAN" %}
+  {% assign alt = "CORSAN" %}
+  {% assign facebook = "https://pt-br.facebook.com/corsan.oficial/" %}
+  {% assign youtube = "https://www.youtube.com/@OficialCorsan" %}
+  {% assign linkedin = "https://www.linkedin.com/company/corsan/?viewAsMember=true" %}
+  {% assign instagram = "https://www.instagram.com/corsanoficial/" %}
+
+{% elsif url contains settings["URLAguasDoPara"] %}
+  {% assign contato_url = "https://www.aguasdopara.com.br/contato/" %}
+  {% assign mid_image = "/para_footer.png" %}
+  {% assign title = "Águas do Pará" %}
+  {% assign alt = "Águas do Pará" %}
+  {% assign facebook = "" %}
+  {% assign youtube = "" %}
+  {% assign linkedin = "" %}
+  {% assign instagram = "" %}
+
+{% elsif url contains settings["URLAguasDeGuariroba"] %}
+  {% assign contato_url = "https://www.aguasguariroba.com.br/contato/" %}
+  {% assign mid_image = "/logo_guariroba_branco.png" %}
+  {% assign title = "Águas de Guariroba" %}
+  {% assign alt = "Águas de Guariroba" %}
+  {% assign facebook = "" %}
+  {% assign youtube = "" %}
+  {% assign linkedin = "" %}
+  {% assign instagram = "" %}
+
+{% elsif url contains settings["URLAguasDeManaus"] %}
+  {% assign contato_url = "https://www.aguasdemanaus.com.br/contato/" %}
+  {% assign mid_image = "/logo_manaus_branco.png" %}
+  {% assign title = "Águas de Manaus" %}
+  {% assign alt = "Águas de Manaus" %}
+  {% assign facebook = "" %}
+  {% assign youtube = "" %}
+  {% assign linkedin = "" %}
+  {% assign instagram = "" %}
+
+{% elsif url contains settings["URLProlagos"] %}
+  {% assign contato_url = "https://www.prolagos.com.br/contato/" %}
+  {% assign mid_image = "/logo_prolagos_branco.png" %}
+  {% assign title = "Prolagos" %}
+  {% assign alt = "Prolagos" %}
+  {% assign facebook = "" %}
+  {% assign youtube = "" %}
+  {% assign linkedin = "" %}
+  {% assign instagram = "" %}
+
+{% endif %}
+
+<footer role="contentinfo" class="aegea-footer" data-component-theme="portalThemeColor5">
+  <div class="container">
+    
+    <div class="row">
+      
+      <div class="col-lg-2 col-md-12 mb-4">
+        <img id="footerLogo" src="{{mid_image}}" title="{{title}}" alt="{{alt}}" class="aegea-logo-img" loading="lazy">
+      </div>
+
+      <div class="col-lg-2 col-md-6 mb-4">
+        <h5>Aegea</h5>
+        <ul>
+          <li><a href="https://www.aegea.com.br/quem-somos/">Quem Somos</a></li>
+          <li><a href="https://www.aegea.com.br/unidades/">Unidades</a></li>
+          <li><a id="footerContatoLink" href="{{contato_url}}">Contato</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-2 col-md-6 mb-4">
+        <h5>AGENDA ESG</h5>
+        <ul>
+          <li><a href="https://www.aegea.com.br/estrategia-esg/agenda/">Agenda</a></li>
+          <li><a href="https://www.aegea.com.br/estrategia-esg/ambiental/">Ambiental</a></li>
+          <li><a href="https://www.aegea.com.br/estrategia-esg/social/">Social</a></li>
+          <li><a href="https://www.aegea.com.br/estrategia-esg/governanca/">Governança</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-2 col-md-6 mb-4">
+        <h5>CARREIRAS</h5>
+        <ul>
+          <li><a href="https://www.aegea.com.br/carreiras/a-vida-na-aegea/">A vida na Aegea</a></li>
+          <li><a href="https://www.aegea.com.br/carreiras/oportunidades/">Oportunidades</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-2 col-md-6 mb-4">
+        <h5>NOTÍCIAS</h5>
+        <ul>
+          <li><a href="https://www.aegea.com.br/noticias/">Publicações</a></li>
+          <li><a href="https://aegea.blog.br/">Aegea Blog</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-2 col-md-6 mb-4">
+        <div class="mb-3">
+            <h5><a href="https://fornecedores.aegea.com.br/">FORNECEDORES</a></h5>
+        </div>
+        <div>
+            <h5><a href="http://ri.aegea.com.br/">INVESTIDORES</a></h5>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="aegea-divider"></div>
+        </div>
+    </div>
+
+    <div class="row align-items-center">
+      
+      <div class="col-lg-8 col-md-12">
+        <div class="footer-bottom-text">
+            {% editable snippets 'Footer' type: 'html' %}
+        </div>
+        <div class="footer-legal-links mt-2">
+            <a href="https://www.aegea.com.br/termos-gerais-de-uso-de-sites-e-aplicativos-da-aegea/" target="_blank">Termos Gerais de Uso</a>
+            <span class="d-none d-md-inline mx-1">|</span> <a href="https://www.aegea.com.br/politica-de-privacidade-e-protecao-de-dados-da-aegea/" target="_blank">Política de Privacidade e Proteção de Dados</a>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-12">
+        <div class="social-icons">
+            <a href="{{facebook}}" target="_blank" aria-label="Facebook">
+                <svg viewBox="0 0 512 512"><path d="M504 256C504 119 393 8 256 8S8 119 8 256c0 123.78 90.69 226.38 209.25 245V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.28c-30.8 0-40.41 19.12-40.41 38.73V256h68.78l-11 71.69h-57.78V501C413.31 482.38 504 379.78 504 256z"></path></svg>
+            </a>
+            <a href="{{youtube}}" target="_blank" aria-label="Youtube">
+                <svg viewBox="0 0 576 512"><path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"></path></svg>
+            </a>
+            <a href="{{linkedin}}" target="_blank" aria-label="LinkedIn">
+                <svg viewBox="0 0 448 512"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"></path></svg>
+            </a>
+            <a href="{{instagram}}" target="_blank" aria-label="Instagram">
+                <svg viewBox="0 0 448 512"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"></path></svg>
+            </a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row">
+        <div id="accessibilityLinkContainer" class="col-12 text-center mt-3"></div>
+    </div>
+
+  </div>
+  <script>
+document.addEventListener("DOMContentLoaded", function () {
+  const STORAGE_KEY = "aegea_unidade_selecionada";
+
+  function getSelectedUnit() {
+    try {
+      return localStorage.getItem(STORAGE_KEY) || "default";
+    } catch (e) {
+      return "default";
+    }
+  }
+
+  const unidadeSelecionada = getSelectedUnit();
+
+  // Se estiver em Padrão(Default), mantém o Liquid atual por URL sem alterar nada
+  if (!unidadeSelecionada || unidadeSelecionada.toLowerCase() === "default") {
+    return;
+  }
+
+  const footerMap = {
+    "corsan": {
+      contato_url: "https://corsan.com.br/canais-de-relacionamento/",
+      mid_image: "/corsan_footer.png",
+      title: "CORSAN",
+      alt: "CORSAN",
+      facebook: "https://pt-br.facebook.com/corsan.oficial/",
+      youtube: "https://www.youtube.com/@OficialCorsan",
+      linkedin: "https://www.linkedin.com/company/corsan/?viewAsMember=true",
+      instagram: "https://www.instagram.com/corsanoficial/"
+    },
+    "águas do pará": {
+      contato_url: "https://www.aguasdopara.com.br/contato/",
+      mid_image: "/para_footer.png",
+      title: "Águas do Pará",
+      alt: "Águas do Pará",
+      facebook: "",
+      youtube: "",
+      linkedin: "",
+      instagram: ""
+    },
+    "aguas do para": {
+      contato_url: "https://www.aguasdopara.com.br/contato/",
+      mid_image: "/para_footer.png",
+      title: "Águas do Pará",
+      alt: "Águas do Pará",
+      facebook: "",
+      youtube: "",
+      linkedin: "",
+      instagram: ""
+    },
+    "aguas do pará": {
+      contato_url: "https://www.aguasdopara.com.br/contato/",
+      mid_image: "/para_footer.png",
+      title: "Águas do Pará",
+      alt: "Águas do Pará",
+      facebook: "",
+      youtube: "",
+      linkedin: "",
+      instagram: ""
+    },
+    "águas do para": {
+      contato_url: "https://www.aguasdopara.com.br/contato/",
+      mid_image: "/para_footer.png",
+      title: "Águas do Pará",
+      alt: "Águas do Pará",
+      facebook: "",
+      youtube: "",
+      linkedin: "",
+      instagram: ""
+    },
+    "águas de guariroba": {
+      contato_url: "https://www.aguasguariroba.com.br/contato/",
+      mid_image: "/logo_guariroba_branco.png",
+      title: "Águas de Guariroba",
+      alt: "Águas de Guariroba",
+      facebook: "",
+      youtube: "",
+      linkedin: "",
+      instagram: ""
+    },
+    "aguas de guariroba": {
+      contato_url: "https://www.aguasguariroba.com.br/contato/",
+      mid_image: "/logo_guariroba_branco.png",
+      title: "Águas de Guariroba",
+      alt: "Águas de Guariroba",
+      facebook: "",
+      youtube: "",
+      linkedin: "",
+      instagram: ""
+    },
+    "águas de manaus": {
+      contato_url: "https://www.aguasdemanaus.com.br/contato/",
+      mid_image: "/logo_manaus_branco.png",
+      title: "Águas de Manaus",
+      alt: "Águas de Manaus",
+      facebook: "",
+      youtube: "",
+      linkedin: "",
+      instagram: ""
+    },
+    "aguas de manaus": {
+      contato_url: "https://www.aguasdemanaus.com.br/contato/",
+      mid_image: "/logo_manaus_branco.png",
+      title: "Águas de Manaus",
+      alt: "Águas de Manaus",
+      facebook: "",
+      youtube: "",
+      linkedin: "",
+      instagram: ""
+    },
+    "prolagos": {
+      contato_url: "https://www.prolagos.com.br/contato/",
+      mid_image: "/logo_prolagos_branco.png",
+      title: "Prolagos",
+      alt: "Prolagos",
+      facebook: "",
+      youtube: "",
+      linkedin: "",
+      instagram: ""
+    }
+  };
+
+  const key = unidadeSelecionada.trim().toLowerCase();
+  const data = footerMap[key];
+
+  if (!data) return;
+
+  const footerLogo = document.getElementById("footerLogo");
+  const footerContatoLink = document.getElementById("footerContatoLink");
+
+  if (footerLogo) {
+    footerLogo.src = data.mid_image || "";
+    footerLogo.title = data.title || "";
+    footerLogo.alt = data.alt || "";
+  }
+
+  if (footerContatoLink) {
+    footerContatoLink.href = data.contato_url || "#";
+  }
+
+
+});
+</script>
+</footer>
+
+<script type="text/javascript">
+  window.onload = function() {
+    const accessibilityLinkContainer = document.getElementById("accessibilityLinkContainer");
+    switch(window.navigator.language) {
+      case "fr":
+        if (accessibilityLinkContainer != null) {
+          const accessibilityText="Accessibilité : partiellement conforme";
+          const frenchAccessibilityAnchor = document.createElement("a");
+          frenchAccessibilityAnchor.id = "frenchAccesssibleLink";
+          frenchAccessibilityAnchor.target = "_blank";
+          frenchAccessibilityAnchor.href = "https://go.microsoft.com/fwlink/?linkid=2163806";
+          frenchAccessibilityAnchor.title = accessibilityText;
+          frenchAccessibilityAnchor.innerText = accessibilityText;
+          frenchAccessibilityAnchor.style.fontSize = "12px"; // Estilo discreto
+          frenchAccessibilityAnchor.style.color = "#666";
+          accessibilityLinkContainer.appendChild(frenchAccessibilityAnchor);
+        }
+        break;
+      case "it":
+        if (accessibilityLinkContainer != null) {
+          const accessibilityText="Accessibilità: parzialmente conforme";
+          const italianAccessibilityAnchor = document.createElement("a");
+          italianAccessibilityAnchor.id = "italianAccesssibleLink";
+          italianAccessibilityAnchor.target = "_blank";
+          italianAccessibilityAnchor.href = "https://go.microsoft.com/fwlink/?linkid=2208177";
+          italianAccessibilityAnchor.title = accessibilityText;
+          italianAccessibilityAnchor.innerText = accessibilityText;
+          italianAccessibilityAnchor.style.fontSize = "12px"; // Estilo discreto
+          italianAccessibilityAnchor.style.color = "#666";
+          accessibilityLinkContainer.appendChild(italianAccessibilityAnchor);
+        }
+        break;
+      default: 
+        if(accessibilityLinkContainer) accessibilityLinkContainer.remove();
+    }
+  };
+ </script>
+
+<!-- {% if user %}
+<script>
+(function () {
+
+  var target = "/Minhas-Solicitações/";
+  var path = window.location.pathname.toLowerCase();
+  var referrer = document.referrer.toLowerCase();
+
+  if (
+      (path === "/" || path === "/profile/") &&
+      referrer.includes("/signin")
+  ) {
+
+      console.log("🔐 Pós-login detectado (home ou profile). Redirecionando...");
+      window.location.replace(target);
+  }
+
+})();
+</script>
+{% endif %} -->

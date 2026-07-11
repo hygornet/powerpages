@@ -1,0 +1,16 @@
+adx_accountrelationship: 
+adx_append: false
+adx_appendto: false
+adx_contactrelationship: 
+adx_create: false
+adx_delete: false
+adx_entitylogicalname: cloud_boletos
+adx_entityname: BOLETOS
+adx_entitypermission_webrole:
+- 1e16f3b3-b319-4d15-a71e-bd149be9381d
+adx_entitypermissionid: afdc3d91-a0d4-4496-8d20-e4de5b60833b
+adx_parententitypermission: dd384cc2-35f9-4ba9-8f4e-a334968d43a2
+adx_parentrelationship: cloud_boletos_fk_solicitacoes_cloud_solicitacoes
+adx_read: true
+adx_scope: 756150003
+adx_write: false

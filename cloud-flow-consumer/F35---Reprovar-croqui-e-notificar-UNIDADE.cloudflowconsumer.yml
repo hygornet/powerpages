@@ -1,0 +1,8 @@
+adx_CloudFlowConsumer_adx_webrole:
+- 1e16f3b3-b319-4d15-a71e-bd149be9381d
+adx_cloudflowconsumerid: 9898ede6-3d4c-f111-bec7-7ced8da81546
+adx_flowapiurl: /_api/cloudflow/v1.0/trigger/2a9aeed4-3d4c-f111-bec7-7ced8da81546
+adx_flowtriggerurl: ''
+adx_metadata: ''
+adx_name: F35 - Reprovar croqui e notificar UNIDADE
+adx_processid: 2a9aeed4-3d4c-f111-bec7-7ced8da81546

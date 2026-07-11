@@ -1,0 +1,47 @@
+- adx_name: Restrict Read on Minhas Solicitações V2
+  adx_right: 2
+  adx_scope: 1
+  adx_webpageaccesscontrolrule_webrole:
+  - 1e16f3b3-b319-4d15-a71e-bd149be9381d
+  adx_webpageaccesscontrolruleid: 09df6a24-5346-f736-6cfa-d5225a2132f4
+  adx_webpageid: ebc9d1f4-fe58-d80c-5d8c-181e76a90514
+- adx_name: Restrict Read on Anexos Atividades
+  adx_right: 2
+  adx_scope: 1
+  adx_webpageaccesscontrolrule_webrole:
+  - 1e16f3b3-b319-4d15-a71e-bd149be9381d
+  adx_webpageaccesscontrolruleid: 4382ab0d-5ff1-6003-6c47-495b41284971
+  adx_webpageid: 21763468-856a-567c-f2da-471ee15eb075
+- adx_name: Restrict Read on Criar Solicitação
+  adx_right: 2
+  adx_scope: 2
+  adx_webpageaccesscontrolrule_webrole:
+  - 1e16f3b3-b319-4d15-a71e-bd149be9381d
+  adx_webpageaccesscontrolruleid: 5fb0a0f2-250f-d042-463e-91b12bcfdacf
+  adx_webpageid: 97e2eb47-a0c8-477d-bf28-3fc29f43d2c3
+- adx_name: Conceder Alteração para Administradores
+  adx_right: 1
+  adx_scope: 1
+  adx_webpageaccesscontrolrule_webrole:
+  - 8438c7f7-45d8-4ff7-960c-437d9a6b9a10
+  adx_webpageaccesscontrolruleid: 8684afdf-d177-40ec-bc8e-6afd612570c0
+  adx_webpageid: 97e2eb47-a0c8-477d-bf28-3fc29f43d2c3
+- adx_name: Restrict Read on Status
+  adx_right: 2
+  adx_scope: 1
+  adx_webpageaccesscontrolrule_webrole:
+  - 1e16f3b3-b319-4d15-a71e-bd149be9381d
+  adx_webpageaccesscontrolruleid: abf577f1-f70f-d002-da91-ea715ef70628
+  adx_webpageid: bd80be4f-be0a-bff9-eb9a-3ebd01478c8e
+- adx_name: Conceder Alteração para Conteúdo
+  adx_right: 1
+  adx_scope: 1
+  adx_webpageaccesscontrolruleid: b3c9cb18-2c22-4f77-a398-d1c706889844
+- adx_name: Restrict Read on Unidade de Serviço
+  adx_right: 2
+  adx_scope: 1
+  adx_webpageaccesscontrolrule_webrole: []
+  adx_webpageaccesscontrolruleid: c2ebc184-e6cd-2805-af54-d1db62924459
+  adx_webpageid: 051b980e-70f1-0597-bfa3-d0b41af4fc80
+  statecode: 1
+  statuscode: 2

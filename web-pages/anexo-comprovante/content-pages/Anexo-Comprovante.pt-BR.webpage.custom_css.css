@@ -1,0 +1,793 @@
+
+  header,
+  footer,
+  nav,
+  .navbar,
+  .navbar-static-top,
+  .page-header,
+  .breadcrumb,
+  .footer,
+  .site-footer,
+  .siteHeader,
+  .siteFooter,
+  #header,
+  #footer,
+  #navbar,
+  #mainContent > .row:first-child {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
+  }
+
+  body,
+  html {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+  }
+
+  main,
+  #mainContent,
+  .container,
+  .row,
+  .sectionBlockLayout,
+  .columnBlockLayout,
+  .col-lg-12 {
+    margin: 0 !important;
+    padding: 0 !important;
+    max-width: none !important;
+    width: 100% !important;
+  }
+
+  #custom-modern-form .buttonForFileUpload {
+  display: block !important;
+  padding: 0 !important;
+  border: none !important;
+  background: transparent !important;
+  position: relative !important;
+}
+
+#custom-modern-form input[type="file"],
+#custom-modern-form #UploadButton {
+  width: 100% !important;
+  min-height: 110px !important;
+  opacity: 0 !important;
+  cursor: pointer !important;
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+
+#custom-modern-form .buttonForFileUpload:hover::after {
+  background-color: #eff6ff;
+  border-color: #0027bd;
+}
+#statusSalvandoComprovante {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 170px;
+  padding: 24px;
+  margin-bottom: 16px;
+  border-radius: 16px;
+  background: #ffffff;
+  color: #0027bd;
+  text-align: center;
+  font-family: Inter, Arial, sans-serif;
+}
+
+#statusSalvandoComprovante strong {
+  font-size: 16px;
+  font-weight: 800;
+}
+
+#statusSalvandoComprovante span {
+  font-size: 13px;
+  color: #64748b;
+}
+
+.loader-comprovante-filho {
+  width: 52px;
+  height: 52px;
+  border: 6px solid #dbeafe;
+  border-top-color: #17e3cb;
+  border-radius: 50%;
+  animation: spinComprovanteFilho 1s linear infinite;
+}
+
+@keyframes spinComprovanteFilho {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* container do upload */
+#custom-modern-form .container-file-input {
+  width: 100% !important;
+}
+
+/* esconde input nativo */
+#custom-modern-form input[type="file"] {
+  display: none !important;
+}
+
+/* botão real */
+#custom-modern-form button[id*="cloud_file_comprovante"],
+#custom-modern-form .btn-for-file-input {
+  width: 100% !important;
+  min-height: 90px !important;
+  border: 2px dashed #cbd5e1 !important;
+  border-radius: 14px !important;
+  background: #f8fafc !important;
+  color: #0027bd !important;
+  font-weight: 700 !important;
+  font-size: 15px !important;
+  font-family: Inter, Arial, sans-serif !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  box-shadow: none !important;
+  transition: all .2s ease !important;
+  margin-bottom: 12px !important;
+}
+
+/* hover */
+#custom-modern-form button[id*="cloud_file_comprovante"]:hover,
+#custom-modern-form .btn-for-file-input:hover {
+  background: #eff6ff !important;
+  border-color: #0027bd !important;
+}
+
+/* nome do arquivo */
+#custom-modern-form .file-name,
+#custom-modern-form .text-muted,
+#custom-modern-form .selected-file-name {
+  display: block !important;
+  width: 100% !important;
+  text-align: center !important;
+  margin-top: 10px !important;
+  font-size: 13px !important;
+  color: #64748b !important;
+}
+
+
+/* organiza tudo dentro do campo de upload em coluna */
+#custom-modern-form .control {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 10px !important;
+  width: 100% !important;
+}
+
+/* container do botão/upload */
+#custom-modern-form .container-file-input,
+#custom-modern-form .file-control-container,
+#custom-modern-form .file-control-container > div {
+  width: 100% !important;
+}
+
+/* botão escolher arquivo ocupando a largura toda */
+#custom-modern-form .btn-for-file-input,
+#custom-modern-form button[id*="cloud_file_comprovante"] {
+  width: 100% !important;
+  min-height: 80px !important;
+  margin: 0 !important;
+}
+
+/* texto "Nenhum arquivo selecionado" abaixo */
+#custom-modern-form .container-filelink-and-delete,
+#custom-modern-form .break-file-name,
+#custom-modern-form .file-name-container {
+  width: 100% !important;
+  display: block !important;
+  text-align: center !important;
+  margin-top: 8px !important;
+}
+
+/* botão delete abaixo também */
+#custom-modern-form .delete-file-link-and-delete,
+#custom-modern-form .container-filelink-and-delete {
+  flex-direction: column !important;
+  align-items: stretch !important;
+}
+
+#custom-modern-form .break-file-name,
+#custom-modern-form .file-name-container,
+#custom-modern-form #cloud_file_comprovante_delete_button {
+  display: none !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+}
+
+#custom-modern-form .container-filelink-and-delete,
+#custom-modern-form .delete-file-link-and-delete {
+  display: none !important;
+}
+
+#custom-modern-form .actions {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+#custom-modern-form .container-filelink-delete.file-link-and-delete {
+  display: none !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+html,
+body {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow-x: hidden !important;
+  background: transparent !important;
+}
+
+.container,
+.row,
+.sectionBlockLayout,
+.columnBlockLayout,
+form,
+.entity-form,
+.crmEntityFormView {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+}
+
+html,
+body {
+  background: #f8fafc !important;
+}
+
+.container,
+.row,
+.sectionBlockLayout,
+.columnBlockLayout,
+.crmEntityFormView,
+.entity-form,
+form {
+  background: #f8fafc !important;
+}
+
+/* FUNDO DA PÁGINA FILHA IGUAL AO CARD DA LISTA DA PÁGINA PAI */
+html,
+body,
+main,
+#mainContent,
+.page-copy,
+.page-content,
+.content,
+.wrapper-body,
+.xrm-editable-html,
+.xrm-attribute,
+.xrm-attribute-value,
+.power-pages-form-container,
+.modern-form-wrapper,
+#custom-modern-form-wrapper,
+#custom-modern-form,
+.crmEntityFormView,
+.entity-form,
+form,
+fieldset,
+table,
+tbody,
+tr,
+td,
+.control,
+.info {
+  background: #f8fafc !important;
+}
+
+/* BOTÃO DE UPLOAD - ESTILO FINAL */
+#custom-modern-form .buttonForFileUpload {
+  width: 100% !important;
+  display: block !important;
+  position: relative !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+  background: transparent !important;
+}
+
+/* BOTÃO DE UPLOAD - ESTILO FINAL VISÍVEL */
+#custom-modern-form .buttonForFileUpload {
+  width: 100% !important;
+  display: block !important;
+  position: relative !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+  background: transparent !important;
+}
+
+/* mantém o input nativo escondido */
+#custom-modern-form input[type="file"] {
+  display: none !important;
+}
+
+/* estiliza o botão real visível */
+#custom-modern-form .btn-for-file-input,
+#custom-modern-form button[id*="cloud_file_comprovante"],
+#custom-modern-form #UploadButton {
+  width: 100% !important;
+  min-height: 120px !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+
+  border: 2px dashed #cbd5e1 !important;
+  border-radius: 14px !important;
+  background: #f8fafc !important;
+
+  color: transparent !important;
+  font-size: 0 !important;
+  font-weight: 800 !important;
+  font-family: Inter, Arial, sans-serif !important;
+
+  box-shadow: none !important;
+  cursor: pointer !important;
+  position: relative !important;
+}
+
+/* cria o rótulo visual */
+#custom-modern-form .btn-for-file-input::before,
+#custom-modern-form button[id*="cloud_file_comprovante"]::before,
+#custom-modern-form #UploadButton::before {
+  content: "↑";
+  display: block !important;
+  color: #0027bd !important;
+  font-size: 42px !important;
+  line-height: 1 !important;
+  font-weight: 700 !important;
+}
+
+/* cria o texto */
+#custom-modern-form .btn-for-file-input::after,
+#custom-modern-form button[id*="cloud_file_comprovante"]::after,
+#custom-modern-form #UploadButton::after {
+  content: "Carregar";
+  display: block !important;
+  color: #0027bd !important;
+  font-size: 16px !important;
+  line-height: 1.2 !important;
+  font-weight: 800 !important;
+}
+
+/* hover */
+#custom-modern-form .btn-for-file-input:hover,
+#custom-modern-form button[id*="cloud_file_comprovante"]:hover,
+#custom-modern-form #UploadButton:hover {
+  background: #f1f5f9 !important;
+  border-color: #0027bd !important;
+}
+
+/* visual do botão */
+#custom-modern-form .buttonForFileUpload::after {
+  content: "↑\A Carregar";
+  white-space: pre-line;
+
+  width: 100% !important;
+  min-height: 120px !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+
+  border: 2px dashed #cbd5e1 !important;
+  border-radius: 14px !important;
+  background: #f8fafc !important;
+
+  color: #0027bd !important;
+  font-family: Inter, Arial, sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 800 !important;
+  text-align: center !important;
+
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 1 !important;
+  box-sizing: border-box !important;
+}
+
+/* aumenta só o ícone da seta */
+#custom-modern-form .buttonForFileUpload::first-line {
+  font-size: 42px !important;
+  line-height: 1 !important;
+}
+
+/* hover */
+#custom-modern-form .buttonForFileUpload:hover::after {
+  background: #f1f5f9 !important;
+  border-color: #0027bd !important;
+}
+
+/* Remove fundo branco do título/descrição do campo */
+#custom-modern-form .table-info,
+#custom-modern-form .info,
+#custom-modern-form .cell-info,
+#custom-modern-form .description,
+#custom-modern-form .description.above,
+#custom-modern-form .field-label,
+#custom-modern-form label,
+#custom-modern-form div[class*="info"],
+#custom-modern-form div[class*="description"] {
+  background: #f8fafc !important;
+  background-color: #f8fafc !important;
+}
+
+/* FORÇA A PÁGINA FILHA A OCUPAR 100% DA LARGURA DO IFRAME */
+html,
+body {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow-x: hidden !important;
+  background: #f8fafc !important;
+}
+
+/* Remove limites dos containers do Power Pages */
+main,
+#mainContent,
+.page-copy,
+.wrapper-body,
+.content,
+.container,
+.row,
+.sectionBlockLayout,
+.columnBlockLayout,
+.col-lg-12,
+.xrm-editable-html,
+.xrm-attribute,
+.xrm-attribute-value {
+  width: 100% !important;
+  max-width: none !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+  background: #f8fafc !important;
+}
+
+/* Wrapper do form */
+#custom-modern-form,
+#custom-modern-form.modern-form-wrapper,
+#custom-modern-form .power-pages-form-container,
+#custom-modern-form .ppFlexContainer {
+  width: 100% !important;
+  max-width: none !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+  background: #f8fafc !important;
+}
+
+/* Camadas internas do Entity Form */
+#custom-modern-form form,
+#custom-modern-form .entity-form,
+#custom-modern-form .crmEntityFormView,
+#custom-modern-form .tab,
+#custom-modern-form .tab-column,
+#custom-modern-form fieldset,
+#custom-modern-form table,
+#custom-modern-form tbody,
+#custom-modern-form tr,
+#custom-modern-form td,
+#custom-modern-form .cell,
+#custom-modern-form .clearfix.cell,
+#custom-modern-form .control,
+#custom-modern-form .info,
+#custom-modern-form .table-info,
+#custom-modern-form .description,
+#custom-modern-form .validators {
+  width: 100% !important;
+  max-width: none !important;
+  min-width: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  box-sizing: border-box !important;
+  background: #f8fafc !important;
+}
+
+#custom-modern-form table {
+  width: 100% !important;
+  max-width: none !important;
+  table-layout: fixed !important;
+  border-collapse: collapse !important;
+}
+
+#custom-modern-form tbody,
+#custom-modern-form tr {
+  width: 100% !important;
+}
+
+#custom-modern-form td,
+#custom-modern-form .cell,
+#custom-modern-form .clearfix.cell {
+  width: 100% !important;
+  max-width: none !important;
+  display: table-cell !important;
+  box-sizing: border-box !important;
+}
+
+/* Campo de upload ocupando toda a largura */
+#custom-modern-form .control,
+#custom-modern-form .container-file-input,
+#custom-modern-form .file-control-container,
+#custom-modern-form .buttonForFileUpload {
+  width: 100% !important;
+  max-width: none !important;
+  display: block !important;
+  box-sizing: border-box !important;
+}
+
+#custom-modern-form .control,
+#custom-modern-form .container-file-input,
+#custom-modern-form .file-control-container,
+#custom-modern-form .buttonForFileUpload,
+#custom-modern-form .btn-for-file-input,
+#custom-modern-form button[id*="cloud_file_comprovante"],
+#custom-modern-form #UploadButton {
+  width: 100% !important;
+  max-width: none !important;
+  min-width: 100% !important;
+  box-sizing: border-box !important;
+}
+/* Oculta botão X/fechar das mensagens de sucesso/alerta na página filha */
+.alert-success .close,
+.alert-success button.close,
+.alert-success .btn-close,
+.notification.success .close,
+.notification.success button.close,
+.notification.success .btn-close,
+.success .close,
+.success button.close,
+.success .btn-close {
+  display: none !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Oculta mensagem de sucesso do Entity Form na página filha */
+#custom-modern-form .alert-success,
+#custom-modern-form .notification.success,
+#custom-modern-form .success,
+#custom-modern-form [role="alert"].alert-success,
+#custom-modern-form [role="alert"],
+.alert-success,
+.notification.success,
+[role="alert"].alert-success {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  overflow: hidden !important;
+}
+
+/* ======================================================
+   REEXIBE O BOTÃO PADRÃO DO ENTITY FORM COMO ENVIAR
+   ====================================================== */
+
+#custom-modern-form .actions {
+  display: flex !important;
+  visibility: visible !important;
+  height: auto !important;
+  min-height: auto !important;
+  overflow: visible !important;
+  margin-top: 16px !important;
+  padding: 0 !important;
+  justify-content: flex-end !important;
+  align-items: center !important;
+  background: #f8fafc !important;
+}
+
+/* Botão ENVIAR */
+#custom-modern-form .actions input[type="submit"],
+#custom-modern-form .actions button[type="submit"],
+#custom-modern-form #UpdateButton {
+  display: inline-flex !important;
+  visibility: visible !important;
+  width: auto !important;
+  min-width: 160px !important;
+  height: 44px !important;
+  min-height: 44px !important;
+
+  align-items: center !important;
+  justify-content: center !important;
+
+  border: none !important;
+  border-radius: 10px !important;
+  background: #0027bd !important;
+  color: #ffffff !important;
+
+  font-family: Inter, Arial, sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+
+  cursor: pointer !important;
+  box-shadow: none !important;
+  opacity: 1 !important;
+}
+
+/* Hover do botão ativo */
+#custom-modern-form .actions input[type="submit"]:hover,
+#custom-modern-form .actions button[type="submit"]:hover,
+#custom-modern-form #UpdateButton:hover {
+  background: #001f99 !important;
+}
+
+/* Estado inativo antes de selecionar arquivo */
+#custom-modern-form .actions input[type="submit"]:disabled,
+#custom-modern-form .actions button[type="submit"]:disabled,
+#custom-modern-form #UpdateButton:disabled,
+#custom-modern-form .btn-enviar-comprovante-inativo {
+  background: #b8c3ea !important;
+  color: #ffffff !important;
+  cursor: not-allowed !important;
+  opacity: 1 !important;
+  pointer-events: none !important;
+}
+
+/* ======================================================
+   MOBILE - CENTRALIZAR OBJETOS DA PÁGINA FILHA
+   Incluir Comprovante
+   ====================================================== */
+@media (max-width: 768px) {
+
+  html,
+  body {
+    text-align: center !important;
+  }
+
+  #custom-modern-form,
+  #custom-modern-form.modern-form-wrapper,
+  #custom-modern-form .power-pages-form-container,
+  #custom-modern-form .ppFlexContainer,
+  #custom-modern-form form,
+  #custom-modern-form .entity-form,
+  #custom-modern-form .crmEntityFormView {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    text-align: center !important;
+  }
+
+  /* Centraliza a estrutura interna do campo */
+  #custom-modern-form fieldset,
+  #custom-modern-form table,
+  #custom-modern-form tbody,
+  #custom-modern-form tr,
+  #custom-modern-form td,
+  #custom-modern-form .cell,
+  #custom-modern-form .clearfix.cell,
+  #custom-modern-form .control,
+  #custom-modern-form .info,
+  #custom-modern-form .table-info {
+    width: 100% !important;
+    max-width: 520px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    text-align: center !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Centraliza o card/botão de carregar comprovante */
+  #custom-modern-form .container-file-input,
+  #custom-modern-form .file-control-container,
+  #custom-modern-form .buttonForFileUpload {
+    width: 100% !important;
+    max-width: 420px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    display: block !important;
+    text-align: center !important;
+  }
+
+  #custom-modern-form .btn-for-file-input,
+  #custom-modern-form button[id*="cloud_file_comprovante"],
+  #custom-modern-form #UploadButton {
+    width: 100% !important;
+    max-width: 420px !important;
+    min-width: 0 !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+  }
+
+  /* Corrige também o card visual criado pelo ::after */
+  #custom-modern-form .buttonForFileUpload::after {
+    width: 100% !important;
+    max-width: 420px !important;
+    left: 50% !important;
+    right: auto !important;
+    transform: translateX(-50%) !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+  }
+
+  /* Centraliza nome/avisos do arquivo, se aparecerem */
+  #custom-modern-form .file-name,
+  #custom-modern-form .text-muted,
+  #custom-modern-form .selected-file-name,
+  #custom-modern-form .container-filelink-and-delete,
+  #custom-modern-form .break-file-name,
+  #custom-modern-form .file-name-container {
+    width: 100% !important;
+    max-width: 420px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    text-align: center !important;
+  }
+
+  /* Centraliza o botão ENVIAR da página filha */
+  #custom-modern-form .actions {
+    width: 100% !important;
+    max-width: 420px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+
+  #custom-modern-form .actions input[type="submit"],
+  #custom-modern-form .actions button[type="submit"],
+  #custom-modern-form #UpdateButton {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    text-align: center !important;
+    justify-content: center !important;
+  }
+}

@@ -1,0 +1,42 @@
+
+
+{% assign url = request.url | downcase %}
+{% assign logo = snippets['Logo URL'] %}
+{% assign logo_alt = snippets['Logo alt text'] | default: 'Logo' %}
+{% assign logo_class = 'aegea-logo-img' %}
+
+{% assign url_corsan = settings["URLCorsan"] | downcase %}
+{% assign url_para = settings["URLAguasDoPara"] | downcase %}
+{% assign url_guariroba = settings["URLAguasDeGuariroba"] | downcase %}
+{% assign url_manaus = settings["URLAguasDeManaus"] | downcase %}
+{% assign url_prolagos = settings["URLProlagos"] | downcase %}
+
+{% if url_corsan and url contains url_corsan %}
+  {% assign logo = "/corsan-centralized.png" %}
+  {% assign logo_class = 'aegea-logo-img aegea-logo-corsan' %}
+
+{% elsif url_para and url contains url_para %}
+  {% assign logo = "/centro_para.png" %}
+
+{% elsif url_guariroba and url contains url_guariroba %}
+  {% assign logo = "/centro_guariroba.png" %}
+
+{% elsif url_manaus and url contains url_manaus %}
+  {% assign logo = "/centro_manaus.png" %}
+
+{% elsif url_prolagos and url contains url_prolagos %}
+  {% assign logo = "/centro_prolagos.png" %}
+
+{% endif %}
+<a href='~/' class='aegea-logo-link'>
+  {% if logo %}
+    <img
+      id="aegeaHeaderLogo"
+      src='{{ logo }}'
+      alt='{{ logo_alt }}'
+      class='{{ logo_class }}'
+      data-default-logo='{{ logo }}'
+    >
+  {% endif %}
+</a>
+

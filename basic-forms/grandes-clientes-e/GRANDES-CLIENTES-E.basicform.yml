@@ -1,0 +1,35 @@
+adx_appendquerystring: false
+adx_attachfilelabel: >-
+  [
+    {
+      "LCID": 1046,
+      "Value": ""
+    }
+  ]
+adx_attachfilemaxsize: 
+adx_attachfilestoragelocation: 756150000
+adx_captcharequired: false
+adx_entityformid: ca80a6ae-a98b-4772-9f82-937bd77b3d65
+adx_entityname: cloud_solicitacoes
+adx_entitypermissionsenabled: true
+adx_entitysourcetype: 756150001
+adx_formname: GRANDES CLIENTES E
+adx_geolocation_maptype: 756150000
+adx_hideformonsuccess: false
+adx_maximumnooffiles: 5
+adx_mode: 100000001
+adx_name: GRANDES CLIENTES E
+adx_onsuccess: 756150001
+adx_recordidquerystringparametername: id
+adx_redirecturl: 
+adx_redirecturlappendentityidquerystring: true
+adx_redirecturlquerystringname: id
+adx_redirectwebpage: beddea4f-1826-3f68-91d3-3adcc0f3e353
+adx_showcaptchaforauthenticatedusers: false
+adx_successmessage: >-
+  [
+    {
+      "LCID": 1046,
+      "Value": ""
+    }
+  ]

@@ -1,0 +1,16 @@
+adx_accountrelationship: 
+adx_append: true
+adx_appendto: true
+adx_contactrelationship: 
+adx_create: true
+adx_delete: true
+adx_entitylogicalname: annotation
+adx_entityname: Anexos Análise Preliminar_Attachment
+adx_entitypermission_webrole:
+- 1e16f3b3-b319-4d15-a71e-bd149be9381d
+adx_entitypermissionid: 251e7acb-6bcc-467e-8cb1-f638c5ea6360
+adx_parententitypermission: aea3a6a2-8e21-4a0d-a5eb-0f66950fe9ab
+adx_parentrelationship: cloud_analise_preliminar_Annotations
+adx_read: true
+adx_scope: 756150003
+adx_write: true

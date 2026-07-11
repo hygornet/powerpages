@@ -1,0 +1,74 @@
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_comentarios_anexo
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Insira comentários sobre esse conjunto"
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_entityform: 29c9a170-1262-4bc0-9922-344701117af3
+  adx_entityformmetadataid: daf6a4a9-b754-4e24-952a-1d244abb1928
+  adx_fieldisrequired: false
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Comentário"
+      }
+    ]
+  adx_name: Anexos Documentos Projetos cloud_comentarios_anexo
+  adx_prepopulatetype: 0
+  adx_prepopulatevalue: 
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_validationregularexpressionerrormessage: ''
+- adx_adddescription: false
+  adx_attributelogicalname: cr40f_nome_documento
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_entityform: 29c9a170-1262-4bc0-9922-344701117af3
+  adx_entityformmetadataid: e5b9b8f6-e9df-468b-80f6-e90418300023
+  adx_fieldisrequired: false
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Documento"
+      }
+    ]
+  adx_name: Anexos Documentos Projetos cr40f_nome_documento
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_validationregularexpressionerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]

@@ -1,0 +1,99 @@
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_numero_funcionarios
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_entityform: 644ec408-dbc8-436a-8c0d-8f7ceca1a324
+  adx_entityformmetadataid: 32b039fa-3a2f-4c05-b48b-8b7211286b21
+  adx_fieldisrequired: true
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Número de Funcionários"
+      }
+    ]
+  adx_name: FINALIDADES_COM_INS E cloud_numero_funcionarios
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_validationregularexpressionerrormessage: ''
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_estimativa_publico_diario
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_entityform: 644ec408-dbc8-436a-8c0d-8f7ceca1a324
+  adx_entityformmetadataid: 50db236b-8a66-41c5-84fa-17b985c7ae80
+  adx_fieldisrequired: true
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Estimativa de Público Diário"
+      }
+    ]
+  adx_name: FINALIDADES_COM_INS E cloud_estimativa_publico_diario
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_validationregularexpressionerrormessage: ''
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_descricao_atividades
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_entityform: 644ec408-dbc8-436a-8c0d-8f7ceca1a324
+  adx_entityformmetadataid: e06f4fb0-71b6-417c-af36-efa6bdd74ec7
+  adx_fieldisrequired: true
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Descrição das Atividades"
+      }
+    ]
+  adx_name: FINALIDADES_COM_INS E cloud_descricao_atividades
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_validationregularexpressionerrormessage: ''

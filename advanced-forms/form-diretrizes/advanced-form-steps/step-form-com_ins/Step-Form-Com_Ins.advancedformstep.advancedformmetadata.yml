@@ -1,0 +1,140 @@
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_numero_funcionarios
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_fieldisrequired: false
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Número de Funcionários"
+      }
+    ]
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_webformmetadataid: 22010003-97c1-45d8-b809-e7ec8846ac8f
+  adx_webformstep: 6e90b1b3-9dd6-f011-8543-000d3a3113d7
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_descricao_atividades
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_fieldisrequired: false
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Descrição das Atividades"
+      }
+    ]
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_webformmetadataid: 50bf2875-2862-49e5-a3c5-b225da975ec4
+  adx_webformstep: 6e90b1b3-9dd6-f011-8543-000d3a3113d7
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_estimativa_publico_diario
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_fieldisrequired: false
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Estimativa de Público Diário"
+      }
+    ]
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_webformmetadataid: 8de43954-cba9-477b-9715-fbd48cdd4eee
+  adx_webformstep: 6e90b1b3-9dd6-f011-8543-000d3a3113d7
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_status_atual
+  adx_descriptionposition: 100000000
+  adx_fieldisrequired: false
+  adx_ignoredefaultvalue: false
+  adx_onsavetype: 100000000
+  adx_onsavevalue: 586450001
+  adx_purchasecreateinvoiceonpayment: false
+  adx_purchasefulfillorderonpayment: false
+  adx_purchaserequiresshipping: false
+  adx_randomizeoptionsetvalues: false
+  adx_setvalueonsave: true
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_webformmetadataid: edc1c6a4-b9da-f011-8543-000d3a3113d7
+  adx_webformstep: 6e90b1b3-9dd6-f011-8543-000d3a3113d7
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_descricao_ativdades
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_fieldisrequired: false
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Descrição de Atividades"
+      }
+    ]
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_webformmetadataid: f23998ed-fa6d-459d-af43-148f9bce5d41
+  adx_webformstep: 6e90b1b3-9dd6-f011-8543-000d3a3113d7

@@ -1,0 +1,8 @@
+adx_CloudFlowConsumer_adx_webrole:
+- 1e16f3b3-b319-4d15-a71e-bd149be9381d
+adx_cloudflowconsumerid: 16da60ad-36f8-f011-8406-002248de77b7
+adx_flowapiurl: /_api/cloudflow/v1.0/trigger/8ce80190-36f8-f011-8406-7ced8da81546
+adx_flowtriggerurl: ''
+adx_metadata: ''
+adx_name: Comprovante Reprovado novo boleto gerado(Aguardando Pagamento)
+adx_processid: 8ce80190-36f8-f011-8406-7ced8da81546

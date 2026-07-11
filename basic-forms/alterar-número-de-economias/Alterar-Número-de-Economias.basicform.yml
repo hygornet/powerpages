@@ -1,0 +1,263 @@
+adx_attachfilestoragelocation: 756150000
+adx_captcharequired: false
+adx_entityformid: 3abe6aa7-8cb1-4fa4-add0-07c605272936
+adx_entityname: cloud_solicitacoes
+adx_entitypermissionsenabled: true
+adx_entitysourcetype: 756150001
+adx_formname: Alterar Número de Economias
+adx_geolocation_maptype: 756150000
+adx_hideformonsuccess: true
+adx_maximumnooffiles: 5
+adx_mode: 100000001
+adx_name: Alterar Número de Economias
+adx_onsuccess: 756150000
+adx_recordidquerystringparametername: id
+adx_redirectwebpage: 
+adx_settings: >-
+  {
+    "Type": "FormActionMetadata",
+    "Actions": [
+      {
+        "Type": "SubmitAction",
+        "ButtonBusyLabel": [
+          {
+            "Type": "LanguageResources",
+            "LCID": 1046,
+            "Value": ""
+          }
+        ],
+        "SuccessMessage": [
+          {
+            "Type": "LanguageResources",
+            "LCID": 1046,
+            "Value": "Saved"
+          }
+        ],
+        "ButtonLabel": [
+          {
+            "Type": "LanguageResources",
+            "LCID": 1046,
+            "Value": "Salvar Alteração"
+          }
+        ],
+        "ButtonTooltip": [
+          {
+            "Type": "LanguageResources",
+            "LCID": 1046,
+            "Value": ""
+          }
+        ],
+        "ButtonCssClass": "",
+        "ActionButtonStyle": 0,
+        "ActionButtonPlacement": 1,
+        "ActionButtonAlignment": 1,
+        "ShowModal": 1,
+        "Confirmation": [
+          {
+            "Type": "LanguageResources",
+            "LCID": 1046,
+            "Value": "Ao avançar, você declara estar de acordo com o reinício da fase de diretrizes técnicas, onde haverá o pagamento de uma nova taxa de entrada (taxa de reanálise) devido alterações no número de economias."
+          }
+        ],
+        "FilterCriteria": ""
+      }
+    ],
+    "DeleteDialog": {
+      "Type": "DeleteModal",
+      "Title": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "PrimaryButtonText": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "CloseButtonText": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "DismissButtonSrText": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "Size": 0,
+      "CssClass": "",
+      "TitleCssClass": "",
+      "PrimaryButtonCssClass": "",
+      "CloseButtonCssClass": ""
+    },
+    "WorkflowDialog": {
+      "Type": "WorkflowModal",
+      "Title": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "PrimaryButtonText": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "CloseButtonText": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "DismissButtonSrText": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "Size": 0,
+      "CssClass": "",
+      "TitleCssClass": "",
+      "PrimaryButtonCssClass": "",
+      "CloseButtonCssClass": ""
+    },
+    "ActionDropDownButtonLabel": [
+      {
+        "Type": "LanguageResources",
+        "LCID": 1046,
+        "Value": ""
+      }
+    ],
+    "TopContainerCssClass": "",
+    "BottomContainerCssClass": "",
+    "ShowSaveChangesWarningOnExit": false,
+    "SaveChangesWarningMessage": [
+      {
+        "Type": "LanguageResources",
+        "LCID": 1046,
+        "Value": ""
+      }
+    ],
+    "ActivateDialog": {
+      "Type": "ActivateModal",
+      "Title": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "PrimaryButtonText": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "CloseButtonText": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "DismissButtonSrText": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "Size": 0,
+      "CssClass": "",
+      "TitleCssClass": "",
+      "PrimaryButtonCssClass": "",
+      "CloseButtonCssClass": ""
+    },
+    "DeactivateDialog": {
+      "Type": "DeactivateModal",
+      "Title": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "PrimaryButtonText": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "CloseButtonText": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "DismissButtonSrText": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "Size": 0,
+      "CssClass": "",
+      "TitleCssClass": "",
+      "PrimaryButtonCssClass": "",
+      "CloseButtonCssClass": ""
+    },
+    "CreateRelatedRecordDialog": {
+      "Type": "CreateRelatedRecordModal",
+      "PrimaryButtonText": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "CloseButtonText": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "PrimaryButtonCssClass": "",
+      "CloseButtonCssClass": "",
+      "Title": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "DismissButtonSrText": [
+        {
+          "Type": "LanguageResources",
+          "LCID": 1046,
+          "Value": ""
+        }
+      ],
+      "Size": 0,
+      "CssClass": "",
+      "TitleCssClass": ""
+    }
+  }
+adx_showcaptchaforauthenticatedusers: false

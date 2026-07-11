@@ -1,0 +1,5726 @@
+ :root {
+  --brand-color: #0027bd;
+  --brand-hover: #8493ca;
+  --text-dark: #1f2937;
+  --secondary-color: #17e3cb;
+}
+
+/* Container diagnóstico */
+.debug-card {
+  max-width: 900px;
+  margin: 24px auto;
+  padding: 20px;
+  border-radius: 10px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  font-size: 14px;
+}
+
+/* Card principal */
+.card-termo {
+  max-width: 900px;
+  margin: 40px auto 60px;
+  padding: 32px;
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  border: 1px solid #e5e7eb;
+}
+
+/* Título */
+.card-termo h2 {
+  margin-bottom: 16px;
+  color: var(--brand-color);
+  font-size: 22px;
+}
+
+/* Texto */
+.card-termo p {
+  font-size: 16px;
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+
+
+/* ===============================
+   BOTÃO PRIMÁRIO – PADRÃO FLUENT
+   =============================== */
+.btn-cloud {
+  background-color: var(--brand-color) !important;
+  color: #ffffff !important;
+  width: auto !important;
+  min-width: 180px !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 32px !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  border-radius: 8px !important;
+  border: none !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  box-shadow: none !important;
+  text-decoration: none !important;
+}
+
+/* Hover */
+.btn-cloud:hover {
+  background-color: var(--secondary-color) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 12px rgba(23, 227, 203, 0.4) !important;
+}
+
+/* Active */
+.btn-cloud:active {
+  transform: translateY(0) !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Focus (acessibilidade) */
+.btn-cloud:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(23, 227, 203, 0.35) !important;
+}
+
+/* ===============================
+   BOTÃO SECUNDÁRIO – OUTLINE
+   =============================== */
+.btn-cloud-outline {
+  background-color: #ffffff !important;
+  color: var(--brand-color) !important;
+  border: 2px solid var(--brand-color) !important;
+  border-radius: 8px !important;
+}
+
+/* Hover outline */
+.btn-cloud-outline:hover {
+  background-color: var(--secondary-color) !important;
+  color: #ffffff !important;
+  border-color: var(--secondary-color) !important;
+}
+
+/* Active outline */
+.btn-cloud-outline:active {
+  transform: translateY(0) !important;
+}
+
+/* Focus outline */
+.btn-cloud-outline:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(23, 227, 203, 0.35) !important;
+}
+/* ======================================
+   REMOVE SUBLINHADO DOS BOTÕES <a>
+   ====================================== */
+.btn-cloud,
+.btn-cloud:hover,
+.btn-cloud:focus,
+.btn-cloud:active,
+.btn-cloud-outline,
+.btn-cloud-outline:hover,
+.btn-cloud-outline:focus,
+.btn-cloud-outline:active {
+  text-decoration: none !important;
+}
+/* ===============================
+   CONFETTI ULTRA EXPLOSIVO
+   =============================== */
+.confetti {
+  position: absolute; /* ⬅️ NÃO fixed */
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 2147483647;
+  animation: explode 900ms cubic-bezier(.17,.67,.45,1.3) forwards;
+  filter: drop-shadow(0 0 6px rgba(255,255,255,0.8));
+}
+
+@keyframes explode {
+  0% {
+    transform: translate(0, 0) scale(1.4) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--dx), var(--dy)) scale(0.2) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+
+
+:root {
+  --brand-color: #0027bd;
+  --brand-hover: #8493ca;
+  --text-dark: #1f2937;
+  --secondary-color: #17e3cb;
+
+  --blue-dark:#0027bd;
+  --blue-light:#0b5cff;
+  --turq:#17e3cb;
+  --line-gray:#e5e7eb;
+  --border-gray:#cbd5e1;
+}
+
+/* ===============================
+   CARDS GERAIS
+   =============================== */
+.debug-card,
+.timeline-card,
+.card-termo {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Container diagnóstico */
+.debug-card {
+  margin-top: 24px;
+  padding: 20px;
+  border-radius: 10px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  font-size: 14px;
+}
+
+/* Card principal */
+.card-termo {
+  margin: 40px auto 60px;
+  padding: 32px;
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  border: 1px solid #e5e7eb;
+}
+
+/* ===============================
+   BOTÕES
+   =============================== */
+.btn-cloud {
+  background-color: var(--brand-color) !important;
+  color: #ffffff !important;
+  min-width: 180px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 32px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 8px;
+  border: none;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none !important;
+}
+
+.btn-cloud:hover {
+  background-color: var(--secondary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(23, 227, 203, 0.4);
+}
+
+.btn-cloud-outline {
+  background-color: #ffffff !important;
+  color: var(--brand-color) !important;
+  border: 2px solid var(--brand-color) !important;
+}
+
+/* ===============================
+   TIMELINE – VERSÃO FINAL
+   =============================== */
+.timeline-card {
+  margin: 32px auto;
+  padding: 26px 28px 30px;
+  border-radius: 14px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+}
+
+/* Área útil da timeline (mais estreita) */
+.timeline-wrap{
+  position: relative;
+  height: 130px;
+  width: 90%;
+  margin: 0 auto;
+}
+
+
+/* Barra */
+/* Base sempre ocupa tudo */
+.timeline-line-base{
+  position:absolute;
+  left:0;
+  right:0;
+  top:46px;
+  height:8px;
+  border-radius:6px;
+  background: var(--line-gray);
+  z-index:1;
+}
+/* ✅ Concluído (azul sólido) */
+.timeline-line-done{
+  position:absolute;
+  left:0;
+  top:46px;
+  height:8px;
+  border-radius:6px;
+  background:#0027bd;
+  box-shadow:none;
+  z-index:2;
+  width: 0%; /* JS/inline define */
+}
+.timeline-line-current{
+  position:absolute;
+  top:46px;
+  height:8px;
+  border-radius:6px;
+   background:
+    linear-gradient(
+      90deg,
+      #0027bd 0%,
+      #17e3cb 25%,
+      #0ea5e9 50%,
+      #17e3cb 75%,
+      #0027bd 100%
+    );
+  box-shadow:
+    0 0 12px rgba(23,227,203,0.25);
+   background-size: 250% 100%;
+   animation: aguaCorrente 2.5s linear infinite;
+  z-index:3;
+
+  left: 0%;   /* JS/inline define */
+  width: 0%;  /* JS/inline define */
+}
+
+/* Barras calculadas usam LEFT + WIDTH */
+.timeline-line-done,
+.timeline-line-current {
+  position: absolute;
+  left: 0;
+  top: 46px;
+  height: 8px;
+  border-radius: 6px;
+}
+
+
+
+/* Barras calculadas usam LEFT + WIDTH */
+.timeline-line-done,
+.timeline-line-current {
+  position: absolute;
+  left: 0;
+  top: 46px;
+  height: 8px;
+  border-radius: 6px;
+}
+
+
+
+
+
+/* Bolinhas */
+.tnode {
+  position: absolute;
+  top: 32px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #fff;
+  border: 3px solid var(--border-gray);
+  color: #0027bd;
+  transition: all .25s ease;
+}
+
+.tnode svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+  fill: currentColor;
+}
+
+.tnode.p1 { left: 0%; }
+.tnode.p2 { left: 33.333%; }
+.tnode.p3 { left: 66.666%; }
+.tnode.p4 { left: 100%; }
+
+/* estados novos */
+.tnode.etapa-superada {
+  background: #dbeafe;
+  border-color: #1d4ed8;
+  color: #0027bd;
+}
+
+.tnode.etapa-atual {
+  background: #17e3cb;
+  border-color: #0f766e;
+  color: #0027bd;
+  box-shadow: none;
+  position: relative;
+  z-index: 6;
+}
+
+.tnode.etapa-futura {
+  background: #cbd5e1;
+  border-color: #94a3b8;
+  color: #ffffff;
+}
+
+.tnode.etapa-reprovada {
+  background: #ef4444;
+  border-color: #b91c1c;
+  color: #ffffff;
+  box-shadow: none;
+  position: relative;
+  z-index: 6;
+}
+
+/* Labels – BONITOS E LEGÍVEIS */
+/* Labels – AJUSTADOS PARA CABER NA HORIZONTAL */
+.timeline-label{
+  position:absolute;
+  top:78px;
+  transform:translateX(-50%);
+  font-size:11px;
+  font-weight:500;
+  color:#475569;
+  text-align:center;
+  line-height:1.2;
+  z-index:5;
+
+  max-width:88px;       /* seguro agora */
+  white-space:normal;
+  word-break:keep-all;
+}
+
+
+
+/* Mesmas posições das bolinhas */
+.timeline-label.p1 { left: 0%; }
+.timeline-label.p2 { left: 33.333%; }
+.timeline-label.p3 { left: 66.666%; }
+.timeline-label.p4 { left: 100%; }
+
+@media (max-width: 1024px) {
+  .timeline-wrap{
+    max-width: 680px;
+  }
+}
+/* Overlay */
+.modal-cloud-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+}
+
+/* Caixa */
+.modal-cloud {
+  background: #fff;
+  width: 100%;
+  max-width: 520px;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.3);
+  font-family: 'Inter', sans-serif;
+}
+
+/* Ações */
+.modal-cloud-actions {
+  margin-top: 32px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+.modal-cloud-actions-center {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+}
+/* ===============================
+   CAMADA GLOBAL DE EFEITOS
+   =============================== */
+.effects-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2147483647; /* topo absoluto */
+}
+/* ===============================
+   TIMELINE – AVANÇO DAS AÇÕES (7 etapas)
+   NÃO afeta a timeline principal
+   =============================== */
+
+.timeline-actions .tnode.p1,
+.timeline-actions .timeline-label.p1 { left: 0%; }
+
+.timeline-actions .tnode.p2,
+.timeline-actions .timeline-label.p2 { left: 16.66%; }
+
+.timeline-actions .tnode.p3,
+.timeline-actions .timeline-label.p3 { left: 33.33%; }
+
+.timeline-actions .tnode.p4,
+.timeline-actions .timeline-label.p4 { left: 50%; }
+
+.timeline-actions .tnode.p5,
+.timeline-actions .timeline-label.p5 { left: 66.66%; }
+
+.timeline-actions .tnode.p6,
+.timeline-actions .timeline-label.p6 { left: 83.33%; }
+
+.timeline-actions .tnode.p7,
+.timeline-actions .timeline-label.p7 { left: 100%; }
+
+/* 🧭 Andamento da Solicitação */
+.timeline-card:not(.timeline-actions) .timeline-line-done{
+  background:#0027bd !important;
+  box-shadow:none !important;
+}
+/* FASE atual */
+.timeline-card:not(.timeline-actions) .timeline-line-current{
+  background: linear-gradient(98deg, #0027bd, #17e3cb) !important;
+  box-shadow:none !important;
+}
+/* 📈 Avanço das ações */
+.timeline-actions .timeline-line-done {
+  background: linear-gradient(5deg, #0027bd, #17e3cb);
+}
+/* ===============================
+   CORES POR ESTADO DA TIMELINE
+   =============================== */
+.timeline-label.past {
+  color: #0027bd; /* azul escuro */
+  font-weight: 600;
+}
+
+.timeline-label.present {
+  color: #0b5cff; /* azul vivo */
+  font-weight: 700;
+}
+
+.timeline-label.future {
+  color: #9ca3af; /* cinza */
+  font-weight: 500;
+}
+/* ===============================
+   BOLINHA ATUAL COM AURA PULSANTE
+   =============================== */
+.tnode.etapa-atual {
+  position: relative;
+  z-index: 6;
+}
+
+.tnode.etapa-atual::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: rgba(23,227,203,0.35);
+  transform: translate(-50%, -50%) scale(1);
+  animation: pulse-timeline-atual 1.6s ease-out infinite;
+  z-index: -1;
+}
+
+@keyframes pulse-timeline-atual {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: .85;
+  }
+  70% {
+    transform: translate(-50%, -50%) scale(1.9);
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+/* ===============================
+   TOOLTIP DAS BOLINHAS
+   =============================== */
+.tnode[data-tooltip] {
+  cursor: help;
+}
+
+.tnode[data-tooltip]::before {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 140%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #010505;
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s ease;
+  z-index: 10;
+}
+
+.tnode[data-tooltip]::after {
+  content: "";
+  position: absolute;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: #17e3cb transparent transparent transparent;
+  opacity: 0;
+  transition: opacity .2s ease;
+}
+
+.tnode:hover::before,
+.tnode:hover::after {
+  opacity: 1;
+}
+/* ================================
+   TIMELINES INTEGRADAS À PÁGINA
+   (remove efeito de card)
+   ================================ */
+
+.timeline-card {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 auto 16px !important;
+  max-width: 1200px;
+  width: 90%;
+}
+
+
+/* ================================
+   APROXIMA AS DUAS TIMELINES
+   ================================ */
+
+.timeline-card.timeline-actions {
+  margin-top: -8px;  /* aproxima da de cima */
+}
+
+
+/* =========================================
+   TIMELINE AÇÕES – PAGAMENTO RECUSADO
+   RESET TOTAL DA AURA (SEM VAZAMENTO)
+   ========================================= */
+
+/* bolinha */
+.timeline-actions .tnode.etapa-reprovada {
+  position: relative;
+  z-index: 6;
+}
+
+.timeline-actions .tnode.etapa-reprovada::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: rgba(239,68,68,0.35);
+  transform: translate(-50%, -50%) scale(1);
+  animation: pulse-timeline-reprovada 1.6s ease-out infinite;
+  z-index: -1;
+}
+
+@keyframes pulse-timeline-reprovada {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: .9;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(2);
+    opacity: 0;
+  }
+}
+
+
+/* =========================================
+   TIMELINE AÇÕES – PAGAMENTO RECUSADO
+   RÓTULO ATUAL EM VERMELHO
+   ========================================= */
+
+.timeline-actions.status-reprovado
+.timeline-label.present {
+  color: #dc2626 !important;
+  font-weight: 700 !important;
+}
+ /* FAB - POSSO AJUDAR */
+.faq-fab {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+
+  background: #0027bd;
+  color: #ffffff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 26px;
+  font-weight: 800;
+  text-decoration: none;
+
+  box-shadow:
+    0 6px 16px rgba(0, 39, 189, 0.45);
+
+  z-index: 9999;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.faq-fab:hover {
+  transform: translateY(-4px);
+  background: #001e99;
+  box-shadow:
+    0 10px 24px rgba(0, 39, 189, 0.55);
+}
+
+/* Tooltip */
+.faq-fab-tooltip {
+  position: absolute;
+  right: 68px;
+  white-space: nowrap;
+
+  background: #111827;
+  color: #ffffff;
+  font-size: 13px;
+  padding: 6px 10px;
+  border-radius: 6px;
+
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(4px);
+  transition: all 0.2s ease;
+}
+
+.faq-fab:hover .faq-fab-tooltip {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* Botão X do modal */
+.modal-cloud {
+  position: relative;
+}
+
+.modal-close-x {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  font-size: 22px;
+  font-weight: 600;
+  
+  cursor: pointer;
+}
+
+
+/* Botão Carregar – padrão portal */
+#mainContent button:not(.delete):not(.delete-file):not(.remove-file):not([title*="Excluir"]):not([aria-label*="Excluir"]),
+#mainContent .btn-upload,
+#mainContent input[type="file"] + label {
+  background-color: #0027bd;
+  color: #ffffff;
+  border-radius: 8px;
+  border: none;
+  padding: 8px 16px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+#modalNovosDocumentos .delete,
+#modalNovosDocumentos .delete-file,
+#modalNovosDocumentos .remove-file,
+#modalNovosDocumentos [title*="Excluir"],
+#modalNovosDocumentos [aria-label*="Excluir"] {
+  pointer-events: auto !important;
+  position: relative !important;
+  z-index: 999999 !important;
+  background: transparent !important;
+  color: #dc2626 !important;
+  padding: 4px 8px !important;
+  min-width: auto !important;
+  width: auto !important;
+}
+#mainContent button:hover,
+#mainContent .btn-upload:hover,
+#mainContent input[type="file"] + label:hover {
+  background-color: #17e3cb;
+  color: #0027bd;
+}
+
+/* Área inferior do modal */
+#modalNovosDocumentos .actions,
+#modalNovosDocumentos .modal-cloud-actions {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Container pai vira footer flex */
+#modalNovosDocumentos .modal-cloud {
+  display: flex;
+  flex-direction: column;
+}
+
+#modalNovosDocumentos .actions {
+  margin-left: auto;
+}
+
+#modalNovosDocumentos .modal-cloud-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+/* Força submit e fechar na mesma linha */
+#modalNovosDocumentos .actions,
+#modalNovosDocumentos .modal-cloud-actions {
+  justify-content: flex-end;
+}
+
+/* Ajuste visual do submit */
+#modalNovosDocumentos input[type="submit"] {
+  margin-right: 12px;
+}
+#btnFecharNovosDocumentos {
+  display: none !important;
+}
+/* ================================
+   BOTÃO X DO MODAL (clean)
+================================ */
+.modal-close-x {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+
+  background: transparent;
+  border: none;
+  outline: none;
+
+  color: #0027bd; /* azul padrão */
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1;
+
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 6px;
+
+  box-shadow: none;
+}
+
+/* Hover suave (sem fundo pesado) */
+.modal-close-x:hover {
+  background: rgba(0, 39, 189, 0.08); /* azul bem leve */
+}
+
+/* Remove qualquer foco feio */
+.modal-close-x:focus,
+.modal-close-x:active {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Garante o X posicionado no canto do modal */
+#modalComprovante .modal-cloud {
+  position: relative;
+}
+
+/* Botão X */
+#modalComprovante .modal-close-x{
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: transparent;
+  color: var(--brand-color, #0027bd);
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+  border-radius: 10px;
+}
+#modalComprovante .modal-close-x:hover{
+  background: rgba(0, 39, 189, 0.08);
+}
+
+/* =========================================
+   UPLOAD MODAL COMPROVANTE (DROPZONE REAL)
+   ========================================= */
+
+/* remove layout padrão do file-cell dentro do modal */
+#modalComprovante .file-cell {
+  display: block !important;
+  padding: 0 !important;
+  border: none !important;
+  background: transparent !important;
+}
+
+/* input ocupa toda a área */
+#modalComprovante #inputComprovante {
+  width: 100% !important;
+  min-height: 110px !important;
+  cursor: pointer !important;
+}
+
+/* dropzone visual */
+#modalComprovante #inputComprovante::file-selector-button {
+  display: none;
+}
+
+/* caixa visual */
+#modalComprovante .file-cell::after {
+  content: "⬆ Carregar";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 110px;
+  border: 2px dashed #cbd5e1;
+  border-radius: 12px;
+  background-color: #f8fafc;
+  color: var(--brand-color, #0027bd);
+  font-weight: 600;
+  font-family: Inter, sans-serif;
+}
+
+/* hover */
+#modalComprovante .file-cell:hover::after {
+  background-color: #eff6ff;
+  border-color: var(--brand-color, #0027bd);
+}
+/* ======================================================
+   ENTITY FORM UPLOAD → MESMO DESIGN DO inputComprovante
+   ====================================================== */
+
+/* remove layout padrão */
+#modalComprovante .buttonForFileUpload {
+  display: block !important;
+  padding: 0 !important;
+  border: none !important;
+  background: transparent !important;
+  position: relative;
+}
+
+/* esconde visual do botão real */
+#modalComprovante #UploadButton {
+  width: 100% !important;
+  min-height: 110px !important;
+  opacity: 0 !important;
+  cursor: pointer !important;
+  position: relative;
+  z-index: 2;
+}
+
+/* caixa visual fake */
+#modalComprovante .buttonForFileUpload::after {
+  content: "⬆ Carregar";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 110px;
+  border: 2px dashed #cbd5e1;
+  border-radius: 12px;
+  background-color: #f8fafc;
+  color: var(--brand-color, #0027bd);
+  font-weight: 600;
+  font-family: Inter, sans-serif;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+/* hover */
+#modalComprovante .buttonForFileUpload:hover::after {
+  background-color: #eff6ff;
+  border-color: var(--brand-color, #0027bd);
+}
+.componentes-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:22px;
+  margin-top:30px;
+  position:relative;
+  z-index:1;
+  isolation:isolate;
+}
+
+.card-componente{
+  position:relative;
+  z-index:1;
+  overflow:visible;
+  height:170px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  background:#ffffff;
+  border:1px solid #e2e8f0;
+  border-radius:12px;
+  cursor:pointer;
+  transition:all .25s ease;
+  font-weight:600;
+}
+
+.card-componente:hover{
+  background:#17e3cb;
+  color:#0027bd;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+  z-index:999;
+}
+
+.tooltip-componente{
+  position:absolute;
+  bottom:calc(100% + 10px);
+  left:50%;
+  transform:translateX(-50%);
+  background:#1f2937;
+  color:#ffffff;
+  padding:12px 16px;
+  border-radius:10px;
+  font-size:13px;
+  max-width:320px;
+  line-height:1.4;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .2s ease;
+  box-shadow:0 10px 24px rgba(0,0,0,.18);
+  z-index:1000;
+  white-space:normal;
+}
+
+.card-componente:hover .tooltip-componente{
+  opacity:1;
+}
+
+.tooltip-componente:after{
+  content:"";
+  position:absolute;
+  top:100%;
+  left:50%;
+  transform:translateX(-50%);
+  border-width:7px;
+  border-style:solid;
+  border-color:#1f2937 transparent transparent transparent;
+}
+
+/* somente a partir da 2ª linha, abre para baixo */
+.componentes-grid .card-componente:nth-child(n+6) .tooltip-componente{
+  top:calc(100% + 10px);
+  bottom:auto;
+}
+
+.componentes-grid .card-componente:nth-child(n+6) .tooltip-componente:after{
+  top:auto;
+  bottom:100%;
+  border-color:transparent transparent #1f2937 transparent;
+}
+
+.check-componente{
+
+position:absolute;
+top:10px;
+right:10px;
+
+background:#17e3cb;
+color:#0027bd;
+
+border-radius:50%;
+
+width:26px;
+height:26px;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+}
+
+
+.componentes-grid{
+position:relative;
+z-index:20;
+}
+
+.card-componente{
+position:relative;
+z-index:21;
+cursor:pointer;
+pointer-events:auto;
+}
+.timeline-card{
+z-index:1;
+}
+
+.tooltip-componente{
+
+position:absolute;
+
+bottom:calc(100% + 10px);
+left:50%;
+
+transform:translateX(-50%);
+
+background:#1f2937;
+color:#ffffff;
+
+padding:12px 16px;
+
+border-radius:10px;
+
+font-size:13px;
+
+max-width:320px;
+
+line-height:1.4;
+
+opacity:0;
+
+pointer-events:none;
+
+transition:opacity .2s ease;
+
+box-shadow:0 10px 24px rgba(0,0,0,.18);
+
+z-index:9999;
+
+}
+
+/* aparecer */
+
+.card-componente:hover .tooltip-componente{
+
+opacity:1;
+
+}
+
+/* seta padrão */
+
+.tooltip-componente:after{
+
+content:"";
+
+position:absolute;
+
+top:100%;
+left:50%;
+
+transform:translateX(-50%);
+
+border-width:7px;
+border-style:solid;
+
+border-color:#1f2937 transparent transparent transparent;
+
+}
+
+.tooltip-bottom{
+
+top:calc(100% + 10px);
+bottom:auto;
+
+}
+
+.tooltip-bottom:after{
+
+top:auto;
+bottom:100%;
+
+border-color:transparent transparent #1f2937 transparent;
+
+}
+.card-componente{
+overflow:visible;
+}
+
+
+
+.card-componente{
+position:relative;
+z-index:20;
+cursor:pointer;
+}
+
+
+.componentes-grid{
+position:relative;
+z-index:30;
+}
+
+.card-componente{
+position:relative;
+z-index:40;
+cursor:pointer;
+}
+
+.card-componente,
+.card-componente *{
+pointer-events:auto;
+}
+.card-componente{
+position:relative;
+z-index:100;
+cursor:pointer;
+}
+
+
+.card-componente,
+.card-componente *{
+pointer-events:auto;
+}
+
+.componentes-grid{
+position:relative;
+z-index:20;
+}
+
+/* cards da segunda linha */
+
+.componentes-grid .card-componente:nth-child(n+5) .tooltip-componente{
+
+top:calc(100% + 10px);
+bottom:auto;
+
+}
+
+/* inverter seta */
+
+.componentes-grid .card-componente:nth-child(n+5) .tooltip-componente:after{
+
+top:auto;
+bottom:100%;
+
+border-color:transparent transparent #1f2937 transparent;
+
+}
+
+.progress-bar{
+position:relative;
+height:10px;
+background:#e5e7eb;
+border-radius:10px;
+overflow:visible;
+}
+
+.progress-fill{
+position:relative;
+height:100%;
+background:#0027bd;
+border-radius:10px;
+transition:width .4s ease;
+}
+
+.progress-marker{
+position:absolute;
+top:50%;
+transform:translate(-50%,-50%);
+width:32px;
+height:32px;
+
+background:#0027bd;
+color:#fff;
+
+border-radius:50%;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+font-size:12px;
+font-weight:600;
+
+box-shadow:0 4px 10px rgba(0,0,0,0.2);
+left:100%;   /* 👈 ESSA LINHA resolve */
+
+}
+
+.doc-row:hover{
+
+background:#e2e8f0;
+
+box-shadow:inset 0 0 0 1px #cbd5f5;
+
+}
+
+.btn-doc{
+width:36px;
+height:36px;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+background:#ffffff !important;
+
+border:none;
+
+border-radius:8px;
+
+box-shadow:0 2px 6px rgba(0,0,0,0.15);
+
+cursor:pointer;
+
+font-size:16px;
+
+transition:all .15s ease;
+}
+
+.btn-doc:hover{
+
+background:#06b6d4;
+
+color:white;
+
+transform:translateY(-1px);
+
+box-shadow:0 4px 10px rgba(0,0,0,0.25);
+}
+
+.opcoes{
+display:flex;
+gap:8px;
+justify-content:center;
+}
+.status-label{
+margin-left:6px;
+font-weight:500;
+}
+
+.tipo-crucial{
+color:#b91c1c;
+font-weight:600;
+}
+
+.tipo-opcional{
+color:#64748b;
+font-weight:500;
+}
+
+.comp-icon{
+margin-right:6px;
+}
+.doc-row td:first-child,
+.doc-row td:nth-child(4){
+text-align:center;
+}
+.progress-title{
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+font-weight:600;
+margin-bottom:6px;
+}
+
+.progress-info{
+font-size:13px;
+font-weight:500;
+color:#475569;
+}
+.docs-header th,
+.doc-row td{
+text-align:center;
+vertical-align:middle;
+}
+.comp-icon{
+margin-right:6px;
+}
+
+.docs-card{
+
+background:#ffffff;
+
+border-radius:14px;
+
+padding:24px;
+
+margin-top:18px;
+
+box-shadow:
+0 4px 12px rgba(0,0,0,0.08),
+0 1px 2px rgba(0,0,0,0.06);
+
+border:1px solid #eef2f7;
+
+}
+.docs-table td:first-child,
+.docs-table td:first-child{
+
+display:flex;
+align-items:center;
+gap:6px;
+
+}
+.titulo-docs-container{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:10px;
+}
+
+.btn-outline-red{
+
+background:#fff;
+border:2px solid #ef4444;
+color:#ef4444;
+
+padding:8px 16px;
+border-radius:8px;
+
+font-weight:600;
+cursor:pointer;
+
+transition:all .2s ease;
+}
+
+.btn-outline-red:hover{
+background:#ef4444;
+color:#fff;
+}
+.pp-modal{
+
+display:none;
+
+position:fixed;
+
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+background:rgba(0,0,0,0.45);
+
+z-index:9999;
+
+align-items:center;
+justify-content:center;
+
+}
+
+.pp-modal-content{
+
+background:#fff;
+
+padding:28px;
+
+border-radius:12px;
+
+width:420px;
+max-width:90%;
+
+box-shadow:
+0 12px 30px rgba(0,0,0,0.25);
+
+text-align:center;
+
+}
+
+.modal-actions{
+
+margin-top:20px;
+
+display:flex;
+justify-content:center;
+gap:12px;
+
+}
+
+.col-status{
+text-align:left !important;
+}
+.col-status{
+display:flex;
+align-items:center;
+gap:6px;
+justify-content:flex-start;
+}
+.docs-title{
+background:#1536b3;
+color:white;
+font-weight:600;
+text-align:center;
+padding:10px;
+border-radius:12px 12px 0 0;
+margin-top:14px;
+}
+
+.docs-card{
+border-radius:12px;
+overflow:hidden;
+}
+
+/* ===============================
+   FILTRO DOCUMENTOS (SEGMENTED)
+=============================== */
+
+.docs-filter{
+display:flex;
+justify-content:center;
+margin:24px 0;
+}
+
+.docs-filter-pill{
+
+display:flex;
+
+background:#ffffff;
+
+border-radius:999px;
+
+padding:6px;
+
+gap:6px;
+
+box-shadow:
+0 6px 18px rgba(0,0,0,0.15);
+
+}
+
+.docs-filter-btn{
+
+border:none;
+
+background:#ffffff;
+
+padding:10px 20px;
+
+border-radius:999px;
+
+font-weight:600;
+
+color:#0027bd;
+
+cursor:pointer;
+
+display:flex;
+align-items:center;
+gap:8px;
+
+font-size:15px;
+
+transition:all .25s ease;
+
+}
+
+/* contador */
+
+.filter-count{
+
+background:#1d4ed8;
+
+color:white;
+
+border-radius:999px;
+
+padding:2px 7px;
+
+font-size:12px;
+
+font-weight:700;
+
+}
+
+/* estado ativo */
+
+.docs-filter-btn.active{
+
+background:#17e3cb;
+
+color:#0027bd;
+
+box-shadow:
+0 4px 10px rgba(0,0,0,0.15);
+
+}
+
+.docs-filter-btn.active .filter-count{
+
+background:#0027bd;
+
+}
+/* ===============================
+   SEGMENTED FILTER DOCUMENTOS
+=============================== */
+
+.docs-filter{
+display:flex;
+justify-content:center;
+margin:28px 0;
+}
+
+.docs-filter-pill{
+
+position:relative;
+
+display:flex;
+align-items:center;
+
+background:#eef2f7;
+
+padding:6px;
+
+border-radius:999px;
+
+box-shadow:0 8px 18px rgba(0,0,0,0.18);
+
+}
+.docs-filter-btn{
+
+color:#0027bd !important;
+
+}
+
+.docs-filter-btn.active{
+
+color:#0027bd !important;
+
+}
+/* slider animado */
+
+.docs-filter-slider{
+
+position:absolute;
+
+top:6px;
+left:6px;
+
+height:calc(100% - 12px);
+
+background:#17e3cb;
+
+border-radius:999px;
+
+box-shadow:0 6px 14px rgba(0,0,0,0.18);
+
+transition:all .35s cubic-bezier(.4,0,.2,1);
+
+z-index:1;
+
+}
+
+/* botões */
+.btn-doc-lock{
+background:#e2e8f0;
+cursor:pointer;
+font-size:18px;
+}
+.docs-filter-btn{
+
+position:relative;
+
+z-index:2;
+
+border:none !important;
+border-radius:999px !important;
+background:transparent !important;
+
+padding:10px 22px;
+
+font-weight:600;
+
+color:#0027bd;
+
+cursor:pointer;
+
+display:flex;
+align-items:center;
+gap:8px;
+
+font-size:15px;
+
+}
+
+/* contador */
+
+.filter-count{
+
+background:#1d4ed8;
+
+color:white;
+
+border-radius:999px;
+
+padding:2px 7px;
+
+font-size:12px;
+
+font-weight:700;
+
+}
+
+/* hover */
+
+.docs-filter-btn:hover{
+
+opacity:.85;
+
+}
+.doc-bloqueado{
+background:#f1f5f9;
+color:#94a3b8;
+}
+
+.doc-bloqueado td{
+opacity:.65;
+}
+
+.doc-bloqueado:hover{
+background:#f1f5f9 !important;
+}
+
+/* botão desabilitado */
+
+.docs-filter-disabled{
+color:#94a3b8 !important;
+cursor:not-allowed;
+}
+
+/* bolinha cinza */
+
+.docs-filter-disabled .filter-count,
+.count-disabled{
+background:#cbd5e1 !important;
+color:#475569 !important;
+}
+
+/* hover desabilitado */
+
+.docs-filter-disabled:hover{
+color:#94a3b8 !important;
+background:transparent !important;
+}
+
+/* impedir cor turquesa do slider */
+
+.docs-filter-disabled:hover ~ .docs-filter-slider{
+background:#cbd5e1 !important;
+}
+.link-doc{
+  color:#0027bd !important;
+  text-decoration:none;
+  font-weight:600;
+}
+
+.link-doc:hover{
+  text-decoration:underline;
+}
+
+.alerta-docs{
+margin:16px 0 18px;
+}
+
+.alerta-docs-warning{
+background:#fff7ed;
+border:1px solid #fed7aa;
+color:#9a3412;
+padding:12px 16px;
+border-radius:8px;
+font-size:14px;
+}
+
+.alerta-docs-success{
+background:#ecfdf5;
+border:1px solid #6ee7b7;
+color:#065f46;
+padding:12px 16px;
+border-radius:8px;
+font-size:14px;
+}
+.grid-pagamento{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:20px;
+margin-top:25px;
+}
+
+.subcard{
+background:#ffffff;
+padding:20px;
+border-radius:10px;
+box-shadow:0 4px 12px rgba(0,0,0,0.08);
+text-align:center;
+}
+
+.subcard h3{
+font-size:16px;
+margin-bottom:12px;
+}
+
+.subcard p{
+font-size:14px;
+color:#4b5563;
+margin-bottom:15px;
+}
+
+.grid-pagamento{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:24px;
+margin-top:24px;
+}
+
+.subcard{
+background:white;
+padding:22px;
+border-radius:10px;
+box-shadow:0 4px 12px rgba(0,0,0,0.08);
+text-align:center;
+min-height:160px;
+}
+
+
+
+.btn-doc-trash{
+  color:#b91c1c;
+}
+
+.btn-doc-trash:hover{
+  background:#dc2626 !important;
+  color:#ffffff !important;
+}
+
+.btn-doc-historico:only-child{
+  margin:0 auto;
+}
+.btn-doc-anexo{
+  background:#ffffff !important; 
+  color:#002b36 !important;
+  border-color:#17e3cb !important;
+}
+
+.btn-doc-anexo:hover{
+  background:#39ff14 !important; /* verde florescente */
+  color:#00312a !important;
+  border-color:#39ff14 !important;
+  transform:translateY(-1px);
+}
+
+.btn-doc-historico:hover{
+  background:#ffd400 !important; /* amarelo */
+  color:#4a3b00 !important;
+  border-color:#ffd400 !important;
+  transform:translateY(-1px);
+}
+
+/* =========================================
+   CARD TRANSPARENTE DAS TIMELINES
+   ========================================= */
+.timeline-glass-card{
+  max-width: 1200px;
+  width: 100%;
+  margin: 32px auto 40px;
+  padding: 24px 20px 18px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.10);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.timeline-block + .timeline-block{
+  margin-top: 10px;
+}
+
+.timeline-block-title{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 90%;
+  margin: 0 auto 12px auto;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: #0027bd;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: left;
+  text-shadow: none;
+}
+
+.timeline-glass-card .timeline-card{
+  margin: 0 auto 12px !important;
+  width: 100% !important;
+  max-width: none !important;
+}
+
+.timeline-glass-card .timeline-card.timeline-actions{
+  margin-top: 0 !important;
+}
+
+@media (max-width: 768px){
+  .timeline-glass-card{
+    padding: 18px 12px 14px;
+  }
+
+  .timeline-block-title{
+    width: 100%;
+    margin: 0 0 12px 0;
+    font-size: 15px;
+    padding: 9px 12px;
+  }
+
+  .timeline-glass-card .timeline-card{
+    width: 100% !important;
+  }
+}
+
+.topo-etapa-pagamento{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  gap:10px;
+  margin:0 0 18px 0;
+}
+
+.titulo-etapa-pagamento{
+  margin:0;
+  font-size:18px;
+  font-weight:700;
+  line-height:1.3;
+  color:#1f2937;
+  text-align:center;
+}
+
+.icone-etapa-pagamento{
+  position:relative;
+  width:100px;
+  height:100px;
+  display:grid;
+  place-items:center;
+  color:#0027bd;
+  isolation:isolate;
+}
+
+.icone-etapa-pagamento svg{
+  position:relative;
+  z-index:3;
+  width:42px;
+  height:42px;
+  display:block;
+}
+
+.icone-etapa-pagamento::before{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%, -50%);
+  width:52px;
+  height:52px;
+  border-radius:50%;
+  z-index:1;
+  transition:all .25s ease;
+}
+
+.icone-etapa-pagamento::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%, -50%) scale(1);
+  width:52px;
+  height:52px;
+  border-radius:50%;
+  z-index:0;
+  opacity:0;
+}
+
+/* SUPERADA: bolinha azul clara atrás, ícone azul */
+.icone-etapa-pagamento.etapa-superada::before{
+  background:rgba(0,39,189,0.16);
+  border:2px solid rgba(0,39,189,0.22);
+}
+
+/* ATUAL: bolinha turquesa atrás, ícone continua azul */
+.icone-etapa-pagamento.etapa-atual::before{
+  background:#17e3cb;
+  border:2px solid rgba(0,39,189,0.18);
+  box-shadow:0 0 0 6px rgba(23,227,203,0.14);
+}
+
+.icone-etapa-pagamento.etapa-atual::after{
+  background:rgba(23,227,203,0.35);
+  opacity:1;
+  animation:pulse-etapa-pagamento 1.6s ease-out infinite;
+}
+
+/* FUTURA: bolinha cinza atrás, ícone continua azul */
+.icone-etapa-pagamento.etapa-futura::before{
+  background:#dbe3ef;
+  border:2px solid #c4cfde;
+}
+
+@keyframes pulse-etapa-pagamento{
+  0%{
+    transform:translate(-50%, -50%) scale(1);
+    opacity:.85;
+  }
+  70%{
+    transform:translate(-50%, -50%) scale(1.9);
+    opacity:0;
+  }
+  100%{
+    transform:translate(-50%, -50%) scale(1.9);
+    opacity:0;
+  }
+}
+
+
+.subcard-pagamento{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+}
+
+.subcard-pagamento p{
+  width:100%;
+  margin-bottom:0;
+}
+
+.acao-card-pagamento{
+  margin-top:auto;
+  padding-top:20px;
+  width:100%;
+  display:flex;
+  justify-content:center;
+  align-items:flex-end;
+}
+
+.btn-pagamento-acao,
+.valor-taxa-aceita{
+  width:220px !important;
+  min-width:220px !important;
+  min-height:76px !important;
+  height:76px !important;
+  box-sizing:border-box;
+}
+
+.btn-pagamento-acao{
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  text-align:center !important;
+  white-space:normal !important;
+  line-height:1.25 !important;
+  padding:14px 18px !important;
+}
+
+.valor-taxa-aceita{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:0 auto;
+  padding:14px 18px;
+  border:2px solid #0027bd;
+  border-radius:10px;
+  background:#ffffff;
+  color:#0027bd;
+  font-size:22px;
+  font-weight:700;
+  line-height:1.2;
+}
+.icone-etapa-pagamento.etapa-reprovada-atual{
+  color:#0027bd;
+}
+
+.icone-etapa-pagamento.etapa-reprovada-atual::before{
+  background:#ef4444;
+  border:2px solid rgba(220,38,38,0.20);
+  box-shadow:0 0 0 6px rgba(239,68,68,0.14);
+}
+
+.icone-etapa-pagamento.etapa-reprovada-atual::after{
+  background:rgba(239,68,68,0.35);
+  opacity:1;
+  animation:pulse-etapa-reprovada 1.6s ease-out infinite;
+}
+
+@keyframes pulse-etapa-reprovada{
+  0%{
+    transform:translate(-50%, -50%) scale(1);
+    opacity:.85;
+  }
+  70%{
+    transform:translate(-50%, -50%) scale(1.9);
+    opacity:0;
+  }
+  100%{
+    transform:translate(-50%, -50%) scale(1.9);
+    opacity:0;
+  }
+}
+
+/* cadeado futuro = ícone branco */
+.icone-etapa-pagamento.etapa-futura{
+  color:#ffffff;
+}
+
+/* exclamação reprovada = ícone branco */
+.icone-etapa-pagamento.etapa-reprovada-atual{
+  color:#ffffff;
+}
+
+.subcard-pagamento{
+  transition:
+    transform .22s ease,
+    box-shadow .22s ease,
+    border-color .22s ease,
+    background-color .22s ease;
+  will-change: transform;
+}
+
+/* hover igual aos cards de login */
+.subcard-pagamento:hover{
+  transform: translateY(-4px) scale(1.018);
+  box-shadow: 0 14px 34px rgba(0,0,0,0.10);
+}
+
+/* cards superados */
+.subcard-pagamento.card-superado{
+  background:#f0fdf4 !important;
+  border-color:#bbf7d0 !important;
+}
+
+/* card reprovado */
+.subcard-pagamento.card-reprovado{
+  background:#fef2f2 !important;
+  border-color:#fecaca !important;
+}
+
+.subcard-pagamento.card-superado:hover{
+  box-shadow: 0 16px 36px rgba(34,197,94,0.12);
+}
+
+.subcard-pagamento.card-reprovado:hover{
+  box-shadow: 0 16px 36px rgba(239,68,68,0.14);
+}
+
+.subcard.subcard-pagamento.card-futuro{
+  background: #f8fafc !important;
+  border: 1px solid #e5e7eb !important;
+}
+
+.subcard.subcard-pagamento.card-futuro:hover{
+  box-shadow: 0 16px 36px rgba(148,163,184,0.12);
+}
+
+.grid-entrega-full{
+  width:100%;
+  display:block;
+}
+
+.card-entrega-full{
+  width:100% !important;
+  max-width:none !important;
+  margin:0 !important;
+  min-height:auto !important;
+  padding:36px 40px !important;
+  text-align:center;
+}
+
+.card-entrega-full h3{
+  margin:0 0 18px 0;
+  color:#0027bd;
+  font-size:22px;
+  line-height:1.3;
+}
+
+.card-entrega-full p{
+  max-width:900px;
+  margin:0 auto 14px auto;
+  line-height:1.6;
+}
+
+.acoes-entrega-full{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:16px;
+  flex-wrap:wrap;
+  margin-top:26px;
+}
+.btn-label-com-icone{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  color:inherit;
+}
+
+.btn-label-com-icone svg{
+  width:18px;
+  height:18px;
+  display:block;
+  fill:currentColor;
+  color:inherit;
+  flex-shrink:0;
+}
+
+.titulo-entrega-com-icone{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+  text-align:center;
+  color:#0027bd;
+  margin-bottom:18px;
+  font-size:22px;
+  font-weight:700;
+  line-height:1.3;
+}
+
+.icone-entrega-card{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:52px;
+  height:52px;
+  min-width:52px;
+  border-radius:50%;
+  background:rgba(23,227,203,0.14);
+  color:#17e3cb;
+}
+
+.icone-entrega-card svg{
+  width:28px;
+  height:28px;
+  display:block;
+  fill:currentColor;
+}
+
+.btn-tooltip-entrega{
+  position:relative !important;
+  overflow:visible !important;
+}
+
+/* balão */
+.btn-tooltip-entrega::after{
+  content: attr(data-tooltip-entrega);
+  position:absolute;
+  left:50%;
+  bottom:calc(100% + 14px);
+  transform:translateX(-50%) translateY(6px);
+  min-width:260px;
+  max-width:340px;
+  padding:12px 14px;
+  border-radius:12px;
+  background:rgba(15, 23, 42, 0.94);
+  color:#ffffff;
+  font-size:13px;
+  font-weight:500;
+  line-height:1.45;
+  text-align:center;
+  box-shadow:0 14px 36px rgba(0,0,0,0.22);
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transition:all .22s ease;
+  z-index:999999;
+}
+
+/* setinha */
+.btn-tooltip-entrega::before{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:calc(100% + 6px);
+  transform:translateX(-50%) translateY(6px);
+  width:12px;
+  height:12px;
+  background:rgba(15, 23, 42, 0.94);
+  rotate:45deg;
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transition:all .22s ease;
+  z-index:999998;
+}
+
+.btn-tooltip-entrega:hover::after,
+.btn-tooltip-entrega:hover::before,
+.btn-tooltip-entrega:focus-visible::after,
+.btn-tooltip-entrega:focus-visible::before{
+  opacity:1;
+  visibility:visible;
+  transform:translateX(-50%) translateY(0);
+}
+.card-componente{
+  position:relative;
+  z-index:1;
+  overflow:visible;
+}
+
+.card-componente:hover{
+  z-index:999;
+}
+
+.tooltip-componente{
+  position:absolute;
+  top:calc(100% + 14px);
+  right:0;
+  left:auto;
+  bottom:auto;
+  transform:translateY(8px);
+
+  min-width:320px;
+  max-width:460px;
+
+  padding:16px 18px;
+  border-radius:16px;
+
+  background:rgba(0, 0, 0, 0.8);
+  color:#17e3cb;
+
+  text-align:left;
+  font-size:14px;
+  line-height:1.55;
+  font-weight:500;
+  white-space:normal;
+  word-break:break-word;
+
+  box-shadow:0 12px 30px rgba(0,0,0,0.28);
+
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+
+  transition:
+    opacity 0.25s ease,
+    visibility 0.25s ease,
+    transform 0.25s ease;
+
+  z-index:1000;
+}
+
+.tooltip-componente::before{
+  content:"";
+  position:absolute;
+  top:-7px;
+  right:22px;
+  width:14px;
+  height:14px;
+  background:rgba(0, 0, 0, 0.8);
+  transform:rotate(45deg);
+}
+
+.card-componente:hover .tooltip-componente,
+.card-componente:focus-within .tooltip-componente{
+  opacity:1;
+  visibility:visible;
+  transform:translateY(0);
+}
+
+.tooltip-componente::before{
+  display:none !important;
+  content:none !important;
+}
+
+.card-componente{
+  position:relative;
+  z-index:1;
+  overflow:visible;
+}
+
+.card-componente:hover{
+  z-index:999;
+}
+
+.tooltip-componente{
+  position:absolute;
+  bottom:calc(100% + 14px);
+  left:50%;
+  top:auto;
+  right:auto;
+
+  transform:translateX(-50%) translateY(8px);
+
+  min-width:320px;
+  max-width:460px;
+
+  padding:16px 18px;
+  border-radius:16px;
+
+  background:rgba(0, 0, 0, 0.8);
+  color:#17e3cb;
+
+  text-align:left;
+  font-size:14px;
+  line-height:1.55;
+  font-weight:500;
+  white-space:normal;
+  word-break:break-word;
+
+  box-shadow:0 12px 30px rgba(0,0,0,0.28);
+
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+
+  transition:
+    opacity 0.25s ease,
+    visibility 0.25s ease,
+    transform 0.25s ease;
+
+  z-index:1000;
+}
+
+.tooltip-componente::before,
+.tooltip-componente::after{
+  display:none !important;
+  content:none !important;
+}
+
+.card-componente:hover .tooltip-componente,
+.card-componente:focus-within .tooltip-componente{
+  opacity:1;
+  visibility:visible;
+  transform:translateX(-50%) translateY(0);
+}
+.card-assinatura-documentos {
+  padding: 28px !important;
+}
+
+.card-assinatura-documentos {
+  padding: 40px !important;
+}
+
+.assinatura-documentos-conteudo-full {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.assinatura-documentos-titulo {
+  font-size: 36px;
+  font-weight: 800;
+  margin-bottom: 24px;
+  color: #111827;
+}
+
+.assinatura-documentos-conteudo-full p {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #111827;
+  margin-bottom: 20px;
+}
+
+.card-entrega-impressa-aviso {
+  padding: 40px !important;
+}
+
+.entrega-impressa-conteudo-full {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.entrega-impressa-titulo {
+  margin: 0 0 28px 0;
+  font-size: 36px;
+  font-weight: 800;
+  color: #111827;
+}
+
+.entrega-impressa-conteudo-full p {
+  margin: 0 0 18px 0;
+  font-size: 18px;
+  line-height: 1.6;
+  color: #111827;
+}
+
+.entrega-impressa-lista {
+  margin: 0 0 24px 24px;
+  padding: 0;
+}
+
+.entrega-impressa-lista li {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #111827;
+  margin-bottom: 8px;
+}
+
+.entrega-impressa-bloco {
+  margin-top: 26px;
+}
+
+.entrega-impressa-label {
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  color: #374151;
+  margin-bottom: 8px;
+}
+
+@media (max-width: 768px) {
+  .card-entrega-impressa-aviso {
+    padding: 28px !important;
+  }
+
+  .entrega-impressa-titulo {
+    font-size: 28px;
+  }
+
+  .entrega-impressa-conteudo-full p,
+  .entrega-impressa-lista li {
+    font-size: 16px;
+  }
+}
+.entrega-impressa-lista {
+  list-style: none !important;
+  margin: 0 0 24px 0 !important;
+  padding-left: 0 !important;
+}
+
+.entrega-impressa-lista li {
+  list-style: none !important;
+  margin-bottom: 8px;
+}
+
+.card-coleta-documentos {
+  padding: 36px !important;
+}
+
+.coleta-documentos-conteudo-full {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.coleta-documentos-titulo {
+  margin: 0 0 24px 0;
+  font-size: 32px;
+  font-weight: 800;
+  color: #111827;
+}
+
+.coleta-documentos-conteudo-full p {
+  margin: 0 0 18px 0;
+  font-size: 15px;
+  line-height: 1.55;
+  color: #111827;
+}
+
+.coleta-documentos-bloco {
+  margin-top: 26px;
+}
+
+.coleta-documentos-label {
+  margin-bottom: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  color: #4b5563;
+}
+
+.coleta-documentos-item {
+  margin: 0;
+  padding: 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #111827;
+}
+
+.tnode {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.tnode svg {
+  width:18px;
+  height:18px;
+  display:block;
+  fill:currentColor;
+}
+
+.tnode.etapa-superada svg {
+  width: 38px;
+  height: 38px;
+  filter: drop-shadow(0 0 2px rgba(0,0,0,0.2));
+}
+
+.tnode.etapa-atual {
+  background: #17e3cb;
+  border-color: #0f766e;
+  color: #0027bd;
+  box-shadow: 0 0 0 6px rgba(23,227,203,0.22);
+}
+
+.tnode.etapa-futura svg {
+  width: 16px;
+  height: 16px;
+}
+
+.icone-galeria-componente{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-bottom:10px;
+  color:#0027bd;
+}
+
+.icone-galeria-componente svg{
+  width:34px;
+  height:34px;
+}
+.componentes-grid{
+  display:grid;
+  grid-template-columns:repeat(4, minmax(180px, 1fr));
+  gap:16px;
+  align-items:stretch;
+}
+
+.card-componente{
+  position:relative;
+  min-height:170px;
+  border-radius:20px;
+  border:1.5px solid #d9e3fb;
+  background:#ffffff;
+  color:#0c35c7;
+  box-shadow:0 8px 20px rgba(12,53,199,.08);
+  padding:16px 14px;
+  overflow: visible;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  text-align:center;
+  cursor:pointer;
+
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease,
+    border-color .2s ease,
+    background .2s ease,
+    color .2s ease;
+}
+
+.card-componente:hover{
+  transform:translateY(-4px);
+  box-shadow:0 18px 34px rgba(12,53,199,.16);
+}
+
+.card-componente.selecionado{
+  background:#0c35c7;
+  color:#ffffff;
+  border-color:#0c35c7;
+}
+
+.card-componente.componente-obrigatorio{
+  background:#0c35c7;
+  color:#ffffff;
+  border-color:#0c35c7;
+  cursor:default;
+}
+
+.card-componente-icone{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  line-height:1;
+}
+
+.card-componente-icone svg{
+  width:34px;
+  height:34px;
+  fill:currentColor;
+}
+
+.nome-componente{
+  font-size:14px;
+  font-weight:500;
+  line-height:1.2;
+  margin:0;
+
+  display:-webkit-box;
+
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.badge-componente-obrigatorio{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:30px;
+  padding:6px 14px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.3px;
+
+  background:rgba(255,255,255,.18);
+  color:#ffffff;
+  border:1px solid rgba(255,255,255,.28);
+}
+
+.card-componente:not(.selecionado):not(.componente-obrigatorio) .badge-componente-obrigatorio{
+  background:#eef4ff;
+  color:#0c35c7;
+  border:1px solid #cfe0ff;
+}
+
+.card-componente{
+  overflow: visible;
+}
+
+.tooltip-componente{
+  position:absolute;
+  left:50%;
+  bottom:calc(100% + 12px);
+  transform:translateX(-50%) translateY(8px);
+  min-width:220px;
+  max-width:300px;
+  padding:12px 14px;
+  border-radius:14px;
+  background:rgba(17,24,39,.94);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,.08);
+  color:#ffffff;
+  font-size:15px;
+  font-weight:400;
+  line-height:1.45;
+  text-align:left;
+  box-shadow:0 16px 34px rgba(0,0,0,.22);
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transition:
+    opacity .18s ease,
+    transform .18s ease,
+    visibility 0s linear .18s;
+  z-index:30;
+}
+
+.tooltip-componente::after{
+  content:"";
+  position:absolute;
+  top:100%;
+  left:50%;
+  transform:translateX(-50%);
+  border-width:8px 7px 0 7px;
+  border-style:solid;
+  border-color:#111827 transparent transparent transparent;
+}
+
+.card-componente:hover .tooltip-componente{
+  opacity:1;
+  visibility:visible;
+  transform:translateX(-50%) translateY(0);
+  transition:
+    opacity .18s ease,
+    transform .18s ease,
+    visibility 0s linear 0s;
+}
+
+.card-componente.selecionado .tooltip-componente,
+.card-componente.componente-obrigatorio .tooltip-componente{
+  background:#0b1220;
+  color:#ffffff;
+}
+
+.card-componente.selecionado .tooltip-componente::after,
+.card-componente.componente-obrigatorio .tooltip-componente::after{
+  border-color:#0b1220 transparent transparent transparent;
+}
+
+.check-componente{
+  position:absolute;
+  top:14px;
+  right:14px;
+  width:30px;
+  height:30px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:15px;
+  font-weight:800;
+  background:#ffffff;
+  color:#0c35c7;
+  box-shadow:0 8px 18px rgba(0,0,0,.12);
+}
+
+.card-componente:not(.selecionado):not(.componente-obrigatorio) .check-componente{
+  background:#0c35c7;
+  color:#ffffff;
+}
+
+@media (max-width: 980px){
+  .componentes-grid{
+    grid-template-columns:repeat(2, minmax(220px, 1fr));
+  }
+}
+
+@media (max-width: 640px){
+  .componentes-grid{
+    grid-template-columns:1fr;
+  }
+
+
+
+  .nome-componente{
+    font-size:18px;
+  }
+}
+
+
+.card-componente.selecionado .nome-componente{
+  font-weight:600;
+}
+/* =========================================
+   TIMELINE DE DOCUMENTAÇÃO - 3 SUBETAPAS
+   ========================================= */
+.timeline-block-docs{
+  margin: 22px 0 26px;
+}
+
+.timeline-actions-docs .timeline-wrap{
+  height: 138px;
+}
+
+.timeline-actions-docs .tnode.p1,
+.timeline-actions-docs .timeline-label.p1{
+  left: 0%;
+}
+
+.timeline-actions-docs .tnode.p2,
+.timeline-actions-docs .timeline-label.p2{
+  left: 50%;
+}
+
+.timeline-actions-docs .tnode.p3,
+.timeline-actions-docs .timeline-label.p3{
+  left: 100%;
+}
+
+.timeline-actions-docs .timeline-line-done{
+  background: linear-gradient(90deg, #0027bd, #17e3cb);
+}
+
+.timeline-actions-docs .timeline-label{
+  max-width: 150px;
+  font-size: 12px;
+  line-height: 1.25;
+}
+
+.timeline-actions-docs.status-reprovado .timeline-label.present{
+  color: #dc2626 !important;
+  font-weight: 700 !important;
+}
+
+/* mantém vermelho no ponto e no raio pulsante */
+.timeline-actions-docs .tnode.etapa-reprovada{
+  background: #ef4444;
+  border-color: #b91c1c;
+  color: #ffffff;
+  position: relative;
+  z-index: 6;
+}
+
+.timeline-actions-docs .tnode.etapa-reprovada::after{
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: rgba(239,68,68,0.35);
+  transform: translate(-50%, -50%) scale(1);
+  animation: pulse-timeline-reprovada 1.6s ease-out infinite;
+  z-index: -1;
+}
+
+/* =========================================
+   CARD DO GRÁFICO PERCENTUAL
+   ========================================= */
+.docs-progress-card{
+  margin: 22px 0 24px;
+  padding: 18px 20px 20px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+}
+
+.docs-progress-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:16px;
+  flex-wrap:wrap;
+  margin-bottom:14px;
+}
+
+.docs-progress-title{
+  color:#0027bd;
+  font-size:16px;
+  font-weight:700;
+  line-height:1.3;
+}
+
+.docs-progress-meta{
+  color:#475569;
+  font-size:13px;
+  font-weight:600;
+}
+
+.docs-progress-bar{
+  height:14px;
+  border-radius:999px;
+  overflow:visible;
+  background:#e5e7eb;
+}
+
+.docs-progress-fill{
+  height:100%;
+  border-radius:999px;
+  background: linear-gradient(90deg, #0027bd, #17e3cb);
+  position:relative;
+  transition:width .35s ease;
+}
+
+.docs-progress-fill .progress-marker{
+  width:42px;
+  height:42px;
+  font-size:12px;
+  font-weight:700;
+  background:#0027bd;
+  color:#ffffff;
+  box-shadow:0 6px 16px rgba(0,39,189,0.25);
+}
+
+.docs-progress-scale{
+  margin-top:10px;
+  display:flex;
+  justify-content:space-between;
+  font-size:12px;
+  font-weight:600;
+  color:#64748b;
+}
+
+@media (max-width: 768px){
+  .timeline-actions-docs .timeline-label{
+    max-width: 92px;
+    font-size: 10px;
+  }
+
+  .docs-progress-card{
+    padding:16px;
+  }
+}
+
+.tooltip-custom {
+  position: relative;
+  cursor: pointer;
+  overflow: visible !important;
+}
+
+.tooltip-custom::after {
+  content: attr(data-tooltip);
+  white-space: pre-line;
+  position: absolute;
+
+  bottom: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%) translateY(6px);
+
+  background: rgba(15, 23, 42, 0.96);
+  color: #17E3CB;
+  font-size: 12px;
+  line-height: 1.5;
+  padding: 10px 14px;
+  border-radius: 8px;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.22s ease;
+  z-index: 99999;
+  width: max-content;
+  max-width: 280px;
+  text-align: left;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+.tooltip-custom::before {
+  content: "";
+  position: absolute;
+
+  bottom: calc(100% + 1px);
+  left: 50%;
+  transform: translateX(-50%) translateY(6px);
+
+  border-width: 6px;
+  border-style: solid;
+  border-color: rgba(15, 23, 42, 0.96) transparent transparent transparent;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.22s ease;
+  z-index: 99999;
+}
+
+.tooltip-custom:hover::after,
+.tooltip-custom:hover::before {
+  opacity: 1;
+}
+
+.tooltip-custom:hover::after {
+  transform: translateX(-50%) translateY(0);
+}
+
+.tooltip-custom:hover::before {
+  transform: translateX(-50%) translateY(0);
+}
+.aviso-sem-componentes{
+  margin: 18px 0 22px;
+  padding: 16px 18px;
+  border-radius: 12px;
+  background: #fff7ed;
+  border-left: 5px solid #f59e0b;
+  color: #7c2d12;
+  font-size: 14px;
+  line-height: 1.55;
+  box-shadow: 0 6px 18px rgba(0,0,0,.06);
+}
+.obs-componentes-obrigatorios{
+  margin: 12px 0 18px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: #eff6ff;
+  border-left: 4px solid #2563eb;
+  color: #1e3a8a;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.btn-doc-ver-anexos{
+  background:#ffffff !important;
+  color:#0027bd !important;
+  border-color:#93c5fd !important;
+}
+
+.btn-doc-ver-anexos:hover{
+  background:#2563eb !important;
+  color:#ffffff !important;
+  border-color:#2563eb !important;
+  transform:translateY(-1px);
+}
+
+.modal-cloud-historico{
+  max-width: 1100px !important;
+  width: 95%;
+}
+
+.historico-table-wrap{
+  margin-top: 18px;
+  max-height: 60vh;
+  overflow: auto;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+}
+
+.historico-table{
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  background: #ffffff;
+}
+
+.historico-table thead th{
+  position: sticky;
+  top: 0;
+  background: #1536b3;
+  color: #ffffff;
+  text-align: center;
+  padding: 12px 10px;
+  font-weight: 700;
+  z-index: 2;
+}
+
+.historico-table tbody td{
+  padding: 12px 10px;
+  border-bottom: 1px solid #e5e7eb;
+  text-align: center;
+  vertical-align: middle;
+  color: #1f2937;
+}
+
+.historico-table tbody tr:hover{
+  background: #f8fafc;
+}
+
+.historico-comentarios {
+  text-align: center !important;
+  vertical-align: middle !important;
+  min-width: 260px;
+  white-space: normal;
+  line-height: 1.45;
+}
+
+@media (max-width: 768px){
+  .modal-cloud-historico{
+    width: 98%;
+    padding: 20px;
+  }
+
+  .historico-table{
+    font-size: 12px;
+  }
+
+  .historico-table thead th,
+  .historico-table tbody td{
+    padding: 10px 8px;
+  }
+}
+
+
+/**********************/
+
+.historico-drawer-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(2, 6, 23, 0.38);
+  z-index:9998;
+}
+
+.historico-drawer{
+  position:absolute;
+  top:0;
+  right:0;
+  width:min(540px, 92vw);
+  height:100%;
+  background:#f8fbff;
+  box-shadow:-18px 0 40px rgba(15, 23, 42, 0.18);
+  display:flex;
+  flex-direction:column;
+  transform:translateX(100%);
+  transition:transform .35s ease;
+  border-left:1px solid rgba(23, 227, 203, 0.20);
+}
+
+.historico-drawer-overlay.is-open .historico-drawer{
+  transform:translateX(0);
+}
+
+.historico-drawer-header{
+  position:relative;
+  padding:28px 28px 18px;
+  background:linear-gradient(135deg, #0027bd 0%, #0b5cff 100%);
+  color:#fff;
+}
+
+.historico-drawer-kicker{
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  opacity:.85;
+  margin-bottom:8px;
+}
+
+.historico-drawer-header h3{
+  margin:0;
+  font-size:24px;
+  font-weight:700;
+  line-height:1.2;
+}
+
+.historico-drawer-close{
+  position:absolute;
+  top:16px;
+  right:16px;
+  width:40px;
+  height:40px;
+  border:none;
+  border-radius:999px;
+  background:rgba(255,255,255,.14);
+  color:#fff;
+  font-size:26px;
+  line-height:1;
+  cursor:pointer;
+  transition:.2s ease;
+}
+
+.historico-drawer-close:hover{
+  background:rgba(255,255,255,.24);
+  transform:scale(1.04);
+}
+
+.historico-drawer-body{
+  flex:1;
+  overflow:auto;
+  padding:26px 24px 30px 24px;
+}
+
+.historico-vazio{
+  padding:18px;
+  border-radius:16px;
+  background:#fff;
+  border:1px solid #e2e8f0;
+  color:#475569;
+}
+
+.historico-timeline{
+  position:relative;
+  padding-left:34px;
+}
+
+.historico-timeline::before{
+  content:"";
+  position:absolute;
+  left:10px;
+  top:4px;
+  bottom:4px;
+  width:4px;
+  border-radius:999px;
+  background:linear-gradient(180deg, #17e3cb 0%, #0b5cff 100%);
+  opacity:.55;
+}
+
+.historico-item{
+  position:relative;
+  margin-bottom:24px;
+}
+
+.historico-item:last-child{
+  margin-bottom:0;
+}
+
+.historico-ponto{
+  position:absolute;
+  left:-24px;
+  top:18px;
+  width:16px;
+  height:16px;
+  border-radius:999px;
+  background:#17e3cb;
+  border:3px solid #fff;
+  box-shadow:0 0 0 4px rgba(23, 227, 203, .20);
+  z-index:2;
+}
+
+.historico-card{
+  position:relative;
+  background:#fff;
+  border:1px solid #dbeafe;
+  border-radius:18px;
+  padding:16px 16px 14px;
+  box-shadow:0 10px 26px rgba(15, 23, 42, .07);
+}
+
+.historico-card::before{
+  content:"";
+  position:absolute;
+  left:-10px;
+  top:18px;
+  width:18px;
+  height:18px;
+  background:#fff;
+  border-left:1px solid #dbeafe;
+  border-bottom:1px solid #dbeafe;
+  transform:rotate(45deg);
+}
+
+.historico-topo{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:12px;
+}
+
+.historico-tipo{
+  font-size:13px;
+  font-weight:700;
+  color:#0027bd;
+}
+
+.historico-badge{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:6px 10px;
+  border-radius:999px;
+  font-size:11px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.03em;
+  white-space:nowrap;
+}
+
+.historico-badge.aprovado{
+  background:#dcfce7;
+  color:#166534;
+}
+
+.historico-badge.reprovado{
+  background:#fee2e2;
+  color:#991b1b;
+}
+
+.historico-badge.aguardando{
+  background:#fef3c7;
+  color:#92400e;
+}
+
+.historico-badge.preanalise{
+  background:#dbeafe;
+  color:#1d4ed8;
+}
+
+.historico-badge.devolvido{
+  background:#ffedd5;
+  color:#c2410c;
+}
+
+.historico-bloco{
+  margin-top:10px;
+}
+
+.historico-label{
+  display:block;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:#64748b;
+  margin-bottom:5px;
+}
+
+.historico-texto{
+  color:#0f172a;
+  font-size:14px;
+  line-height:1.5;
+  white-space:pre-wrap;
+}
+
+.historico-meta-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:10px;
+  margin-top:12px;
+}
+
+.historico-meta-item{
+  padding:10px 12px;
+  border-radius:12px;
+  background:#f8fafc;
+  border:1px solid #e2e8f0;
+}
+
+.btn-doc-ver-anexo{
+  background:#eef6ff;
+}
+
+.btn-doc-ver-anexo:hover{
+  background:#dcecff;
+}
+td.opcoes {
+  text-align: right;
+  white-space: nowrap;
+}
+
+td.opcoes .btn-doc {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+td.col-status {
+  text-align: center;
+  vertical-align: middle;
+}
+
+td.col-status .status-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.docs-header th:nth-child(5) {
+  text-align: center;
+}
+
+.docs-prazo-analise {
+  margin: 16px 0;
+  padding: 14px 18px;
+  background: #eff6ff;
+  border-left: 4px solid #0027bd;
+  border-radius: 10px;
+  color: #1e3a8a;
+  font-weight: 600;
+}
+/* Corrige lixeira do upload dentro do modal Submeter Novos Documentos */
+#modalNovosDocumentos .delete,
+#modalNovosDocumentos .delete-file,
+#modalNovosDocumentos .remove-file,
+#modalNovosDocumentos a[title*="Excluir"],
+#modalNovosDocumentos button[title*="Excluir"],
+#modalNovosDocumentos a[aria-label*="Excluir"],
+#modalNovosDocumentos button[aria-label*="Excluir"] {
+  pointer-events: auto !important;
+  position: relative !important;
+  z-index: 999999 !important;
+  width: auto !important;
+  min-width: 0 !important;
+  height: auto !important;
+  padding: 4px 8px !important;
+  background: transparent !important;
+  color: #dc2626 !important;
+  border: none !important;
+}
+
+/* impede o visual fake do carregar de cobrir a lixeira */
+#modalNovosDocumentos .buttonForFileUpload::after,
+#modalNovosDocumentos .file-cell::after {
+  pointer-events: none !important;
+  z-index: 1 !important;
+}
+
+/* mantém o botão/input real clicável só na área dele */
+#modalNovosDocumentos #UploadButton,
+#modalNovosDocumentos input[type="file"] {
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+.btn-danger-outline {
+  border: 2px solid #dc2626 !important;
+  color: #dc2626 !important;
+  background: transparent !important;
+}
+
+.btn-danger-outline:hover {
+  border-color: #17e3cb !important;
+  background: #17e3cb !important;
+  color: #0027bd !important;
+}
+/* =====================================================
+   ANIMAÇÃO ÁGUA CORRENTE - 2 TIMELINES DA PÁGINA
+   ===================================================== */
+
+/* 1) Timeline de FASES */
+.timeline-block .timeline-line-done {
+  position: absolute !important;
+  overflow: hidden !important;
+  background: #0027bd !important;
+}
+
+.timeline-block .timeline-line-done::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+
+  background: linear-gradient(
+    90deg,
+    #001b8f 0%,
+    #0b5cff 18%,
+    #17e3cb 35%,
+    #0b5cff 52%,
+    #17e3cb 70%,
+    #0b5cff 85%,
+    #001b8f 100%
+  );
+
+  background-size: 300% 100%;
+  animation: aguaCorrenteDuasTimelines 2.6s linear infinite;
+}
+
+
+
+/* 2) Timeline de STATUS/AÇÕES */
+.timeline-card.timeline-actions .timeline-line-done {
+  position: absolute !important;
+  overflow: hidden !important;
+  background: #0027bd !important;
+}
+
+.timeline-card.timeline-actions .timeline-line-done::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+
+  background: linear-gradient(
+    90deg,
+    #001b8f 0%,
+    #0b5cff 18%,
+    #17e3cb 35%,
+    #0b5cff 52%,
+    #17e3cb 70%,
+    #0b5cff 85%,
+    #001b8f 100%
+  );
+
+  background-size: 300% 100%;
+  animation: aguaCorrenteDuasTimelines 2.6s linear infinite;
+}
+
+/* esquerda para direita */
+@keyframes aguaCorrenteDuasTimelines {
+  0% {
+    background-position: 300% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+/* FASES - barra concluída animada */
+.timeline-card:not(.timeline-actions) .timeline-line-done {
+  position: absolute !important;
+  overflow: hidden !important;
+  background: #0027bd !important;
+  z-index: 2 !important;
+}
+
+.timeline-card:not(.timeline-actions) .timeline-line-done::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    90deg,
+    #0027bd 0%,
+    #0b5cff 25%,
+    #17e3cb 50%,
+    #0b5cff 75%,
+    #0027bd 100%
+  );
+  background-size: 300% 100%;
+  animation: aguaCorrenteFases 2.6s linear infinite;
+}
+
+/* FASES - trecho atual animado */
+.timeline-card:not(.timeline-actions) .timeline-line-current {
+  position: absolute !important;
+  overflow: hidden !important;
+  background: #0027bd !important;
+  z-index: 3 !important;
+}
+
+.timeline-card:not(.timeline-actions) .timeline-line-current::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    90deg,
+    #0027bd 0%,
+    #0b5cff 25%,
+    #17e3cb 50%,
+    #0b5cff 75%,
+    #0027bd 100%
+  );
+  background-size: 300% 100%;
+  animation: aguaCorrenteFases 2.6s linear infinite;
+}
+
+@keyframes aguaCorrenteFases {
+  from {
+    background-position: 300% 50%;
+  }
+  to {
+    background-position: 0% 50%;
+  }
+}
+
+.doc-row.anexos-carregando {
+  background: rgba(23, 227, 203, 0.16) !important;
+  position: relative;
+}
+
+.doc-row.anexos-carregando td:first-child::before {
+  content: "⏳";
+  margin-right: 6px;
+}
+
+.doc-row.anexos-carregando .col-status .status-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.doc-row.anexos-carregando .col-status .status-label::after {
+  content: "Carregando anexos...";
+  background: #17e3cb;
+  color: #003b49;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 800;
+  margin-left: 8px;
+}
+
+
+/* ===============================
+   MOBILE - CARDS MAIS ESTREITOS - 28_05_2026
+   =============================== */
+@media (max-width: 768px) {
+
+  /* Card transparente que envolve as timelines */
+  .timeline-glass-card {
+    width: 92% !important;
+    max-width: 92% !important;
+    margin: 20px auto 28px !important;
+    padding: 16px 10px 14px !important;
+    border-radius: 16px !important;
+  }
+
+  /* Cards das timelines */
+  .timeline-card {
+    width: 92% !important;
+    max-width: 92% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  /* Card principal/status */
+  .card-termo,
+  .card-upload-documentacao,
+  .debug-card {
+    width: 92% !important;
+    max-width: 92% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding: 22px 18px !important;
+  }
+
+  /* Área interna da timeline um pouco mais estreita */
+  .timeline-wrap {
+    width: 86% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
+
+/* ===============================
+   MOBILE - TIMELINE 2 MAIS COMPACTA
+   =============================== */
+@media (max-width: 768px) {
+
+  /* Bolinhas menores */
+  .timeline-actions .tnode {
+    width: 24px !important;
+    height: 24px !important;
+    border-width: 2px !important;
+    top: 41px !important;
+  }
+
+  .timeline-actions .tnode svg {
+    width: 12px !important;
+    height: 12px !important;
+  }
+
+  .timeline-actions .tnode.etapa-superada svg {
+    width: 24px !important;
+    height: 24px !important;
+  }
+
+  /* Rótulos menores */
+  .timeline-actions .timeline-label {
+    font-size: 9px !important;
+    line-height: 1.1 !important;
+    max-width: 58px !important;
+    font-weight: 600 !important;
+  }
+
+  /* Ímpares abaixo */
+  .timeline-actions .timeline-label.p1,
+  .timeline-actions .timeline-label.p3,
+  .timeline-actions .timeline-label.p5,
+  .timeline-actions .timeline-label.p7 {
+    top: 72px !important;
+  }
+
+  /* Pares acima */
+  .timeline-actions .timeline-label.p2,
+  .timeline-actions .timeline-label.p4,
+  .timeline-actions .timeline-label.p6 {
+    top: auto !important;
+    bottom: 76px !important;
+  }
+
+  /* Dá altura para caber rótulo acima e abaixo */
+  .timeline-actions .timeline-wrap {
+    height: 112px !important;
+  }
+}
+
+.mobile-top-actions {
+  max-width: 1200px;
+  margin: 120px auto 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ===============================
+   MOBILE - VOLTAR E SOLICITAÇÃO NA MESMA LINHA
+   =============================== */
+@media (max-width: 768px) {
+  .mobile-top-actions {
+    width: 92% !important;
+    max-width: 92% !important;
+    margin: 70px auto 18px !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: stretch !important;
+    justify-content: space-between !important;
+    gap: 10px !important;
+  }
+
+  .mobile-top-actions .btn-voltar-topo,
+  .mobile-top-actions .btn-solicitacao-topo {
+    flex: 1 1 0 !important;
+    width: 50% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    height: 42px !important;
+    padding: 10px 8px !important;
+    font-size: 12px !important;
+    line-height: 1.1 !important;
+    justify-content: center !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+  }
+}
+
+/* ===============================
+   MOBILE - CARDS DE STATUS TURQUESA
+   =============================== */
+@media (max-width: 768px) {
+  .card-termo {
+    background: #17E3CB !important;
+    border: 1px solid rgba(0, 39, 189, 0.18) !important;
+    box-shadow: 0 10px 26px rgba(0, 39, 189, 0.18) !important;
+  }
+
+  .card-termo h2 {
+    color: #0027bd !important;
+  }
+
+  .card-termo p,
+  .card-termo li,
+  .card-termo strong {
+    color: #002147 !important;
+  }
+
+  .card-termo a {
+    color: #0027bd !important;
+  }
+}
+
+/* ===============================
+   MOBILE - CENTRALIZAR BARRA DA TIMELINE 2 NAS BOLINHAS
+   =============================== */
+@media (max-width: 768px) {
+  .timeline-actions .timeline-line-base,
+  .timeline-actions .timeline-line-done,
+  .timeline-actions .timeline-line-current {
+    top: 49px !important;
+  }
+}
+
+/* ===============================
+   MOBILE - STATUS CARDS CENTRALIZADOS
+   =============================== */
+@media (max-width: 768px) {
+  .card-termo {
+    text-align: center !important;
+  }
+
+  .card-termo h2,
+  .card-termo h3,
+  .card-termo p,
+  .card-termo ul,
+  .card-termo li,
+  .card-termo div {
+    text-align: center !important;
+  }
+
+  .card-termo ul {
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+    list-style-position: inside !important;
+  }
+
+  .card-termo > div,
+  .card-termo .modal-cloud-actions,
+  .card-termo .modal-cloud-actions-center,
+  .card-termo .upload-doc-lista-head,
+  .card-termo .upload-doc-bottom-actions {
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
+  .card-termo .btn-cloud,
+  .card-termo .btn-cloud-outline,
+  .card-termo button,
+  .card-termo a.btn-cloud {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    align-self: stretch !important;
+  }
+
+  .card-termo .upload-doc-lista,
+  .card-termo .upload-doc-grid,
+  .card-termo .upload-doc-item,
+  .card-termo .upload-doc-info {
+    width: 100% !important;
+  }
+
+  .card-termo .upload-doc-item {
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+}
+
+/* ===============================
+   MOBILE - MODAIS MAIS ESTREITOS
+   =============================== */
+@media (max-width: 768px) {
+  .modal-cloud {
+    width: 88% !important;
+    max-width: 88% !important;
+    margin: 0 auto !important;
+    padding: 22px 18px !important;
+    box-sizing: border-box !important;
+  }
+
+  .modal-cloud-overlay {
+    padding: 0 12px !important;
+    box-sizing: border-box !important;
+  }
+
+  .modal-anexo-preliminar,
+  .modal-novos-documentos-box {
+    width: 88% !important;
+    max-width: 88% !important;
+  }
+}
+
+/* ===============================
+   MOBILE - TIMELINE 1 COM 3 FASES
+   PC CONTINUA COM 4 FASES
+   =============================== */
+@media (max-width: 768px) {
+  .timeline-card:not(.timeline-actions) .tnode.p1,
+  .timeline-card:not(.timeline-actions) .timeline-label.p1 {
+    left: 0% !important;
+  }
+
+  .timeline-card:not(.timeline-actions) .tnode.p2,
+  .timeline-card:not(.timeline-actions) .timeline-label.p2 {
+    left: 50% !important;
+  }
+
+  .timeline-card:not(.timeline-actions) .tnode.p3,
+  .timeline-card:not(.timeline-actions) .timeline-label.p3 {
+    left: 100% !important;
+  }
+
+  .timeline-card:not(.timeline-actions) .tnode.p4,
+  .timeline-card:not(.timeline-actions) .timeline-label.p4 {
+    display: none !important;
+  }
+
+  .timeline-card:not(.timeline-actions) .timeline-line-done {
+    width: calc(var(--mobile-fase-done, 0) * 50%) !important;
+  }
+}
+
+/* ===============================
+   MOBILE - TIMELINE 1 MAIS ESTREITA
+   =============================== */
+@media (max-width: 768px) {
+  .timeline-card:not(.timeline-actions) .timeline-wrap {
+    width: 76% !important;
+  }
+}
+
+/* ===============================
+   MOBILE - BOTÕES DOS MODAIS EMPILHADOS
+   Confirmar em cima / Cancelar embaixo
+   =============================== */
+@media (max-width: 768px) {
+  .modal-cloud .modal-cloud-actions {
+    display: flex !important;
+    flex-direction: column-reverse !important;
+    align-items: stretch !important;
+    justify-content: center !important;
+    gap: 10px !important;
+  }
+
+  .modal-cloud .modal-cloud-actions .btn-cloud,
+  .modal-cloud .modal-cloud-actions button,
+  .modal-cloud .modal-cloud-actions a {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+
+  .modal-cloud .modal-cloud-actions-center {
+    align-items: stretch !important;
+  }
+
+  .modal-cloud .modal-cloud-actions-center .btn-cloud,
+  .modal-cloud .modal-cloud-actions-center button,
+  .modal-cloud .modal-cloud-actions-center a {
+    width: 100% !important;
+  }
+}
+
+/* ===============================
+   MOBILE - CARDS/AVISOS INTERNOS À ESQUERDA
+   =============================== */
+@media (max-width: 768px) {
+  .card-termo > div:not(.modal-cloud-actions):not(.modal-cloud-actions-center),
+  .card-termo > div:not(.modal-cloud-actions):not(.modal-cloud-actions-center) *,
+  .card-termo [style*="border-left"],
+  .card-termo [style*="border-left"] * {
+    text-align: left !important;
+  }
+
+  .card-termo [style*="border-left"] {
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+}
+
+/* ===============================
+   MOBILE - ITENS DAS LISTAS CENTRALIZADOS
+   =============================== */
+@media (max-width: 768px) {
+  .card-termo .upload-doc-lista-head {
+    flex-direction: column !important;
+    text-align: center !important;
+  }
+
+  .card-termo .upload-doc-lista-titulo,
+  .card-termo .upload-doc-item,
+  .card-termo .upload-doc-item *,
+  .card-termo .upload-doc-info,
+  .card-termo .upload-doc-nome,
+  .card-termo .upload-doc-link,
+  .card-termo .upload-doc-vazio {
+    text-align: center !important;
+  }
+
+  .card-termo .upload-doc-item {
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .card-termo .upload-doc-lista .btn-cloud,
+  .card-termo .upload-doc-bottom-actions .btn-cloud {
+    width: 100% !important;
+    justify-content: center !important;
+    text-align: center !important;
+  }
+}
+/* ===============================
+   MOBILE - NOMES DE ARQUIVOS E BOTÃO CENTRALIZADOS
+   =============================== */
+@media (max-width: 768px) {
+  .card-termo .upload-doc-nome,
+  .card-termo .upload-doc-link {
+    display: block !important;
+    width: 100% !important;
+    text-align: center !important;
+  }
+
+  .card-termo #btnEnviarArquivosDiretrizes {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    white-space: normal !important;
+    line-height: 1.2 !important;
+  }
+}
+/* ===============================
+   MOBILE - NOME DO ARQUIVO CENTRALIZADO
+   =============================== */
+@media (max-width: 768px) {
+  .card-termo .upload-doc-info {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center !important;
+    width: 100% !important;
+  }
+
+  .card-termo .upload-doc-info .upload-doc-nome.upload-doc-link {
+    display: block !important;
+    width: 100% !important;
+    text-align: center !important;
+    margin: 0 auto !important;
+  }
+}
+
+/* ===============================
+   MOBILE - BOTÃO VOLTAR FLUTUANTE
+   =============================== */
+.voltar-fab-mobile {
+  display: none !important;
+}
+
+@media (max-width: 768px) {
+  .mobile-top-actions .btn-voltar-topo {
+    display: none !important;
+  }
+
+  .voltar-fab-mobile {
+    position: fixed !important;
+    bottom: 24px !important;
+    left: 24px !important;
+
+    width: 56px !important;
+    height: 56px !important;
+    border-radius: 50% !important;
+
+    background: #0027bd !important;
+    color: #ffffff !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    box-shadow: 0 6px 16px rgba(0, 39, 189, 0.45) !important;
+    z-index: 9999 !important;
+
+    text-decoration: none !important;
+  }
+
+  .voltar-fab-mobile:hover {
+    background: #001e99 !important;
+    transform: translateY(-4px) !important;
+  }
+}
+
+/* Centralizar rótulo do botão Solicitar Orçamento */
+@media (max-width: 768px) {
+  #btnSolicitarOrcamento {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    white-space: normal !important;
+    line-height: 1.25 !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .titulo-fase-atual,
+  .titulo-proximos-passos {
+    justify-content: center !important;
+    text-align: center !important;
+  }
+}
+
+/* ===============================
+   MOBILE - LISTA DE DOCUMENTOS EM GALERIA
+   =============================== */
+@media (max-width: 768px) {
+  .docs-card {
+    padding: 14px !important;
+    overflow: visible !important;
+  }
+
+  .docs-card table,
+  .docs-card thead,
+  .docs-card tbody,
+  .docs-card tr,
+  .docs-card td {
+    display: block !important;
+    width: 100% !important;
+  }
+
+  .docs-card thead {
+    display: none !important;
+  }
+
+  .docs-card tbody {
+    display: grid !important;
+    gap: 14px !important;
+  }
+
+  .docs-card .doc-row {
+    background: #ffffff !important;
+    border: 1px solid #dbeafe !important;
+    border-radius: 16px !important;
+    padding: 16px !important;
+    box-shadow: 0 8px 20px rgba(0, 39, 189, 0.08) !important;
+    text-align: center !important;
+  }
+
+  .docs-card .doc-row td {
+    border: none !important;
+    padding: 6px 0 !important;
+    text-align: center !important;
+  }
+
+  .docs-card .doc-row td:nth-child(2)::before {
+    content: "📁 Documento";
+    display: block;
+    color: #0027bd;
+    font-weight: 800;
+    margin-bottom: 6px;
+  }
+
+  .docs-card .doc-row td:nth-child(3)::before {
+    content: "🧩 Componente";
+    display: block;
+    color: #0027bd;
+    font-weight: 800;
+    margin-bottom: 4px;
+  }
+
+  .docs-card .doc-row td:nth-child(4)::before {
+    content: "⚙️ Opcional";
+    display: block;
+    color: #0027bd;
+    font-weight: 800;
+    margin-bottom: 4px;
+  }
+
+  .docs-card .doc-row td:nth-child(5)::before {
+    content: "📌 Status";
+    display: block;
+    color: #0027bd;
+    font-weight: 800;
+    margin-bottom: 4px;
+  }
+
+  .docs-card .doc-row td:nth-child(6)::before {
+    content: "📅 Data em análise";
+    display: block;
+    color: #0027bd;
+    font-weight: 800;
+    margin-bottom: 4px;
+  }
+
+  .docs-card .doc-row td:first-child {
+    font-size: 13px !important;
+    color: #64748b !important;
+    font-weight: 700 !important;
+  }
+
+  .docs-card .link-doc {
+    display: block !important;
+    color: #0027bd !important;
+    font-size: 15px !important;
+    font-weight: 800 !important;
+    text-align: center !important;
+    line-height: 1.3 !important;
+  }
+
+  .docs-card .col-status {
+    display: block !important;
+    text-align: center !important;
+  }
+
+  .docs-card .opcoes {
+    display: flex !important;
+    justify-content: center !important;
+    gap: 10px !important;
+    margin-top: 10px !important;
+    padding-top: 12px !important;
+    border-top: 1px solid #e5e7eb !important;
+  }
+
+  .docs-card .opcoes::before {
+    content: "Ações";
+    display: block;
+    width: 100%;
+    color: #0027bd;
+    font-weight: 800;
+    margin-bottom: 8px;
+  }
+
+  .docs-card .btn-doc {
+    width: 42px !important;
+    height: 42px !important;
+  }
+}
+
+/* ===============================
+   MOBILE - PAGAMENTO 2x2
+   =============================== */
+@media (max-width: 768px) {
+  .grid-pagamento {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 12px !important;
+  }
+
+  .grid-pagamento .subcard-pagamento {
+    width: 100% !important;
+    min-width: 0 !important;
+    padding: 14px 10px !important;
+    box-sizing: border-box !important;
+  }
+
+  .grid-pagamento .titulo-etapa-pagamento {
+    font-size: 13px !important;
+  }
+
+  .grid-pagamento .subcard-pagamento p {
+    font-size: 12px !important;
+    line-height: 1.35 !important;
+  }
+
+  .grid-pagamento .icone-etapa-pagamento {
+    width: 64px !important;
+    height: 64px !important;
+  }
+
+  .grid-pagamento .icone-etapa-pagamento svg {
+    width: 28px !important;
+    height: 28px !important;
+  }
+
+  .grid-pagamento .btn-pagamento-acao,
+  .grid-pagamento .valor-taxa-aceita {
+    width: 100% !important;
+    min-width: 0 !important;
+    height: auto !important;
+    min-height: 52px !important;
+    font-size: 11px !important;
+    padding: 10px 8px !important;
+  }
+}
+
+/* ===============================
+   MOBILE - PAGAMENTO 2x2 COM ALTURA IGUAL
+   =============================== */
+@media (max-width: 768px) {
+  .grid-pagamento {
+    align-items: stretch !important;
+  }
+
+  .grid-pagamento .subcard-pagamento {
+    height: 100% !important;
+    min-height: 310px !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .grid-pagamento .acao-card-pagamento {
+    margin-top: auto !important;
+  }
+}
+
+/* ===============================
+   MOBILE - TEXTOS DOS SUBCARDS DE PAGAMENTO CENTRALIZADOS
+   =============================== */
+@media (max-width: 768px) {
+  .grid-pagamento .subcard.subcard-pagamento,
+  .grid-pagamento .subcard.subcard-pagamento * {
+    text-align: center !important;
+  }
+
+  .grid-pagamento .subcard.subcard-pagamento p,
+  .grid-pagamento .subcard.subcard-pagamento h3,
+  .grid-pagamento .subcard.subcard-pagamento strong,
+  .grid-pagamento .subcard.subcard-pagamento div {
+    text-align: center !important;
+  }
+
+  .grid-pagamento .subcard.subcard-pagamento {
+    align-items: center !important;
+  }
+}
+/* MOBILE - centralizar rótulo do botão dentro do subcard de pagamento */
+@media (max-width: 768px) {
+  .subcard.subcard-pagamento .acao-card-pagamento .btn-pagamento-acao {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    white-space: normal !important;
+    line-height: 1.25 !important;
+    width: 100% !important;
+  }
+}
+
+/* ======================================================
+   TIMELINE DA ETAPA DE PAGAMENTO
+   ====================================================== */
+
+.pagamento-timeline-card {
+  width: 100%;
+  margin: 22px 0 26px;
+  padding: 22px 22px 30px;
+  background: #ffffff;
+  border: 1px solid #dbe4ff;
+  border-radius: 18px;
+  box-shadow: 0 10px 24px rgba(0, 39, 189, 0.08);
+  overflow: visible;
+}
+
+.pagamento-timeline-title {
+  margin-bottom: 28px;
+  color: #1536b3;
+  font-size: 17px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.pagamento-timeline-wrap {
+  position: relative;
+  width: 100%;
+  height: 92px;
+  overflow: visible;
+}
+
+.pagamento-line-base,
+.pagamento-line-done {
+  position: absolute;
+  top: 24px;
+  left: 8%;
+  height: 8px;
+  border-radius: 999px;
+}
+
+.pagamento-line-base {
+  width: 84%;
+  background: #e5e7eb;
+}
+
+.pagamento-line-done {
+  max-width: 84%;
+  background: linear-gradient(90deg, #0027bd, #17e3cb);
+  box-shadow: 0 0 14px rgba(23, 227, 203, 0.35);
+  transition: width 0.45s ease;
+  z-index: 2;
+}
+
+.pagamento-node {
+  position: absolute;
+  top: 5px;
+  width: 46px;
+  height: 46px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateX(-50%);
+  z-index: 4;
+  background: #ffffff;
+  border: 3px solid #cbd5e1;
+  color: #64748b;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.12);
+}
+
+.pagamento-node svg {
+  width: 18px;
+  height: 18px;
+}
+
+.pagamento-node.p1,
+.pagamento-label.p1 {
+  left: 8%;
+}
+
+.pagamento-node.p2,
+.pagamento-label.p2 {
+  left: 36%;
+}
+
+.pagamento-node.p3,
+.pagamento-label.p3 {
+  left: 64%;
+}
+
+.pagamento-node.p4,
+.pagamento-label.p4 {
+  left: 92%;
+}
+
+.pagamento-node.etapa-superada {
+  background: #0027bd;
+  border-color: #0027bd;
+  color: #ffffff;
+}
+
+.pagamento-node.etapa-atual {
+  background: #17e3cb;
+  border-color: #0027bd;
+  color: #0027bd;
+  animation: pagamentoPulse 1.35s infinite;
+}
+
+.pagamento-node.etapa-futura {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+  color: #94a3b8;
+}
+
+.pagamento-node.etapa-reprovada-atual,
+.pagamento-node.etapa-reprovada {
+  background: #fee2e2;
+  border-color: #dc2626;
+  color: #dc2626;
+  animation: pagamentoPulseErro 1.25s infinite;
+}
+
+.pagamento-label {
+  position: absolute;
+  top: 60px;
+  width: 150px;
+  transform: translateX(-50%);
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.25;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.pagamento-label.past {
+  color: #0027bd;
+}
+
+.pagamento-label.present {
+  color: #1536b3;
+}
+
+.pagamento-label.future {
+  color: #94a3b8;
+}
+
+.pagamento-label.error {
+  color: #dc2626;
+}
+
+.pagamento-node::after {
+  content: attr(data-tooltip-pagamento);
+  position: absolute;
+  bottom: 56px;
+  left: 50%;
+  transform: translateX(-50%) translateY(6px);
+  width: 220px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #0f172a;
+  color: #ffffff;
+  font-size: 12px;
+  line-height: 1.35;
+  font-weight: 600;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.2s ease;
+  z-index: 20;
+}
+
+.pagamento-node:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+@keyframes pagamentoPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(23, 227, 203, 0.55);
+  }
+  70% {
+    box-shadow: 0 0 0 14px rgba(23, 227, 203, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(23, 227, 203, 0);
+  }
+}
+
+@keyframes pagamentoPulseErro {
+  0% {
+    box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.35);
+  }
+  70% {
+    box-shadow: 0 0 0 14px rgba(220, 38, 38, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(220, 38, 38, 0);
+  }
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .pagamento-timeline-card {
+    padding: 20px 12px 36px;
+    margin: 20px 0 24px;
+  }
+
+  .pagamento-timeline-wrap {
+    height: 118px;
+  }
+
+  .pagamento-line-base,
+  .pagamento-line-done {
+    top: 26px;
+    left: 10%;
+    height: 7px;
+  }
+
+  .pagamento-line-base {
+    width: 80%;
+  }
+
+  .pagamento-line-done {
+    max-width: 80%;
+  }
+
+  .pagamento-node {
+    width: 38px;
+    height: 38px;
+    top: 10px;
+  }
+
+  .pagamento-node svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .pagamento-node.p1,
+  .pagamento-label.p1 {
+    left: 10%;
+  }
+
+  .pagamento-node.p2,
+  .pagamento-label.p2 {
+    left: 36.6%;
+  }
+
+  .pagamento-node.p3,
+  .pagamento-label.p3 {
+    left: 63.3%;
+  }
+
+  .pagamento-node.p4,
+  .pagamento-label.p4 {
+    left: 90%;
+  }
+
+  .pagamento-label {
+    top: 62px;
+    width: 86px;
+    font-size: 10px;
+    line-height: 1.15;
+  }
+
+  .pagamento-node::after {
+    display: none;
+  }
+}
+
+/* Oculta os cards que não são da etapa atual do pagamento */
+.card-pagamento-oculto {
+  display: none !important;
+}
+
+/* Quando só tiver 1 card visível, ele ocupa melhor o espaço */
+.grid-pagamento {
+  grid-template-columns: 1fr !important;
+}
+
+.grid-pagamento .subcard-pagamento:not(.card-pagamento-oculto) {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* ======================================================
+   PAGAMENTO - CARD ATUAL NO PADRÃO DOS DEMAIS STATUS
+   ====================================================== */
+
+.card-pagamento-oculto {
+  display: none !important;
+}
+
+/* mantém apenas um card visível ocupando o padrão do container */
+.grid-pagamento.grid-pagamento-etapa-atual {
+  display: block !important;
+  width: 100% !important;
+  margin-top: 24px !important;
+}
+
+/* card no padrão dos demais STATUS_ATUAL */
+.grid-pagamento.grid-pagamento-etapa-atual 
+.subcard-pagamento:not(.card-pagamento-oculto) {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-height: auto !important;
+
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+
+  text-align: left !important;
+  transform: none !important;
+}
+
+/* remove ícone grande do card */
+.grid-pagamento.grid-pagamento-etapa-atual .icone-etapa-pagamento {
+  display: none !important;
+}
+
+/* título igual aos demais cards principais */
+.grid-pagamento.grid-pagamento-etapa-atual .topo-etapa-pagamento {
+  display: block !important;
+  width: 100% !important;
+  margin: 0 0 16px 0 !important;
+  padding: 0 !important;
+  text-align: left !important;
+}
+
+.grid-pagamento.grid-pagamento-etapa-atual .titulo-etapa-pagamento {
+  margin: 0 0 16px 0 !important;
+  color: var(--brand-color, #0027bd) !important;
+  font-size: 22px !important;
+  font-weight: 700 !important;
+  line-height: 1.3 !important;
+  text-align: left !important;
+}
+
+/* descrição igual ao texto dos demais STATUS_ATUAL */
+.grid-pagamento.grid-pagamento-etapa-atual .subcard-pagamento p {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 0 22px 0 !important;
+
+  color: var(--text-dark, #1f2937) !important;
+  font-size: 16px !important;
+  line-height: 1.6 !important;
+  text-align: left !important;
+}
+
+/* área do botão alinhada à esquerda */
+.grid-pagamento.grid-pagamento-etapa-atual .acao-card-pagamento {
+  display: flex !important;
+  justify-content: flex-start !important;
+  align-items: center !important;
+
+  width: 100% !important;
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* botão DE ACORDO menor e no padrão */
+.grid-pagamento.grid-pagamento-etapa-atual .btn-pagamento-acao {
+  width: auto !important;
+  min-width: 150px !important;
+
+  height: 44px !important;
+  min-height: 44px !important;
+
+  padding: 10px 24px !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  line-height: 1.2 !important;
+  border-radius: 8px !important;
+
+  justify-content: center !important;
+  text-align: center !important;
+}
+
+/* remove hover de card antigo */
+.grid-pagamento.grid-pagamento-etapa-atual 
+.subcard-pagamento:not(.card-pagamento-oculto):hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* mobile */
+@media (max-width: 768px) {
+  .grid-pagamento.grid-pagamento-etapa-atual .titulo-etapa-pagamento {
+    font-size: 20px !important;
+  }
+
+  .grid-pagamento.grid-pagamento-etapa-atual .btn-pagamento-acao {
+    min-width: 140px !important;
+    height: 42px !important;
+    min-height: 42px !important;
+    padding: 9px 20px !important;
+    font-size: 13px !important;
+  }
+}
+
+/* ======================================================
+   PAGAMENTO - TIMELINE SEM CONTAINER INTERNO
+   ====================================================== */
+
+.pagamento-timeline-card {
+  width: 100% !important;
+  margin: 24px 0 30px 0 !important;
+  padding: 0 !important;
+
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+
+  overflow: visible !important;
+}
+
+.pagamento-timeline-title {
+  margin: 0 0 26px 0 !important;
+  padding: 0 !important;
+
+  color: #0027bd !important;
+  font-size: 17px !important;
+  font-weight: 800 !important;
+  text-align: center !important;
+}
+
+.pagamento-timeline-wrap {
+  position: relative !important;
+  width: 100% !important;
+  height: 112px !important;
+  overflow: visible !important;
+}
+
+/* ajuste da linha base sem aparência de card */
+.pagamento-line-base,
+.pagamento-line-done {
+  top: 24px !important;
+}
+
+/* garante que a linha não passe dos pontos */
+.pagamento-line-base {
+  left: 8% !important;
+  width: 84% !important;
+}
+
+.pagamento-line-done {
+  left: 8% !important;
+  max-width: 84% !important;
+}
+
+/* CARD 1 - botão DE ACORDO alinhado à direita */
+.acao-card-pagamento-direita {
+  justify-content: flex-end !important;
+}
+
+/* CARD 1 - botão DE ACORDO à direita */
+.grid-pagamento.grid-pagamento-etapa-atual 
+.subcard-pagamento:not(.card-pagamento-oculto) 
+.acao-card-pagamento.acao-card-pagamento-direita {
+  display: flex !important;
+  justify-content: flex-end !important;
+  align-items: center !important;
+  width: 100% !important;
+}
+
+/* ======================================================
+   CARD 3 - COMPROVANTE INLINE NO PADRÃO CORRETO
+   ====================================================== */
+
+.grid-pagamento.grid-pagamento-etapa-atual .acao-baixar-boleto-card3 {
+  display: flex !important;
+  justify-content: flex-end !important;
+  width: 100% !important;
+  margin: 18px 0 24px 0 !important;
+  padding: 0 !important;
+}
+
+.grid-pagamento.grid-pagamento-etapa-atual .acao-baixar-boleto-card3 .btn-cloud {
+  min-width: 190px !important;
+  height: 46px !important;
+  min-height: 46px !important;
+  padding: 10px 24px !important;
+  font-size: 14px !important;
+}
+
+/* container da lista */
+.grid-pagamento.grid-pagamento-etapa-atual .upload-comprovante-lista {
+  width: 100% !important;
+  margin: 24px 0 0 0 !important;
+  padding: 18px !important;
+  background: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 16px !important;
+  box-sizing: border-box !important;
+}
+
+/* cabeçalho */
+.grid-pagamento.grid-pagamento-etapa-atual .upload-doc-lista-head {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  margin-bottom: 16px !important;
+}
+
+.grid-pagamento.grid-pagamento-etapa-atual .upload-doc-lista-titulo {
+  font-size: 16px !important;
+  font-weight: 800 !important;
+  color: #0027bd !important;
+}
+
+/* lista vazia */
+.grid-pagamento.grid-pagamento-etapa-atual .upload-doc-vazio {
+  width: 100% !important;
+  padding: 16px !important;
+  background: #ffffff !important;
+  border-radius: 12px !important;
+  color: #64748b !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  text-align: center !important;
+  box-sizing: border-box !important;
+}
+
+/* grid */
+.grid-pagamento.grid-pagamento-etapa-atual .upload-doc-grid {
+  display: grid !important;
+  gap: 14px !important;
+  width: 100% !important;
+}
+
+/* item */
+.grid-pagamento.grid-pagamento-etapa-atual .upload-doc-item {
+  position: relative !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 14px !important;
+  width: 100% !important;
+  padding: 16px 18px !important;
+  background: #ffffff !important;
+  border: 1px solid #e5e7eb !important;
+  border-radius: 16px !important;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, .05) !important;
+  box-sizing: border-box !important;
+  text-align: left !important;
+}
+
+.grid-pagamento.grid-pagamento-etapa-atual .upload-doc-icon {
+  width: 42px !important;
+  height: 42px !important;
+  min-width: 42px !important;
+  border-radius: 12px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: #eff6ff !important;
+  color: #0027bd !important;
+  font-size: 20px !important;
+}
+
+.grid-pagamento.grid-pagamento-etapa-atual .upload-doc-info {
+  flex: 1 !important;
+  min-width: 0 !important;
+  text-align: left !important;
+}
+
+.grid-pagamento.grid-pagamento-etapa-atual .upload-doc-nome {
+  color: #0f172a !important;
+  font-weight: 800 !important;
+  text-align: left !important;
+}
+
+.grid-pagamento.grid-pagamento-etapa-atual .upload-doc-link {
+  color: #0027bd !important;
+  text-decoration: none !important;
+}
+
+.grid-pagamento.grid-pagamento-etapa-atual .upload-doc-link:hover {
+  color: #17a99b !important;
+  text-decoration: underline !important;
+}
+
+/* iframe da página filha */
+.grid-pagamento.grid-pagamento-etapa-atual .comprovante-inline-container {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 18px 0 0 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+}
+
+.grid-pagamento.grid-pagamento-etapa-atual .comprovante-inline-frame-box {
+  width: 100% !important;
+  height: 190px !important;
+  min-height: 190px !important;
+  overflow: hidden !important;
+  border-radius: 14px !important;
+  background: transparent !important;
+  border: 1px solid #e2e8f0 !important;
+  box-sizing: border-box !important;
+}
+
+.grid-pagamento.grid-pagamento-etapa-atual .iframe-comprovante-inline {
+  width: 100% !important;
+  height: 190px !important;
+  min-height: 190px !important;
+  border: 0 !important;
+  display: block !important;
+  background: #f8fafc !important;
+}
+
+/* botão enviar para análise somente quando houver comprovante */
+.grid-pagamento.grid-pagamento-etapa-atual .upload-doc-bottom-actions {
+  display: flex !important;
+  justify-content: flex-end !important;
+  align-items: center !important;
+  width: 100% !important;
+  margin-top: 20px !important;
+}
+
+.grid-pagamento.grid-pagamento-etapa-atual #btnEnviarComprovanteAnalise {
+  width: auto !important;
+  min-width: 260px !important;
+  height: 46px !important;
+  min-height: 46px !important;
+  padding: 10px 24px !important;
+  font-size: 14px !important;
+}
+
+/* carregando */
+.grid-pagamento.grid-pagamento-etapa-atual .upload-doc-item-carregando {
+  background: #eff6ff !important;
+  border-color: #93c5fd !important;
+  pointer-events: none !important;
+}
+
+.grid-pagamento.grid-pagamento-etapa-atual .upload-doc-status-carregando {
+  margin-top: 4px !important;
+  color: #0027bd !important;
+  font-size: 13px !important;
+  font-weight: 800 !important;
+}
+
+.upload-doc-spinner {
+  width: 18px !important;
+  height: 18px !important;
+  border: 3px solid #dbeafe !important;
+  border-top-color: #0027bd !important;
+  border-radius: 50% !important;
+  animation: spinAnexos .8s linear infinite !important;
+}
+
+@keyframes spinAnexos {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.motivo-reprovacao-comprovante {
+  width: 100% !important;
+  margin: 16px 0 20px !important;
+  padding: 14px 16px !important;
+  background: #fef2f2 !important;
+  border-left: 4px solid #dc2626 !important;
+  border-radius: 8px !important;
+  color: #7f1d1d !important;
+  font-size: 14px !important;
+  line-height: 1.5 !important;
+  text-align: left !important;
+}
+
+
+
+#btnEnviarComprovanteAnalise.btn-cloud-disabled,
+#btnEnviarComprovanteAnalise:disabled,
+#btnEnviarComprovanteAnalise[disabled],
+button#btnEnviarComprovanteAnalise[disabled].btn-cloud {
+  background: #8fa2ff !important;
+  border-color: #8fa2ff !important;
+  color: #ffffff !important;
+
+  opacity: 1 !important;
+  filter: none !important;
+  cursor: not-allowed !important;
+  pointer-events: none !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+#btnEnviarComprovanteAnalise.btn-cloud-disabled:hover,
+#btnEnviarComprovanteAnalise:disabled:hover,
+#btnEnviarComprovanteAnalise[disabled]:hover,
+button#btnEnviarComprovanteAnalise[disabled].btn-cloud:hover {
+  background: #8fa2ff !important;
+  border-color: #8fa2ff !important;
+  color: #ffffff !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* ======================================================
+   IFRAME COMPROVANTE - SEM CONTORNO
+   ====================================================== */
+
+.comprovante-inline-frame-box {
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  background: transparent !important;
+}
+
+.iframe-comprovante-inline {
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  background: transparent !important;
+}
+/* ======================================================
+   COMPROVANTE IFRAME - REMOVER LINHA DO FRAME BOX
+   ====================================================== */
+
+.grid-pagamento.grid-pagamento-etapa-atual 
+.comprovante-inline-container,
+.grid-pagamento.grid-pagamento-etapa-atual 
+.comprovante-inline-frame-box,
+.grid-pagamento.grid-pagamento-etapa-atual 
+.iframe-comprovante-inline {
+  border: 0 !important;
+  border-color: transparent !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+/* remove também qualquer borda criada por pseudo-elemento */
+.grid-pagamento.grid-pagamento-etapa-atual 
+.comprovante-inline-frame-box::before,
+.grid-pagamento.grid-pagamento-etapa-atual 
+.comprovante-inline-frame-box::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* mantém só o arredondamento, se quiser */
+.grid-pagamento.grid-pagamento-etapa-atual 
+.comprovante-inline-frame-box {
+  border-radius: 14px !important;
+  overflow: hidden !important;
+}
+
+
+/* ======================================================
+   TIMELINE DE FASE COM 3 PONTOS - DESKTOP E MOBILE
+   ====================================================== */
+
+/* Apenas a timeline "Fase atual da solicitação" */
+.timeline-block:first-child .timeline-wrap > .tnode.p1,
+.timeline-block:first-child .timeline-wrap > .timeline-label.p1 {
+  left: 0% !important;
+}
+
+.timeline-block:first-child .timeline-wrap > .tnode.p2,
+.timeline-block:first-child .timeline-wrap > .timeline-label.p2 {
+  left: 50% !important;
+}
+
+.timeline-block:first-child .timeline-wrap > .tnode.p3,
+.timeline-block:first-child .timeline-wrap > .timeline-label.p3 {
+  left: 100% !important;
+}
+
+/* Remove FINALIZAÇÃO da timeline de fases */
+.timeline-block:first-child .timeline-wrap > .tnode.p4,
+.timeline-block:first-child .timeline-wrap > .timeline-label.p4 {
+  display: none !important;
+}
+
+/* ======================================================
+   MOBILE - TIMELINE DE PAGAMENTO + CARD VISÍVEL ÚNICO
+   ====================================================== */
+@media (max-width: 768px) {
+
+  /* 1) Garante que só o card da etapa atual apareça no mobile */
+  .grid-pagamento.grid-pagamento-etapa-atual {
+    display: block !important;
+  }
+
+  .grid-pagamento.grid-pagamento-etapa-atual .subcard.subcard-pagamento {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+  }
+
+  .grid-pagamento.grid-pagamento-etapa-atual .subcard.subcard-pagamento.card-pagamento-oculto {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .grid-pagamento.grid-pagamento-etapa-atual .subcard.subcard-pagamento:not(.card-pagamento-oculto) {
+    display: block !important;
+    visibility: visible !important;
+    height: auto !important;
+  }
+
+
+  /* 2) Timeline de pagamento mobile com rótulos intercalados */
+  .pagamento-timeline-card {
+    padding: 16px 12px 20px !important;
+    overflow: visible !important;
+  }
+
+  .pagamento-timeline-wrap {
+    position: relative !important;
+    height: 120px !important;
+    margin-top: 8px !important;
+    overflow: visible !important;
+  }
+
+  .pagamento-line-base,
+  .pagamento-line-done {
+    top: 58px !important;
+  }
+
+  .pagamento-node {
+    top: 58px !important;
+    transform: translate(-50%, -50%) !important;
+    z-index: 3 !important;
+  }
+
+  .pagamento-node.p1,
+  .pagamento-label.p1 {
+    left: 8% !important;
+  }
+
+  .pagamento-node.p2,
+  .pagamento-label.p2 {
+    left: 36% !important;
+  }
+
+  .pagamento-node.p3,
+  .pagamento-label.p3 {
+    left: 64% !important;
+  }
+
+  .pagamento-node.p4,
+  .pagamento-label.p4 {
+    left: 92% !important;
+  }
+
+  .pagamento-label {
+    position: absolute !important;
+    width: 82px !important;
+    max-width: 82px !important;
+    font-size: 10px !important;
+    line-height: 1.15 !important;
+    text-align: center !important;
+    white-space: normal !important;
+    word-break: normal !important;
+    overflow-wrap: normal !important;
+    transform: translateX(-50%) !important;
+    margin: 0 !important;
+  }
+
+  /* Ímpares em cima */
+  .pagamento-label.p1,
+  .pagamento-label.p3 {
+    top: 6px !important;
+    bottom: auto !important;
+  }
+
+  /* Pares embaixo */
+  .pagamento-label.p2,
+  .pagamento-label.p4 {
+    top: 78px !important;
+    bottom: auto !important;
+  }
+}
+
+/* ======================================================
+   MOBILE - CENTRALIZAÇÕES DO PAGAMENTO
+   ====================================================== */
+@media (max-width: 768px) {
+
+  /* Centraliza o rótulo "Etapas do Pagamento da Taxa" */
+  .pagamento-timeline-title {
+    text-align: center !important;
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  /* Centraliza o card filho de Anexar comprovante */
+  .comprovante-inline-container {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100% !important;
+  }
+
+  .comprovante-inline-frame-box {
+    width: 100% !important;
+    max-width: 520px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  .iframe-comprovante-inline {
+    width: 100% !important;
+    display: block !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  /* Centraliza o botão e o texto ENVIAR COMPROVANTE PARA ANÁLISE */
+  .upload-doc-bottom-actions {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100% !important;
+    text-align: center !important;
+  }
+
+  #btnEnviarComprovanteAnalise {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    white-space: normal !important;
+    line-height: 1.2 !important;
+  }
+}
+
+
+/* Alinha os títulos com o primeiro ponto da timeline */
+.timeline-block-title,
+.titulo-fase-atual,
+.titulo-proximos-passos {
+  margin-left: 0 !important;
+  padding-left: 32px !important;
+  text-align: left !important;
+  position: relative;
+  left: 0 !important;
+}
+
+.envio-pre-analise-actions {
+  margin-top: 24px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.envio-pre-analise-info {
+  width: 100%;
+  text-align: right;
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+#btnEnviarPreAnalise.btn-cloud-disabled,
+#btnEnviarPreAnalise:disabled,
+#btnEnviarPreAnalise[disabled] {
+  background-color: #94a3b8 !important;
+  color: #ffffff !important;
+  cursor: not-allowed !important;
+  opacity: 0.7 !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+#btnEnviarPreAnalise.btn-cloud-disabled:hover,
+#btnEnviarPreAnalise:disabled:hover,
+#btnEnviarPreAnalise[disabled]:hover {
+  background-color: #94a3b8 !important;
+  color: #ffffff !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.doc-row.anexos-carregando .opcoes button,
+.btn-doc-disabled-loading {
+  pointer-events: none !important;
+  cursor: not-allowed !important;
+  opacity: 0.45 !important;
+  filter: grayscale(1) !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.doc-row.anexos-carregando .opcoes button:hover,
+.btn-doc-disabled-loading:hover {
+  background: #ffffff !important;
+  color: inherit !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.link-doc-disabled-loading {
+  pointer-events: none !important;
+  cursor: not-allowed !important;
+  opacity: 0.55 !important;
+  text-decoration: none !important;
+}
+
+.docs-card:has(.doc-row.anexos-carregando) .opcoes button {
+  pointer-events: none !important;
+  cursor: not-allowed !important;
+  opacity: 0.45 !important;
+  filter: grayscale(1) !important;
+}
+
+.aviso-vencimento-boleto {
+  margin: 10px 0 18px;
+  padding: 10px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  text-align: left;
+  line-height: 1.4;
+}
+
+.aviso-vencimento-boleto-valido {
+  background: #eff6ff;
+  border-left: 4px solid #2563eb;
+  color: #1e3a8a;
+}
+
+.aviso-vencimento-boleto-vencido {
+  background: #fef2f2;
+  border-left: 4px solid #dc2626;
+  color: #7f1d1d;
+}
+
+/* ======================================================
+   MODAL FSA - ATUALIZAÇÃO DE INFORMAÇÕES SEM IFRAME
+   ====================================================== */
+
+#modalAtualizarDadosFsa {
+  padding: 24px 48px !important;
+  box-sizing: border-box !important;
+  z-index: 1000000 !important;
+}
+
+#modalAtualizarDadosFsa .fsa-modal-panel {
+  width: 100% !important;
+  max-width: 1400px !important;
+  height: 90vh !important;
+  max-height: 90vh !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  border-radius: 20px !important;
+  background: #ffffff !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+#modalAtualizarDadosFsa form {
+  min-height: 0;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+#modalAtualizarDadosFsa .fsa-modal-header {
+  flex: 0 0 auto;
+  padding: 26px 72px 20px 32px;
+  border-bottom: 1px solid #e5e7eb;
+  background: #ffffff;
+}
+
+#modalAtualizarDadosFsa .fsa-modal-header h2 {
+  margin: 0;
+  color: #0027bd;
+  font-size: 24px;
+  line-height: 1.3;
+}
+
+#modalAtualizarDadosFsa .fsa-modal-body {
+  min-height: 0;
+  flex: 1;
+  overflow-y: auto;
+  padding: 28px 32px;
+  background: #f8fafc;
+}
+
+#modalAtualizarDadosFsa .fsa-bloco {
+  margin-bottom: 24px;
+  padding: 24px;
+  border: 1px solid #dbe3ef;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.05);
+}
+
+#modalAtualizarDadosFsa .fsa-bloco:last-child {
+  margin-bottom: 0;
+}
+
+#modalAtualizarDadosFsa .fsa-bloco-readonly {
+  border-left: 5px solid #0027bd;
+}
+
+#modalAtualizarDadosFsa .fsa-bloco-titulo {
+  margin-bottom: 20px;
+}
+
+#modalAtualizarDadosFsa .fsa-bloco-titulo h3 {
+  margin: 0 0 6px;
+  color: #0027bd;
+  font-size: 19px;
+  line-height: 1.35;
+}
+
+#modalAtualizarDadosFsa .fsa-bloco-titulo p {
+  margin: 0;
+  color: #475569;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+#modalAtualizarDadosFsa .fsa-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px 22px;
+  align-items: start;
+}
+
+#modalAtualizarDadosFsa .fsa-campo {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+#modalAtualizarDadosFsa .fsa-campo-full {
+  grid-column: 1 / -1;
+}
+
+#modalAtualizarDadosFsa .fsa-campo label {
+  color: #1f2937;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+#modalAtualizarDadosFsa input,
+#modalAtualizarDadosFsa select,
+#modalAtualizarDadosFsa textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #cbd5e1;
+  border-radius: 9px;
+  background: #ffffff;
+  color: #111827;
+  padding: 11px 12px;
+  font: inherit;
+  transition:
+    border-color .2s ease,
+    box-shadow .2s ease;
+}
+
+#modalAtualizarDadosFsa textarea {
+  resize: vertical;
+  min-height: 110px;
+}
+
+#modalAtualizarDadosFsa input:focus,
+#modalAtualizarDadosFsa select:focus,
+#modalAtualizarDadosFsa textarea:focus {
+  outline: none;
+  border-color: #0027bd;
+  box-shadow: 0 0 0 3px rgba(0, 39, 189, 0.14);
+}
+
+#modalAtualizarDadosFsa .fsa-valor-readonly {
+  min-height: 44px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  padding: 11px 12px;
+  border: 1px solid #dbe3ef;
+  border-radius: 9px;
+  background: #eef2f7;
+  color: #334155;
+  font-size: 14px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+#modalAtualizarDadosFsa .fsa-modal-actions {
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: flex-end;
+  gap: 14px;
+  padding: 18px 32px;
+  border-top: 1px solid #e5e7eb;
+  background: #ffffff;
+}
+
+#modalAtualizarDadosFsa .modal-close-x {
+  z-index: 3;
+}
+
+#modalConfirmarAtualizacaoFsa {
+  z-index: 1000001 !important;
+}
+
+#modalSucessoAtualizarDados {
+  z-index: 1000002 !important;
+}
+
+#btnConfirmarAtualizacaoFsa:disabled {
+  opacity: .7;
+  cursor: wait !important;
+  transform: none !important;
+}
+
+@media (max-width: 768px) {
+
+  #modalAtualizarDadosFsa {
+    padding: 10px !important;
+    align-items: stretch !important;
+  }
+
+  #modalAtualizarDadosFsa .fsa-modal-panel {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: calc(100vh - 20px) !important;
+    max-height: calc(100vh - 20px) !important;
+    border-radius: 14px !important;
+  }
+
+  #modalAtualizarDadosFsa .fsa-modal-header {
+    padding: 20px 54px 16px 18px;
+  }
+
+  #modalAtualizarDadosFsa .fsa-modal-header h2 {
+    font-size: 19px;
+  }
+
+  #modalAtualizarDadosFsa .fsa-modal-body {
+    padding: 16px;
+  }
+
+  #modalAtualizarDadosFsa .fsa-bloco {
+    padding: 18px;
+  }
+
+  #modalAtualizarDadosFsa .fsa-grid {
+    grid-template-columns: 1fr;
+  }
+
+  #modalAtualizarDadosFsa .fsa-campo-full {
+    grid-column: auto;
+  }
+
+  #modalAtualizarDadosFsa .fsa-modal-actions {
+    flex-direction: column-reverse;
+    padding: 14px 16px;
+  }
+
+  #modalAtualizarDadosFsa .fsa-modal-actions .btn-cloud {
+    width: 100% !important;
+  }
+}
+
+/* Componentes bloqueados durante o envio */
+.componentes-grid.componentes-processando {
+  cursor: wait;
+}
+
+.componentes-grid.componentes-processando .card-componente {
+  pointer-events: none !important;
+  cursor: not-allowed !important;
+  opacity: 0.55;
+  filter: grayscale(25%);
+  user-select: none;
+}
+
+.componentes-grid.componentes-processando .card-componente:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Mantém selecionados identificáveis, mas bloqueados */
+.componentes-grid.componentes-processando .card-componente.selecionado {
+  opacity: 0.7;
+}
+
+.upload-doc-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.upload-doc-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.upload-doc-trash {
+  width: 38px;
+  height: 38px;
+  flex: 0 0 38px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.upload-doc-trash:hover {
+  background: #fef2f2;
+  transform: scale(1.05);
+}
+
+.upload-doc-trash:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.upload-doc-item.excluindo {
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+.upload-doc-status-excluindo {
+  margin-top: 4px;
+  color: #b91c1c;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* Timeline reposicionada depois do card da etapa atual */
+.timeline-glass-card.timeline-posicionada-no-final {
+  margin-top: 0 !important;
+  margin-bottom: 40px !important;
+}
+
+/* Botão SALVAR do FSA desabilitado */
+#btnSalvarAtualizacaoFsa:disabled,
+#btnSalvarAtualizacaoFsa.btn-cloud-disabled {
+  opacity: 0.55 !important;
+  cursor: not-allowed !important;
+  pointer-events: none !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+#btnSalvarAtualizacaoFsa:disabled:hover,
+#btnSalvarAtualizacaoFsa.btn-cloud-disabled:hover {
+  background-color: var(--brand-color, #0027bd) !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Data de previsão anterior ao dia atual */
+#modalAtualizarDadosFsa
+#fsaDataPrevisao.fsa-data-invalida {
+  border-color: #dc2626 !important;
+  background-color: #fef2f2 !important;
+}
+
+#modalAtualizarDadosFsa
+#fsaDataPrevisao.fsa-data-invalida:focus {
+  border-color: #dc2626 !important;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.14) !important;
+}
+
+#modalAtualizarDadosFsa
+.fsa-mensagem-data-invalida {
+  margin-top: 1px;
+  color: #dc2626;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+/* CPF, RG ou CNPJ inválido */
+#modalAtualizarDadosFsa
+input.fsa-campo-invalido,
+#modalAtualizarDadosFsa
+select.fsa-campo-invalido {
+  border-color: #dc2626 !important;
+  background-color: #fef2f2 !important;
+}
+
+#modalAtualizarDadosFsa
+input.fsa-campo-invalido:focus,
+#modalAtualizarDadosFsa
+select.fsa-campo-invalido:focus {
+  border-color: #dc2626 !important;
+  box-shadow:
+    0 0 0 3px
+    rgba(220, 38, 38, 0.14) !important;
+}
+
+#modalAtualizarDadosFsa
+.fsa-mensagem-invalida {
+  margin-top: 1px;
+  color: #dc2626;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+#modalAtualizarDadosFsa .fsa-campo > label {
+  min-height: 44px;
+  display: flex;
+  align-items: flex-end;
+}

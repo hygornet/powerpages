@@ -1,0 +1,22 @@
+adx_attachfilelabel: ''
+adx_attachfilemaxsize: 
+adx_attachfilestoragelocation: 756150000
+adx_captcharequired: false
+adx_containername: ''
+adx_entitypermissionsenabled: true
+adx_formname: GRANDES CLIENTES A
+adx_hideformonsuccess: true
+adx_maximumnooffiles: 5
+adx_mode: 100000001
+adx_movepreviouspermitted: false
+adx_name: 1
+adx_nextstep: b161b622-bc4f-4514-805d-2123856045a7
+adx_referencequerystringisprimarykey: true
+adx_showcaptchaforauthenticatedusers: false
+adx_storageaccountname: ''
+adx_successmessage: ''
+adx_targetentitylogicalname: cloud_solicitacoes
+adx_type: 100000001
+adx_validationsummarylinksenabled: true
+adx_webform: 7f296fed-594c-40a2-9dab-bbef87610ab2
+adx_webformstepid: d3f2e083-60c6-4c61-9f2a-00f3fe526faf

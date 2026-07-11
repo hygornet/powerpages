@@ -1,0 +1,39 @@
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_cnpj_construtora
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_entityform: 574791f8-1129-4a78-95b3-bcb95600b261
+  adx_entityformmetadataid: 90897716-9e39-42fd-8e6e-96d470009134
+  adx_fieldisrequired: false
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "CNPJ_CONSTRUTORA"
+      }
+    ]
+  adx_name: Form_FSA cloud_cnpj_construtora
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_validationregularexpressionerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]

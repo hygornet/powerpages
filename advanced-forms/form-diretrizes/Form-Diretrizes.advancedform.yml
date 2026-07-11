@@ -1,0 +1,13 @@
+adx_authenticationrequired: true
+adx_editexistingrecordpermitted: true
+adx_multiplerecordsperuserpermitted: true
+adx_name: Form Diretrizes
+adx_progressindicatorenabled: true
+adx_progressindicatorignorelaststep: false
+adx_progressindicatorposition: 756150000
+adx_progressindicatorprependstepnum: false
+adx_progressindicatortype: 756150001
+adx_savechangeswarningonclose: true
+adx_startnewsessiononload: true
+adx_startstep: 48c5e849-13bb-f011-bbd3-000d3a5976b0
+adx_webformid: 23cc022e-13bb-f011-bbd3-000d3a5976b0

@@ -1,0 +1,300 @@
+
+/* ======================================================
+   LIMPEZA DA PÁGINA FILHA / IFRAME
+   ====================================================== */
+
+header,
+footer,
+nav,
+.navbar,
+.navbar-static-top,
+.page-header,
+.breadcrumb,
+.footer,
+.site-footer,
+.siteHeader,
+.siteFooter,
+#header,
+#footer,
+#navbar,
+#mainContent > .row:first-child {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+}
+
+html,
+body {
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  overflow-x: hidden !important;
+}
+
+main,
+#mainContent,
+.container,
+.row,
+.sectionBlockLayout,
+.columnBlockLayout,
+.col-lg-12 {
+  margin: 0 !important;
+  padding: 0 !important;
+  max-width: none !important;
+  width: 100% !important;
+  background: transparent !important;
+}
+
+/* ======================================================
+   CONTAINER DO FORM
+   ====================================================== */
+
+#custom-modern-form {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+}
+
+#custom-modern-form .power-pages-form-container,
+#custom-modern-form .ppFlexContainer {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: visible !important;
+}
+
+/* ======================================================
+   CAMPO DE ANEXO COMO CARD/LISTA
+   ====================================================== */
+
+#custom-modern-form .tr {
+  display: flex !important;
+  flex-direction: column !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+}
+
+#custom-modern-form .file-cell {
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  background: transparent !important;
+}
+
+#custom-modern-form .file-cell .table-info {
+  display: none !important;
+}
+
+/* Esconde itens nativos feios do Power Pages */
+#custom-modern-form .container-filelink-delete,
+#custom-modern-form .file-link-and-delete,
+#custom-modern-form .break-file-name,
+#custom-modern-form .file-name-container,
+#custom-modern-form .cloud_file_comprovante_delete_button,
+#custom-modern-form .actions {
+  display: none !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+}
+
+/* ======================================================
+   CARD MODERNO DE UPLOAD
+   ====================================================== */
+
+#custom-modern-form .control {
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 12px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+#custom-modern-form input[type="file"] {
+  width: 100% !important;
+  max-width: 100% !important;
+  cursor: pointer !important;
+  padding: 16px !important;
+  border: 2px dashed #c7d2fe !important;
+  border-radius: 16px !important;
+  background: #f8fafc !important;
+  color: #1f2937 !important;
+  font-size: 14px !important;
+  box-sizing: border-box !important;
+}
+
+#custom-modern-form input[type="file"]::file-selector-button {
+  border: none !important;
+  border-radius: 999px !important;
+  background: #0027bd !important;
+  color: #ffffff !important;
+  font-weight: 800 !important;
+  padding: 10px 18px !important;
+  margin-right: 14px !important;
+  cursor: pointer !important;
+  text-transform: uppercase !important;
+  letter-spacing: .03em !important;
+}
+
+/* ======================================================
+   LISTA DE ITEM SELECIONADO NO MESMO ESTILO
+   ====================================================== */
+
+.upload-doc-lista {
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+}
+
+.upload-doc-lista-head {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  margin-bottom: 10px !important;
+}
+
+.upload-doc-lista-titulo {
+  font-size: 14px !important;
+  font-weight: 800 !important;
+  color: #0027bd !important;
+  text-transform: uppercase !important;
+  letter-spacing: .04em !important;
+}
+
+.upload-doc-grid {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 10px !important;
+  width: 100% !important;
+}
+
+.upload-doc-item {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  width: 100% !important;
+  min-height: 64px !important;
+  padding: 14px 16px !important;
+  border-radius: 16px !important;
+  border: 1px solid #dbeafe !important;
+  background: #ffffff !important;
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.08) !important;
+  box-sizing: border-box !important;
+}
+
+.upload-doc-icon {
+  width: 42px !important;
+  height: 42px !important;
+  min-width: 42px !important;
+  border-radius: 14px !important;
+  background: #eff6ff !important;
+  color: #0027bd !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 21px !important;
+}
+
+.upload-doc-info {
+  flex: 1 !important;
+  min-width: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 4px !important;
+}
+
+.upload-doc-nome {
+  font-size: 14px !important;
+  font-weight: 800 !important;
+  color: #111827 !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+.upload-doc-status-carregando {
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  color: #2563eb !important;
+}
+
+.upload-doc-vazio {
+  width: 100% !important;
+  padding: 16px !important;
+  border-radius: 16px !important;
+  border: 1px dashed #cbd5e1 !important;
+  background: #f8fafc !important;
+  color: #64748b !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  box-sizing: border-box !important;
+}
+
+/* Spinner igual ao da página principal */
+.upload-doc-spinner {
+  width: 22px !important;
+  height: 22px !important;
+  border: 3px solid #dbeafe !important;
+  border-top-color: #0027bd !important;
+  border-radius: 50% !important;
+  display: inline-block !important;
+  animation: uploadDocSpin .8s linear infinite !important;
+}
+
+@keyframes uploadDocSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ======================================================
+   BOTÃO NATIVO DE SALVAR
+   Como o envio é automático, deixa invisível.
+   ====================================================== */
+
+#UpdateButton,
+input[type="submit"],
+button[type="submit"],
+.submit-btn {
+  display: none !important;
+}
+
+/* ======================================================
+   MOBILE
+   ====================================================== */
+
+@media (max-width: 768px) {
+  #custom-modern-form input[type="file"] {
+    padding: 14px !important;
+    font-size: 13px !important;
+  }
+
+  #custom-modern-form input[type="file"]::file-selector-button {
+    display: block !important;
+    width: 100% !important;
+    margin: 0 0 10px 0 !important;
+  }
+
+  .upload-doc-item {
+    padding: 12px 14px !important;
+    gap: 10px !important;
+  }
+
+  .upload-doc-icon {
+    width: 38px !important;
+    height: 38px !important;
+    min-width: 38px !important;
+  }
+}

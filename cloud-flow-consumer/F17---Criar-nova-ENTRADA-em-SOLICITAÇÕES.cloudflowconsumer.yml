@@ -1,0 +1,8 @@
+adx_CloudFlowConsumer_adx_webrole:
+- 1e16f3b3-b319-4d15-a71e-bd149be9381d
+adx_cloudflowconsumerid: e7389cae-361c-f111-8341-7ced8da81546
+adx_flowapiurl: /_api/cloudflow/v1.0/trigger/24ee2c30-361c-f111-8342-002248de77b7
+adx_flowtriggerurl: ''
+adx_metadata: ''
+adx_name: F17 - Criar nova ENTRADA em SOLICITAÇÕES
+adx_processid: 24ee2c30-361c-f111-8342-002248de77b7

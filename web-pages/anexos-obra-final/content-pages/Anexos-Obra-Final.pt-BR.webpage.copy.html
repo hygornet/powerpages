@@ -1,0 +1,121 @@
+<div id="custom-modern-form" class="modern-form-wrapper" style="width: 100%; max-width: 1600px; margin-top: 0px; margin-right: auto; margin-bottom: 0px; margin-left: auto;">
+  <div class="power-pages-form-container" style="width: 100%; overflow-x: visible; overflow-y: visible;">
+    <div class="ppFlexContainer" style="width: 100%; max-width: 100%;">
+      {% entityform name: 'Anexos Obra' %}
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  let usuarioSelecionouArquivo = false;
+  let jaSubmeteu = false;
+  let jaAvisouPaiCarregando = false;
+  let jaAvisouPaiSalvo = false;
+
+  function getRecordId() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get("id");
+  }
+
+  function avisarPai(tipo) {
+    const recordId = getRecordId();
+
+    if (window.parent && window.parent !== window) {
+      window.parent.postMessage({
+        type: tipo,
+        origem: "ANEXOS_OBRA_FINAL",
+        RecordID: recordId,
+        recordId: recordId
+      }, "*");
+    }
+  }
+
+  function avisarPaiCarregando() {
+    if (jaAvisouPaiCarregando) return;
+
+    jaAvisouPaiCarregando = true;
+
+    avisarPai("ANEXO_OBRA_FINAL_CARREGANDO");
+  }
+
+  function avisarPaiSalvo() {
+    if (jaAvisouPaiSalvo) return;
+
+    jaAvisouPaiSalvo = true;
+
+    avisarPai("ANEXO_OBRA_FINAL_SALVO");
+  }
+
+  function encontrarBotaoSalvar() {
+    return (
+      document.querySelector("#UpdateButton") ||
+      document.querySelector("input[id$='UpdateButton']") ||
+      document.querySelector("input[type='submit']") ||
+      document.querySelector("button[type='submit']") ||
+      document.querySelector(".submit-btn")
+    );
+  }
+
+  function submeterAutomaticamente() {
+    if (!usuarioSelecionouArquivo) return;
+    if (jaSubmeteu) return;
+
+    const botaoSalvar = encontrarBotaoSalvar();
+
+    if (!botaoSalvar) {
+      console.warn("Botão salvar não encontrado.");
+      return;
+    }
+
+    jaSubmeteu = true;
+
+    avisarPaiCarregando();
+
+    setTimeout(function () {
+      console.log("💾 Submetendo form de anexos finais automaticamente...");
+      botaoSalvar.click();
+    }, 2500);
+  }
+
+  document.addEventListener("change", function (e) {
+    const inputFile = e.target;
+
+    if (!inputFile || inputFile.type !== "file") return;
+    if (!inputFile.files || inputFile.files.length === 0) return;
+
+    usuarioSelecionouArquivo = true;
+
+    setTimeout(function () {
+      submeterAutomaticamente();
+    }, 3500);
+  }, true);
+
+  const observerSucesso = new MutationObserver(function () {
+    const sucesso =
+      document.querySelector(".alert-success") ||
+      document.querySelector(".success") ||
+      document.querySelector(".notification.success") ||
+      document.querySelector("[data-form-success]");
+
+    if (sucesso && sucesso.innerText.trim() !== "") {
+      console.log("✅ Anexo final salvo. Avisando página pai.");
+      avisarPaiSalvo();
+    }
+  });
+
+  observerSucesso.observe(document.body, {
+    childList: true,
+    subtree: true,
+    characterData: true
+  });
+
+  console.log("✅ Script /anexos-obra-final carregado.");
+})();
+</script>
+
+<div class="row sectionBlockLayout text-start" style="display: flex; flex-wrap: wrap; min-height: auto; margin: 0px; padding: 0px; max-width: none; width: 100%;">
+  <div class="container" style="padding: 0px; display: flex; flex-wrap: wrap; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; max-width: none; width: 100%;">
+    <div class="col-lg-12 columnBlockLayout" style="flex-grow: 1; display: flex; flex-direction: column; min-width: 250px; margin: 0px; padding: 0px; max-width: none; width: 100%;"></div>
+  </div>
+</div>

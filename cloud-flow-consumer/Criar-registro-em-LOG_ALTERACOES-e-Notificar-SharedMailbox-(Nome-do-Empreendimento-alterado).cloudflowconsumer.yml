@@ -1,0 +1,10 @@
+adx_CloudFlowConsumer_adx_webrole:
+- 1e16f3b3-b319-4d15-a71e-bd149be9381d
+- 8438c7f7-45d8-4ff7-960c-437d9a6b9a10
+- d4c7d889-5e63-41b4-8927-326dcc287e96
+adx_cloudflowconsumerid: 4c5beed9-d0df-f011-8543-000d3a5ae560
+adx_flowapiurl: /_api/cloudflow/v1.0/trigger/b9a1abc5-d0df-f011-8543-000d3a5ae560
+adx_flowtriggerurl: ''
+adx_metadata: ''
+adx_name: Criar registro em LOG_ALTERACOES e Notificar SharedMailbox (Nome do Empreendimento alterado)
+adx_processid: b9a1abc5-d0df-f011-8543-000d3a5ae560

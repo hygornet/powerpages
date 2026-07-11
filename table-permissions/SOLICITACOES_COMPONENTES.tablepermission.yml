@@ -1,0 +1,16 @@
+adx_accountrelationship: 
+adx_append: true
+adx_appendto: true
+adx_contactrelationship: 
+adx_create: true
+adx_delete: true
+adx_entitylogicalname: cloud_solicitacoes_componentes
+adx_entityname: SOLICITACOES_COMPONENTES
+adx_entitypermission_webrole:
+- 1e16f3b3-b319-4d15-a71e-bd149be9381d
+adx_entitypermissionid: 339c60ab-cf69-4967-8468-c286f0849e23
+adx_parententitypermission: dd384cc2-35f9-4ba9-8f4e-a334968d43a2
+adx_parentrelationship: cloud_solicitacoes_componentes_FK_SOLICITACOES_cloud_solicitacoes
+adx_read: true
+adx_scope: 756150003
+adx_write: true

@@ -1,0 +1,444 @@
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_cnpj_construtora
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_entityform: 0863683c-a2ac-4b52-9715-6a1c2782bec5
+  adx_entityformmetadataid: 04c7e043-db7b-4053-af58-2a57d684ddbe
+  adx_fieldisrequired: true
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "CNPJ do empreendimento"
+      }
+    ]
+  adx_name: Form_FSA E cloud_cnpj_construtora
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_validationregularexpressionerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_id_solicitacoes
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_entityform: 0863683c-a2ac-4b52-9715-6a1c2782bec5
+  adx_entityformmetadataid: 0a25a8b0-c0ef-4ae5-875d-1b68b8255441
+  adx_fieldisrequired: true
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "PROTOCOLO (somente leitura)"
+      }
+    ]
+  adx_name: Form_FSA E cloud_id_solicitacoes
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_validationregularexpressionerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_rg_proprietario
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_entityform: 0863683c-a2ac-4b52-9715-6a1c2782bec5
+  adx_entityformmetadataid: 4c2075d2-3ab2-45e5-9215-21cc174cb17e
+  adx_fieldisrequired: true
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "RG do Proprietário"
+      }
+    ]
+  adx_name: Form_FSA E cloud_rg_proprietario
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_validationregularexpressionerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_nome_empreendimento
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_entityform: 0863683c-a2ac-4b52-9715-6a1c2782bec5
+  adx_entityformmetadataid: 4c7a7ede-8860-471d-9dc8-125e497ea2da
+  adx_fieldisrequired: true
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Nome do Empreendimento"
+      }
+    ]
+  adx_name: Form_FSA E cloud_nome_empreendimento
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_validationregularexpressionerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_data_prev_fim_obra
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_entityform: 0863683c-a2ac-4b52-9715-6a1c2782bec5
+  adx_entityformmetadataid: 5bba40a3-9df4-462e-bd1f-5f85cae981d1
+  adx_fieldisrequired: true
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Data de Previsão de Conclusão da Obra"
+      }
+    ]
+  adx_name: Form_FSA E cloud_data_prev_fim_obra
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_validationregularexpressionerrormessage: ''
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_bairro_da_obra
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_entityform: 0863683c-a2ac-4b52-9715-6a1c2782bec5
+  adx_entityformmetadataid: 6391d2f0-67e5-4a9e-bf60-dc969c05aeb0
+  adx_fieldisrequired: true
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Bairro da Obra"
+      }
+    ]
+  adx_name: Form_FSA E cloud_bairro_da_obra
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_validationregularexpressionerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_nome_resp_faturamento
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_entityform: 0863683c-a2ac-4b52-9715-6a1c2782bec5
+  adx_entityformmetadataid: 7264d6bd-611e-413e-b42e-eb7cfda4bae2
+  adx_fieldisrequired: true
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Devemos faturar para CNPJ ou CPF?"
+      }
+    ]
+  adx_name: Form_FSA E cloud_nome_resp_faturamento
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_validationregularexpressionerrormessage: ''
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_nome_proprietario
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_entityform: 0863683c-a2ac-4b52-9715-6a1c2782bec5
+  adx_entityformmetadataid: 7c70c781-1d85-46a4-97f5-edb45a6ec86a
+  adx_fieldisrequired: true
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Nome do Proprietário"
+      }
+    ]
+  adx_name: Form_FSA E cloud_nome_proprietario
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_validationregularexpressionerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_endereco_da_obra
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_entityform: 0863683c-a2ac-4b52-9715-6a1c2782bec5
+  adx_entityformmetadataid: 7e8755f3-2bdc-4ca3-8fd3-19f952e0016a
+  adx_fieldisrequired: true
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Endereço da Obra"
+      }
+    ]
+  adx_name: Form_FSA E cloud_endereco_da_obra
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_validationregularexpressionerrormessage: ''
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_nome_construtora
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_entityform: 0863683c-a2ac-4b52-9715-6a1c2782bec5
+  adx_entityformmetadataid: 95f3b7d0-4df8-4d30-aa60-90e189f9e304
+  adx_fieldisrequired: true
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Nome da Construtora"
+      }
+    ]
+  adx_name: Form_FSA E cloud_nome_construtora
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_validationregularexpressionerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_observacoes
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_entityform: 0863683c-a2ac-4b52-9715-6a1c2782bec5
+  adx_entityformmetadataid: d027e670-5e45-470e-996e-4743192432fc
+  adx_fieldisrequired: false
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Observações"
+      }
+    ]
+  adx_name: Form_FSA E cloud_observacoes
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_validationregularexpressionerrormessage: ''
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_cpf_proprietario
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_entityform: 0863683c-a2ac-4b52-9715-6a1c2782bec5
+  adx_entityformmetadataid: f8be99d8-c1ea-4f69-b054-cf2abb1d3308
+  adx_fieldisrequired: true
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "CPF do Proprietário"
+      }
+    ]
+  adx_name: Form_FSA E cloud_cpf_proprietario
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_validationregularexpressionerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]

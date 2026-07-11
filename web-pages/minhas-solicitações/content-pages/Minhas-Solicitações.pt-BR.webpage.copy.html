@@ -1,0 +1,1478 @@
+{% assign nomeUsuario = user.fullname | default: "usuário" %}
+
+{% fetchxml solicitacoes %}
+<fetch mapping="logical" distinct="false">
+  <entity name="cloud_solicitacoes">
+
+    <attribute name="cloud_solicitacoesid" />
+    <attribute name="cloud_protocolo" />
+    <attribute name="createdon" />
+    <attribute name="modifiedon" />
+    <attribute name="cloud_nome_empreendimento" />
+    <attribute name="cloud_fase" />
+    <attribute name="cloud_etapa" />
+    <attribute name="cloud_status_atual" />
+    <attribute name="cloud_finalidade_empreendimento" />
+    <attribute name="cloud_consumo_mensal" />
+    <attribute name="cloud_numero_economias" />
+    <attribute name="cloud_area_construida_total" />
+    <attribute name="cloud_nome_proprietario" />
+    <attribute name="cloud_cpf_proprietario" />
+    <attribute name="cloud_rg_proprietario" />
+    <attribute name="cloud_nome_construtora" />
+    <attribute name="cloud_cnpj_construtora" />
+    <attribute name="cloud_is_orcamento_solicitado" />
+    <attribute name="cloud_fk_finalidades_solicitacao" />
+    <link-entity name="cloud_finalidades_solicitacao"
+             from="cloud_finalidades_solicitacaoid"
+             to="cloud_fk_finalidades_solicitacao"
+             link-type="outer"
+             alias="finalidade">
+  <attribute name="cloud_nome_finalidade" />
+</link-entity>
+    <attribute name="cloud_nome_resp_faturamento" />
+    <attribute name="cloud_observacoes" />
+    <attribute name="cloud_endereco_da_obra" />
+    <attribute name="cloud_bairro_da_obra" />
+    <attribute name="cloud_fk_municipios" />
+    <link-entity name="cloud_municipios"
+             from="cloud_municipiosid"
+             to="cloud_fk_municipios"
+             link-type="outer"
+             alias="municipio">
+  <attribute name="cloud_nome_municipio" />
+</link-entity>
+    <attribute name="cloud_data_prev_fim_obra" />
+    <attribute name="cloud_descricao_atividades" />
+    <attribute name="cloud_numero_funcionarios" />
+    <attribute name="cloud_estimativa_publico_diario" />
+    <attribute name="cloud_volume_agua_processo" />
+    <attribute name="cloud_is_projecao_ampliacao" />
+    <attribute name="cloud_is_conglomerado_empresarial" />
+    <attribute name="cloud_tipo_ocupacao" />
+    <attribute name="cloud_tipo_parcelamento" />
+    <attribute name="cloud_tipo_medicao" />
+    <attribute name="cloud_tipo_cadastro" />
+    <attribute name="cloud_quantidade_box" />    
+<attribute name="cloud_qtd_apt_1_dorm_maior_12" />
+    <attribute name="cloud_qtd_apt_1_dorm_menor_12" />
+    <attribute name="cloud_qtd_apt_2_dorm_maior_12" />
+    <attribute name="cloud_qtd_apt_2_dorm_menor_12" />
+    <attribute name="cloud_qtd_apt_3_dorm_maior_12" />
+    <attribute name="cloud_qtd_apt_3_dorm_menor_12" />
+    <attribute name="cloud_qtd_apt_4_dorm_maior_12" />
+    <attribute name="cloud_qtd_apt_4_dorm_menor_12" />
+    <attribute name="createdon" />
+    <attribute name="modifiedon" />
+    <attribute name="cloud_id_solicitacoes" />
+    <attribute name="cloud_fk_contato" />
+    <attribute name="statecode" />
+    <attribute name="cloud_is_importacao" />
+    <order attribute="createdon" descending="true" />
+    <filter>
+      <condition attribute="createdon"
+                 operator="le"
+                 value='{{ "today" | date: "yyyy-MM-dd HH:mm:ss" }}' />
+
+      <condition attribute="cloud_fk_contato"
+           operator="eq"
+           value="{{ user.id }}" />
+
+           <condition attribute="statecode"
+           operator="eq"
+           value="0" />
+    </filter>
+  </entity>
+</fetch>
+{% endfetchxml %}
+
+
+<div class="row sectionBlockLayout" style="display: flex; flex-wrap: wrap; margin: 0px; min-height: auto; padding: 60px 0px 0px; background-color: transparent !important; border-bottom: none !important;">
+<div class="container" style="padding: 0; display: flex; flex-wrap: wrap; align-items: stretch; background: transparent !important;">
+
+  <!-- CARD 1 -->
+  <div class="col-lg-7 columnBlockLayout" style="flex-grow: 1; min-width: 250px; display: flex; flex-direction: column; justify-content: stretch; padding: 0 15px 24px; background: transparent !important;">
+    <div
+      style="
+        width: 100%;
+        height: 100%;
+        min-height: 330px;
+        padding: 32px 30px;
+        border-radius: 24px;
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        box-shadow: 0 18px 45px rgba(0, 0, 0, 0.20);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      "
+    >
+      <span style="font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: #17e3cb; font-weight: 700; margin-bottom: 12px; display: block;">
+        Painel do Cliente
+      </span>
+
+      <h1 style="text-align: left; margin: 0 0 16px 0; color: #0a33c7;">
+        Minhas Solicitações
+      </h1>
+
+      <p style="font-size: 18px; color: #1d4ed8; line-height: 1.6; margin-bottom: 24px; max-width: 600px;">
+        Acompanhe o status de todos os seus processos de viabilidade técnica em tempo real. Consulte aqui todo o seu histórico e as informações das suas solicitações.
+      </p>
+
+      <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+        <div
+          id="btnRefreshStatus"
+          style="
+            background-color: #ecfdf5;
+            padding: 8px 12px;
+            border-radius: 20px;
+            color: #047857;
+            font-size: 14px;
+            font-weight: 600;
+            border: 1px solid #a7f3d0;
+            cursor: pointer;
+          "
+        >
+          Status Atualizado
+        </div>
+
+        <span style="font-size: 14px; color: #2563eb;">
+          As atualizações são automáticas.
+        </span>
+      </div>
+    </div>
+  </div>
+
+ 
+<!-- CARD 2 -->
+<div class="col-lg-5 columnBlockLayout" style="flex-grow: 1; min-width: 250px; display: flex; flex-direction: column; justify-content: stretch; padding: 0 15px 24px;">
+  <div
+    style="
+      width: 100%;
+      height: 100%;
+      min-height: 330px;
+      padding: 24px;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.20);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    "
+  >
+    <div style="width: 100%; max-width: 100%;">
+
+      <div style="display: flex; align-items: flex-start; margin-bottom: 14px;">
+        <div style="background-color: #eff6ff; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 16px; flex-shrink: 0;">
+          <span style="font-size: 20px; color: #2563eb; font-weight: bold;">i</span>
+        </div>
+        <div>
+          <h4 style="margin: 0 0 4px 0; font-size: 18px; font-weight: 700; color: #0a33c7;">
+            Como gerenciar?
+          </h4>
+          <p style="margin: 0; font-size: 14px; color: #2563eb;">
+            Siga os passos abaixo na tabela:
+          </p>
+        </div>
+      </div>
+
+      <div style="background-color: rgba(255,255,255,0.78); border-radius: 12px; padding: 16px; border: 1px solid rgba(255, 255, 255, 0.65); box-shadow: 0 8px 24px rgba(0,0,0,0.08);">
+        <div style="display: flex; align-items: center; margin-bottom: 12px;">
+          <div style="width: 32px; height: 32px; background-color: white; border: 1px solid #d1d5db; border-radius: 4px; display: flex; align-items: center; justify-content: center; margin-right: 12px; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
+            <span style="font-weight: bold; color: #374151; padding-bottom: 8px; font-size: 20px;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
+  <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"/>
+</svg>
+            </span>
+          </div>
+          <p style="margin: 0; font-size: 14px; color: #0a33c7;">
+            <strong>1.</strong> Localize o ícone de ações (ou três pontos) no canto direito de cada item.
+          </p>
+        </div>
+
+        <div style="display: flex; align-items: center;">
+          <div style="width: 32px; height: 32px; background-color: white; border: 1px solid #d1d5db; border-radius: 4px; display: flex; align-items: center; justify-content: center; margin-right: 12px; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
+            <span style="font-size: 16px;">📝</span>
+          </div>
+          <p style="margin: 0; font-size: 14px; color: #0a33c7;">
+            <strong>2.</strong> Escolha <strong>"Ver Status"</strong> para abrir a página de status atual do item e <u>saber se existe alguma pendência</u>.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</div>
+</div>
+
+<div class="row sectionBlockLayout" style="display: flex; flex-wrap: wrap; margin: 0px; min-height: auto; padding: 0 0 24px; background-color: transparent !important;">
+  <div class="container" style="padding: 0; display: flex; flex-wrap: wrap; align-items: stretch; background: transparent !important;">
+    <div class="col-lg-12 columnBlockLayout" style="flex-grow: 1; min-width: 250px; display: flex; flex-direction: column; justify-content: stretch; padding: 0 15px;">
+      <div style="
+        width: 100%;
+        padding: 32px 30px;
+        border-radius: 24px;
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        box-shadow: 0 18px 45px rgba(0, 0, 0, 0.20);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+      ">
+        <span style="font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: #17e3cb; font-weight: 700; margin-bottom: 12px; display: block;">
+          Aviso Importante
+        </span>
+        <h2 style="text-align: left; margin: 0 0 16px 0; color: #0a33c7;">
+          Aviso importante sobre as solicitações realizadas em 2026.
+        </h2>
+        <p style="font-size: 16px; color: #1d4ed8; line-height: 1.6; margin: 0;">
+          As solicitações realizadas via e-mail em 2026 foram inseridas para possibilitar o acompanhamento centralizado na plataforma.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row sectionBlockLayout text-start" style="margin:0;">
+  <div class="container-fluid" style="padding: 0 24px;">
+
+    <div class="pp-list-actions">
+
+          <button class="btn-download pp-action-btn" id="btnBaixarExcel">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cloud-arrow-down-fill" viewBox="0 0 16 16">
+          <path d="M8 2a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 6.095 0 7.555 0 9.318 0 11.366 1.708 13 3.781 13h8.906C14.502 13 16 11.57 16 9.773c0-1.636-1.242-2.969-2.834-3.194C12.923 3.999 10.69 2 8 2m2.354 6.854-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 1 1 .708-.708L7.5 9.293V5.5a.5.5 0 0 1 1 0v3.793l1.146-1.147a.5.5 0 0 1 .708.708"/>
+        </svg>
+        <span>Baixar</span>
+      </button>
+
+      <button class="btn-download pp-action-btn btn-filter-toggle" id="btnToggleFiltros" type="button" aria-expanded="false">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-filter" viewBox="0 0 16 16">
+          <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5"/>
+        </svg>
+        <span>Filtrar</span>
+      </button>
+
+      
+      
+<!-- lista/card |toogle button -->
+
+
+    </div>
+
+<div class="pp-filter-overlay" id="ppFilterOverlay"></div>
+
+<div class="pp-filter-panel">
+  <div class="pp-filter-head">
+    <div>
+      <h3>Encontre sua solicitação rapidamente</h3>
+    </div>
+<button type="button" id="btnFecharSlideFiltros" class="pp-filter-slide-close" aria-label="Fechar filtros">
+  ×
+</button>
+    
+  </div>
+
+    <div class="pp-filter-buttons">
+
+      <div class="pp-filter-open" role="button" tabindex="0" data-modal="modalFiltroFinalidade" data-clear-field="finalidade">
+        <button type="button" class="pp-filter-mini-clear" data-clear-field="finalidade">×</button>
+        <span>Finalidade</span>
+        <strong id="resumoFiltroFinalidade">Todas</strong>
+      </div>
+
+      <div class="pp-filter-open" role="button" tabindex="0" data-modal="modalFiltroFase" data-clear-field="fase">
+        <button type="button" class="pp-filter-mini-clear" data-clear-field="fase">×</button>
+        <span>Fase</span>
+        <strong id="resumoFiltroFase">Todas</strong>
+      </div>
+
+      <div class="pp-filter-open" role="button" tabindex="0" data-modal="modalFiltroStatus" data-clear-field="status">
+        <button type="button" class="pp-filter-mini-clear" data-clear-field="status">×</button>
+        <span>Status atual</span>
+        <strong id="resumoFiltroStatus">Todos</strong>
+      </div>
+
+      <div class="pp-filter-open" role="button" tabindex="0" data-modal="modalFiltroData" data-clear-field="data">
+        <button type="button" class="pp-filter-mini-clear" data-clear-field="data">×</button>
+        <span>Data da solicitação</span>
+        <strong id="resumoFiltroData">Todas</strong>
+      </div>
+
+    </div>
+
+  
+
+  <div class="pp-filter-result">
+    <span id="qtdFiltroResultado"></span>
+  </div>
+</div> <!-- fecha pp-filter-panel -->
+
+<div class="pp-filter-tags-row pp-filter-tags-row-outside">
+  <button type="button" id="btnLimparFiltros" class="pp-btn-clear-filter is-hidden">
+    🗑 LIMPAR FILTROS
+  </button>
+
+  <div id="filtrosAplicados" class="pp-filter-tags"></div>
+</div>
+
+  <div class="pp-table-wrapper">
+
+{% if solicitacoes and solicitacoes.results.entities.size > 0 %}
+
+<table class="table table-hover align-middle">
+  <thead>
+    <tr>
+    <th data-type="text">
+      <span class="th-label">PROTOCOLO</span>
+      <span class="th-chevron">▾</span>
+    </th>
+    <th></th>
+    <th data-type="date">
+      <span class="th-label">CRIADO EM</span>
+      <span class="th-chevron">▾</span>
+    </th>
+    <th data-type="date">
+      <span class="th-label">ÚLT. ATUALIZAÇÃO</span>
+      <span class="th-chevron">▾</span>
+    </th>
+    <th data-type="text">
+      <span class="th-label">NOME EMPREENDIMENTO</span>
+      <span class="th-chevron">▾</span>
+    </th>
+    <th data-type="text">
+      <span class="th-label">FASE</span>
+      <span class="th-chevron">▾</span>
+    </th>
+    <th data-type="text">
+      <span class="th-label">ETAPA</span>
+      <span class="th-chevron">▾</span>
+    </th>
+    <th data-type="text">
+      <span class="th-label">STATUS ATUAL</span>
+      <span class="th-chevron">▾</span>
+    </th>
+    <th data-type="text">
+      <span class="th-label">FINALIDADE EMPREENDIMENTO</span>
+      <span class="th-chevron">▾</span>
+    </th>
+    <th data-type="number">
+      <span class="th-label">CONSUMO MENSAL</span>
+      <span class="th-chevron">▾</span>
+    </th>
+    <th data-type="number">
+      <span class="th-label">NÚM. ECONOMIAS</span>
+      <span class="th-chevron">▾</span>
+    </th>
+    <th data-type="number">
+      <span class="th-label">ÁREA CONSTRUÍDA TOTAL</span>
+      <span class="th-chevron">▾</span>
+    </th>
+    <th data-type="text">
+      <span class="th-label">CONGLOMERADO EMPRESARIAL?</span>
+      <span class="th-chevron">▾</span>
+    </th>
+    <th data-type="text">
+      <span class="th-label">NOME PROPRIETÁRIO</span>
+      <span class="th-chevron">▾</span>
+    </th>
+    <th data-type="text">
+      <span class="th-label">CPF PROPRIETÁRIO</span>
+      <span class="th-chevron">▾</span>
+    </th>
+    <th data-type="text">
+      <span class="th-label">RG PROPRIETÁRIO</span>
+      <span class="th-chevron">▾</span>
+    </th>
+    <th data-type="text">
+      <span class="th-label">NOME CONSTRUTORA</span>
+      <span class="th-chevron">▾</span>
+    </th>
+    <th data-type="text">
+      <span class="th-label">CNPJ CONSTRUTORA</span>
+      <span class="th-chevron">▾</span>
+    </th>
+    <th data-type="text">
+      <span class="th-label">RESPONSÁVEL FATURAMENTO</span>
+      <span class="th-chevron">▾</span>
+    </th>
+    <th data-type="text">
+      <span class="th-label">OBSERVAÇÕES</span>
+      <span class="th-chevron">▾</span>
+    </th>
+    <th data-type="text">
+      <span class="th-label">ENDEREÇO OBRA</span>
+      <span class="th-chevron">▾</span>
+    </th>
+    <th data-type="text">
+      <span class="th-label">BAIRRO OBRA</span>
+      <span class="th-chevron">▾</span>
+    </th>
+    <th data-type="text">
+      <span class="th-label">MUNICÍPIO OBRA</span>
+      <span class="th-chevron">▾</span>
+    </th>
+    <th data-type="date">
+      <span class="th-label">DATA PREV. FIM OBRA</span>
+      <span class="th-chevron">▾</span>
+    </th>
+    <th data-type="text">
+      <span class="th-label">DESCRIÇÃO ATIVIDADES</span>
+      <span class="th-chevron">▾</span>
+    </th>
+    <th data-type="number">
+      <span class="th-label">NÚM. FUNCIONÁRIOS</span>
+      <span class="th-chevron">▾</span>
+    </th>
+    <th data-type="number">
+      <span class="th-label">ESTIMATIVA PÚBLICO DIÁRIO</span>
+      <span class="th-chevron">▾</span>
+    </th>
+    <th data-type="number">
+      <span class="th-label">VOLUME ÁGUA DO PROCESSO</span>
+      <span class="th-chevron">▾</span>
+    </th>
+    <th data-type="text">
+      <span class="th-label">PROJETO DE AMPLIAÇÃO?</span>
+      <span class="th-chevron">▾</span>
+    </th>
+    <th data-type="text">
+      <span class="th-label">TIPO OCUPAÇÃO</span>
+      <span class="th-chevron">▾</span>
+    </th>
+    <th data-type="text">
+      <span class="th-label">TIPO PARCELAMENTO</span>
+      <span class="th-chevron">▾</span>
+    </th>
+    <th data-type="text">
+      <span class="th-label">TIPO MEDIÇÃO</span>
+      <span class="th-chevron">▾</span>
+    </th>
+    <th data-type="text">
+      <span class="th-label">TIPO CADASTRO</span>
+      <span class="th-chevron">▾</span>
+    </th>
+    
+  </tr>
+  </thead>
+  <tbody>
+    {% for s in solicitacoes.results.entities %}
+
+    {% assign faseLabelOriginal = s.cloud_fase.label | default: '-' %}
+{% assign faseLabelUpper = faseLabelOriginal | upcase | strip %}
+
+{% if s.cloud_is_orcamento_solicitado == true and faseLabelUpper == "PROJETO" %}
+  {% assign faseLabelExibida = "PROJETO AEGEA" %}
+{% elsif s.cloud_is_orcamento_solicitado == true and faseLabelUpper == "OBRA" %}
+  {% assign faseLabelExibida = "OBRA AEGEA" %}
+{% else %}
+  {% assign faseLabelExibida = faseLabelOriginal %}
+{% endif %}
+
+<tr
+  data-record-id="{{ s.cloud_solicitacoesid }}"
+  data-status-value="{{ s.cloud_status_atual.value }}"
+  data-fase="{{ faseLabelExibida | escape }}"
+  data-status="{{ s.cloud_status_atual.label | default: '-' | escape }}"
+  data-finalidade="{{ s['finalidade.cloud_nome_finalidade'] | default: '-' | escape }}"
+  data-created="{{ s.createdon | date: 'yyyy-MM-dd' }}"
+>
+      <td>
+         
+          <span style="display:inline-flex;align-items:center;gap:6px;">
+            <span>{{ emoji }}</span>
+            <span>{{ s.cloud_id_solicitacoes | default: '-' }}</span>
+          </span>
+        </td>
+      <td>
+          <div class="actions-wrap">
+
+{% assign faseSolicitacao = s.cloud_fase.label | upcase | strip %}
+{% assign orcamentoSolicitado = s.cloud_is_orcamento_solicitado %}
+
+{% if orcamentoSolicitado == true %}
+  {% assign urlStatusFinal = "/status-projeto-aegea/?id=" | append: s.cloud_solicitacoesid %}
+
+{% elsif faseSolicitacao == "OBRA" %}
+  {% assign urlStatusFinal = "/status-obra/?id=" | append: s.cloud_solicitacoesid %}
+
+{% elsif s.cloud_is_importacao == true %}
+  {% assign urlStatusFinal = "/status/?id=" | append: s.cloud_solicitacoesid %}
+
+{% elsif faseSolicitacao == "PROJETO" %}
+  {% assign urlStatusFinal = "/status-projeto/?id=" | append: s.cloud_solicitacoesid %}
+
+{% else %}
+  {% assign urlStatusFinal = "/status/?id=" | append: s.cloud_solicitacoesid %}
+{% endif %}
+
+
+           <button type="button"
+        class="btn-ellipsis has-tooltip"
+        aria-label="Menu de ação"
+        aria-haspopup="true"
+        aria-expanded="false"
+        data-tooltip="Menu de ação"
+        data-record-id="{{ s.cloud_solicitacoesid }}"
+        data-status-value="{{ s.cloud_status_atual.value }}"
+        data-status-url="{{ urlStatusFinal }}">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
+  <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"/>
+</svg>
+            </button>
+
+            <!-- Menu de Opções da Solicitação -->
+            <div class="actions-menu" role="menu">
+
+              {% assign statusLabelMenu = s.cloud_status_atual.label | default: "" | upcase | strip %}
+              {% assign statusCancelado = false %}
+
+              {% if statusLabelMenu == "CANCELADO" %}
+                {% assign statusCancelado = true %}
+              {% endif %}
+
+              {% if statusCancelado %}
+
+                <!-- Quando o status for CANCELADO, esta será a única opção -->
+                <button type="button"
+                        class="am-item am-danger"
+                        data-action="excluir"
+                        data-record-id="{{ s.cloud_solicitacoesid }}"
+                        role="menuitem">
+                  <span class="am-ico">🗑</span>
+                  <span>Excluir solicitação</span>
+                </button>
+
+              {% else %}
+              
+              <button type="button"
+                    class="am-item"
+                    data-action="status"
+                    data-record-id="{{ s.cloud_solicitacoesid }}"
+                    data-status-value="{{ s.cloud_status_atual.value }}"
+                    role="menuitem">
+              <span class="am-ico">📝</span>
+              <span>Ver Status</span>
+            </button>
+              {% assign statusItem = s.cloud_status_atual.value | append: "" %}
+{% assign orcamentoSolicitado = s.cloud_is_orcamento_solicitado %}
+
+{% if orcamentoSolicitado == true or orcamentoSolicitado == 1 %}
+  {% if statusItem == "586450011" or statusItem == "586450012" or statusItem == "202410005" or statusItem == "202410006" or statusItem == "202410007" %}
+
+    <button type="button"
+            class="am-item"
+            data-action="cancelar-orcamento-enviar-projeto"
+            data-record-id="{{ s.cloud_solicitacoesid }}"
+            role="menuitem">
+      <span class="am-ico">↩️</span>
+      <span>Cancelar pedido de orçamento e enviar meu próprio projeto</span>
+    </button>
+
+  {% endif %}
+{% endif %}
+
+
+
+{% if s.cloud_is_importacao != true %}
+              <!-- ADICIONE AQUI A OPÇÃO 'EDITAR A SOLICITAÇÃO'-->
+                <button type="button"
+                        class="am-item"
+                        data-action="editar"
+                        data-edit-url="/Atualizar-Dados-da-Solicitação/?id={{ s.cloud_solicitacoesid }}"
+                        role="menuitem">
+                  <span class="am-ico">✏️</span>
+                  <span>Substituir Solicitação</span>
+                </button>
+
+
+              <button type="button"
+                      class="am-item am-danger"
+                      data-action="excluir"
+                      data-record-id="{{ s.cloud_solicitacoesid }}"
+                      role="menuitem">
+                <span class="am-ico"> 🗑</span>
+                <span>Excluir solicitação</span>
+              </button>
+{% assign tipoCadastro = s.cloud_tipo_cadastro.label | upcase | strip %}
+
+              {% assign tipoCadastro = s.cloud_tipo_cadastro.label | upcase | strip %}
+{% assign statusAtualLinha = s.cloud_status_atual.value | append: "" %}
+
+{% if tipoCadastro == "CPF" and statusAtualLinha != "586450000" %}
+<button type="button"
+        class="am-item"
+        data-action="alterar-cnpj"
+        data-record-id="{{ s.cloud_solicitacoesid }}"
+        role="menuitem">
+  <span class="am-ico">🏢</span>
+  <span>Substituir CPF por CNPJ</span>
+</button>
+{% endif %}
+{% assign fase = s.cloud_fase.value | append: "" %}
+{% assign status = s.cloud_status_atual.value | append: "" %}
+
+{% assign statusPermitidos = "586450013,586450014,586450015,586450016,586450017,586450018,586450019,586450020" %}
+
+{% if fase == "586450001" %}
+  {% if statusPermitidos contains status %}
+
+  <button type="button"
+        class="am-item"
+        data-action="editar-componentes"
+        data-record-id="{{ s.cloud_solicitacoesid }}"
+        role="menuitem">
+  <span class="am-ico">🛠️</span>
+  <span>Editar Componentes</span>
+</button>
+
+  {% endif %}
+{% endif %}
+{% endif %}
+{% endif %}
+            </div>
+
+
+          </div>
+          <!-- Modal Editar em Construção -->
+
+        </td>
+      <td class="br-date" data-utc='{{ s.createdon | date: "yyyy-MM-ddTHH:mm:ssZ" }}'></td>
+
+      <td class="br-date" data-utc='{{ s.modifiedon | date: "yyyy-MM-ddTHH:mm:ssZ" }}'></td>  
+
+      <td>{{ s.cloud_nome_empreendimento | default: '-' }}</td>
+      <td>
+      {{ faseLabelExibida }}
+    </td>
+      <td>{{ s.cloud_etapa.label | default: '-' }}</td>
+      <td>
+        <span style="font-weight:600">
+          {{ s.cloud_status_atual.label | default: '-' }}
+        </span>
+      </td>
+      <td>
+  {{ s["finalidade.cloud_nome_finalidade"] | default: "-" }}
+</td>
+      <td>
+      {% if s.cloud_consumo_mensal != null %}
+        {{ s.cloud_consumo_mensal | round: 2 }} m³
+      {% else %}
+        -
+      {% endif %}
+    </td>
+      <td data-sort-value="{{ s.cloud_numero_economias | default: 0 }}">
+  {% if s.cloud_numero_economias != null %}
+    {{ s.cloud_numero_economias }}
+    {% if s.cloud_numero_economias == 1 %}
+      unidade
+    {% else %}
+      unidades
+    {% endif %}
+  {% else %}
+    -
+  {% endif %}
+</td>
+      <td>
+      {% if s.cloud_area_construida_total != null %}
+        {{ s.cloud_area_construida_total | round: 2 }} m²
+      {% else %}
+        -
+      {% endif %}
+    </td>
+      <td>
+        {% if s.cloud_is_conglomerado_empresarial == true %}
+          Sim
+        {% elsif s.cloud_is_conglomerado_empresarial == false %}
+          Não
+        {% else %}
+          -
+        {% endif %}
+      </td>
+    <td>{{ s.cloud_nome_proprietario | default: '-' }}</td>
+    <td>{{ s.cloud_cpf_proprietario | default: '-' }}</td>
+    <td>{{ s.cloud_rg_proprietario | default: '-' }}</td>
+    {% assign tipoCadastroLinha = s.cloud_tipo_cadastro.label | upcase | strip %}
+
+<td>
+  {% if tipoCadastroLinha != "CPF" %}
+    {{ s.cloud_nome_construtora | default: '-' }}
+  {% endif %}
+</td>
+
+<td>
+  {% if tipoCadastroLinha != "CPF" %}
+    {{ s.cloud_cnpj_construtora | default: '-' }}
+  {% endif %}
+</td>
+    <td>{{ s.cloud_nome_resp_faturamento.label | default: '-' }}</td>
+    <td>{{ s.cloud_observacoes | default: '-' }}</td>
+    <td>{{ s.cloud_endereco_da_obra | default: '-' }}</td>
+    <td>{{ s.cloud_bairro_da_obra | default: '-' }}</td>
+    <td>{{ s["municipio.cloud_nome_municipio"] | default: "-" }}</td>  
+    <td data-sort-value="{{ s.cloud_data_prev_fim_obra | date: 'yyyy-MM-dd' }}">
+      {% if s.cloud_data_prev_fim_obra %}
+        {{ s.cloud_data_prev_fim_obra | date: "dd/MM/yyyy" }}
+      {% else %}
+        -
+      {% endif %}
+    </td>
+    <td>{{ s.cloud_descricao_atividades | default: '-' }}</td>
+    <td data-sort-value="{{ s.cloud_numero_funcionarios | default: 0 }}">
+        {% if s.cloud_numero_funcionarios != null %}
+          {{ s.cloud_numero_funcionarios }}
+          {% if s.cloud_numero_funcionarios == 1 %}
+            pessoa
+          {% else %}
+            pessoas
+          {% endif %}
+        {% else %}
+          -
+        {% endif %}
+      </td>
+    <td data-sort-value="{{ s.cloud_estimativa_publico_diario | default: 0 }}">
+        {% if s.cloud_estimativa_publico_diario != null %}
+          {{ s.cloud_estimativa_publico_diario }}
+          {% if s.cloud_estimativa_publico_diario == 1 %}
+            pessoa
+          {% else %}
+            pessoas
+          {% endif %}
+        {% else %}
+          -
+        {% endif %}
+      </td>
+    <td>
+      {% if s.cloud_volume_agua_processo != null %}
+        {{ s.cloud_volume_agua_processo | round: 2 }} m³
+      {% else %}
+        -
+      {% endif %}
+    </td>
+    <td>{{ s.cloud_is_projecao_ampliacao.label | default: '-' }}</td>
+    <td>{{ s.cloud_tipo_ocupacao.label | default: '-' }}</td>
+    <td>{{ s.cloud_tipo_parcelamento.label | default: '-' }}</td>
+    <td>{{ s.cloud_tipo_medicao.label | default: '-' }}</td>
+    <td>{{ s.cloud_tipo_cadastro.label | default: '-' }}</td>
+
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<div style="padding:24px;color:#6b7280">
+  Nenhuma solicitação encontrada.
+</div>
+{% endif %}
+  </div>
+
+
+</div>
+</div>
+</div>
+<div id="modalConfirmacaoExclusao" class="pp-modal-backdrop" style="display:none;">
+  <div class="pp-modal">
+    <button class="pp-modal-close" id="btnFecharModalExclusao">×</button>
+    <h3 style="color:#0027bd;">
+  🗑️ Cancelar e excluir solicitação
+</h3>
+    <p>
+      Você confirma que deseja <strong>cancelar esta solicitação</strong>?
+      <br />
+      Essa ação não poderá ser desfeita.
+    </p>
+    <div class="pp-modal-actions">
+      <button id="btnCancelarExclusao" class="btn-cloud btn-cloud-outline">
+        CANCELAR
+      </button>
+      <button id="btnConfirmarExclusao" class="btn-cloud">
+        CONFIRMAR
+      </button>
+    </div>
+  </div>
+</div>
+<div id="modalSucessoExclusao" class="pp-modal-backdrop" style="display:none;">
+  <div class="pp-modal">
+    <h3>✔ Sucesso</h3>
+    <p>Sua solicitação foi cancelada com sucesso!</p>
+    <div class="modal-cloud-actions-center">
+      <button id="btnOkSucessoExclusao" class="btn-cloud">
+        OK
+      </button>
+    </div>
+  </div>
+</div>
+<div id="modalEditarNome" class="modal-cloud-overlay" style="display:none;">
+  <div class="modal-cloud">
+    <button type="button" class="pp-modal-close" id="btnFecharEditarNome">×</button>
+    <h3 style="color:#0027bd;">✏️ Alterar Nome do Empreendimento</h3>
+    <label style="display:block;margin-top:16px;font-weight:600;">
+      Nome do Empreendimento
+    </label>
+    <div class="control">
+  <div class="input-group">
+    <input
+      type="text"
+      id="inputNovoNome"
+      class="text form-control modal-input"
+    />
+  </div>
+</div>
+    <div class="modal-cloud-actions">
+      <button id="btnCancelarEditarNome" class="btn-cloud btn-cloud-outline">
+        Cancelar
+      </button>
+      <button id="btnSalvarNome" class="btn-cloud" disabled>
+        SALVAR ALTERAÇÃO
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<div id="modalConfirmarEditarNome" class="modal-cloud-overlay" style="display:none;">
+  <div class="modal-cloud">
+    <h3 style="color:#0027bd;">⚠️ Confirmar alteração</h3>
+    <p id="textoConfirmacaoNome"></p>
+    <div class="modal-cloud-actions">
+      <button id="btnCancelarConfirmacaoNome" class="btn-cloud btn-cloud-outline">
+        Cancelar
+      </button>
+      <button id="btnConfirmarEditarNome" class="btn-cloud">
+        Confirmar
+      </button>
+    </div>
+  </div>
+</div>
+<div id="modalEditarNomeSucesso" class="modal-cloud-overlay" style="display:none;">
+  <div class="modal-cloud">
+    <h3 style="color:#0027bd;">✅ Nome alterado</h3>
+    <p>O nome do empreendimento foi atualizado com sucesso.</p>
+    <div class="modal-cloud-actions-center">
+      <button id="btnOkEditarNome" class="btn-cloud">
+        OK
+      </button>
+    </div>
+  </div>
+</div>
+<div id="modalEditarEconomias"
+     class="modal-cloud-overlay"
+     style="display:none;">
+  <div class="modal-cloud">
+    <button class="pp-modal-close" id="btnFecharEditarEconomias">×</button>
+    <h3 style="color:#0027bd;">✏️ Alterar Número de Economias</h3>
+    <label style="display:block;margin-top:16px;font-weight:600;">
+      Número de Economias
+    </label>
+    <input type="text"
+       id="inputNovoNumeroEconomias"
+       class="text form-control modal-input"
+       inputmode="numeric"
+       pattern="[0-9]*"
+       autocomplete="off" />
+    <div class="modal-cloud-actions modal-actions-split">
+      <button id="btnCancelarEditarEconomias"
+              class="btn-cloud btn-cloud-outline">
+        Cancelar
+      </button>
+      <button id="btnSalvarEconomias"
+              class="btn-cloud"
+              disabled>
+        Salvar alteração
+      </button>
+    </div>
+  </div>
+</div>
+<div id="modalConfirmarEconomias"
+     class="modal-cloud-overlay"
+     style="display:none;">
+  <div class="modal-cloud">
+    <h3 style="color:#0027bd;">⚠️ Confirmar alteração</h3>
+    <p id="textoConfirmacaoEconomias"></p>
+    <div class="modal-cloud-actions modal-actions-split">
+      <button id="btnCancelarConfirmarEconomias"
+              class="btn-cloud btn-cloud-outline">
+        Cancelar
+      </button>
+      <button id="btnConfirmarEconomias"
+              class="btn-cloud">
+        Confirmar
+      </button>
+    </div>
+  </div>
+</div>
+<div id="modalSucessoEconomias"
+     class="modal-cloud-overlay"
+     style="display:none;">
+  <div class="modal-cloud">
+    <h3 style="color:#0027bd;">✅ Número alterado</h3>
+    <p>O número de economias foi atualizado com sucesso.</p>
+    <div class="modal-cloud-actions-center">
+      <button id="btnOkEconomias" class="btn-cloud">
+        OK
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================= -->
+<!-- MODAL ALTERAR PARA CNPJ -->
+<!-- ============================= -->
+<div id="modalAlterarCnpj" class="modal-cloud-overlay" style="display:none;">
+  <div class="modal-cloud modal-cnpj-lg">
+    <button type="button" class="pp-modal-close" id="btnFecharAlterarCnpj">×</button>
+
+    <h3 style="color:#0027bd;">Substituir CPF por CNPJ</h3>
+
+    <div class="modal-form-grid">
+
+      <div class="modal-field">
+        <label for="inputCnpjConstrutora">*CNPJ do empreendimento</label>
+        <input type="text"
+               id="inputCnpjConstrutora"
+               class="text form-control modal-input"
+               inputmode="text"
+               maxlength="18"
+               autocomplete="off"
+               placeholder="00.000.000/0000-00" />
+      </div>
+
+      <div class="modal-field">
+        <label for="inputNomeConstrutora">*Nome da Construtora</label>
+        <input type="text"
+               id="inputNomeConstrutora"
+               class="text form-control modal-input"
+               maxlength="200"
+               autocomplete="off"
+               placeholder="Digite o nome da construtora" />
+      </div>
+
+      <div class="modal-field">
+  <label for="selectRespFaturamento">*Devemos faturar para CNPJ ou CPF?</label>
+
+  <div class="select-chevron-wrap">
+    <select id="selectRespFaturamento" class="form-control modal-input modal-select">
+      <option value="">Selecione</option>
+      <option value="586450000">PROPRIETARIO</option>
+      <option value="586450001">CONSTRUTORA</option>
+    </select>
+  </div>
+</div>
+
+      <div class="modal-field">
+        <label>
+          *Este CNPJ já é (ou será) utilizado para cadastrar outros endereços/filiais com nossa companhia de água?
+        </label>
+
+        <div class="modal-radio-group" id="grupoReusoCnpj">
+          <label class="modal-radio-option">
+            <input type="radio" name="reusoCnpjRadio" value="1" />
+            <span>SIM</span>
+          </label>
+
+          <label class="modal-radio-option">
+            <input type="radio" name="reusoCnpjRadio" value="2" />
+            <span>NÃO</span>
+          </label>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="modal-cloud-actions">
+      <button type="button"
+              id="btnCancelarAlterarCnpj"
+              class="btn-cloud btn-cloud-outline">
+        Cancelar
+      </button>
+
+      <button type="button"
+              id="btnSalvarAlterarCnpj"
+              class="btn-cloud"
+              disabled>
+        SALVAR ALTERAÇÕES
+      </button>
+    </div>
+  </div>
+</div>
+
+
+
+<div id="modalSucessoAlterarCnpj" class="modal-cloud-overlay" style="display:none;">
+  <div class="modal-cloud">
+    <h3 style="color:#0027bd;">✅ Sucesso</h3>
+    <p>Tipo de cadastro alterado com sucesso!</p>
+
+    <div class="modal-cloud-actions-center">
+      <button id="btnOkSucessoAlterarCnpj" class="btn-cloud">
+        OK
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================= -->
+<!-- MODAL CONFIRMAÇÃO EDIÇÃO -->
+<!-- ============================= -->
+<div id="modalConfirmarEdicao" class="pp-modal-backdrop" style="display:none;">
+  <div class="pp-modal">
+
+    <button class="pp-modal-close" id="btnFecharModalEdicao">×</button>
+
+    <h3 style="color:#0027bd;">
+      ⚠️ ATENÇÃO!
+    </h3>
+
+    <p style="margin-top:10px;">
+      Ao selecionar essa opção, a solicitação atual será <strong>CANCELADA</strong>
+      e será criada uma nova solicitação de <strong>REANÁLISE</strong>,
+      onde será necessário elaboração de um novo boleto para pagamento da taxa.
+    </p>
+
+    <p style="margin-top:12px;font-weight:600;">
+      Deseja prosseguir com a EDIÇÃO?
+    </p>
+
+    <div class="pp-modal-actions">
+      <button id="btnCancelarEdicao" class="btn-cloud btn-cloud-outline">
+        CANCELAR
+      </button>
+
+      <button id="btnConfirmarEdicao" class="btn-cloud">
+        CONFIRMAR
+      </button>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+<button type="button"
+        class="nova-solicitacao-fab"
+        aria-label="Criar nova solicitação"
+        onclick="window.location.href='/'">
+  +
+  <span class="nova-solicitacao-fab-tooltip">Criar nova solicitação</span>
+</button>
+<!-- 
+<button type="button"
+        class="faq-fab"
+        aria-label="FAQ"
+        onclick="window.location.href='/faq/'">
+
+  ?
+
+  <span class="faq-fab-tooltip">
+    Posso ajudar?
+  </span>
+
+</button>
+-->
+</div> <!-- fecha tudo da página -->
+
+<!-- Modal Editar (EXCLUSIVO) -->
+<div id="ppEditModalOverlay" aria-hidden="true">
+  <div id="ppEditModalBox" role="dialog" aria-modal="true" aria-labelledby="ppEditModalTitle">
+    <div id="ppEditModalTitle">🚧 Desculpe, essa opção está em construção.</div>
+    <button type="button" id="ppEditModalOk" class="btn-cloud">OK</button>
+  </div>
+</div>
+
+<!-- ============================= -->
+<!-- MODAL EDITAR SOLICITAÇÃO FSA -->
+<!-- ============================= -->
+<div id="modalEditarFSA" class="modal-cloud-overlay" style="display:none;">
+  <div class="modal-cloud modal-fsa-lg">
+
+    <button type="button" class="pp-modal-close" id="btnFecharEditarFSA">×</button>
+
+    <div class="fsa-header">
+
+  <h2 class="fsa-title">
+    Formulário de Solicitação de Análise (FSA)
+  </h2>
+
+  <p class="fsa-subtitle">
+    Preencha os dados abaixo para darmos sequência.
+  </p>
+
+  <div class="fsa-step-indicator">
+    <span class="fsa-step-text">ETAPA</span>
+
+    <div class="fsa-step-circle active" id="fsaStepNumber">1</div>
+
+    <span class="fsa-step-text">DE</span>
+
+    <div class="fsa-step-circle total">3</div>
+  </div>
+
+</div>
+
+    <form id="formEditarFSA">
+      <div class="fsa-grid">
+
+        <!-- EXEMPLO DE CAMPOS (replicaremos via JS dinamicamente) -->
+
+      </div>
+
+      <div class="modal-cloud-actions modal-actions-split">
+        <button type="button"
+                id="btnFecharFSA"
+                class="btn-cloud btn-cloud-outline">
+          FECHAR
+        </button>
+
+        <button type="button"
+                id="btnSalvarAlteracoesFSA"
+                class="btn-cloud"
+                disabled>
+          SALVAR ALTERAÇÕES
+        </button>
+      </div>
+    </form>
+
+  </div>
+</div>
+
+<div id="modalEditarComponentesConfirmacao" class="pp-modal-backdrop" style="display:none;">
+  <div class="pp-modal">
+
+    <button class="pp-modal-close" id="btnFecharEditarComponentes">×</button>
+
+    <h3 style="color:#0027bd;">
+      🛠️ Editar Componentes
+    </h3>
+
+    <p style="margin-top:10px;">
+      Ao prosseguir para a redefinição de componentes, ao selecionar ou remover
+      a seleção, o conjunto de documentos também será alterado, sendo necessário
+      levantamento e validação dos anexos novamente.
+    </p>
+
+    <p style="margin-top:12px;font-weight:600;">
+      Deseja prosseguir?
+    </p>
+
+    <div class="pp-modal-actions">
+      <button id="btnCancelarEditarComponentes"
+              class="btn-cloud btn-cloud-outline">
+        CANCELAR
+      </button>
+
+      <button id="btnConfirmarEditarComponentes"
+              class="btn-cloud">
+        CONFIRMAR
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<div id="modalEditarComponentesSucesso"
+     class="pp-modal-backdrop"
+     style="display:none;">
+
+  <div class="pp-modal">
+
+    <h3>✔ Componentes redefinidos</h3>
+
+    <p>
+      Os componentes foram redefinidos com sucesso.
+    </p>
+
+    <div class="modal-cloud-actions-center">
+      <button id="btnOkEditarComponentes" class="btn-cloud">
+        OK
+      </button>
+    </div>
+
+  </div>
+</div>
+<div id="modalFiltroFase" class="pp-filter-modal-backdrop" style="display:none;">
+  <div class="pp-filter-modal">
+    <button type="button" class="pp-modal-close pp-close-filter-modal">×</button>
+    <h3>Filtrar por fase</h3>
+    <p>Selecione uma ou mais fases.</p>
+
+    <div id="opcoesFiltroFase" class="pp-filter-options"></div>
+
+    <div class="pp-modal-actions">
+      <button type="button" class="btn-cloud btn-cloud-outline pp-close-filter-modal">CANCELAR</button>
+      <button type="button" class="btn-cloud" id="btnAplicarFase">OK</button>
+    </div>
+  </div>
+</div>
+
+<div id="modalFiltroStatus" class="pp-filter-modal-backdrop" style="display:none;">
+  <div class="pp-filter-modal">
+    <button type="button" class="pp-modal-close pp-close-filter-modal">×</button>
+    <h3>Filtrar por status atual</h3>
+    <p>Selecione um ou mais status.</p>
+
+    <div id="opcoesFiltroStatus" class="pp-filter-options"></div>
+
+    <div class="pp-modal-actions">
+      <button type="button" class="btn-cloud btn-cloud-outline pp-close-filter-modal">CANCELAR</button>
+      <button type="button" class="btn-cloud" id="btnAplicarStatus">OK</button>
+    </div>
+  </div>
+</div>
+
+<div id="modalFiltroData" class="pp-filter-modal-backdrop" style="display:none;">
+  <div class="pp-filter-modal pp-filter-modal-date">
+    <button type="button" class="pp-modal-close pp-close-filter-modal">×</button>
+    <h3>Data da solicitação</h3>
+    <p>Informe o período de criação da solicitação.</p>
+
+    <div class="pp-date-grid">
+      <div>
+        <label>Data inicial</label>
+        <input type="date" id="modalDataInicio" />
+      </div>
+
+      <div>
+        <label>Data final</label>
+        <input type="date" id="modalDataFim" />
+      </div>
+    </div>
+
+    <div class="pp-date-slider-wrap">
+      <label>Ajuste rápido do intervalo</label>
+      <div class="pp-range-dual" id="rangeDataCustom">
+  <div class="pp-range-track"></div>
+  <div class="pp-range-fill" id="rangeFillData"></div>
+  <button type="button" class="pp-range-thumb" id="thumbDataInicio"></button>
+  <button type="button" class="pp-range-thumb" id="thumbDataFim"></button>
+
+  <input type="hidden" id="modalDataSliderInicio" value="0" />
+  <input type="hidden" id="modalDataSliderFim" value="0" />
+</div>
+
+      <small id="textoSliderData">Intervalo completo</small>
+    </div>
+
+    <div class="pp-modal-actions">
+      <button type="button" class="btn-cloud btn-cloud-outline pp-close-filter-modal">CANCELAR</button>
+      <button type="button" class="btn-cloud" id="btnAplicarData">OK</button>
+    </div>
+  </div>
+</div>
+
+<div id="modalFiltroFinalidade" class="pp-filter-modal-backdrop" style="display:none;">
+  <div class="pp-filter-modal">
+    <button type="button" class="pp-modal-close pp-close-filter-modal">×</button>
+    <h3>Filtrar por finalidade</h3>
+    <p>Selecione uma ou mais finalidades.</p>
+
+    <div id="opcoesFiltroFinalidade" class="pp-filter-options"></div>
+
+    <div class="pp-modal-actions">
+      <button type="button" class="btn-cloud btn-cloud-outline pp-close-filter-modal">CANCELAR</button>
+      <button type="button" class="btn-cloud" id="btnAplicarFinalidade">OK</button>
+    </div>
+  </div>
+</div>
+
+<div id="modalVisualizarLinha" class="pp-modal-backdrop" style="display:none;">
+  <div class="pp-modal pp-modal-view-lg">
+    <button type="button" class="pp-modal-close" id="btnFecharVisualizarLinha">×</button>
+    <h3>Detalhes da solicitação</h3>
+    <div id="conteudoVisualizarLinha" class="pp-view-grid"></div>
+    <div class="modal-cloud-actions-center">
+      <button type="button" id="btnFecharVisualizarLinhaRodape" class="btn-cloud">
+        FECHAR
+      </button>
+    </div>
+  </div>
+</div>
+
+<div id="modalCancelarOrcamentoProjeto" class="pp-modal-backdrop" style="display:none;">
+  <div class="pp-modal">
+    <button type="button" class="pp-modal-close" id="btnFecharCancelarOrcamentoProjeto">×</button>
+
+    <h3 style="color:#0027bd;">⚠️ Confirmar cancelamento</h3>
+
+    <p>
+      Deseja cancelar o pedido de orçamento da AEGEA e enviar seu próprio projeto?
+    </p>
+
+    <div class="pp-modal-actions">
+      <button type="button" id="btnCancelarCancelarOrcamentoProjeto" class="btn-cloud btn-cloud-outline">
+        CANCELAR
+      </button>
+
+      <button type="button" id="btnConfirmarCancelarOrcamentoProjeto" class="btn-cloud">
+        CONFIRMAR
+      </button>
+    </div>
+  </div>
+</div>
+
+<div id="modalSucessoCancelarOrcamentoProjeto" class="pp-modal-backdrop" style="display:none;">
+  <div class="pp-modal">
+    <h3 style="color:#0027bd;">✅ Sucesso</h3>
+
+    <p>
+      Pedido de orçamento cancelado com sucesso. Agora você poderá enviar seu próprio projeto.
+    </p>
+
+    <div class="modal-cloud-actions-center">
+      <button type="button" id="btnOkCancelarOrcamentoProjeto" class="btn-cloud">
+        OK
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  const STATUS_QUE_EXECUTAM_FLUXO = [
+    "202410014",
+    "586450033",
+    "586450034",
+    "586450036"
+  ];
+
+  const FLOW_URL_STATUS =
+    "/_api/cloudflow/v1.0/trigger/37c1c88e-1f66-f111-ab0d-002248de77b7";
+
+  function obterUrlStatus(botaoStatus) {
+      if (!botaoStatus) return "";
+
+      const urlDireta = botaoStatus.getAttribute("data-status-url");
+      if (urlDireta) return urlDireta;
+
+      const wrap = botaoStatus.closest(".actions-wrap");
+      const botaoTresPontos = wrap ? wrap.querySelector(".btn-ellipsis") : null;
+
+      return botaoTresPontos
+        ? botaoTresPontos.getAttribute("data-status-url")
+        : "";
+    }
+
+  function dispararFlowSemEsperar(recordId) {
+    if (!window.shell || typeof shell.ajaxSafePost !== "function") {
+      console.error("shell.ajaxSafePost não disponível.");
+      return;
+    }
+
+    const payload = {
+      eventData: JSON.stringify({
+        RecordID: recordId,
+        RecordId: recordId,
+        recordId: recordId
+      })
+    };
+
+    console.log("🚀 Disparando flow de status sem aguardar:", payload);
+
+    shell.ajaxSafePost({
+      type: "POST",
+      contentType: "application/json",
+      url: FLOW_URL_STATUS,
+      data: JSON.stringify(payload),
+      processData: false,
+      global: false
+    })
+    .done(function (response) {
+      console.log("✅ Flow de status disparado com sucesso:", response);
+    })
+    .fail(function (xhr) {
+      console.error("❌ Flow de status falhou:", xhr.status, xhr.responseText);
+    });
+  }
+
+  document.addEventListener("click", function (event) {
+    const botaoStatus = event.target.closest('[data-action="status"]');
+
+    if (!botaoStatus) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+
+    const linha = botaoStatus.closest("tr");
+
+    const recordId =
+      botaoStatus.getAttribute("data-record-id") ||
+      (linha ? linha.getAttribute("data-record-id") : "");
+
+    const statusAtual = String(
+      botaoStatus.getAttribute("data-status-value") ||
+      (linha ? linha.getAttribute("data-status-value") : "")
+    ).trim();
+
+    const urlStatus = obterUrlStatus(botaoStatus);
+
+    console.log("📝 Ver Status clicado");
+    console.log("RecordID:", recordId);
+    console.log("Status atual:", statusAtual);
+    console.log("URL status:", urlStatus);
+
+    if (!recordId) {
+      console.error("RecordID não encontrado.");
+      if (urlStatus) window.location.href = urlStatus;
+      return;
+    }
+
+    if (!urlStatus) {
+      console.error("URL de status não encontrada.");
+      return;
+    }
+
+    if (STATUS_QUE_EXECUTAM_FLUXO.includes(statusAtual)) {
+      dispararFlowSemEsperar(recordId);
+    }
+
+    setTimeout(function () {
+      window.location.href = urlStatus;
+    }, 120);
+
+  }, true);
+})();
+
+(function () {
+  function forcarSomenteLista() {
+    const tableWrapper = document.querySelector(".pp-table-wrapper");
+    const cardsWrapper = document.getElementById("ppCardsGalleryWrapper");
+    const cardsGallery = document.getElementById("ppCardsGallery");
+    const toggle = document.querySelector(".pp-view-toggle");
+
+    if (tableWrapper) {
+      tableWrapper.classList.remove("is-hidden");
+    }
+
+    if (cardsWrapper) {
+      cardsWrapper.classList.add("is-hidden");
+      cardsWrapper.style.display = "none";
+    }
+
+    if (cardsGallery) {
+      cardsGallery.innerHTML = "";
+    }
+
+    if (toggle) {
+      toggle.style.display = "none";
+    }
+
+    try {
+      localStorage.setItem("ppViewMode", "lista");
+    } catch (e) {
+      console.warn("Não foi possível salvar o modo lista.", e);
+    }
+
+    document.body.classList.remove("pp-view-cards");
+    document.body.classList.add("pp-view-lista");
+  }
+
+  document.addEventListener("DOMContentLoaded", forcarSomenteLista);
+})();
+</script>

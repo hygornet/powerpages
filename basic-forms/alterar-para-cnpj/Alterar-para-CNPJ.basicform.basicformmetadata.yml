@@ -1,0 +1,111 @@
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_nome_resp_faturamento
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_entityform: 16b3acdf-63d2-4875-a32f-74440052758c
+  adx_entityformmetadataid: 97399332-d345-4cb8-a4d7-0d418e1534dc
+  adx_fieldisrequired: true
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Responsável pelo Faturamento"
+      }
+    ]
+  adx_name: Alterar para CNPJ cloud_nome_resp_faturamento
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_validationregularexpressionerrormessage: ''
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_nome_construtora
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_entityform: 16b3acdf-63d2-4875-a32f-74440052758c
+  adx_entityformmetadataid: e694966f-8ad8-431a-9b87-e539a622237b
+  adx_fieldisrequired: true
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "Nome da Construtora"
+      }
+    ]
+  adx_name: Alterar para CNPJ cloud_nome_construtora
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_validationregularexpressionerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+- adx_adddescription: false
+  adx_attributelogicalname: cloud_cnpj_construtora
+  adx_controlstyle: 0
+  adx_description: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_descriptionposition: 100000000
+  adx_entityform: 16b3acdf-63d2-4875-a32f-74440052758c
+  adx_entityformmetadataid: f825b087-d0bd-4b8a-bda4-9e53502fafcb
+  adx_fieldisrequired: true
+  adx_label: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": "CNPJ da Construtora"
+      }
+    ]
+  adx_name: Alterar para CNPJ cloud_cnpj_construtora
+  adx_requiredfieldvalidationerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
+  adx_type: 100000000
+  adx_useattributedescriptionproperty: false
+  adx_validationregularexpression: ''
+  adx_validationregularexpressionerrormessage: >-
+    [
+      {
+        "LCID": 1046,
+        "Value": ""
+      }
+    ]
